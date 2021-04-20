@@ -1,0 +1,7 @@
+.relative {
+  position: relative;
+  bottom: 43px;
+  left: 40%;
+  font-size: 20px;
+  cursor: pointer;
+}
