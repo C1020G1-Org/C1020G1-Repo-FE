@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Sprint1</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+
+  <link rel="icon" href="./assets/images/fav.png" type="image/png" sizes="16x16">
+
+  <link rel="stylesheet" href="./assets/css/main.min.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/color.css">
+  <link rel="stylesheet" href="./assets/css/responsive.css">
+
+</head>
+<body>
+<app-root></app-root>
+</body>
+
+
+<script src="./assets/js/main.min.js"></script>
+<script src="./assets/js/toast-notificatons.js"></script>
+<script src="./assets/js/script.js"></script>
+<script>
+  jQuery(document).ready(function($) {
+
+    if ($.isFunction($.fn.toast)) {
+      $.toast({
+        heading: 'Welcome To Pitnik',
+        text: '',
+        showHideTransition: 'slide',
+        icon: 'success',
+        loaderBg: '#fa6342',
+        position: 'bottom-right',
+        hideAfter: 3000,
+      });
+
+      $.toast({
+        heading: 'Information',
+        text: 'Now you can full demo of pitnik and hope you like',
+        showHideTransition: 'slide',
+        icon: 'info',
+        hideAfter: 5000,
+        loaderBg: '#fa6342',
+        position: 'bottom-right',
+      });
+      $.toast({
+        heading: 'Support & Help',
+        text: 'Report any <a href="#">issues</a> by email',
+        showHideTransition: 'fade',
+        icon: 'error',
+        hideAfter: 7000,
+        loaderBg: '#fa6342',
+        position: 'bottom-right',
+      });
+    }
+
+  });
+</script>
+</html>
