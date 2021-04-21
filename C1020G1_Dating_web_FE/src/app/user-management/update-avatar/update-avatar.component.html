@@ -1,0 +1,82 @@
+<link rel="stylesheet" href="/assets/css/main.min.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/color.css">
+<link rel="stylesheet" href="/assets/css/responsive.css">
+<div class="set-title">
+  <h5><i class="fa fa-file-image"></i> Edit Avatar</h5>
+  <span>Update your avatar regularly so that everyone can see you every day</span>
+</div>
+<div class="setting-meta">
+  <div class="change-photo">
+    <div class="form-row">
+      <div class="user-profile">
+        <figure>
+          <div class="edit-pp">
+            <label class="fileContainer">
+              <i class="fa fa-image"></i>
+              <input type="file">
+            </label>
+          </div>
+          <img src="/assets/images/resources/profile-image.jpg"
+               alt="">
+        </figure>
+        <div class="profile-section">
+          <div class="row">
+            <div class="col-lg-2 col-md-3 mr-5 mt-5">
+              <div class="profile-author">
+                <div class="profile-author-thumb">
+                  <div class="zoomin">
+                    <img id="image" src="/assets/images/resources/admin2.jpg"
+                         alt="">
+                    <div class="edit-dp">
+                      <label class="fileContainer">
+                        <i class="fa fa-camera"></i>
+                        <input type="file">
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <input value="50" class="form-range ml-4"
+                     oninput="changeImage(event.target)"
+                     type="range">
+            </div>
+            <div class="col-lg-6 ml-5">
+              <input type="text" id="file-1"
+                     class="border-dark form-control form-file mt-3">
+              <div class="edit-img">
+                <form class="edit-phto mt-2">
+                  <label class="fileContainer">
+                    <i class="fa fa-upload "> Upload
+                      Photos</i>
+                    <input type="file">
+                  </label>
+                </form>
+                <form class="edit-phto mt-4">
+                  <label class="fileContainer">
+                    <i class="fa fa-camera ">
+                      Photograph</i>
+                  </label>
+                </form>
+              </div>
+              <form class="mt-3">
+                <div class="submit-btns">
+                  <button type="button"
+                          class="btn-secondary"
+                          data-ripple="">
+                    <span>Cancel</span></button>
+                  <button type="button"
+                          data-ripple="">
+                    <span>Save</span></button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div><!-- user profile banner  -->
+    </div>
+  </div>
+</div>
+<script src="/assets/js/main.min.js"></script>
+<script src="/assets/js/script.js"></script>
+
