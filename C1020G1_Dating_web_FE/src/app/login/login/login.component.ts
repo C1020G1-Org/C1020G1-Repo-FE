@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AuthenticationService} from "../auth/authentication-service";
+import {TokenStorageService} from "../auth/token-storage";
+import {Account} from "../auth/account";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -8,18 +13,86 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
   type = 'password'
   classPassword = 'fa fa-eye-slash relative color-orange'
-  constructor() { }
+  loginForm: FormGroup;
+  account: Account;
+  title = "Sign In Now And Meet The Awesome Friends Around The World.";
 
-  ngOnInit(): void {
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private auth: AuthenticationService,
+              private form: FormBuilder,
+              private tokenStorage: TokenStorageService) {
   }
 
+  ngOnInit(): void {
+    this.loginForm = this.form.group({
+      accountName: ['', [Validators.required]],
+      password: ['', Validators.required],
+      remember: false
+    });
+    this.checkLogin();
+  }
+
+  checkLogin() {
+    if (this.tokenStorage.isLogged()) {
+      this.router.navigateByUrl("/error-page")
+    }
+  }
+
+
   viewPassword() {
-    if (this.type === 'password'){
+    if (this.type === 'password') {
       this.type = 'text'
       this.classPassword = 'fa fa-eye relative color-orange'
-    }else {
+    } else {
       this.type = 'password'
       this.classPassword = 'fa fa-eye-slash relative color-orange'
+    }
+  }
+
+  onSubmit() {
+    this.account = new Account(this.getAccountName().value, this.getPassword().value);
+    console.log(this.loginForm.get("remember").value)
+    this.loginWithCheckRemember(this.account);
+  }
+
+  getAccountName() {
+    return this.loginForm.get("accountName");
+  }
+
+  getPassword() {
+    return this.loginForm.get("password");
+  }
+
+  loginWithCheckRemember(accountReg) {
+    if (!this.loginForm.get("remember").value) {
+      this.auth.sendLogin(accountReg).subscribe(data => {
+        this.login(data)
+      })
+    } else {
+      this.auth.sendLogin(accountReg).subscribe(data => {
+        this.loginRemember(data)
+      })
+    }
+  }
+
+  login(data){
+    if (data.token != "INVALID_CREDENTIALS") {
+      this.tokenStorage.saveToken(data.token);
+      this.tokenStorage.saveAccountName(this.getAccountName().value);
+      this.router.navigateByUrl("/error-page");
+    } else {
+      this.title =  "Your account is not correct, please check your username or password"
+    }
+  }
+
+  loginRemember(data) {
+    if (data.token != "INVALID_CREDENTIALS") {
+      this.tokenStorage.saveTokenRemember(data.token);
+      this.tokenStorage.saveAccountNameRemember(this.getAccountName().value);
+      this.router.navigateByUrl("/error-page");
+    } else {
+      this.title =  "Your account is not correct, please check your username or password"
     }
   }
 }

@@ -19,15 +19,22 @@
             <div class="we-login-register">
               <div class="form-title">
                 <i class="fa fa-key"></i>login
-                <span>sign in now and meet the awesome Friends around the world.</span>
+                <span>{{title}}</span>
               </div>
-              <form class="we-form" method="post">
-                <input type="text" placeholder="User Name">
-                <input [type]="type" id="form-password" placeholder="Password"><i (click)="viewPassword()" class="{{classPassword}}"></i>
+              <form class="we-form" method="post" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <input type="text" placeholder="Account Name" formControlName="accountName">
+                <p class="text-black-50" *ngIf="loginForm.get('accountName').invalid && loginForm.get('accountName').touched">
+                  Account Name Not Null!
+                </p>
+                <i (click)="viewPassword()" class="{{classPassword}}"></i>
+                <input [type]="type" placeholder="Password" formControlName="password">
+                <p class="text-black-50" *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched">
+                  Password Not Null!
+                </p>
                 <br>
-                <input type="checkbox"><label>remember me</label>
-                <button type="submit" data-ripple="">sign in</button>
-                <a class="forgot underline" href="request-email.html" title="">forgot password?</a>
+                <input type="checkbox" formControlName="remember" ><label>remember me</label>
+                <button type="submit" data-ripple="">Log In</button>
+                <a class="forgot underline" routerLink="/recover" title="">forgot password?</a>
               </form>
               <a class="with-smedia facebook" href="#" title="" data-ripple=""><i class="fa fa-facebook"></i></a>
               <a class="with-smedia google" href="#" title="" data-ripple=""><i class="fa fa-google"></i></a>
