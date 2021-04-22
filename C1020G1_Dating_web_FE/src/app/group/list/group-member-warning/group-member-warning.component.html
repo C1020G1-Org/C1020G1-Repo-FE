@@ -1,0 +1,79 @@
+<section>
+    <div class="gap2 gray-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row merged20" id="page-contents">
+                        <div class="col-lg-3">
+                            <aside class="sidebar static left">
+                                <div class="widget">
+                                    <h4 class="widget-title">Group Community</h4>
+                                    <ul class="fav-community">
+                                        <li><i class="fa fa-users"></i><a href="#" title="">invite friends</a> to like
+                                            this page</li>
+                                        <li><i class="fa fa-thumbs-up"></i>13,33,454 People like this</li>
+                                        <li><i class="fa fa-rss"></i>13,33,454 People follow this</li>
+                                        <li><i class="fa fa-share-alt"></i>13,540 People share this</li>
+                                        <li><i class="fa fa-bookmark"></i><a href="#" title="">category</a>
+                                            Entertainment</li>
+                                        <li><i class="fa fa-map-marker"></i><a
+                                                href="http://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__"
+                                                data-cfemail="d699b5b3b7b889bbb9a2b3ba96afb9a3a4bbb7bfbaf8b5b9bb">[email&#160;protected]</a>
+                                        </li>
+                                    </ul>
+                                </div><!-- Page Community-->
+                            </aside>
+                        </div><!-- sidebar -->
+                        <div class="col-lg-9">
+                            <div class="central-meta padding30">
+                                <div class="row warning-amount">
+                                    <div class="col-lg-12">
+                                        <div class="align-left">
+                                            <h5>Warning<span>{{data.totalElements}}</span></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <div class="group-box">
+                                            <figure><img src="https://static.remove.bg/remove-bg-web/2a274ebbb5879d870a69caae33d94388a88e0e35/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg" style="width:150px !important"
+                                                    alt=""></figure>
+                                            <a class="cursor">Adam James</a>
+                                            <span>California, USA</span><br>
+                                            <div class="invites-btns">
+                                                <a class="main-btn cursor margin-left-20" (click)="open(addModal)" title="" data-ripple="">Add Warning</a>
+                                                <a class="main-btn cursor margin-left-5" (click)="open(deleteModal)" title="" data-ripple="">Remove Member</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table class="table table-hover table-responsive-sm">
+                                        <thead>
+                                            <tr class="bg-warning">
+                                                <th>#</th>
+                                                <th>Reason</th>
+                                                <th>Date Warning</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let warning of list;let i = index">
+                                                <td>{{i}}</td>
+                                                <td>{{warning.warningContent}}</td>
+                                                <td>{{warning.warningDate | date : 'dd/MM/yyyy'}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div><!-- centerl meta -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- content -->
+<ng-template #addModal let-modal>
+    <app-warning-member-modal [modal]="modal" [member]="member"></app-warning-member-modal>
+</ng-template>
+<ng-template #deleteModal let-modal>
+    <app-remove-member-modal [modal]="modal" [member]="member"></app-remove-member-modal>
+</ng-template>
