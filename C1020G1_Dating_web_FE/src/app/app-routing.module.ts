@@ -11,7 +11,7 @@ const routes: Routes = [
   {path: 'c10tinder' , pathMatch: 'full', redirectTo: 'error-page'},
   {path: 'login' , component: LoginComponent},
   {path: '' , component: LoginComponent},
-  {path: 'error-page', component: ErrorPageComponent,canActivate:[AuthGuardService]}
+  {path: 'error-page', component: ErrorPageComponent, canActivate:[AuthGuardService]}
 ];
 
 @NgModule({

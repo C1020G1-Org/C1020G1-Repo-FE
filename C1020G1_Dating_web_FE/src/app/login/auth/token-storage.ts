@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+import {UserDto} from "../../dto/user-dto";
 
 const TOKEN_KEY = 'AuthToken';
 const ACCOUNT_NAME_KEY = 'AuthAccountName';
+const USER_KEY = 'UserLogged';
 
 @Injectable({
   providedIn: 'root'
@@ -59,6 +61,15 @@ export class TokenStorageService {
 
   public isRemember(): boolean {
     return window.localStorage.getItem(TOKEN_KEY) != null;
+  }
+
+  public saveUser(userDTO: UserDto) {
+    window.localStorage.removeItem(USER_KEY)
+    window.localStorage.setItem(USER_KEY, JSON.stringify(userDTO))
+  }
+
+  public getUser(): UserDto {
+   return JSON.parse(window.localStorage.getItem(USER_KEY))
   }
 
 }
