@@ -4,6 +4,8 @@ import {AuthenticationService} from "../auth/authentication-service";
 import {TokenStorageService} from "../auth/token-storage";
 import {Account} from "../auth/account";
 import {ActivatedRoute, Router} from "@angular/router";
+import {FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser} from "angularx-social-login";
+import {JwtResponse} from "../auth/JwtResponse";
 
 @Component({
   selector: 'app-login',
@@ -16,22 +18,83 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   account: Account;
   title = "Sign In Now And Meet The Awesome Friends Around The World.";
+  socialUser: SocialUser;
+  userLogged: SocialUser;
+  isLogged: boolean;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private auth: AuthenticationService,
               private form: FormBuilder,
-              private tokenStorage: TokenStorageService) {
+              private tokenStorage: TokenStorageService,
+              private authService: SocialAuthService) {
   }
 
   ngOnInit(): void {
+    this.authService.authState.subscribe(data => {
+      this.userLogged = data;
+      this.isLogged = (this.userLogged != null);
+    })
+
     this.loginForm = this.form.group({
       accountName: ['', [Validators.required]],
       password: ['', Validators.required],
       remember: false
     });
+
     this.checkLogin();
   }
+
+  signInWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(data => {
+      this.socialUser = data;
+      const tokenGoogle = new JwtResponse(this.socialUser.idToken)
+      this.auth.google(tokenGoogle).subscribe(req => {
+        this.tokenStorage.saveToken(req.token)
+        this.isLogged = true;
+        this.router.navigateByUrl("/error-page")
+      },
+      error => {
+        console.log(error);
+        this.logOut()
+      })
+    }).catch(
+      err => {
+        console.log(err)
+      }
+    );
+  }
+
+  signInWithFB(): void {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(data => {
+      this.socialUser = data;
+      const tokenFacebook = new JwtResponse(this.socialUser.authToken)
+      this.auth.facebook(tokenFacebook).subscribe(req => {
+        this.tokenStorage.saveToken(req.token)
+        this.isLogged = true;
+        this.router.navigateByUrl("/error-page")
+      },
+        error => {
+          console.log(error);
+          this.logOut()
+        }
+      )
+    }).catch(
+      err => {
+        console.log(err)
+      }
+    );
+  }
+
+  logOut(): void {
+    this.authService.signOut().then(
+      data => {
+        this.tokenStorage.logOut();
+        this.router.navigateByUrl("/login")
+      }
+    );
+  }
+
 
   checkLogin() {
     if (this.tokenStorage.isLogged()) {

@@ -36,8 +36,8 @@
                 <button type="submit" data-ripple="">Log In</button>
                 <a class="forgot underline" routerLink="/recover" title="">forgot password?</a>
               </form>
-              <a class="with-smedia facebook" href="#" title="" data-ripple=""><i class="fa fa-facebook"></i></a>
-              <a class="with-smedia google" href="#" title="" data-ripple=""><i class="fa fa-google"></i></a>
+              <a class="with-smedia facebook" href="#" title="" data-ripple="" (click)="signInWithFB()"><i class="fa fa-facebook"></i></a>
+              <a class="with-smedia google" href="#" title="" data-ripple="" (click)="signInWithGoogle()"><i class="fa fa-google"></i></a>
               <span>don't have an account? <a class="we-account underline" href="register.html" title="">register now</a></span>
             </div>
           </div>
