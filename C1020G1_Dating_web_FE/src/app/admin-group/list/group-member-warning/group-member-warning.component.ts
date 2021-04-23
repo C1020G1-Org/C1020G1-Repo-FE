@@ -26,13 +26,15 @@ export class GroupMemberWarningComponent implements OnInit {
     this.title.setTitle('Group Warning');
     let id;
     this.activatedRoute.paramMap.subscribe(param => id = param.get('id'));
-    this.groupManagementService.adminGroup();
     this.groupManagementService.getMember(id).subscribe(data => this.member = data, err =>
-      this.groupManagementService.navigate(err.status, this.getUrlNav()));
+      this.groupManagementService.navigate(err.status, this.getUrlNav()), () => {
+        this.groupManagementService.groupId = this.member.group.groupId;
+        this.groupManagementService.adminGroup();
+      });
     this.set(id);
   }
 
-  set(id){
+  set(id) {
     this.groupManagementService.getListWarning(id, this.page).subscribe(data => this.data = data, () => console.log('no warning'), () => this.setList());
   }
 
@@ -51,10 +53,14 @@ export class GroupMemberWarningComponent implements OnInit {
     this.modalService.open(content);
   }
 
-  defaultMember(){
-    return { groupUserId: 0, group: null, user: 
-      { userId: null, userName: '', userAvatar: '', userBackground: '', account: null, address: '', birthday: '', email: '', gender: '', 
-      marriaged: '', occupation: '', status: null, ward: null } };
+  defaultMember() {
+    return {
+      groupUserId: 0, group: null, user:
+      {
+        userId: null, userName: '', userAvatar: '', userBackground: '', account: null, address: '', birthday: '', email: '', gender: '',
+        marriaged: '', occupation: '', status: null, ward: null
+      }
+    };
   }
 
   emit() {
@@ -62,7 +68,7 @@ export class GroupMemberWarningComponent implements OnInit {
     this.set(this.member.groupUserId);
   }
 
-  paging(page: number){
+  paging(page: number) {
     this.page = page;
     this.set(this.member.groupUserId);
   }
