@@ -1,0 +1,39 @@
+<app-receive-notification></app-receive-notification>
+<section>
+    <div class="gap2 gray-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row merged20" id="page-contents">
+                        <div class="col-lg-3">
+                            <app-aside [totalMember]="data.totalElements" [type]="'member'"></app-aside>
+                        </div><!-- sidebar -->
+                        <div class="col-lg-9">
+                            <div class="central-meta padding30">
+                                <div class="row member-amount">
+                                    <div class="col-lg-12">
+                                        <div class="align-left">
+                                            <h5>Member<span>{{data.totalElements}}</span></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 col-sm-4" *ngFor="let member of list">
+                                        <app-group-member [member]="member"></app-group-member>
+                                    </div>
+                                </div>
+                                <div class="lodmore">
+                                    <span>Viewing {{list.length}} of {{data.totalElements}} member</span><br>
+                                    <p class="p-0 cursor" (click)="addList()">
+                                        <i class="fa fa-chevron-circle-down font-250" data-toggle="tooltip"
+                                            title="More"></i>
+                                    </p>
+                                </div>
+                            </div>
+                        </div><!-- centerl meta -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- content -->

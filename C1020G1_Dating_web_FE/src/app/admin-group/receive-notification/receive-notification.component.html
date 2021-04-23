@@ -1,0 +1,16 @@
+<a title="Notification cursor" data-ripple="">
+    <i class="fa fa-bell"></i><em class="bg-purple">{{notiList.length}}</em>
+</a>
+<div class="dropdowns">
+    <span>{{notiList.length}} New Notifications <a class="cursor" (click)="deleteAll()" title="">Clear All</a></span>
+    <ul class="drops-menu">
+        <li *ngFor="let noti of notiList">
+            <a (click)="nav(noti)" title="">
+                <div class="mesg-meta cursor">
+                    <h6>{{noti.sender}}</h6>
+                    <div>{{noti.content}}</div>
+                </div>
+            </a>
+        </li>
+    </ul>
+</div>

@@ -1,5 +1,6 @@
 import { Account } from './account';
 import { Status } from './status';
+import { Ward } from './ward';
 export interface User {
     userId: number;
     userName: string;
@@ -13,4 +14,5 @@ export interface User {
     address: string;
     status: Status;
     account: Account;
+    ward: Ward;
 }

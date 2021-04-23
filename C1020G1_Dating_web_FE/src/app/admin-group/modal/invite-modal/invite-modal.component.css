@@ -1,0 +1,6 @@
+select {
+    border: solid !important;
+    height: 40px !important;
+    border-radius: 0.75rem !important;
+    padding: 5px 15px !important;
+}

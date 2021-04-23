@@ -5,5 +5,5 @@ export interface GroupRequest {
     groupRequestId: number;
     group: Group;
     user: User;
-    from: string;
+    sender: string;
 }

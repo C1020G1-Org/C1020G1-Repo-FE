@@ -1,0 +1,25 @@
+<div class="modal-header">
+    <h4 class="modal-title">Invite Member</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="form-group">
+        <label for="type">Type</label>
+        <select id="type" (change)="changeListInvite($event.target.value)">
+            <option class="form-control form-select" value="1">Friends</option>
+            <option class="form-control" value="2">Friends Of Friends</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="friend">Friends</label>
+        <select (change)="changeValue($event.target.value)">
+            <option *ngFor="let user of list" [value]="user.userId">{{user.userName}}</option>
+        </select>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('Cross click')">Cancel</button>
+    <button type="button" class="btn btn-outline-danger" (click)="submit()">Invite</button>
+</div>
