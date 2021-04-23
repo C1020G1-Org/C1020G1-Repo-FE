@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/model/user';
 import { GroupManagementService } from "../../service/group.service";
 import { GroupRequest } from "../../../model/group-request";
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -19,9 +20,10 @@ export class GroupListRequestComponent implements OnInit {
   key = "";
   request: GroupRequest;
   constructor(private modalService: NgbModal, private groupManagementService: GroupManagementService,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute,private title: Title) { }
 
   ngOnInit(): void {
+    this.title.setTitle('Group Request List');
     this.data = this.groupManagementService.defaultPage;
     this.activatedRoute.paramMap.subscribe(param => this.groupManagementService.groupId = parseFloat(param.get('id')));
     this.groupManagementService.adminGroup();

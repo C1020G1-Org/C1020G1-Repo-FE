@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 
 import { GroupUser } from 'src/app/model/group-user';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -17,11 +18,12 @@ export class GroupMemberWarningComponent implements OnInit {
   page = 0;
   member: GroupUser = this.defaultMember();
   constructor(private modalService: NgbModal, private activatedRoute: ActivatedRoute,
-    private groupManagementService: GroupManagementService) {
+    private groupManagementService: GroupManagementService, private title: Title) {
     this.data = groupManagementService.defaultPage;
   }
 
   ngOnInit(): void {
+    this.title.setTitle('Group Warning');
     let id;
     this.activatedRoute.paramMap.subscribe(param => id = param.get('id'));
     this.groupManagementService.adminGroup();
