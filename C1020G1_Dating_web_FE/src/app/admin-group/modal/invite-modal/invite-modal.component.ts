@@ -69,6 +69,7 @@ export class InviteModalComponent implements OnInit {
           })
         }))
   }
+  
   noti(id: number, group: Group) {
     let notification = new Notification();
     notification.userId = id;

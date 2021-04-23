@@ -2,6 +2,8 @@ import { GroupUser } from 'src/app/model/group-user';
 import { GroupManagementService } from '../../service/group.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import Notification from 'src/app/model/notification';
+import { NotificationService } from '../../service/notification.service';
 
 @Component({
   selector: 'app-remove-member-modal',
@@ -13,7 +15,7 @@ export class RemoveMemberModalComponent implements OnInit {
   modal;
   @Input()
   member: GroupUser;
-  constructor(private groupManagementService: GroupManagementService, private router: Router) { }
+  constructor(private groupManagementService: GroupManagementService, private router: Router, private notificationService:NotificationService) { }
 
   ngOnInit(): void {
   }
@@ -28,5 +30,14 @@ export class RemoveMemberModalComponent implements OnInit {
       return '/';
     }
     return '/group/member/list/' + this.groupManagementService.groupId;
+  }
+
+  noti() {
+    let notification = new Notification();
+    notification.userId = this.member.user.userId;
+    notification.content = 'You have a notify: ' + this.member.group.groupName + ' have been remove you out from their group.';
+    notification.sender = this.member.group.groupName;
+    notification.href = '/group/' + this.member.group.groupId;
+    this.notificationService.create(notification, this.member.user.userId);
   }
 }

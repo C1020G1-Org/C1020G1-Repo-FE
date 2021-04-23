@@ -1,7 +1,9 @@
+import { NotificationService } from './../../service/notification.service';
 import { GroupManagementService } from './../../service/group.service';
 import { GroupUser } from './../../../model/group-user';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { GroupWarning } from 'src/app/model/warning';
+import Notification from 'src/app/model/notification';
 
 @Component({
   selector: 'app-warning-member-modal',
@@ -20,7 +22,7 @@ export class WarningMemberModalComponent implements OnInit {
     this.event.emit();
   }
   type: string = '18+ post';
-  constructor(private groupManagementService: GroupManagementService) { }
+  constructor(private groupManagementService: GroupManagementService, private notificationService: NotificationService) { }
 
   ngOnInit(): void {
   }
@@ -38,9 +40,19 @@ export class WarningMemberModalComponent implements OnInit {
       groupUser: this.member,
       warningDate: dateStr
     }
-    this.groupManagementService.warningMember(groupWarning).subscribe(() => { }, err => console.log(err),() => {
-      this.emit();
+    this.groupManagementService.warningMember(groupWarning).subscribe(() => { }, err => console.log(err), () => {
+      this.noti();
       this.modal.dismiss('ok close');
     });
+  }
+
+  noti() {
+    this.emit();
+    let notification = new Notification();
+    notification.userId = this.member.user.userId;
+    notification.content = 'You have a notify: ' + this.member.group.groupName + ' dinied you.';
+    notification.sender = this.member.group.groupName;
+    notification.href = '/group/' + this.member.group.groupId;
+    this.notificationService.create(notification, this.member.user.userId);
   }
 }
