@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {WallModule} from "./wall/wall.module";
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -13,8 +14,8 @@ import {WallModule} from "./wall/wall.module";
     imports: [
         BrowserModule,
         AppRoutingModule,
-        WallModule
-
+        WallModule,
+        HttpClientModule
     ],
   providers: [],
   bootstrap: [AppComponent]
