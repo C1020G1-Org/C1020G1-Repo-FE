@@ -1,0 +1,39 @@
+<div class="central-meta postbox">
+  <span class="create-post">Create post</span>
+  <div class="new-postbox">
+    <div class="newpst-input d-block w-100">
+      <form method="post">
+        <div class="attachments">
+          <ul>
+            <li>
+              <i class="fa fa-image"></i>
+              <label class="fileContainer">
+                <input type="file" id="upload_file" name="upload_file[]"
+                       onchange="preview_image();" multiple/>
+              </label>
+            </li>
+            <li>
+              <select class="fa form-control" id="status" style="height: 30px;width: 125px;font-size: 15px">
+                <option value="public">
+                  &#xf0ac; &nbsp; Public
+                </option>
+                <option value="friend">
+                  &#xf0c0; &nbsp; Friend
+                </option>
+                <option value="onlyMe">
+                  &#xf023; &nbsp; Only Me
+                </option>
+              </select>
+            </li>
+          </ul>
+        </div>
+        <textarea rows="2" id="myText" class="select-status" style="height: 100px"
+                  placeholder="Share some what you are thinking?"></textarea>
+      </form>
+      <div id="image_preview" class="d-block w-100"></div>
+    </div>
+    <button class="post-btn" onclick="displayValue()" type="submit" data-ripple="">
+      Post
+    </button>
+  </div>
+</div>
