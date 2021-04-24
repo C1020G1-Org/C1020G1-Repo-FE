@@ -18,9 +18,6 @@ export class AccountService {
     };
   }
 
-  errorPage(): Observable<any> {
-    return this.http.get(this.baseURL+"error-page/" + this.tokenStorage.getAccountName(), this.httpOptions);
-  }
   recoverPage(accountName: string): Observable<any>{
     return this.http.get(this.baseURL+"recover/" + accountName);
   }

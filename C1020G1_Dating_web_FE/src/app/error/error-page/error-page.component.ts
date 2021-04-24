@@ -20,10 +20,5 @@ export class ErrorPageComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this.accountService.errorPage().subscribe(data => {
-    //   this.userDTO = data
-    //   this.tokenStorage.saveUser(this.userDTO)
-    //   console.log(this.tokenStorage.getUser())
-    // })
   }
 }
