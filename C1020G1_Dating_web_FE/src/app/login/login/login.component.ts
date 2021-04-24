@@ -6,6 +6,7 @@ import {Account} from "../auth/account";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser} from "angularx-social-login";
 import {JwtResponse} from "../auth/JwtResponse";
+import {UserDto} from "../../dto/user-dto";
 
 @Component({
   selector: 'app-login',
@@ -50,14 +51,19 @@ export class LoginComponent implements OnInit {
       this.socialUser = data;
       const tokenGoogle = new JwtResponse(this.socialUser.idToken)
       this.auth.google(tokenGoogle).subscribe(req => {
-        this.tokenStorage.saveToken(req.token)
-        this.isLogged = true;
-        this.router.navigateByUrl("/error-page")
-      },
-      error => {
-        console.log(error);
-        this.logOut()
-      })
+          if (req == null) {
+            this.router.navigateByUrl("/recover")
+          } else {
+            this.tokenStorage.saveToken(req.token)
+            this.tokenStorage.saveUser(req.user)
+            this.isLogged = true;
+            this.router.navigateByUrl("/error-page")
+          }
+        },
+        error => {
+          console.log(error);
+          this.logOut()
+        })
     }).catch(
       err => {
         console.log(err)
@@ -70,10 +76,16 @@ export class LoginComponent implements OnInit {
       this.socialUser = data;
       const tokenFacebook = new JwtResponse(this.socialUser.authToken)
       this.auth.facebook(tokenFacebook).subscribe(req => {
-        this.tokenStorage.saveToken(req.token)
-        this.isLogged = true;
-        this.router.navigateByUrl("/error-page")
-      },
+          if (req == null) {
+            this.router.navigateByUrl("/recover")
+          } else {
+            this.tokenStorage.saveToken(req.token)
+            this.tokenStorage.saveUser(req.user)
+            this.isLogged = true;
+            this.router.navigateByUrl("/error-page")
+          }
+
+        },
         error => {
           console.log(error);
           this.logOut()
@@ -115,7 +127,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.account = new Account(this.getAccountName().value, this.getPassword().value);
-    console.log(this.loginForm.get("remember").value)
     this.loginWithCheckRemember(this.account);
   }
 
@@ -130,22 +141,25 @@ export class LoginComponent implements OnInit {
   loginWithCheckRemember(accountReg) {
     if (!this.loginForm.get("remember").value) {
       this.auth.sendLogin(accountReg).subscribe(data => {
+        this.tokenStorage.saveUser(data.user);
         this.login(data)
       })
     } else {
       this.auth.sendLogin(accountReg).subscribe(data => {
-        this.loginRemember(data)
+        this.tokenStorage.saveUser(data.user);
+        this.loginRemember(data);
+
       })
     }
   }
 
-  login(data){
+  login(data) {
     if (data.token != "INVALID_CREDENTIALS") {
       this.tokenStorage.saveToken(data.token);
       this.tokenStorage.saveAccountName(this.getAccountName().value);
       this.router.navigateByUrl("/error-page");
     } else {
-      this.title =  "Your account is not correct, please check your username or password"
+      this.title = "Your account is not correct, please check your username or password";
     }
   }
 
@@ -155,7 +169,7 @@ export class LoginComponent implements OnInit {
       this.tokenStorage.saveAccountName(this.getAccountName().value);
       this.router.navigateByUrl("/error-page");
     } else {
-      this.title =  "Your account is not correct, please check your username or password"
+      this.title = "Your account is not correct, please check your username or password"
     }
   }
 }
