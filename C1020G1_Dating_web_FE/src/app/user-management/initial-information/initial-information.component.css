@@ -1,0 +1,7 @@
+button:focus {
+  outline: none;
+}
+
+modal-footer {
+  border-top-color: #fa6342;
+}
