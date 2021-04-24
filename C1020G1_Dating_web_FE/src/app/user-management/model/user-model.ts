@@ -47,8 +47,8 @@ export interface Favourite {
   favouriteName: string;
 }
 
-export interface CreateUser {
-  user: User;
-  account: Account;
-  favourites: Array<Favourite>;
+export interface Reason {
+  reasonId: number;
+  reasonName: string;
 }
+

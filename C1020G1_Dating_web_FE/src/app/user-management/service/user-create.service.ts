@@ -7,22 +7,30 @@ import {Observable} from "rxjs";
 })
 export class UserCreateService {
   public API_USER = 'http://localhost:8080/user'
-  public API_FAVOURITE = 'http://localhost:8080/favourite'
-  public API_LOCATION = 'http://localhost:8080/location'
+  public API_MISC = 'http://localhost:8080/misc'
 
   constructor(public http: HttpClient) {
   }
 
   public getAllProvinces(): Observable<any> {
-    return this.http.get(this.API_LOCATION + '/' + 'province');
+    return this.http.get(this.API_MISC + '/' + 'province');
   }
 
   public getDistrictByProvince(provinceId): Observable<any> {
-    return this.http.get(this.API_LOCATION + '/district/' + provinceId);
+    return this.http.get(this.API_MISC + '/district/' + provinceId);
   }
 
   public getWardByDistrict(districtId): Observable<any> {
-    return this.http.get(this.API_LOCATION + '/ward/' + districtId);
+    return this.http.get(this.API_MISC + '/ward/' + districtId);
   }
+
+  public getFavourites(): Observable<any> {
+    return this.http.get(this.API_MISC + '/favourites')
+  }
+
+  public createUser(obj): Observable<any> {
+    return this.http.post(this.API_USER + '/create',obj)
+  }
+
 
 }
