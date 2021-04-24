@@ -36,22 +36,14 @@ export class TokenStorageService {
   }
 
 
-  public saveAccountName(accountName: string) {
-    window.sessionStorage.removeItem(ACCOUNT_NAME_KEY);
-    window.sessionStorage.setItem(ACCOUNT_NAME_KEY, accountName);
-  }
 
-  public saveAccountNameRemember(accountName: string) {
+  public saveAccountName(accountName: string) {
     window.localStorage.removeItem(ACCOUNT_NAME_KEY);
     window.localStorage.setItem(ACCOUNT_NAME_KEY, accountName);
   }
 
   public getAccountName(): string {
-    if (this.isRemember()) {
       return localStorage.getItem(ACCOUNT_NAME_KEY);
-    } else {
-      return sessionStorage.getItem(ACCOUNT_NAME_KEY)
-    }
   }
 
   public isLogged(): boolean {

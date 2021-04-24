@@ -152,7 +152,7 @@ export class LoginComponent implements OnInit {
   loginRemember(data) {
     if (data.token != "INVALID_CREDENTIALS") {
       this.tokenStorage.saveTokenRemember(data.token);
-      this.tokenStorage.saveAccountNameRemember(this.getAccountName().value);
+      this.tokenStorage.saveAccountName(this.getAccountName().value);
       this.router.navigateByUrl("/error-page");
     } else {
       this.title =  "Your account is not correct, please check your username or password"
