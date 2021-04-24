@@ -1,0 +1,45 @@
+<div class="theme-layout">
+
+  <section>
+    <div class="gap2 gray-bg">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row merged20" id="page-contents">
+              <div class="col-lg-12">
+                <div class="central-meta padding30">
+                  <div class="row merged20">
+                    <div class="col-lg-3 col-md-6 col-sm-6" *ngFor="let f of suggestFriend">
+                      <div class="friend-block">
+                        <figure>
+                          <img src="{{f.suggestFriend.userAvatar}}" alt="" style="width: 80px; height: 80px">
+                        </figure>
+
+                        <div class="frnd-meta">
+                          <div class="frnd-name">
+                            <a href="#" title="">{{f.suggestFriend.userName}}</a>
+                            <span>{{f.suggestFriend.address}}</span>
+                            <p><span>{{f.mutualFriends.length}}</span> Mutual Friends</p>
+                          </div>
+                          <ul class="add-remove-frnd">
+                            <li class="add-tofrndlist" style="margin-left: 50px"><a href="#" title="Add friend"><i class="fa fa-user-plus"></i></a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="lodmore">
+                    <span>Viewing 1-16 of 30 friends</span>
+                    <button class="btn-view btn-load-more"></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section><!-- content -->
+
+</div>
