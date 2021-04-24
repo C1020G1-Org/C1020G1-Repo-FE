@@ -10,18 +10,26 @@ import {
   GoogleLoginProvider,
   FacebookLoginProvider
 } from 'angularx-social-login';
+import {HeaderModule} from "./header/header.module";
+import {FooterModule} from "./footer/footer.module";
+import {SearchingModule} from "./searching/searching.module";
+import {HeaderComponent} from "./header/header.component";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ErrorPageComponent
+    ErrorPageComponent,
+    HeaderComponent,
   ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         LoginModule,
-      SocialLoginModule
+      SocialLoginModule,
+      HeaderModule,
+      FooterModule,
+      SearchingModule,
     ],
   providers: [{
     provide: 'SocialAuthServiceConfig',

@@ -4,7 +4,7 @@ import {LoginComponent} from "./login/login/login.component";
 import {ErrorPageComponent} from "./error/error-page/error-page.component";
 import {LoginRoutingModule} from "./login/login-routing.module";
 import {HttpClientModule} from "@angular/common/http";
-import {AuthGuardService} from "./login/auth/auth-guard.service";
+import {AuthGuardService} from "./service/auth/auth-guard.service";
 import {RecoverPasswordComponent} from "./login/recover-password/recover-password.component";
 
 

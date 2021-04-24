@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {AccountService} from "../../login/auth/account-service";
-import {TokenStorageService} from "../../login/auth/token-storage";
+import {AccountService} from "../../service/auth/account-service";
+import {TokenStorageService} from "../../service/auth/token-storage";
 import {Router} from "@angular/router";
 import {UserDto} from "../../dto/user-dto";
-import {WardDto} from "../../dto/ward-dto";
-import {StatusDto} from "../../dto/status-dto";
 
 @Component({
   selector: 'app-error-page',
@@ -27,10 +25,5 @@ export class ErrorPageComponent implements OnInit {
     //   this.tokenStorage.saveUser(this.userDTO)
     //   console.log(this.tokenStorage.getUser())
     // })
-  }
-
-  logout() {
-    this.tokenStorage.logOut();
-    this.router.navigateByUrl("/login")
   }
 }

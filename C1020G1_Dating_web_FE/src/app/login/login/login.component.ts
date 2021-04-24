@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthenticationService} from "../auth/authentication-service";
-import {TokenStorageService} from "../auth/token-storage";
-import {Account} from "../auth/account";
+import {AuthenticationService} from "../../service/auth/authentication-service";
+import {TokenStorageService} from "../../service/auth/token-storage";
+import {Account} from "../../service/auth/account";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser} from "angularx-social-login";
-import {JwtResponse} from "../auth/JwtResponse";
+import {JwtResponse} from "../../service/auth/JwtResponse";
 import {UserDto} from "../../dto/user-dto";
 
 @Component({

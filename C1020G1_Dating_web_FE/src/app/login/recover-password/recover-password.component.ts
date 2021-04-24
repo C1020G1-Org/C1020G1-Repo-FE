@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthenticationService} from "../auth/authentication-service";
-import {AccountService} from "../auth/account-service";
+import {AuthenticationService} from "../../service/auth/authentication-service";
+import {AccountService} from "../../service/auth/account-service";
 
 @Component({
   selector: 'app-recover-password',
