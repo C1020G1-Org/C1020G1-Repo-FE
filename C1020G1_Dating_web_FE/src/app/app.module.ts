@@ -14,6 +14,11 @@ import {HeaderModule} from "./header/header.module";
 import {FooterModule} from "./footer/footer.module";
 import {SearchingModule} from "./searching/searching.module";
 import {HeaderComponent} from "./header/header.component";
+import {UserManagementModule} from "./user-management/user-management.module";
+import {AngularFireModule} from "@angular/fire";
+import {environment} from "../environments/environment";
+import {AngularFireDatabaseModule} from "@angular/fire/database";
+import {AngularFireStorageModule} from "@angular/fire/storage";
 
 
 @NgModule({
@@ -30,6 +35,10 @@ import {HeaderComponent} from "./header/header.component";
       HeaderModule,
       FooterModule,
       SearchingModule,
+      UserManagementModule,
+      AngularFireModule.initializeApp(environment.firebaseConfig),
+      AngularFireDatabaseModule,
+      AngularFireStorageModule
     ],
   providers: [{
     provide: 'SocialAuthServiceConfig',

@@ -6,7 +6,7 @@ import {Account} from "../../service/auth/account";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser} from "angularx-social-login";
 import {JwtResponse} from "../../service/auth/JwtResponse";
-import {UserDto} from "../../dto/user-dto";
+
 
 @Component({
   selector: 'app-login',
@@ -48,13 +48,14 @@ export class LoginComponent implements OnInit {
       const tokenGoogle = new JwtResponse(this.socialUser.idToken)
       console.log(data)
       this.auth.google(tokenGoogle).subscribe(req => {
-          if (req == null) {
-            this.router.navigateByUrl("/recover")
+          if (req.token == "") {
+            this.tokenStorage.saveUser(req.user);
+            this.router.navigateByUrl("/registration");
           } else {
-            this.tokenStorage.saveToken(req.token)
-            this.tokenStorage.saveUser(req.user)
-            this.tokenStorage.saveAccountName(req.accountName)
-            this.router.navigateByUrl("/error-page")
+            this.tokenStorage.saveToken(req.token);
+            this.tokenStorage.saveUser(req.user);
+            this.tokenStorage.saveAccountName(req.accountName);
+            this.router.navigateByUrl("/home");
           }
         },
         error => {
@@ -73,13 +74,14 @@ export class LoginComponent implements OnInit {
       this.socialUser = data;
       const tokenFacebook = new JwtResponse(this.socialUser.authToken)
       this.auth.facebook(tokenFacebook).subscribe(req => {
-          if (req == null) {
-            this.router.navigateByUrl("/recover")
+          if (req.token == "") {
+            this.tokenStorage.saveUser(req.user);
+            this.router.navigateByUrl("/registration");
           } else {
-            this.tokenStorage.saveToken(req.token)
-            this.tokenStorage.saveUser(req.user)
-            this.tokenStorage.saveAccountName(req.accountName)
-            this.router.navigateByUrl("/error-page")
+            this.tokenStorage.saveToken(req.token);
+            this.tokenStorage.saveUser(req.user);
+            this.tokenStorage.saveAccountName(req.accountName);
+            this.router.navigateByUrl("/home");
           }
 
         },
@@ -107,7 +109,7 @@ export class LoginComponent implements OnInit {
 
   checkLogin() {
     if (this.tokenStorage.isLogged()) {
-      this.router.navigateByUrl("/error-page")
+      this.router.navigateByUrl("/home")
     }
   }
 
@@ -154,7 +156,7 @@ export class LoginComponent implements OnInit {
     if (data.token != "INVALID_CREDENTIALS") {
       this.tokenStorage.saveToken(data.token);
       this.tokenStorage.saveAccountName(this.getAccountName().value);
-      this.router.navigateByUrl("/error-page");
+      this.router.navigateByUrl("/home");
     } else {
       this.title = "Your account is not correct, please check your username or password";
     }
@@ -164,7 +166,7 @@ export class LoginComponent implements OnInit {
     if (data.token != "INVALID_CREDENTIALS") {
       this.tokenStorage.saveTokenRemember(data.token);
       this.tokenStorage.saveAccountName(this.getAccountName().value);
-      this.router.navigateByUrl("/error-page");
+      this.router.navigateByUrl("/home");
     } else {
       this.title = "Your account is not correct, please check your username or password"
     }
