@@ -1,0 +1,14 @@
+.relative {
+  position: relative;
+  bottom: 36px;
+  left: -10px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #fa6342;
+  float: right;
+}
+
+select{
+  display: inline-block !important;
+}
+

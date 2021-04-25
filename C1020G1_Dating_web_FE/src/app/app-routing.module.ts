@@ -6,14 +6,18 @@ import {LoginRoutingModule} from "./login/login-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import {AuthGuardService} from "./service/auth/auth-guard.service";
 import {RecoverPasswordComponent} from "./login/recover-password/recover-password.component";
+import {RegistrationComponent} from "./user-management/registration/registration.component";
+import {InitialInformationComponent} from "./user-management/initial-information/initial-information.component";
 
 
 const routes: Routes = [
-  {path: 'c10tinder' , pathMatch: 'full', redirectTo: 'error-page'},
+  {path: 'c10tinder' , pathMatch: 'full', redirectTo: 'home'},
   {path: 'login' , component: LoginComponent},
   {path: '' , component: LoginComponent},
   {path: 'recover' , component: RecoverPasswordComponent},
-  {path: 'error-page', component: ErrorPageComponent, canActivate:[AuthGuardService]}
+  {path: 'home', component: ErrorPageComponent, canActivate:[AuthGuardService]},
+    {path: 'registration', component: RegistrationComponent},
+  {path: 'initial-information', component: InitialInformationComponent}
 ];
 
 @NgModule({

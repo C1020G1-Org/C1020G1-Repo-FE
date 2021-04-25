@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
-import {UserDto} from "../dto/user-dto";
 import {TokenStorageService} from "../service/auth/token-storage";
 import {SearchingService} from "../service/searching/searching.service";
+import {User} from "../user-management/model/user-model";
 
 @Component({
   selector: 'app-header',
@@ -11,7 +11,7 @@ import {SearchingService} from "../service/searching/searching.service";
 })
 export class HeaderComponent implements OnInit {
   keySearch: any;
-  user: UserDto;
+  user: User;
 
   constructor(private searchingService: SearchingService,
               private router: Router,

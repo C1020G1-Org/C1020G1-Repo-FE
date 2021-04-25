@@ -1,9 +1,10 @@
-import {UserDto} from "../../dto/user-dto";
+import {User} from "../../user-management/model/user-model";
+
 
 export class JwtResponse {
 
   token: string;
-  user: UserDto;
+  user: User;
   accountName: string
 
   constructor(token: string) {
