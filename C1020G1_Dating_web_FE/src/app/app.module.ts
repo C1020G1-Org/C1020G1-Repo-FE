@@ -4,7 +4,11 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {PostModule} from "./post/post.module";
-
+import {AngularFireModule} from "@angular/fire";
+import {environment} from "../environments/environment";
+import {HttpClientModule} from "@angular/common/http";
+import {AngularFirestoreModule} from "@angular/fire/firestore";
+import {AngularFireStorageModule} from "@angular/fire/storage";
 
 @NgModule({
   declarations: [
@@ -12,8 +16,12 @@ import {PostModule} from "./post/post.module";
   ],
   imports: [
     BrowserModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
     AppRoutingModule,
-    PostModule
+    PostModule,
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
   providers: [],
   bootstrap: [AppComponent]

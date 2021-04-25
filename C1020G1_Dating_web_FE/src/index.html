@@ -10,42 +10,34 @@
 
   <link rel="icon" href="assets/images/pngegg.png" type="image/png" sizes="16x16">
 
-  <link rel="stylesheet" href="assets/css/main.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/color.css">
-  <link rel="stylesheet" href="assets/css/responsive.css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/mervick/emojionearea/master/dist/emojionearea.min.css">
-  <script>
-    function preview_image() {
-      var total_file = document.getElementById("upload_file").files.length;
-      for (var i = 0; i < total_file; i++) {
-        $('#image_preview').append("<img src='" + URL.createObjectURL(event.target.files[i]) + "' style=\"margin:3px; height: 300px; width: 200px; float: left\">");
-      }
-    }
-  </script>
+  <link rel="stylesheet" href="/assets/css/main.min.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/color.css">
+  <link rel="stylesheet" href="/assets/css/responsive.css">
 </head>
 <body>
 <app-root></app-root>
-<script src="assets/js/main.min.js"></script>
-<script src="assets/js/toast-notificatons.js"></script>
-<script src="assets/js/script.js"></script>
+<script src="/assets/js/main.min.js"></script>
+<script src="/assets/js/script.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.js"></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular-route.min.js"></script>
-<script type="text/javascript" src="https://cdn.rawgit.com/mervick/emojionearea/master/dist/emojionearea.min.js"></script>
+<script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular-route.min.js"></script>
 
 <script type="text/javascript">
-  $(document).ready(function() {
+  $(document).ready(function () {
     $("#myText").emojioneArea({
       pickerPosition: "right",
       tonesStyle: "radio"
     });
   });
-</script>
-<script>
-  function displayValue() {
-    alert(document.getElementById("myText").value + '\n' + document.getElementById("upload_file").value + '\n' + document.getElementById("status").value);
-  }
+
+  $(document).ready(function () {
+    $("#myButton").click(function (e) {
+      e.preventDefault();
+      $(".emojionearea-editor").html('');
+    });
+  });
 </script>
 </body>
 </html>
