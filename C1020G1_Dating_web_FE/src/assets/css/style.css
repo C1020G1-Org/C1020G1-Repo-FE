@@ -4191,6 +4191,7 @@ form .dob .form-group {
 
 .chosen-container {
     width: 100% !important;
+  display:none !important;
 }
 
 form .dob .form-group:last-child {
@@ -7661,7 +7662,7 @@ input[type="checkbox"]:checked + label{color: #000;}
 	background-position: -16px 10px;
 }
 .chosen-container-single .chosen-single div b{
-	background: rgba(0, 0, 0, 0) url("src/assets/css/chosen-sprite.png") no-repeat scroll 0 10px;
+	background: rgba(0, 0, 0, 0)  no-repeat scroll 0 10px;
 }
 
 .select-options .chosen-single > span {

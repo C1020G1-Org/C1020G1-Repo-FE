@@ -1,9 +1,13 @@
-import { BrowserModule } from '@angular/platform-browser';
+  import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {UserManagementModule} from "./user-management/user-management.module";
+  import {HttpClientModule} from "@angular/common/http";
+  import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+  import {FormsModule} from "@angular/forms";
+
 
 
 @NgModule({
@@ -13,7 +17,12 @@ import {UserManagementModule} from "./user-management/user-management.module";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    UserManagementModule
+    UserManagementModule,
+    BrowserModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    AppRoutingModule,
 
   ],
   providers: [],

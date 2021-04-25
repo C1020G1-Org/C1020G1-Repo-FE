@@ -1,8 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EditComponent } from './edit/edit.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {Routes} from "@angular/router";
 
 
+const routes: Routes = [
+  {path: 'edit/:id', component: EditComponent}
+];
 
 @NgModule({
   declarations: [EditComponent],
@@ -10,7 +15,9 @@ import { EditComponent } from './edit/edit.component';
     EditComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class UserManagementModule { }

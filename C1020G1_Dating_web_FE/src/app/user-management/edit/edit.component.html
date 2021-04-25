@@ -396,29 +396,22 @@
 <!--                            <span>People on Pitnik will get to know you with the info below</span>-->
                           </div>
                           <div class="stg-form-area">
-                            <form method="post" class="c-form">
+                            <form method="post" class="c-form" [formGroup]="editUserForm" (ngSubmit)="updateUser()">
                               <div>
                                 <label>User Name:
-                                  <input type="text" placeholder="Jack Carter">
+                                  <input type="text" class="form-control" formControlName="userName">
                                 </label>
                               </div>
                               <!-- name -->
 
 
-                              <div>
+                              <div class="c-form" style="margin-bottom: 20px; ">
                                 <label>Gender:
-                                  <div class="form-radio">
-                                    <div class="radio">
-                                      <label>
-                                        <input type="radio" checked="checked" name="radio"><i class="check-box"></i>Male
-                                      </label>
-                                    </div>
-                                    <div class="radio">
-                                      <label>
-                                        <input type="radio" name="radio"><i class="check-box"></i>Female
-                                      </label>
-                                    </div>
-                                  </div>
+                                  <select class="form-control d-inline-block" formControlName="gender">
+                                    <!--                                    <option disabled value="">Choose province</option>-->
+                                    <option value="1">Male</option>
+                                    <option value="2">Female</option>
+                                  </select>
                                 </label>
                               </div>
                               <!-- gender -->
@@ -426,7 +419,7 @@
 
                               <div class="c-form" style="margin-bottom: 20px;">
                                 <label>Date Of Birth:
-                                  <input type="date" placeholder="DD-MM-YYYY">
+                                  <input type="text" [value]="editUserForm.get('birthday').value | date: 'dd/MM/yyyy'" class="form-control" formControlName="birthday">
                                 </label>
                               </div>
                               <!-- dob -->
@@ -434,7 +427,7 @@
 
                               <div class="c-form" style="margin-bottom: 20px;">
                                 <label>Married:
-                                  <select>
+                                  <select class="form-control d-inline-block" formControlName="marriaged">
                                     <option value="1">Single</option>
                                     <option value="2">In Relationship</option>
                                   </select>
@@ -445,7 +438,7 @@
 
                               <div class="c-form" style="margin-bottom: 20px;">
                                 <label>Occupation:
-                                  <input type="text" placeholder="Doctor, Dev, ...">
+                                  <input type="text" class="form-control" formControlName="occupation">
                                 </label>
                               </div>
                               <!-- occupation -->
@@ -453,7 +446,7 @@
 
                               <div>
                                 <label>Email:
-                                  <input type="text" placeholder="abc@pitnikmail.com">
+                                  <input type="text" class="form-control" formControlName="email">
                                 </label>
                               </div>
                               <!-- email -->
@@ -461,7 +454,7 @@
 
                               <div>
                                 <label>Address:
-                                  <textarea placeholder="Address"></textarea>
+                                  <textarea class="form-control" formControlName="address"></textarea>
                                 </label>
                               </div>
                               <!-- address -->
@@ -469,12 +462,10 @@
 
                               <div>
                                 <label>Province:
-                                  <select>
-<!--                                    <option disabled value="">Choose province</option>-->
-                                    <option value="1">Da Nang</option>
-                                    <option value="2">Thua Thien - Hue</option>
-                                    <option value="3">TP Ho Chi Minh</option>
-                                    <option value="4">Quang Nam</option>
+                                  <select [compareWith]="compareProvince" class="form-control d-inline-block"  formControlName="province">
+                                    <option *ngFor="let province of provinces" [ngValue]="province">
+                                      {{province.provinceName}}
+                                    </option>
                                   </select>
                                 </label>
                               </div>
@@ -483,12 +474,10 @@
 
                               <div>
                                 <label>District:
-                                  <select>
-<!--                                    <option disabled value="">Choose district</option>-->
-                                    <option value="1">Lien Chieu</option>
-                                    <option value="2">Hai Chau</option>
-                                    <option value="3">Son Tra</option>
-                                    <option value="4">Lang Co</option>
+                                  <select [compareWith]="compareDistrict" class="form-control d-inline-block"  formControlName="district">
+                                    <option *ngFor="let district of districts" [ngValue]="district">
+                                      {{district.districtName}}
+                                    </option>
                                   </select>
                                 </label>
                               </div>
@@ -497,12 +486,10 @@
 
                               <div>
                                 <label>Ward:
-                                  <select>
-<!--                                    <option disabled value="">Choose district</option>-->
-                                    <option value="1">Lien Chieu</option>
-                                    <option value="2">Hai Chau</option>
-                                    <option value="3">Son Tra</option>
-                                    <option value="4">Lang Co</option>
+                                  <select [compareWith]="compareWard" class="form-control d-inline-block"  formControlName="ward">
+                                    <option *ngFor="let ward of wards" [ngValue]="ward">
+                                      {{ward.wardName}}
+                                    </option>
                                   </select>
                                 </label>
                               </div>
@@ -510,8 +497,9 @@
 
 
                               <div class="">
-                                <button class="btn btn-outline-warning" type="submit" data-ripple="">Cancel</button>
                                 <button class="btn btn-outline-success" type="submit" data-ripple="">Save</button>
+                                <button class="btn btn-outline-warning" type="submit" data-ripple="">Cancel</button>
+
                               </div>
 
                             </form>
