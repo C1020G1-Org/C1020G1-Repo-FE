@@ -9,7 +9,7 @@ import {Friends} from "../Friends";
 })
 export class FriendListComponent implements OnInit {
   public friends: Friends[];
-  friendsId: number;
+  friendId: number;
   friendName: string;
 
 
@@ -25,13 +25,13 @@ export class FriendListComponent implements OnInit {
   }
 
   showDelete(id: number, userName: string) {
-    this.friendsId = id;
+    this.friendId = id;
     this.friendName = userName;
-    console.log(this.friendsId, this.friendName)
+    console.log(this.friendId, this.friendName)
   }
 
   delete() {
-    this.friendService.deleteFriend(this.friendsId).subscribe(data => {
+    this.friendService.deleteFriend(this.friendId).subscribe(data => {
         this.ngOnInit();
     })
   }
