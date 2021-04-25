@@ -8,7 +8,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  keySearch: any;
+  name: any;
 
   constructor(private searchingService: SearchingService,
               private router: Router) { }
@@ -16,8 +16,9 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  search(keySearch: any) {
-    // this.router.navigate(['/name-search'],{queryParams:{search: keySearch}})
-    this.router.navigate(['/name-search/'], )
+  search(event: any) {
+    this.searchingService.searchTerm.next(event.target.value);
+    // this.searchingService.getKeySearch(event.target.value);
+    this.router.navigateByUrl('/name-search')
   }
 }

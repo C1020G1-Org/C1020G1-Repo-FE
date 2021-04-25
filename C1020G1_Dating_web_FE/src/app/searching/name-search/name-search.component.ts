@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {SearchingService} from "../../service/searching/searching.service";
 import {ActivatedRoute, ParamMap} from "@angular/router";
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-name-search',
@@ -10,15 +11,30 @@ import {ActivatedRoute, ParamMap} from "@angular/router";
 export class NameSearchComponent implements OnInit {
   search: string;
   listUser;
+  public name = '';
+  searchTerm = new FormControl();
+  private router: any;
+
   constructor(private searchingService: SearchingService,
-              private activeRouter: ActivatedRoute) { }
+              private activeRouter: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
-   this.search = this.activeRouter.snapshot.paramMap.get("search");
-   console.log(this.search);
-      this.searchingService.doNameSearch(this.search).subscribe((data)=>{
-        console.log(this.search);
-        this.listUser = data;
-      })
-    };
+    this.search = this.searchingService.passKeySearch();
+    // this.searchingService.searchTerm.subscribe((newValue: string) => {
+    //   this.searchTerm = newValue;
+    // });
+    this.searchingService.doNameSearch(this.search).subscribe((data) => {
+      this.listUser = data;
+    });
+  };
+
+
+  doSearchName(name) {
+    this.searchingService.doNameSearch(this.name).subscribe((data) => {
+      this.listUser = data;
+      console.log(this.listUser);
+      this.router.navigateByUrl('/name-search')
+    })
+  }
 }

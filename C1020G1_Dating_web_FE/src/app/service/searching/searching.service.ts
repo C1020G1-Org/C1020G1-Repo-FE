@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchingService {
   public API = 'http://localhost:8080/searching';
+  public keySearch: string;
+  public searchTerm: BehaviorSubject<string> = new BehaviorSubject<string>(null);
   constructor(
     public http: HttpClient
   ) { }
@@ -17,5 +19,14 @@ export class SearchingService {
 
   doAdvancedSearch(name, gender): Observable<any> {
     return this.http.get(this.API + '/name-search?name=' + name + '&gender=' + gender);
+  }
+
+  // getKeySearch(name) {
+  //   this.keySearch = name;
+  // }
+
+  passKeySearch() {
+    this.keySearch = this.searchTerm.value;
+    return this.keySearch;
   }
 }

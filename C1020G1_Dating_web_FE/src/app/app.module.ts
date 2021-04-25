@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HeaderModule} from "./header/header.module";
 import {ReactiveFormsModule} from "@angular/forms";
+import {EventEmitterService} from "./service/event-emitter.service";
 
 
 @NgModule({
@@ -18,7 +19,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [EventEmitterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

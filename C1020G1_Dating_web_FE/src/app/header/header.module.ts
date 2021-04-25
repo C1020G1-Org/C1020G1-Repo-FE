@@ -3,10 +3,10 @@ import {CommonModule} from '@angular/common';
 import {HeaderComponent} from './header/header.component';
 import {Routes, RouterModule} from '@angular/router';
 import { NameSearchComponent } from '../searching/name-search/name-search.component'
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 const routes: Routes = [
-  {path: 'name-search/:keySearch', component: NameSearchComponent},
+  {path: 'name-search', component: NameSearchComponent},
 ];
 
 @NgModule({
@@ -16,11 +16,12 @@ const routes: Routes = [
     HeaderComponent,
     RouterModule
   ],
-  imports: [
-    RouterModule.forChild(routes),
-    CommonModule,
-    FormsModule
-  ]
+    imports: [
+        RouterModule.forChild(routes),
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule
+    ]
 })
 export class HeaderModule {
 }

@@ -5,7 +5,8 @@
   <div class="top-area">
     <div class="top-search">
       <form method="post" class="">
-        <input (change)="search($event)"  type="text" placeholder="Search People">
+<!--        <input (change)="search($event.target.value)" type="text" placeholder="Search People">-->
+        <input (keydown.enter)="search($event)" type="text" placeholder="Search People">
         <button data-ripple><i class="ti-search"></i></button>
       </form>
     </div>
