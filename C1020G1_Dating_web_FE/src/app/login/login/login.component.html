@@ -36,8 +36,10 @@
                 <button type="submit" data-ripple="" [disabled]="loginForm.invalid">Log In</button>
                 <a class="forgot underline" routerLink="/recover" title="">forgot password?</a>
               </form>
-              <a class="with-smedia facebook" href="#" title="" data-ripple="" (click)="signInWithFB()"><i class="fa fa-facebook"></i></a>
-              <a class="with-smedia google" href="#" title="" data-ripple="" (click)="signInWithGoogle()"><i class="fa fa-google"></i></a>
+              <i class="fa fa-2x fa-facebook-square mr-1 " (click)="signInWithFB()"></i>
+
+              <i class="fa fa-2x fa-google-plus-square  ml-1 " (click)="signInWithGoogle()"></i>
+
               <span>don't have an account? <a class="we-account underline" href="register.html" title="">register now</a></span>
             </div>
           </div>
