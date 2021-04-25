@@ -59,6 +59,11 @@ export interface Post {
   };
 }
 
+export interface postImage {
+  post: Post;
+  images: Array<string>;
+}
+
 
 @NgModule({
   declarations: [CreatePostComponent, EditPostComponent],

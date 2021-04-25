@@ -119,13 +119,11 @@ export class CreatePostComponent implements OnInit {
   addImageToFireBase() {
     this.uploads = [];
     console.log(this.fileImage);
-    const allPercentage: Observable<number>[] = [];
     for (const file of this.fileImage) {
       const path = `files/${file.name}`;
       const ref = this.storage.ref(path);
       const task = this.storage.upload(path, file);
       const _percentage$ = task.percentageChanges();
-      allPercentage.push(_percentage$);
 
       // create composed objects with different information. ADAPT THIS ACCORDING to YOUR NEED
       const uploadTrack = {
@@ -135,17 +133,12 @@ export class CreatePostComponent implements OnInit {
       //
       // push each upload into the array
       this.uploads.push(uploadTrack);
+
+      const _t = task.then((f) => {
+        return f.ref.getDownloadURL().then((url) => {
+          return
+        })
+      })
     }
-    this.allPercentage = combineLatest(allPercentage)
-      .pipe(
-        map((percentages) => {
-          let result = 0;
-          for (const percentage of percentages) {
-            result = result + percentage;
-          }
-          return result / percentages.length;
-        }),
-        tap(console.log)
-      );
   }
 }
