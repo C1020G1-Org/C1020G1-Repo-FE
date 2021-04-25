@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   title = "Sign In Now And Meet The Awesome Friends Around The World.";
   socialUser: SocialUser;
   userLogged: SocialUser;
-  isLogged: boolean;
+
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -32,10 +32,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.authState.subscribe(data => {
-      this.userLogged = data;
-      this.isLogged = (this.userLogged != null);
-    })
 
     this.loginForm = this.form.group({
       accountName: ['', [Validators.required]],
@@ -50,13 +46,14 @@ export class LoginComponent implements OnInit {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(data => {
       this.socialUser = data;
       const tokenGoogle = new JwtResponse(this.socialUser.idToken)
+      console.log(data)
       this.auth.google(tokenGoogle).subscribe(req => {
           if (req == null) {
             this.router.navigateByUrl("/recover")
           } else {
             this.tokenStorage.saveToken(req.token)
             this.tokenStorage.saveUser(req.user)
-            this.isLogged = true;
+            this.tokenStorage.saveAccountName(req.accountName)
             this.router.navigateByUrl("/error-page")
           }
         },
@@ -81,7 +78,7 @@ export class LoginComponent implements OnInit {
           } else {
             this.tokenStorage.saveToken(req.token)
             this.tokenStorage.saveUser(req.user)
-            this.isLogged = true;
+            this.tokenStorage.saveAccountName(req.accountName)
             this.router.navigateByUrl("/error-page")
           }
 
