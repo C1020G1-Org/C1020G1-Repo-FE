@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {UserServiceService} from "../user-service.service";
 import {ActivatedRoute} from "@angular/router";
+import {UserInfo} from "../model/UserInfo";
+import {PostImage} from "../model/PostImage";
 
 @Component({
   selector: 'app-information',
@@ -8,7 +10,8 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./information.component.css']
 })
 export class InformationComponent implements OnInit {
-  public userInfo ;
+  public userInfo: UserInfo ;
+
   constructor(
     public userService : UserServiceService ,
     private activatedRoute: ActivatedRoute

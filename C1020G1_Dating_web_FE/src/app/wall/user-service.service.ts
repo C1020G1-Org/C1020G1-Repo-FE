@@ -6,13 +6,19 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class UserServiceService {
-
+  public API_USER = 'http://localhost:8686/user';
+  public API_POST = 'http://localhost:8686/post';
+  public API_COMMENT = 'http://localhost:8686/comment';
   constructor( private http: HttpClient) { }
   findUserById(id: number): Observable<any> {
-      return this.http.get('http://localhost:8080/user' + '/' + id);
+      return this.http.get(this.API_USER + '/' + id);
   }
 
   findPostById(id: number): Observable<any> {
-      return this.http.get('http://localhost:8080/post' + '/' + id);
+      return this.http.get(this.API_POST + '/' + id);
+  }
+
+  findCommentById(id: number): Observable<any> {
+    return this.http.get(this.API_COMMENT + '/' + id);
   }
 }
