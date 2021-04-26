@@ -12,31 +12,6 @@
     <ul class="setting-area pr-5">
       <li><a href="#" title="Home" data-ripple=""><i class="fa fa-home"></i></a></li>
       <li>
-        <a href="#" (click)="getFriendsRequest(2)" title="Friend Requests" data-ripple="">
-        <i class="fa fa-user"></i>
-        </a>
-        <div class="dropdowns">
-          <span><a href="#" title="">View all Requests</a></span>
-          <ul class="drops-menu">
-            <li *ngFor="let friend of listFriendRequest">
-              <div>
-                <figure>
-                  <img src="{{friend.sendUser.userAvatar}}" alt="" style="width: 15%;height: 15%;margin-left: 6px">
-                </figure>
-                <div class="mesg-meta">
-                  <h6><a href="#" title="" style="color: darkorange">{{friend.sendUser.userName}}</a></h6>
-                </div>
-                <div class="add-del-friends" style="margin-top: 20px">
-                  <a href="#" title=""><i class="fa fa-check-square fa-lg" style="color: darkorange"></i></a>
-                  <a href="#" title=""><i class="fa fa-trash fa-lg" style="color: darkorange"></i></a>
-                </div>
-              </div>
-            </li>
-          </ul>
-          <a href="friend-requests.html" title="" class="more-mesg">View All</a>
-        </div>
-      </li>
-      <li>
         <a href="#" title="Notification" data-ripple="">
           <i class="fa fa-bell"></i><em class="bg-purple">7</em>
         </a>

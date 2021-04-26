@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {HeaderService} from "../header_service/header-service.service";
-import {FriendRequest} from "../../model/friend_request";
+import {Component, OnInit, Output} from '@angular/core';
+import {WallService} from "../../wall/wall.service";
 
 
 @Component({
@@ -10,15 +9,9 @@ import {FriendRequest} from "../../model/friend_request";
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private headerService: HeaderService) { }
-
-  listFriendRequest: FriendRequest[];
-
-  ngOnInit(): void {
+  constructor(private wallService: WallService) {
   }
 
-
-  getFriendsRequest(id:number) {
-    this.headerService.getAllFriendRequest(id).subscribe(data => this.listFriendRequest = data);
+  ngOnInit(): void {
   }
 }
