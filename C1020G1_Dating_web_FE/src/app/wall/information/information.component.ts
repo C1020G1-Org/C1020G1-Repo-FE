@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserServiceService} from "../user-service.service";
 import {ActivatedRoute} from "@angular/router";
-import {UserInfo} from "../model/UserInfo";
-import {PostImage} from "../model/PostImage";
+import {User} from "../model/User";
 
 @Component({
   selector: 'app-information',
@@ -10,7 +9,7 @@ import {PostImage} from "../model/PostImage";
   styleUrls: ['./information.component.css']
 })
 export class InformationComponent implements OnInit {
-  public userInfo: UserInfo ;
+  public userInfo: User ;
 
   constructor(
     public userService : UserServiceService ,

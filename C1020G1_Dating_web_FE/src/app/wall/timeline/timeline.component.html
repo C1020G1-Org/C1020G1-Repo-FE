@@ -1,152 +1,153 @@
-  <section>
-    <div class="gap2 gray-bg">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="row merged20" id="page-contents">
-
-              <div class="col-lg-3">
-              </div>
-              <div class="col-lg-6">
-                <div class="central-meta postbox">
-                  <span class="create-post">Create post</span>
-                  <div class="new-postbox">
-                    <figure>
-                      <img src="src/assets/images/resources/admin.jpg" alt="">
-                    </figure>
-                    <div class="newpst-input">
-                      <form method="post">
-                        <textarea rows="2" placeholder="Share some what you are thinking?"></textarea>
-                      </form>
-                    </div>
-                    <div class="attachments">
-                      <ul>
-                        <li>
+<section>
+  <div class="gap2 gray-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row merged20" id="page-contents">
+            <div class="col-lg-3">
+            </div>
+            <div class="col-lg-6">
+              <div class="central-meta postbox">
+                <span class="create-post">Create post</span>
+                <div class="new-postbox">
+                  <figure>
+                    <img src="assets/images/resources/admin.jpg" alt="">
+                  </figure>
+                  <div class="newpst-input">
+                    <form method="post">
+                      <textarea rows="2" placeholder="Share some what you are thinking?"></textarea>
+                    </form>
+                  </div>
+                  <div class="attachments">
+                    <ul>
+                      <li>
 													<span class="add-loc">
 														<i class="fa fa-map-marker"></i>
 													</span>
-                        </li>
-                        <li>
-                          <i class="fa fa-music"></i>
-                          <label class="fileContainer">
-                            <input type="file">
-                          </label>
-                        </li>
-                        <li>
-                          <i class="fa fa-image"></i>
-                          <label class="fileContainer">
-                            <input type="file">
-                          </label>
-                        </li>
-                        <li>
-                          <i class="fa fa-video-camera"></i>
-                          <label class="fileContainer">
-                            <input type="file">
-                          </label>
-                        </li>
-                        <li>
-                          <i class="fa fa-camera"></i>
-                          <label class="fileContainer">
-                            <input type="file">
-                          </label>
-                        </li>
-                        <li class="preview-btn">
-                          <button class="post-btn-preview" type="submit" data-ripple="">Preview</button>
-                        </li>
-                      </ul>
-                      <button class="post-btn" type="submit" data-ripple="">Post</button>
-                    </div>
+                      </li>
+                      <li>
+                        <i class="fa fa-music"></i>
+                        <label class="fileContainer">
+                          <input type="file">
+                        </label>
+                      </li>
+                      <li>
+                        <i class="fa fa-image"></i>
+                        <label class="fileContainer">
+                          <input type="file">
+                        </label>
+                      </li>
+                      <li>
+                        <i class="fa fa-video-camera"></i>
+                        <label class="fileContainer">
+                          <input type="file">
+                        </label>
+                      </li>
+                      <li>
+                        <i class="fa fa-camera"></i>
+                        <label class="fileContainer">
+                          <input type="file">
+                        </label>
+                      </li>
+                      <li class="preview-btn">
+                        <button class="post-btn-preview" type="submit" data-ripple="">Preview</button>
+                      </li>
+                    </ul>
+                    <button class="post-btn" type="submit" data-ripple="">Post</button>
                   </div>
                 </div>
-                <div class="loadMore">
-                  <div class="central-meta item">
-                    <div class="user-post">
-                      <div class="friend-info">
-                        <figure>
-                          <img src="src/assets/images/resources/nearly1.jpg" alt="">
+              </div>
+              <div class="loadMore" *ngFor="let postInfo of postInfos">
+                <div class="central-meta item">
+                  <div class="user-post">
+                    <div class="friend-info">
+                      <figure>
+                        <img src="assets/images/resources/nearly1.jpg" alt="">
+                      </figure>
+                      <div class="friend-name">
+                        <div class="more">
+                          <div class="more-post-optns"><i class="ti-more-alt"></i>
+                            <ul>
+                              <li><i class="fa fa-pencil-square-o"></i>Edit Post</li>
+                              <li><i class="fa fa-trash-o"></i>Delete Post</li>
+                              <li class="bad-report"><i class="fa fa-flag"></i>Report Post</li>
+                            </ul>
+                          </div>
+                        </div>
+                        <ins><p>{{postInfo.user.userName}}</p></ins>
+                        <span> {{postInfo.postStatus}} <i class="fa fa-globe"></i></span>
+                      </div>
+                      <div class="post-meta">
+                        <figure *ngFor="let p of postInfo.postImages">
+                          <img src="{{p.image}}" alt="">
                         </figure>
-                        <div class="friend-name">
-                          <div class="more">
-                            <div class="more-post-optns"><i class="ti-more-alt"></i>
-                              <ul>
-                                <li><i class="fa fa-pencil-square-o"></i>Edit Post</li>
-                                <li><i class="fa fa-trash-o"></i>Delete Post</li>
-                                <li class="bad-report"><i class="fa fa-flag"></i>Report Post</li>
-                              </ul>
+                        <div class="description">
+                          <div>{{postInfo.postContent}}</div>
+                        </div>
+                      </div>
+                      <div class="coment-area" style="display: block;">
+                        <ul class="we-comet">
+                          <li>
+                            <div class="comet-avatar">
+                              <img src="assets/images/resources/nearly3.jpg" alt="">
                             </div>
-                          </div>
-                          <ins><a  title=""></a></ins>
-                          <span> {{postInfo.postStatus}} <i class="fa fa-globe"></i></span>
-                        </div>
-                        <div class="post-meta">
-                          <figure *ngFor="let p of postInfo.postImages">
-                            <img src="{{p.image}}" alt="">
-                          </figure>
-                          <div class="description">
-                           <div>{{postInfo.postContent}}</div>
-                          </div>
-                        </div>
-                        <div class="coment-area" style="display: block;">
-                          <ul class="we-comet">
-                            <li>
-                              <div class="comet-avatar">
-                                <img src="src/assets/images/resources/nearly3.jpg" alt="">
+                            <div class="we-comment">
+                              <h5><a title="">
+                                {{postInfo.user.userName}}
+                              </a></h5>
+                              <p *ngFor="let c of postInfo.parentComments"> {{c.content}}</p>
+                              <div class="inline-itms">
+                                <a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
                               </div>
-                              <div class="we-comment">
-                                <h5><a title="">Thanh Tung</a></h5>
-                                <p *ngFor="let comment of postInfo.postComment">{{comment.content}} </p>
-                                <div class="inline-itms">
-                                  <a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
-                                </div>
-                              </div>
-                            </li>
-                            <li class="post-comment">
-                              <div class="comet-avatar">
-                                <img src="src/assets/images/resources/nearly1.jpg" alt="">
-                              </div>
-                              <div class="post-comt-box">
-                                <form method="post">
-                                  <textarea placeholder="Post your comment"></textarea>
-                                  <div class="add-smiles">
-                                    <div class="uploadimage">
-                                      <i class="fa fa-image"></i>
-                                      <label class="fileContainer">
-                                        <input type="file">
-                                      </label>
-                                    </div>
-                                    <span class="em em-expressionless" title="add icon"></span>
-                                    <div class="smiles-bunch">
-                                      <i class="em em---1"></i>
-                                      <i class="em em-smiley"></i>
-                                      <i class="em em-anguished"></i>
-                                      <i class="em em-laughing"></i>
-                                      <i class="em em-angry"></i>
-                                      <i class="em em-astonished"></i>
-                                      <i class="em em-blush"></i>
-                                      <i class="em em-disappointed"></i>
-                                      <i class="em em-worried"></i>
-                                      <i class="em em-kissing_heart"></i>
-                                      <i class="em em-rage"></i>
-                                      <i class="em em-stuck_out_tongue"></i>
-                                    </div>
+                            </div>
+                          </li>
+                          <li class="post-comment">
+                            <div class="comet-avatar">
+                              <img src="assets/images/resources/nearly1.jpg" alt="">
+                            </div>
+                            <div class="post-comt-box">
+                              <form method="post">
+                                <textarea placeholder="Post your comment"></textarea>
+                                <div class="add-smiles">
+                                  <div class="uploadimage">
+                                    <i class="fa fa-image"></i>
+                                    <label class="fileContainer">
+                                      <input type="file">
+                                    </label>
                                   </div>
-                                  <button type="submit"></button>
-                                </form>
-                              </div>
-                            </li>
-                          </ul>
-                        </div>
+                                  <span class="em em-expressionless" title="add icon"></span>
+                                  <div class="smiles-bunch">
+                                    <i class="em em---1"></i>
+                                    <i class="em em-smiley"></i>
+                                    <i class="em em-anguished"></i>
+                                    <i class="em em-laughing"></i>
+                                    <i class="em em-angry"></i>
+                                    <i class="em em-astonished"></i>
+                                    <i class="em em-blush"></i>
+                                    <i class="em em-disappointed"></i>
+                                    <i class="em em-worried"></i>
+                                    <i class="em em-kissing_heart"></i>
+                                    <i class="em em-rage"></i>
+                                    <i class="em em-stuck_out_tongue"></i>
+                                  </div>
+                                </div>
+                                <button type="submit"></button>
+                              </form>
+                            </div>
+                          </li>
+                        </ul>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-3">
-              </div>
+            </div>
+            <div class="col-lg-3">
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 

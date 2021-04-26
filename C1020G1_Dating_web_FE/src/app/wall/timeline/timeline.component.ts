@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UserServiceService} from "../user-service.service";
 import {ActivatedRoute} from "@angular/router";
 import {Post} from "../model/Post";
-import {PostImage} from "../model/PostImage";
+
 
 @Component({
   selector: 'app-timeline',
@@ -10,7 +10,7 @@ import {PostImage} from "../model/PostImage";
   styleUrls: ['./timeline.component.css']
 })
 export class TimelineComponent implements OnInit {
-  postInfo: Post ;
+   postInfos: Post[] ;
   constructor(
     public userService : UserServiceService,
     private activatedRoute: ActivatedRoute
@@ -19,9 +19,9 @@ export class TimelineComponent implements OnInit {
   ngOnInit(): void {
     let id = this.activatedRoute.snapshot.params['id'];
     this.userService.findPostById(id).subscribe(data => {
-      this.postInfo = data;
-      console.log(this.postInfo)
+      this.postInfos = data;
+      console.log(this.postInfos)
     });
-  }o
+  }
 
 }
