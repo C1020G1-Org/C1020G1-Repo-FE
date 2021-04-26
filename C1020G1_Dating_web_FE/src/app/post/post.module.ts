@@ -59,9 +59,9 @@ export interface Post {
   };
 }
 
-export interface postImage {
+export interface PostImage {
   post: Post;
-  images: Array<string>;
+  postImages: Array<string>;
 }
 
 

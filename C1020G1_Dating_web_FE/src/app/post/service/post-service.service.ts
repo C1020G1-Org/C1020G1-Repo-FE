@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Post} from "../post.module";
+import {Post, PostImage} from "../post.module";
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +16,8 @@ export class PostServiceService {
     return this.httpClient.get(this.API + '/' + postId);
   }
 
-  createPost(post: Post): Observable<any> {
-    return this.httpClient.post(this.API, post);
+  createPost(postImage: PostImage): Observable<any> {
+    return this.httpClient.post(this.API, postImage);
   }
 
   updatePost(post: Post): Observable<any> {

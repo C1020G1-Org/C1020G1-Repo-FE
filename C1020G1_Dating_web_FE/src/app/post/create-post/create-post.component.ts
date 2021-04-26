@@ -28,22 +28,16 @@ export class CreatePostComponent implements OnInit {
   public check: boolean = false;
   public contentTemp: any;
   public fileImage: any;
-
-  uploads: any[];
-  files: Observable<any>;
-  allPercentage: Observable<any>;
+  public urlImage: Array<string>;
 
   constructor(public formBuilder: FormBuilder,
               public postService: PostServiceService,
               public router: Router,
-              public afs: AngularFirestore,
               public storage: AngularFireStorage,
               public dom: DomSanitizer) {
   }
 
   ngOnInit(): void {
-    this.files = this.afs.collection('files').valueChanges();
-
     this.user = {
       userId: 1,
       userName: "son",
@@ -83,19 +77,27 @@ export class CreatePostComponent implements OnInit {
       postContent: [''],
       user: [''],
       groupSocial: [null]
-    })
+    });
+    this.fileImage = [];
+    this.urlImage = [];
   }
 
-  addNewPost() {
+  async addNewPost() {
     this.contentTemp = $("#myText").data("emojioneArea").getText();
+    this.formCreatePost.get("postContent").setValue($("#myText").data("emojioneArea").getText());
+    this.formCreatePost.get("user").setValue(this.user);
     if (this.contentTemp != '') {
-      this.addImageToFireBase();
-      this.files = new Observable<any>();
-      this.formCreatePost.get("postContent").setValue($("#myText").data("emojioneArea").getText());
-      this.formCreatePost.get("user").setValue(this.user);
+      await this.addImageToFireBase();
+      this.check = false;
       console.log(this.formCreatePost.value);
-      this.postService.createPost(this.formCreatePost.value).subscribe(data => {
-        this.router.navigateByUrl('');
+      let postImage = {
+        post: this.formCreatePost.value,
+        postImages: this.urlImage
+      };
+      console.log(postImage);
+      console.log(JSON.stringify(postImage));
+      this.postService.createPost(postImage).subscribe(data => {
+        this.ngOnInit();
       })
     } else {
       this.check = true;
@@ -106,39 +108,79 @@ export class CreatePostComponent implements OnInit {
     return this.formCreatePost.get('postStatus');
   }
 
+  // importImages(event) {
+  //   const fileList = event.target.files;
+  //   this.fileImage = event.target.files;
+  //   for (const file of fileList) {
+  //     this.afs.collection('files').add({
+  //       url: URL.createObjectURL(file)
+  //     });
+  //   }
+  // }
+
+  // addImageToFireBase() {
+  //     this.uploads = [];
+  //     this.urlImage = [];
+  //     console.log(this.fileImage);
+  //     for (const file of this.fileImage) {
+  //       const path = `files/${file.name}`;
+  //       const ref = this.storage.ref(path);
+  //       const task = this.storage.upload(path, file);
+  //       const _percentage$ = task.percentageChanges();
+  //
+  //       // create composed objects with different information. ADAPT THIS ACCORDING to YOUR NEED
+  //       const uploadTrack = {
+  //         fileName: file.name,
+  //         percentage: _percentage$
+  //       };
+  //       //
+  //       // push each upload into the array
+  //       this.uploads.push(uploadTrack);
+  //
+  //       const _t = task.then((f) => {
+  //         return f.ref.getDownloadURL().then((url) => {
+  //           this.urlImage.push(url);
+  //         })
+  //       })
+  //     }
+  // }
+
   importImages(event) {
-    const fileList = event.target.files;
-    this.fileImage = event.target.files;
-    for (const file of fileList) {
-      this.afs.collection('files').add({
-        url: URL.createObjectURL(file)
-      });
+    this.fileImage = [];
+    let files = event.target.files;
+    if (files) {
+      for (let file of files) {
+        let reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.fileImage.push({url: e.target.result, file: file})
+        };
+        reader.readAsDataURL(file);
+      }
     }
+    console.log(this.fileImage)
   }
 
   addImageToFireBase() {
-    this.uploads = [];
-    console.log(this.fileImage);
-    for (const file of this.fileImage) {
-      const path = `files/${file.name}`;
-      const ref = this.storage.ref(path);
-      const task = this.storage.upload(path, file);
-      const _percentage$ = task.percentageChanges();
-
-      // create composed objects with different information. ADAPT THIS ACCORDING to YOUR NEED
-      const uploadTrack = {
-        fileName: file.name,
-        percentage: _percentage$
-      };
-      //
-      // push each upload into the array
-      this.uploads.push(uploadTrack);
-
-      const _t = task.then((f) => {
-        return f.ref.getDownloadURL().then((url) => {
-          return
-        })
-      })
-    }
+    this.urlImage = [];
+    return new Promise(resolve => {
+      Promise.all(this.fileImage.map(file =>
+        new Promise((resolve) => {
+          const name = file.file.name;
+          if (name.match(/.*\.(png|jpeg|jpg|PNG|JPEG|JPG)$/)) {
+            const fileRef = this.storage.ref(name);
+            this.storage.upload(name, file.file).snapshotChanges().pipe(
+              finalize(() => {
+                fileRef.getDownloadURL()
+                  .subscribe((url) => {
+                    this.urlImage.push(url);
+                    resolve(1);
+                  });
+              })).subscribe();
+          }
+        }))).then(() => {
+        console.log(this.urlImage);
+        resolve(1)
+      });
+    });
   }
 }
