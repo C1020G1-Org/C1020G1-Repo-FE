@@ -60,9 +60,15 @@
                             </div>
                           </div>
                           <ins
-                            ><a href="time-line.html" title="">{{
-                              post.user.userName
-                            }}</a>
+                            ><a href="time-line.html" title=""
+                              >{{ post.user.userName }}
+                            </a>
+                            &nbsp;&nbsp;
+                            <a *ngIf="post.groupSocial" href="">
+                              <i class="fa fa-caret-right"></i>
+                              &nbsp;&nbsp;
+                              {{ post.groupSocial.groupName }} (group)</a
+                            >
                           </ins>
                           <span
                             ><i class="fa fa-globe"></i>
@@ -107,20 +113,6 @@
                                     >
                                       <img
                                         src="../../../assets/images/resources/album2.jpg"
-                                        alt=""
-                                      />
-                                    </a>
-                                  </figure>
-                                  <figure>
-                                    <a
-                                      class="strip"
-                                      href="../../../assets/images/resources/album6.jpg"
-                                      title=""
-                                      data-strip-group="mygroup"
-                                      data-strip-group-options="loop: false"
-                                    >
-                                      <img
-                                        src="../../../assets/images/resources/album6.jpg"
                                         alt=""
                                       />
                                     </a>
@@ -197,10 +189,7 @@
                             <!-- user comment -->
                             <li class="post-comment">
                               <div class="comet-avatar">
-                                <img
-                                  src="../../../assets/images/resources/nearly1.jpg"
-                                  alt=""
-                                />
+                                <img src="{{ user.userAvatar }}" alt="" />
                               </div>
                               <div class="post-comt-box">
                                 <form
@@ -339,6 +328,29 @@
             <input type="hidden" formControlName="post" />
             <input type="hidden" formControlName="user" />
             <input type="hidden" formControlName="commentImage" />
+            <div class="add-smiles">
+              <div class="uploadimage">
+                <i class="fa fa-image"></i>
+                <label class="fileContainer">
+                  <input type="file" />
+                </label>
+              </div>
+              <span class="em em-expressionless" title="add icon"></span>
+              <div class="smiles-bunch">
+                <i class="em em---1"></i>
+                <i class="em em-smiley"></i>
+                <i class="em em-anguished"></i>
+                <i class="em em-laughing"></i>
+                <i class="em em-angry"></i>
+                <i class="em em-astonished"></i>
+                <i class="em em-blush"></i>
+                <i class="em em-disappointed"></i>
+                <i class="em em-worried"></i>
+                <i class="em em-kissing_heart"></i>
+                <i class="em em-rage"></i>
+                <i class="em em-stuck_out_tongue"></i>
+              </div>
+            </div>
             <input
               style="margin-top: 10px"
               type="submit"

@@ -15,7 +15,10 @@
         <p style="display: block">
           {{ parentComment.content }}
         </p>
-        <div class="inline-itms">
+        <div
+          class="inline-itms"
+          *ngIf="parentComment.user.userName == user.userName"
+        >
           <a
             class="we-reply"
             data-toggle="collapse"
@@ -53,7 +56,7 @@
     >
       <li *ngFor="let childComment of parentComment.childComments">
         <div class="comet-avatar">
-          <img src="../../../assets/images/resources/comet-4.jpg" alt="" />
+          <img src="{{ childComment.user.userAvatar }}" alt="" />
         </div>
         <div class="we-comment">
           <h5>
@@ -65,13 +68,25 @@
             {{ childComment.content }}
             <i class="em em-smiley"></i>
           </p>
-          <div class="inline-itms">
-            <!-- <a href="" class="we-reply">
-                  Edit <i class="fa fa-edit"></i>
-              </a>
-              <a href="" class="we-reply">
-                Delete <i class="fa fa-remove"></i>
-            </a> -->
+          <div
+            class="inline-itms"
+            *ngIf="childComment.user.userName == user.userName"
+          >
+            <a
+              href=""
+              class="we-reply"
+              data-toggle="modal"
+              data-target="#editModal"
+              (click)="sendEditParentComment(parentComment)"
+            >
+              Edit <i class="fa fa-edit"></i>
+            </a>
+            <a
+              class="we-reply"
+              (click)="openDeleteDialog(parentComment.parentCommentId)"
+            >
+              Delete <i class="fa fa-remove"></i>
+            </a>
           </div>
         </div>
       </li>
@@ -79,8 +94,7 @@
       <!-- user comment -->
       <li class="post-comment">
         <div class="comet-avatar">
-          <img src="../../../assets/images/resources/nearly1.jpg" alt="" />
-          <p>cao</p>
+          <img src="{{ user.userAvatar }}" alt="" />
         </div>
         <div class="post-comt-box" style="width: 89%">
           <form
