@@ -1,0 +1,133 @@
+<ul class="we-comet">
+  <!-- firts comment  -->
+  <li *ngFor="let parentComment of parentComments">
+    <!-- main comment -->
+    <div>
+      <div class="comet-avatar">
+        <img src="{{ parentComment.user.userAvatar }}" alt="" />
+      </div>
+      <div class="we-comment">
+        <h5>
+          <a href="time-line.html" title="">{{
+            parentComment.user.userName
+          }}</a>
+        </h5>
+        <p style="display: block">
+          {{ parentComment.content }}
+        </p>
+        <div class="inline-itms">
+          <a
+            class="we-reply"
+            data-toggle="collapse"
+            href="#chilCommentBlock"
+            role="button"
+            aria-expanded="false"
+            aria-controls="childComment1"
+            title="Reply"
+            >Reply <i class="fa fa-reply"></i
+          ></a>
+          <a
+            href=""
+            class="we-reply"
+            data-toggle="modal"
+            data-target="#editModal"
+            (click)="sendEditParentComment(parentComment)"
+          >
+            Edit <i class="fa fa-edit"></i>
+          </a>
+          <a
+            class="we-reply"
+            (click)="openDeleteDialog(parentComment.parentCommentId)"
+          >
+            Delete <i class="fa fa-remove"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- child comments -->
+    <ul
+      class="we-comet collapse"
+      id="chilCommentBlock"
+      *ngIf="parentComment.childComments"
+    >
+      <li *ngFor="let childComment of parentComment.childComments">
+        <div class="comet-avatar">
+          <img src="../../../assets/images/resources/comet-4.jpg" alt="" />
+        </div>
+        <div class="we-comment">
+          <h5>
+            <a href="time-line.html" title="">{{
+              childComment.user.userName
+            }}</a>
+          </h5>
+          <p>
+            {{ childComment.content }}
+            <i class="em em-smiley"></i>
+          </p>
+          <div class="inline-itms">
+            <!-- <a href="" class="we-reply">
+                  Edit <i class="fa fa-edit"></i>
+              </a>
+              <a href="" class="we-reply">
+                Delete <i class="fa fa-remove"></i>
+            </a> -->
+          </div>
+        </div>
+      </li>
+
+      <!-- user comment -->
+      <li class="post-comment">
+        <div class="comet-avatar">
+          <img src="../../../assets/images/resources/nearly1.jpg" alt="" />
+          <p>cao</p>
+        </div>
+        <div class="post-comt-box" style="width: 89%">
+          <form
+            [formGroup]="childCommentForm"
+            (ngSubmit)="submitChildForm(parentComment)"
+          >
+            <input
+              class="form-control comment-input"
+              placeholder="Post your comment"
+              formControlName="content"
+              style="
+                background: #edf2f6 none repeat scroll 0 0;
+                border-color: transparent;
+                border-radius: 5px;
+                color: inherit;
+                font-size: 13px;
+                height: 60px;
+                line-height: 16px;
+              "
+            />
+            <input type="hidden" formControlName="commentImage" />
+            <div class="add-smiles">
+              <div class="uploadimage">
+                <i class="fa fa-image"></i>
+                <label class="fileContainer">
+                  <input type="file" />
+                </label>
+              </div>
+              <span class="em em-expressionless" title="add icon"></span>
+              <div class="smiles-bunch">
+                <i class="em em---1"></i>
+                <i class="em em-smiley"></i>
+                <i class="em em-anguished"></i>
+                <i class="em em-laughing"></i>
+                <i class="em em-angry"></i>
+                <i class="em em-astonished"></i>
+                <i class="em em-blush"></i>
+                <i class="em em-disappointed"></i>
+                <i class="em em-worried"></i>
+                <i class="em em-kissing_heart"></i>
+                <i class="em em-rage"></i>
+                <i class="em em-stuck_out_tongue"></i>
+              </div>
+            </div>
+          </form>
+        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
