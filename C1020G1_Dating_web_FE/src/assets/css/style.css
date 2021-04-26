@@ -4191,6 +4191,7 @@ form .dob .form-group {
 
 .chosen-container {
     width: 100% !important;
+  display: none;
 }
 
 form .dob .form-group:last-child {

@@ -1,3 +1,11 @@
+function myFunctionAdvancedSearch() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
 // Page Loader : hide loader when all are loaded
 $(window).load(function(){
 	"use strict";
@@ -5,21 +13,21 @@ $(window).load(function(){
 });
 
 jQuery(document).ready(function($) {
-	
+
 	"use strict";
-	
-//----- popup display on window load	
+
+//----- popup display on window load
 		function delay(){
 			$(".popup-wraper.subscription").fadeIn();
 		}
 		window.setTimeout( delay, 3000 );
-		
+
 		$('.popup-closed').on('click', function() {
 		  $('.popup-wraper.subscription').addClass('closed');
 		  return false;
 		});
-	// popup end	
-	
+	// popup end
+
 //------- Notifications Dropdowns
   $('.top-area > .setting-area > li > a').on("click",function(){
 	 var $parent = $(this).parent('li');
@@ -31,10 +39,10 @@ jQuery(document).ready(function($) {
 
   $("body *").not('.top-area > .setting-area > li > a').on("click", function() {
 	 $(".top-area > .setting-area > li > a").removeClass('active');
-	
+
  });
-	
-	
+
+
 // New submit post box
 	$(".new-postbox").click(function () {
 	    $(".postoverlay").fadeIn(500);
@@ -45,41 +53,41 @@ jQuery(document).ready(function($) {
 	$("[type = submit]").click(function () {
 	    var post = $("textarea").val();
 	    $("<p class='post'>" + post + "</p>").appendTo("section");
-	});	
-	
-// top menu list	
+	});
+
+// top menu list
 	$('.main-menu > span').on('click', function () {
 		$('.nav-list').slideToggle(300);
-		
+
 	});
-	
-// show comments	
+
+// show comments
 	$('.comment').on('click', function () {
 		$(this).parents(".post-meta").siblings(".coment-area").slideToggle("slow");
 	});
-	
-// add / post location	
+
+// add / post location
 	$('.add-loc').on('click', function () {
-		$('.add-location-post').slideToggle("slow");	
+		$('.add-location-post').slideToggle("slow");
 	});
 
-// add popup upload from gallery	
+// add popup upload from gallery
 	$('.from-gallery').on('click', function () {
 		$('.already-gallery').addClass('active');
-		
+
 	});
-	
+
 	$('.canceld').on('click', function () {
 		$('.already-gallery').removeClass('active');
 	});
-	
+
 // Stories slide show
 	$('.story-box').on('click', function () {
 		$('.stories-wraper').addClass('active');
 	});
 		$('.close-story').on('click', function () {
 		$('.stories-wraper').removeClass('active');
-	});	
+	});
 
 // add popup upload photo
 	$('.edit-prof').on('click', function () {
@@ -87,24 +95,24 @@ jQuery(document).ready(function($) {
 	});
 		$('.popup-closed').on('click', function () {
 		$('.popup-wraper, .popup-wraper1').removeClass('active');
-	});	
-	
+	});
+
 	// Create group friend
 	$('.item-upload').on('click', function () {
 		$('.popup-wraper4').addClass('active');
 	});
 		$('.popup-closed').on('click', function () {
 		$('.popup-wraper4').removeClass('active');
-	});	
-	
+	});
+
 	// Create group friend
 	$('.item-upload.album').on('click', function () {
 		$('.popup-wraper5').addClass('active');
 	});
 		$('.popup-closed').on('click', function () {
 		$('.popup-wraper5').removeClass('active');
-	});	
-	
+	});
+
 // popup event
 	$('.event-title h4').on('click', function () {
 		$('.popup-wraper7').addClass('active');
@@ -112,25 +120,25 @@ jQuery(document).ready(function($) {
 	$('.popup-closed').on('click', function () {
 		$('.popup-wraper7').removeClass('active');
 	});
-	
+
 // chat messenger remove unread
 	$('.msg-pepl-list .nav-item').on('click', function () {
 		$(this).removeClass('unread');
-	});	
-	
-// select gender on pitpoint page	
+	});
+
+// select gender on pitpoint page
 	$('.select-gender > li').click( function() {
 		$(this).addClass('selected').siblings().removeClass('selected');
 	  });
-	
-// select amount on donation page	
+
+// select amount on donation page
 	$('.amount-select > li').click( function() {
 		$(this).addClass('active').siblings().removeClass('active');
 	  });
-// select pay method on donation page	
+// select pay method on donation page
 	$('.pay-methods > li').click( function() {
 		$(this).addClass('active').siblings().removeClass('active');
-	  });	
+	  });
 
 // popup add user
 	$('.user-add').on('click', function () {
@@ -146,7 +154,7 @@ jQuery(document).ready(function($) {
 		$('.popup-wraper1').addClass('active');
 		return false;
 	});
-	
+
 // popup report post
 	$('.bad-report').on('click', function () {
 		$('.popup-wraper3').addClass('active');
@@ -155,29 +163,29 @@ jQuery(document).ready(function($) {
 	$('.popup-closed, .cancel').on('click', function () {
 		$('.popup-wraper3').removeClass('active');
 		return false;
-	});		
-	
+	});
+
 // comments popup
 	jQuery(window).on("load", function(){
 		$('.show-comt').bind('click', function () {
-			$('.pit-comet-wraper').addClass('active');  
-		});	
+			$('.pit-comet-wraper').addClass('active');
+		});
 	});
 // comments popup
 	$('.add-pitrest > a, .pitred-links > .main-btn, .create-pst').on('click', function () {
 		$('.popup-wraper').addClass('active');
 		return false;
 	});
-	
-// share post popup	
+
+// share post popup
 $('.share-pst').on('click', function () {
 	$('.popup-wraper2').addClass('active');
 	return false;
 });
 	$('.popup-closed, .cancel').on('click', function () {
 	$('.popup-wraper2').removeClass('active');
-});	
-	
+});
+
 // messenger call popup
 $('.audio-call, .video-call').on('click', function () {
 		$('.call-wraper').addClass('active');
@@ -185,12 +193,12 @@ $('.audio-call, .video-call').on('click', function () {
 		$('.decline-call, .later-rmnd').on('click', function () {
 		$('.call-wraper').removeClass('active');
 	});
-	
+
 // Touch Spin cart qty number
     if ($.isFunction($.fn.TouchSpin)) {
         $('.qty').TouchSpin({});
-    }	
-		
+    }
+
 // drag drop widget
 
 	$( init );
@@ -201,7 +209,7 @@ $('.audio-call, .video-call').on('click', function () {
 	    }).disableSelection();
 	}
 
-//--- heart like and unlike 
+//--- heart like and unlike
 	var counter = 0;
 	var animated = false;
 		$('.heart').click(function(){
@@ -213,24 +221,24 @@ $('.audio-call, .video-call').on('click', function () {
 		  }
 		  else {
 			$(this).removeClass('happy').addClass('broken');
-			animated = false; 
+			animated = false;
 			 counter--;
 			$(this).children('span').text(counter);
 		  }
-		});	
-	
-// search fadein out at navlist area	
+		});
+
+// search fadein out at navlist area
 	$('.search-data').on('click', function () {
 	  $( ".searchees" ).fadeIn( "slow", function() {
 	  });
 		return false;
 	});
-	
+
 	$('.cancel-search').on('click', function () {
 	  $( ".searchees" ).fadeOut( "slow", function() {
 	  });
 		return false;
-	});	
+	});
 
 //------- remove class active on body
 	$("body *").not('.top-area > .setting-area > li > a').on("click", function() {
@@ -238,94 +246,94 @@ $('.audio-call, .video-call').on('click', function () {
 	});
 
 
-//--- user setting dropdown on topbar	
+//--- user setting dropdown on topbar
 $('.user-img').on('click', function() {
 	$('.user-setting').toggleClass("active");
 });
 
-	
-//--- side message box	
+
+//--- side message box
 	$('.friendz-list > li, .chat-users > li, .drops-menu > li > a.show-mesg').on('click', function() {
 		$('.chat-box').addClass("show");
 		return false;
-	});	
+	});
 	$('.close-mesage').on('click', function() {
 		$('.chat-box').removeClass("show");
 		return false;
-	});	
-	
+	});
+
 //------ scrollbar plugin
 	if ($.isFunction($.fn.perfectScrollbar)) {
 		$('.dropdowns, .twiter-feed, .invition, .followers, .chatting-area, .peoples, #people-list, .chat-list > ul, .message-list, .chat-users, .left-menu, .sugestd-photo-caro, .popup.events, .related-tube-psts, .music-list, .more-songs, .media > ul, .conversations, .msg-pepl-list, .menu-slide, .frnds-stories, .modal-body .we-comet').perfectScrollbar();
 	}
 
-/*--- socials menu scritp ---*/	
+/*--- socials menu scritp ---*/
 	$('.trigger').on("click", function() {
 	    $(this).parent(".menu").toggleClass("active");
 	});
-	
-/*--- left menu full ---*/	
+
+/*--- left menu full ---*/
 	$('.menu-small').on("click", function() {
 	    $(".fixed-sidebar.left").addClass("open");
-		
+
 	  });
 	$('.closd-f-menu').on("click", function() {
 	    $(".fixed-sidebar.left").removeClass("open");
-		
+
 	  });
 
-/*--- emojies show on text area ---*/	
+/*--- emojies show on text area ---*/
 	$('.add-smiles > span, .smile-it').on("click", function() {
 	    $(this).siblings(".smiles-bunch").toggleClass("active");
 	});
-	
+
 	$('.smile-it').on("click", function() {
 	    $(this).children(".smiles-bunch").toggleClass("active");
 	});
-	
-//save post click	
+
+//save post click
 $('.save-post, .bane, .get-link').on("click", function() {
 	    $(this).toggleClass("save");
 	});
-	
+
 // delete notifications
 	$('.notification-box > ul li > i.del').on("click", function(){
 	    $(this).parent().slideUp();
 		return false;
-	}); 	
+	});
 
-/*--- socials menu scritp ---*/	
+/*--- socials menu scritp ---*/
 	$('.f-page > figure i').on("click", function() {
 	    $(".drop").toggleClass("active");
 	});
 
-	
-//select photo in upload photo popup	
+
+//select photo in upload photo popup
 	$('.sugestd-photo-caro > li').on('click', function() {
-		$(this).toggleClass('active');			
+		$(this).toggleClass('active');
 		return false;
 	});
-	
+
 //--- pitred point adding
 	$('.minus').click(function () {
 		var $input = $(this).parent().find('input');
-		
+
 		$('.minus').on("click", function() {
 			$(this).siblings('input').removeClass("active");
 			$(this).siblings('.plus').removeClass("active");
-			
+
 		});
-		
+
 		var count = parseInt($input.val()) - 1;
 		count = count < 1 ? 0 : count;
 		$input.val(count);
 		$input.change();
 		return false;
 	});
-	
+
    $('.plus').click(function () {
 		var $input = $(this).parent().find('input');
-		
+
 		$('.plus').on("click", function() {
 			$(this).addClass("active");
 			$(this).siblings('input').addClass("active");
@@ -335,7 +343,7 @@ $('.save-post, .bane, .get-link').on("click", function() {
 		return false;
 	});
 
-//Link copied on click 	
+//Link copied on click
 
 	$(".get-link").click(function (event) {
 		event.preventDefault();
@@ -372,7 +380,7 @@ $('.save-post, .bane, .get-link').on("click", function() {
 		}
 	}
 
-	
+
 //===== Search Filter =====//
 	(function ($) {
 	// custom css expression for a case-insensitive contains()
@@ -380,7 +388,7 @@ $('.save-post, .bane, .get-link').on("click", function() {
 	  return (a.textContent || a.innerText || "").toUpperCase().indexOf(m[3].toUpperCase())>=0;
 	};
 
-	function listFilter(searchDir, list) { 
+	function listFilter(searchDir, list) {
 	  var form = $("<form>").attr({"class":"filterform","action":"#"}),
 	  input = $("<input>").attr({"class":"filterinput","type":"text","placeholder":"Search Contacts..."});
 	  $(form).append(input).appendTo(searchDir);
@@ -405,19 +413,19 @@ $('.save-post, .bane, .get-link').on("click", function() {
 	$(function () {
 	  listFilter($("#searchDir"), $("#people-list"));
 	});
-	}(jQuery));	
+	}(jQuery));
 
 //progress line for page loader
 	$('body').show();
 	NProgress.start();
 	setTimeout(function() { NProgress.done(); $('.fade').removeClass('out'); }, 2000);
-	
-//--- bootstrap tooltip and popover	
+
+//--- bootstrap tooltip and popover
 	$(function () {
 	  $('[data-toggle="tooltip"]').tooltip();
 		$('[data-toggle="popover"]').popover();
 	});
-	
+
 // Sticky Sidebar & header
 	if($(window).width() < 981) {
 		$(".sidebar").children().removeClass("stick-widget");
@@ -429,24 +437,24 @@ $('.save-post, .bane, .get-link').on("click", function() {
 			offset_top: 60,
 		});
 
-		
+
 		$('.stick').stick_in_parent({
 		    parent: 'body',
             offset_top: 0,
 		});
-		
+
 	}
-	
-/*--- topbar setting dropdown ---*/	
+
+/*--- topbar setting dropdown ---*/
 	$(".we-page-setting").on("click", function() {
 	    $(".wesetting-dropdown").toggleClass("active");
-	});	
-	  
-/*--- topbar toogle setting dropdown ---*/	
+	});
+
+/*--- topbar toogle setting dropdown ---*/
 $('#nightmode').on('change', function() {
     if ($(this).is(':checked')) {
         // Show popup window
-        $(".theme-layout").addClass('black');	
+        $(".theme-layout").addClass('black');
     }
 	else {
         $(".theme-layout").removeClass("black");
@@ -463,9 +471,9 @@ $('#nightmode').on('change', function() {
 		$(".manual-adjust").userincr({
 			buttonlabels:{'dec':'-','inc':'+'},
 		}).data({'min':0,'max':20,'step':1});
-	}	
-	
-if ($.isFunction($.fn.loadMoreResults)) {	
+	}
+
+if ($.isFunction($.fn.loadMoreResults)) {
 	$('.loadMore').loadMoreResults({
 		displayedItems: 3,
 		showItems: 1,
@@ -473,8 +481,8 @@ if ($.isFunction($.fn.loadMoreResults)) {
 		  'class': 'btn-load-more',
 		  'text': 'Load More'
 		}
-	});	
-	
+	});
+
 	$('.load-more').loadMoreResults({
 		displayedItems: 8,
 		showItems: 1,
@@ -483,7 +491,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 		  'text': 'Load More'
 		}
 	});
-	
+
 	$('.load-more4').loadMoreResults({
 		displayedItems: 8,
 		showItems: 1,
@@ -520,7 +528,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 				}
 
 		});
-		
+
 		//contributors on tube channel
 		$('.contributorz').owlCarousel({
 			items: 6,
@@ -547,7 +555,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 				}
 
 		});
-		
+
 		/*--- timeline page ---*/
 		$('.suggested-frnd-caro').owlCarousel({
 			items: 4,
@@ -573,7 +581,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 				}
 			}
 		});
-		
+
 		$('.frndz-list').owlCarousel({
 			items: 5,
 			loop: true,
@@ -598,7 +606,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 					}
 				}
 		});
-		
+
 		$('.photos-list').owlCarousel({
 			items: 5,
 			loop: true,
@@ -623,7 +631,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 					}
 				}
 		});
-		
+
 		$('.videos-list').owlCarousel({
 			items: 3,
 			loop: true,
@@ -648,7 +656,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 					}
 				}
 		});
-		
+
 		//Badges carousel on badges page
 		$('.badge-caro').owlCarousel({
 			items: 6,
@@ -675,7 +683,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 					}
 				}
 		});
-		
+
 		// Related groups on groups page
 		$('.related-groups').owlCarousel({
 			items: 6,
@@ -703,7 +711,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 					}
 				}
 		});
-		
+
 		// trending pitred posts
 		$('.pitred-trendings.six').owlCarousel({
 			items: 6,
@@ -731,7 +739,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 					}
 				}
 		});
-		
+
 		// trending pitred posts
 		$('.pitred-trendings').owlCarousel({
 			items: 4,
@@ -759,7 +767,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 					}
 				}
 		});
-		
+
 		// Success couples caro in pitpoint page
 		$('.succes-people').owlCarousel({
 			items: 1,
@@ -786,7 +794,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 					}
 				}
 		});
-		
+
 		// Featured area fade caro soundnik page
 		$('.soundnik-featured').owlCarousel({
 			items: 1,
@@ -815,7 +823,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 					}
 				}
 		});
-		
+
 		// Promo Caro classified page
 		$('.promo-caro').owlCarousel({
 			items: 3,
@@ -842,7 +850,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 					}
 				}
 		});
-		
+
 	// Promo Caro classified page
 		$('.testi-caro').owlCarousel({
 			items: 1,
@@ -868,8 +876,8 @@ if ($.isFunction($.fn.loadMoreResults)) {
 						items:1,
 					}
 				}
-		});	
-		
+		});
+
 	//featured-text-caro
 		$('.text-caro').owlCarousel({
 			items:1,
@@ -883,8 +891,8 @@ if ($.isFunction($.fn.loadMoreResults)) {
 			animateIn:'fadeIn',
 			animateOut:'fadeOut',
 		});
-		
-	//sponsors carousel	
+
+	//sponsors carousel
 		$('.sponsors').owlCarousel({
 			loop:true,
 			margin:80,
@@ -910,7 +918,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 				}
 			}
 		});
-		
+
 	//team section carousel
 		$('.team-carouzel').owlCarousel({
 			loop:true,
@@ -935,9 +943,9 @@ if ($.isFunction($.fn.loadMoreResults)) {
 				}
 			}
 		});
-		
+
 	}
-	
+
 // slick carousel for detail page
 	if ($.isFunction($.fn.slick)) {
 		$('.slick-single').slick();
@@ -988,7 +996,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
         fade: true,
         cssEase: 'linear'
     });
-		
+
 
     $('.slider-for').slick({
         slidesToShow: 1,
@@ -1054,8 +1062,8 @@ if ($.isFunction($.fn.loadMoreResults)) {
 	});
 }
 
-//---- calander	
-	if ($.isFunction($.fn.jalendar)) { 
+//---- calander
+	if ($.isFunction($.fn.jalendar)) {
 	 $('#yourId').jalendar({
 			customDay: '11/01/2015',
 			color: '#577e9a', // Unlimited Colors
@@ -1064,7 +1072,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 			sundayStart: true
 		});
 	}
-	
+
 //---- responsive header
 if ($.isFunction($.fn.mmenu)) {
 	$(function() {
@@ -1090,7 +1098,7 @@ if ($.isFunction($.fn.mmenu)) {
 		$('.mh-head.second').mhead({
 			scroll: false
 		});
-	});	
+	});
 }
 
 //**** Slide Panel Toggle ***//
@@ -1105,33 +1113,33 @@ if ($.isFunction($.fn.mmenu)) {
 	     $(".side-panel").removeClass('active');
 	});
 
-	  
+
 // login & register form
 	$('button.signup').on("click", function(){
 		$('.login-reg-bg').addClass('show');
 		return false;
 	});
-	  
+
 	$('.already-have').on("click", function(){
 		$('.login-reg-bg').removeClass('show');
 		return false;
 	});
-	
-//----- count down timer		
+
+//----- count down timer
 	if ($.isFunction($.fn.downCount)) {
 		$('.countdown').downCount({
 			date: '11/12/2021 12:00:00',
 			offset: +10
 		});
 	}
-	
+
 //counter for funfacts
 		if ($.isFunction($.fn.counterUp)) {
 		$('.counter').counterUp({
 			delay: 10,
 			time: 1000
 		});
-		}	
+		}
 /** Post a Comment **/
 jQuery(".post-comt-box textarea").on("keydown", function(event) {
 
@@ -1142,10 +1150,10 @@ jQuery(".post-comt-box textarea").on("keydown", function(event) {
 		$(comment_HTML).insertBefore(parent);
 		jQuery(this).val('');
 	}
-}); 
-	
-//inbox page 	
-//***** Message Star *****//  
+});
+
+//inbox page
+//***** Message Star *****//
     $('.message-list > li > span.star-this').on("click", function(){
     	$(this).toggleClass('starred');
     });
@@ -1156,7 +1164,7 @@ jQuery(".post-comt-box textarea").on("keydown", function(event) {
     	$(this).toggleClass('important-done');
     });
 
-    
+
 
 // Listen for click on toggle checkbox
 	$('#select_all').on("click", function(event) {
@@ -1186,8 +1194,8 @@ jQuery(".post-comt-box textarea").on("keydown", function(event) {
 		$(this).addClass('selected');
 		$(this).parent().siblings().children('.category-box').removeClass('selected');
 	});*/
-	
-	
+
+
 // Responsive nav dropdowns
 	$('li.menu-item-has-children > a').on('click', function () {
 		$(this).parent().siblings().children('ul').slideUp();
@@ -1196,7 +1204,7 @@ jQuery(".post-comt-box textarea").on("keydown", function(event) {
 		$(this).parent().toggleClass('active');
 		return false;
 	});
-	
+
 // Slider box
 	$(function() {
 	  $("#price-range").slider({
@@ -1211,7 +1219,7 @@ jQuery(".post-comt-box textarea").on("keydown", function(event) {
 	  });
 	  $("#priceRange").val( $("#price-range").slider("value") + " Years");
 	});
-//--- range slider 	
+//--- range slider
  $( function() {
 		$( "#slider-range" ).slider({
 		  range: true,
@@ -1225,13 +1233,13 @@ jQuery(".post-comt-box textarea").on("keydown", function(event) {
 		$( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
 		  " - $" + $( "#slider-range" ).slider( "values", 1 ) );
 	  } );
-		
-	
+
+
 });//document ready end
 
 /*--- progress circle with percentage ---*/
 (function() {
-	
+
 	window.onload = function() {
     var totalProgress, progres;
 		const circles = document.querySelectorAll('.progres');
@@ -1239,13 +1247,13 @@ jQuery(".post-comt-box textarea").on("keydown", function(event) {
 			totalProgress = circles[i].querySelector('circle').getAttribute('stroke-dasharray');
 			progress = circles[i].parentElement.getAttribute('data-percent');
       circles[i].querySelector('.bar').style['stroke-dashoffset'] = totalProgress * progress / 100;
-      
+
 		}
 	};
 })();
 
 
-	
+
 
 
 

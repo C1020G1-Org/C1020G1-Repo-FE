@@ -17,9 +17,14 @@ export class SearchingService {
     return this.http.get(this.API + '/name-search/' + name);
   }
 
-  doAdvancedSearch(name, gender): Observable<any> {
-    return this.http.get(this.API + '/name-search?name=' + name + '&gender=' + gender);
+  doAdvancedSearch(name, birthday): Observable<any> {
+    return this.http.get(this.API + '/advanced-search?name=' + name +
+      '&birthday=' + birthday);
   }
+
+  // doAdvancedSearch(name, gender): Observable<any> {
+  //   return this.http.get(this.API + '/name-search?name=' + name + '&gender=' + gender);
+  // }
 
   // getKeySearch(name) {
   //   this.keySearch = name;

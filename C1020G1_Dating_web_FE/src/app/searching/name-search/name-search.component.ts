@@ -30,11 +30,11 @@ export class NameSearchComponent implements OnInit {
   };
 
 
-  doSearchName(name) {
+  doSearchName() {
     this.searchingService.doNameSearch(this.name).subscribe((data) => {
       this.listUser = data;
-      console.log(this.listUser);
-      this.router.navigateByUrl('/name-search')
+      // console.log(this.listUser);
+      // this.router.navigateByUrl('/name-search')
     })
   }
 }
