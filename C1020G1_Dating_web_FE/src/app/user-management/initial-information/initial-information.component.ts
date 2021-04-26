@@ -7,6 +7,7 @@ import {atLeastOneCheckboxValidator} from "../validator/atleast.validator";
 import {finalize} from "rxjs/operators";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {Favourite, Reason} from "../model/user-model";
+import {TokenStorageService} from "../../service/auth/token-storage";
 
 declare const $: any;
 
@@ -31,7 +32,8 @@ export class InitialInformationComponent implements OnInit {
               public userCreate: UserCreateService,
               public userStorage: UserStorageService,
               public router: Router,
-              public storage: AngularFireStorage) {
+              public storage: AngularFireStorage,
+              public tokenStorage: TokenStorageService) {
   }
 
   ngOnInit(): void {
@@ -181,6 +183,8 @@ export class InitialInformationComponent implements OnInit {
       console.log(this.userStorage.serverError.error.errors['account'])
       this.router.navigateByUrl("registration");
     });
+
+    this.userStorage.clearRegis();
   }
 
 
@@ -214,6 +218,7 @@ export class InitialInformationComponent implements OnInit {
   }
 
   goToLogin() {
+    this.tokenStorage.logOut();
     this.router.navigateByUrl("login");
   }
 }

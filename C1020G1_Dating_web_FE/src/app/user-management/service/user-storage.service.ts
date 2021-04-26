@@ -6,6 +6,8 @@ import {Account, Favourite, Reason, Status, User, Ward} from "../model/user-mode
 })
 export class UserStorageService {
 
+  private regis: boolean
+
   private _user: User = {
     userId: null,
     userName: "",
@@ -32,6 +34,7 @@ export class UserStorageService {
     accountName: "",
     password: "",
   };
+
   private _favourites: Array<Favourite> = [];
   private _reason: Array<Reason> = [];
   private _reEmail: string = null;
@@ -220,4 +223,17 @@ export class UserStorageService {
     this._background = null;
     this._serverError = null;
   }
+
+  isRegis() {
+    return this.regis;
+  }
+
+  registed() {
+    this.regis = true
+  }
+
+  clearRegis() {
+    this.regis = false
+  }
+
 }

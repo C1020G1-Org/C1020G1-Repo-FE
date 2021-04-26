@@ -85,11 +85,11 @@
                 class="check-box"></i>
                 {{favourite.favouriteName}}
               </label>
-              <span class="color-red ml-4" style="font-size: 12px"
-                    *ngIf="this.formInitial.controls.favourites.hasError('requireCheckboxToBeChecked') && (formInitial.controls.favourites?.touched ||formInitial.controls.favourites?.dirty)"><i
-                class="fas fa-warning"></i><i>At least a favourite is checked</i>
-            </span>
             </div>
+            <span class="color-red" style="font-size: 12px"
+                  *ngIf="this.formInitial.controls.favourites.hasError('requireCheckboxToBeChecked') && (formInitial.controls.favourites?.touched ||formInitial.controls.favourites?.dirty)"><i
+              class="fa fa-warning"></i><i>At least a favourite is checked</i>
+            </span>
           </div>
         </div>
         <hr>
