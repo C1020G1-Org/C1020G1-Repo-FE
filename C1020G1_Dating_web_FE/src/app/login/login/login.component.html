@@ -23,15 +23,17 @@
               </div>
               <form class="we-form" method="post" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <input type="text" placeholder="Account Name" formControlName="accountName">
-                <p class="text-black-50" *ngIf="loginForm.get('accountName').invalid && loginForm.get('accountName').touched">
-                  Account Name Not Null!
-                </p>
+                <span class="text-black-50" style="font-size: 12px" *ngIf="loginForm.controls.accountName.errors?.required && loginForm.get('accountName').touched">
+                  <i class="fa fa-exclamation-circle"></i><i> Account Name Not Null!</i>
+                </span>
+                <span class="text-black-50" style="font-size: 12px"
+                      *ngIf="loginForm.controls.accountName.errors?.pattern"><i class="fa fa-exclamation-circle"></i><i> Account name contain alphabet characters and digits</i>
+                </span> <br>
                 <i (click)="viewPassword()" class="{{classPassword}}"></i>
                 <input [type]="type" placeholder="Password" formControlName="password">
-                <p class="text-black-50" *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched">
-                  Password Not Null!
+                <p class="text-black-50" style="font-size: 12px" *ngIf="loginForm.controls.password.errors?.required && loginForm.get('password').touched">
+                  <i class="fa fa-exclamation-circle"></i><i> Password Not Null!</i>
                 </p>
-                <br>
                 <input type="checkbox" formControlName="remember" ><label>remember me</label>
                 <button type="submit" data-ripple="" [disabled]="loginForm.invalid">Log In</button>
                 <a class="forgot underline" routerLink="/recover" title="">forgot password?</a>

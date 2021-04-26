@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
 
     this.loginForm = this.form.group({
-      accountName: ['', [Validators.required]],
+      accountName: ['', [Validators.required, Validators.pattern("^[0-9A-Za-z]*$")]],
       password: ['', Validators.required],
       remember: false
     });
@@ -158,7 +158,7 @@ export class LoginComponent implements OnInit {
       this.tokenStorage.saveAccountName(this.getAccountName().value);
       this.router.navigateByUrl("/home");
     } else {
-      this.title = "Your account is not correct, please check your username or password";
+      this.title = "<i class=\"fa fa-exclamation-circle\"></i><i>Your account is not correct, please check your username or password</i>";
     }
   }
 
