@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {GroupService} from '../service/group.service';
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 
 
 @Component({
@@ -9,17 +10,29 @@ import {GroupService} from '../service/group.service';
 })
 export class GroupListComponent implements OnInit {
   public groups;
-  term: any;
+  searchForm: FormGroup;
 
   constructor(
-    public groupService: GroupService
+    public groupService: GroupService,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(){
+    this.searchForm = this.formBuilder.group({
+      search:""
+    })
+
     this.groupService.getAllGroup().subscribe(data => {
       this.groups = data;
       console.log(this.groups);
     });
   }
 
+  onSubmit() {
+    this.groupService.getGroupByName(this.searchForm.get("search").value).subscribe(data=>{
+      this.groups = data;
+      console.log(this.groups);
+
+    });
+  }
 }

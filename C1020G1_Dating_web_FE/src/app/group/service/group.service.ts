@@ -13,7 +13,20 @@ export class GroupService {
   getAllGroup(): Observable<any> {
     return this.http.get(this.API);
   }
-  getAllGroupMember():Observable<any>{
-    return this.http.get((this.API + '/' + "member"))
+
+  getGroupById(groupId): Observable<any>{
+    return this.http.get(this.API + '-detail/'+ groupId);
+  }
+
+  deleteGroup(groupId): Observable<any>{
+    return this.http.delete(this.API+ '-delete/'+groupId);
+  }
+
+  getGroupByName(groupName): Observable<any>{
+    return this.http.get(this.API + '-search/'+ groupName);
+  }
+
+  getAllMemberGroup(groupId): Observable<any>{
+    return this.http.get(this.API+'-member/'+ groupId);
   }
 }

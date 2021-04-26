@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {GroupService} from "../service/group.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-group-member',
@@ -6,10 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./group-member.component.css']
 })
 export class GroupMemberComponent implements OnInit {
+   groupMember: any;
+   group;
 
-  constructor() { }
+  constructor(public groupService: GroupService,
+              private activatedRoute: ActivatedRoute) { }
 
-  ngOnInit(): void {
+  ngOnInit(){
+    this.activatedRoute.paramMap.subscribe(data => {
+
+      this.groupService.getAllMemberGroup(data.get("id")).subscribe(groupUser=> {
+        console.log(groupUser);
+        this.groupMember = groupUser;
+      });
+      })
+      console.log(this.groupMember);
+      console.log(this.group);
   }
 
 }
