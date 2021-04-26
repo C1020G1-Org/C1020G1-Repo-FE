@@ -19,7 +19,7 @@ export class ReceiveNotificationComponent implements OnInit {
   }
 
   setNotiList() {
-    this.notificationService.getAll(5).snapshotChanges().pipe(
+    this.notificationService.getAll(5).snapshotChanges().pipe( // 5 is userId is logged
       map(changes =>
         changes.map(data => ({ key: data.payload.key, ...data.payload.val() })
         )
@@ -30,11 +30,11 @@ export class ReceiveNotificationComponent implements OnInit {
   }
 
   deleteAll() {
-    this.notificationService.deleteAll(5).then(() => console.log('delete all success!'));
+    this.notificationService.deleteAll(5).then(() => console.log('delete all success!')); // 5 is userId is logged
   }
 
   nav(noti: Notification){
-    this.notificationService.delete(noti.key,5).then(() => console.log('delelte success!'));
+    this.notificationService.delete(noti.key,5).then(() => console.log('delete success!')); // 5 is userId is logged
     this.router.navigateByUrl(noti.href);
   }
 }

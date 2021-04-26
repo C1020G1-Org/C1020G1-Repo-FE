@@ -1,6 +1,6 @@
 import { Group } from './../../model/group';
 import { GroupWarning } from './../../model/warning';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -15,7 +15,6 @@ import { GroupRequest } from "../../model/group-request";
 export class GroupManagementService {
   url = 'http://localhost:8080/group/';
   groupId: number;
-  userId = 1;
   constructor(private http: HttpClient, private router: Router) {
   }
 
@@ -84,6 +83,10 @@ export class GroupManagementService {
     if (status == 404) {
       this.router.navigateByUrl(url);
     }
+  }
+
+  get userId() {
+    return 1; // 1 is userId is logged
   }
 
   get defaultPage() {

@@ -20,7 +20,7 @@ export class GroupListRequestComponent implements OnInit {
   key = "";
   request: GroupRequest;
   constructor(private modalService: NgbModal, private groupManagementService: GroupManagementService,
-    private activatedRoute: ActivatedRoute,private title: Title) { }
+    private activatedRoute: ActivatedRoute, private title: Title) { }
 
   ngOnInit(): void {
     this.title.setTitle('Group Request List');
@@ -49,6 +49,6 @@ export class GroupListRequestComponent implements OnInit {
 
   addList() {
     this.page++;
-    this.groupManagementService.getListRequest(this.key, this.page).subscribe(data => this.data = data,err => console.log(err),() => this.list = this.list.concat(this.data.content));
+    this.groupManagementService.getListRequest(this.key, this.page).subscribe(data => this.data = data, err => console.log(err), () => this.list = this.list.concat(this.data.content));
   }
 }

@@ -22,7 +22,8 @@ import { ReceiveNotificationComponent } from './receive-notification/receive-not
 const routes: Routes = [
   { path: 'group/member/list/:id', component: GroupMemberListComponent },
   { path: 'group/warning/:id', component: GroupMemberWarningComponent },
-  { path: 'group/request/list/:id', component: GroupListRequestComponent }
+  { path: 'group/request/list/:id', component: GroupListRequestComponent },
+  { path: 'noti', component: ReceiveNotificationComponent }
 ];
 
 @NgModule({
