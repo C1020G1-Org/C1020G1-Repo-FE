@@ -378,22 +378,22 @@
                 <div class="central-meta">
                   <div class="about">
                     <div class="d-flex flex-row mt-2">
-                      <ul class="nav nav-tabs nav-tabs--vertical nav-tabs--left" >
+                      <ul class="nav nav-tabs nav-tabs--vertical nav-tabs--left">
                         <li class="nav-item">
-                          <a href="#edit-profile" class="nav-link" data-toggle="tab" >Edit Profile</a>
+                          <a href="#edit-profile" class="nav-link" data-toggle="tab">Edit Profile</a>
                         </li>
-<!--                        <li class="nav-item">-->
-<!--                          <a href="#edit-avatar" class="nav-link " data-toggle="tab" ><i class="far fa-edit"></i> Change avatar</a>-->
-<!--                        </li>-->
-<!--                        <li class="nav-item">-->
-<!--                          <a href="#change-password" class="nav-link " data-toggle="tab" ><i class="far fa-edit"></i> Change password</a>-->
-<!--                        </li>-->
+                        <!--                        <li class="nav-item">-->
+                        <!--                          <a href="#edit-avatar" class="nav-link " data-toggle="tab" ><i class="far fa-edit"></i> Change avatar</a>-->
+                        <!--                        </li>-->
+                        <!--                        <li class="nav-item">-->
+                        <!--                          <a href="#change-password" class="nav-link " data-toggle="tab" ><i class="far fa-edit"></i> Change password</a>-->
+                        <!--                        </li>-->
                       </ul>
                       <div class="tab-content">
-                        <div class="active" id="edit-profile" >
+                        <div class="active" id="edit-profile">
                           <div class="set-title">
                             <h5>Edit Profile</h5>
-<!--                            <span>People on Pitnik will get to know you with the info below</span>-->
+                            <!--                            <span>People on Pitnik will get to know you with the info below</span>-->
                           </div>
                           <div class="stg-form-area">
                             <form method="post" class="c-form" [formGroup]="editUserForm" (ngSubmit)="updateUser()">
@@ -419,7 +419,8 @@
 
                               <div class="c-form" style="margin-bottom: 20px;">
                                 <label>Date Of Birth:
-                                  <input type="text" [value]="editUserForm.get('birthday').value | date: 'dd/MM/yyyy'" class="form-control" formControlName="birthday">
+                                  <input type="text" [value]="editUserForm.get('birthday').value | date: 'dd/MM/yyyy'"
+                                         class="form-control" formControlName="birthday">
                                 </label>
                               </div>
                               <!-- dob -->
@@ -462,7 +463,8 @@
 
                               <div>
                                 <label>Province:
-                                  <select [compareWith]="compareProvince" class="form-control d-inline-block"  formControlName="province">
+                                  <select [compareWith]="compareProvince" class="form-control d-inline-block"
+                                          formControlName="province">
                                     <option *ngFor="let province of provinces" [ngValue]="province">
                                       {{province.provinceName}}
                                     </option>
@@ -474,7 +476,8 @@
 
                               <div>
                                 <label>District:
-                                  <select [compareWith]="compareDistrict" class="form-control d-inline-block"  formControlName="district">
+                                  <select [compareWith]="compareDistrict" class="form-control d-inline-block"
+                                          formControlName="district">
                                     <option *ngFor="let district of districts" [ngValue]="district">
                                       {{district.districtName}}
                                     </option>
@@ -486,7 +489,8 @@
 
                               <div>
                                 <label>Ward:
-                                  <select [compareWith]="compareWard" class="form-control d-inline-block"  formControlName="ward">
+                                  <select [compareWith]="compareWard" class="form-control d-inline-block"
+                                          formControlName="ward">
                                     <option *ngFor="let ward of wards" [ngValue]="ward">
                                       {{ward.wardName}}
                                     </option>
@@ -506,65 +510,65 @@
                           </div>
                         </div>
 
-<!--                        <div class="tab-pane fade" id="change-password">-->
-<!--                          <div class="set-title">-->
-<!--                            <h5>Change Password</h5>-->
-<!--                            <span>You will change your password here, we will assist with your security issues</span>-->
-<!--                          </div>-->
-<!--                          <div class="stg-form-area">-->
-<!--                            <form method="post" class="c-form">-->
-<!--                              <div>-->
-<!--                                <input type="password" placeholder="Current password">-->
-<!--                              </div>-->
-<!--                              <div>-->
-<!--                                <input type="password" class="mt-3"-->
-<!--                                       placeholder="A new password">-->
-<!--                              </div>-->
-<!--                              <div>-->
-<!--                                <input type="password" class="mt-3"-->
-<!--                                       placeholder="Confirm password">-->
-<!--                              </div>-->
-<!--                              <div>-->
-<!--                                <button type="submit" class="btn-secondary"-->
-<!--                                        data-ripple="">Cancel-->
-<!--                                </button>-->
-<!--                                <button type="submit" class="btn-info" data-ripple="">-->
-<!--                                  Save-->
-<!--                                </button>-->
-<!--                              </div>-->
-<!--                            </form>-->
-<!--                          </div>-->
-<!--                        </div>&lt;!&ndash; change - password &ndash;&gt;-->
-<!--                        <div class="tab-pane fade" id="edit-avatar">-->
-<!--                          <div class="set-title">-->
-<!--                            <h5><i class="fa fa-file-image"></i> Edit Avatar</h5>-->
-<!--                            <span>Update your avatar regularly so that everyone can see you every day</span>-->
-<!--                          </div>-->
-<!--                          <div class="setting-meta">-->
-<!--                            <div class="stg-form-area">-->
-<!--                              <div class="change-photo">-->
-<!--                                <div class="zoomin">-->
-<!--                                  <img id="image" src="admin2.jpg"-->
-<!--                                       alt="">-->
-<!--                                </div>-->
-<!--                                <div class="edit-img">-->
-<!--                                  <form class="edit-phto">-->
-<!--                                    <label class="fileContainer">-->
-<!--                                      <i class="fa fa-upload"></i>-->
-<!--                                      Upload Photos-->
-<!--                                      <input type="file">-->
-<!--                                    </label>-->
-<!--                                  </form>-->
-<!--                                </div>-->
-<!--                                <div class="mt-3">-->
-<!--                                  <input min="0" max="100" class="form-range"-->
-<!--                                         oninput="changeImage(event.target)"-->
-<!--                                         type="range">-->
-<!--                                </div>-->
-<!--                              </div>-->
-<!--                            </div>-->
-<!--                          </div>-->
-<!--                        </div>&lt;!&ndash; edit - avatar &ndash;&gt;-->
+                        <!--                        <div class="tab-pane fade" id="change-password">-->
+                        <!--                          <div class="set-title">-->
+                        <!--                            <h5>Change Password</h5>-->
+                        <!--                            <span>You will change your password here, we will assist with your security issues</span>-->
+                        <!--                          </div>-->
+                        <!--                          <div class="stg-form-area">-->
+                        <!--                            <form method="post" class="c-form">-->
+                        <!--                              <div>-->
+                        <!--                                <input type="password" placeholder="Current password">-->
+                        <!--                              </div>-->
+                        <!--                              <div>-->
+                        <!--                                <input type="password" class="mt-3"-->
+                        <!--                                       placeholder="A new password">-->
+                        <!--                              </div>-->
+                        <!--                              <div>-->
+                        <!--                                <input type="password" class="mt-3"-->
+                        <!--                                       placeholder="Confirm password">-->
+                        <!--                              </div>-->
+                        <!--                              <div>-->
+                        <!--                                <button type="submit" class="btn-secondary"-->
+                        <!--                                        data-ripple="">Cancel-->
+                        <!--                                </button>-->
+                        <!--                                <button type="submit" class="btn-info" data-ripple="">-->
+                        <!--                                  Save-->
+                        <!--                                </button>-->
+                        <!--                              </div>-->
+                        <!--                            </form>-->
+                        <!--                          </div>-->
+                        <!--                        </div>&lt;!&ndash; change - password &ndash;&gt;-->
+                        <!--                        <div class="tab-pane fade" id="edit-avatar">-->
+                        <!--                          <div class="set-title">-->
+                        <!--                            <h5><i class="fa fa-file-image"></i> Edit Avatar</h5>-->
+                        <!--                            <span>Update your avatar regularly so that everyone can see you every day</span>-->
+                        <!--                          </div>-->
+                        <!--                          <div class="setting-meta">-->
+                        <!--                            <div class="stg-form-area">-->
+                        <!--                              <div class="change-photo">-->
+                        <!--                                <div class="zoomin">-->
+                        <!--                                  <img id="image" src="admin2.jpg"-->
+                        <!--                                       alt="">-->
+                        <!--                                </div>-->
+                        <!--                                <div class="edit-img">-->
+                        <!--                                  <form class="edit-phto">-->
+                        <!--                                    <label class="fileContainer">-->
+                        <!--                                      <i class="fa fa-upload"></i>-->
+                        <!--                                      Upload Photos-->
+                        <!--                                      <input type="file">-->
+                        <!--                                    </label>-->
+                        <!--                                  </form>-->
+                        <!--                                </div>-->
+                        <!--                                <div class="mt-3">-->
+                        <!--                                  <input min="0" max="100" class="form-range"-->
+                        <!--                                         oninput="changeImage(event.target)"-->
+                        <!--                                         type="range">-->
+                        <!--                                </div>-->
+                        <!--                              </div>-->
+                        <!--                            </div>-->
+                        <!--                          </div>-->
+                        <!--                        </div>&lt;!&ndash; edit - avatar &ndash;&gt;-->
                       </div>
                     </div>
                   </div>
