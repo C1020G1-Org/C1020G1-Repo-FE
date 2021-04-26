@@ -6,14 +6,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {GroupModule} from "./group/group.module";
 import {HeaderComponent} from "./header/header.component";
-import { GroupHeaderComponent } from './group/group-header/group-header.component';
 
 
 @NgModule({
     declarations: [
         AppComponent,
         HeaderComponent,
-        GroupHeaderComponent
     ],
     imports: [
         BrowserModule,
@@ -22,9 +20,7 @@ import { GroupHeaderComponent } from './group/group-header/group-header.componen
         HttpClientModule
     ],
     providers: [],
-    exports: [
-        GroupHeaderComponent
-    ],
+    exports: [],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

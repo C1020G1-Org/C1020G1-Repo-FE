@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {GroupService} from '../service/group.service';
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {Title} from "@angular/platform-browser";
 
 
 @Component({
@@ -14,10 +15,12 @@ export class GroupListComponent implements OnInit {
 
   constructor(
     public groupService: GroupService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private title: Title
   ) { }
 
   ngOnInit(){
+    this.title.setTitle("Group List");
     this.searchForm = this.formBuilder.group({
       search:""
     })

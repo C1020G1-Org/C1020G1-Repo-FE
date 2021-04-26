@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {GroupService} from "../service/group.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-group-detail',
@@ -12,9 +13,11 @@ export class GroupDetailComponent implements OnInit {
 
   constructor(public groupService: GroupService,
               private activatedRoute: ActivatedRoute,
-              public router: Router){}
+              public router: Router,
+              private title: Title){}
 
   ngOnInit(){
+    this.title.setTitle("Group-detail");
     this.activatedRoute.paramMap.subscribe(data => {
       this.groupService.getGroupById(data.get("id")).subscribe(group =>{
         this.group = group;

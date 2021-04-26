@@ -43,14 +43,13 @@
 
             <div class="author-content">
               <a class="h4 author-name">{{group.groupName}}</a>
-              <!--                          <div class="country">Asian</div>-->
             </div>
           </div>
         </div>
         <div class="col-lg-10 col-md-9">
           <ul class="profile-menu">
             <li>
-              <a class="active" href="#">Timeline</a>
+              <a class="" [routerLink]="['/group-detail/' + group.groupId]">Timeline</a>
             </li>
             <li>
               <a class="" [routerLink]="['/group-member/' + group.groupId]">Member</a>

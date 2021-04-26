@@ -7,16 +7,17 @@ import {RouterModule} from "@angular/router";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatDialogModule} from "@angular/material/dialog";
 import {Ng2SearchPipeModule} from "ng2-search-filter";
-import {AppModule} from "../app.module";
+import {GroupHeaderComponent} from "./group-header/group-header.component";
 
 
 
 @NgModule({
-    declarations: [GroupListComponent, GroupDetailComponent, GroupMemberComponent],
+    declarations: [GroupListComponent, GroupDetailComponent, GroupMemberComponent,GroupHeaderComponent],
   exports: [
     GroupDetailComponent,
     GroupListComponent,
-    GroupMemberComponent
+    GroupMemberComponent,
+    GroupHeaderComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +26,6 @@ import {AppModule} from "../app.module";
     MatDialogModule,
     Ng2SearchPipeModule,
     ReactiveFormsModule,
-    AppModule
   ]
 })
 export class GroupModule { }
