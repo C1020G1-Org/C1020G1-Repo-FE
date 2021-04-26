@@ -1,4 +1,4 @@
-<section>
+<section *ngFor="let postInfo of postInfos">
   <div class="gap2 gray-bg">
     <div class="container">
       <div class="row">
@@ -11,7 +11,7 @@
                 <span class="create-post">Create post</span>
                 <div class="new-postbox">
                   <figure>
-                    <img src="assets/images/resources/admin.jpg" alt="">
+                    <img style="height: 50px ; width: 50px" src="{{postInfo.user.userAvatar}}" alt="">
                   </figure>
                   <div class="newpst-input">
                     <form method="post">
@@ -57,12 +57,12 @@
                   </div>
                 </div>
               </div>
-              <div class="loadMore" *ngFor="let postInfo of postInfos">
+              <div class="loadMore" >
                 <div class="central-meta item">
                   <div class="user-post">
                     <div class="friend-info">
                       <figure>
-                        <img src="assets/images/resources/nearly1.jpg" alt="">
+                        <img src="{{postInfo.user.userAvatar}}" alt="">
                       </figure>
                       <div class="friend-name">
                         <div class="more">
@@ -89,21 +89,18 @@
                         <ul class="we-comet">
                           <li>
                             <div class="comet-avatar">
-                              <img src="assets/images/resources/nearly3.jpg" alt="">
+                              <img src="{{postInfo.user.userAvatar}}" alt="">
                             </div>
                             <div class="we-comment">
                               <h5><a title="">
                                 {{postInfo.user.userName}}
                               </a></h5>
                               <p *ngFor="let c of postInfo.parentComments"> {{c.content}}</p>
-                              <div class="inline-itms">
-                                <a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
-                              </div>
                             </div>
                           </li>
                           <li class="post-comment">
                             <div class="comet-avatar">
-                              <img src="assets/images/resources/nearly1.jpg" alt="">
+                              <img src="{{postInfo.user.userAvatar}}" alt="">
                             </div>
                             <div class="post-comt-box">
                               <form method="post">
@@ -141,8 +138,6 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-lg-3">
             </div>
           </div>
         </div>
