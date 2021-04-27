@@ -122,8 +122,7 @@ export class EditPostComponent implements OnInit {
 
   deleteUpdateImage(event) {
     let index = event.target.attributes['data-index'].value;
-    this.updateFileImage = this.updateFileImage.slice(0, index).concat(this.updateFileImage.slice(index + 1, this.updateFileImage.length));
-    console.log(this.updateFileImage);
+    this.updateFileImage.splice(index,1);
   }
 
   addImageToFireBase() {
