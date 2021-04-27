@@ -3,18 +3,32 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import {HeaderModule} from "./header/header.module";
+import {HttpClientModule} from "@angular/common/http";
+import {WallModule} from "./wall/wall.module";
+import {TooltipModule} from "ng2-tooltip-directive";
+import {AngularFireModule} from "@angular/fire";
+import {AngularFireDatabaseModule} from "@angular/fire/database";
+import {environment} from "../environments/environment";
 
 
 @NgModule({
   declarations: [
     AppComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule
-
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HeaderModule,
+    WallModule,
+    HttpClientModule,
+    TooltipModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+}

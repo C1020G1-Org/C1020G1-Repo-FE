@@ -1,0 +1,205 @@
+<section>
+  <div class="gap2 gray-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row merged20" id="page-contents">
+            <div class="user-profile">
+              <figure>
+                <div class="edit-pp">
+                  <label class="fileContainer">
+                    <i class="fa fa-camera"></i>
+                    <input type="file">
+                  </label>
+                </div>
+                <img src="http://topanhdep.net/wp-content/uploads/2015/05/anh-bia-chibi-kure.jpg" alt="">
+                <ul class="profile-controls">
+                  <li
+                    *ngIf="checkFriend == true && userLogin.userId != userWall.userId && checkFriendRequest == true && checkFriendRequest2 == true">
+                    <button class="btn"
+                            style="align-items: center;background: #ff4e01;border-radius: 50%;height: 40px;width: 40px"
+                            tooltip="Add Friend"
+                            (click)="createFriendRequest()">
+                      <i class="fa fa-user-plus" style="color: white"></i></button>
+                  </li>
+
+                  <li *ngIf="checkFriend == false">
+                    <button
+                      style="align-items: center;background: #ff4e01;border-radius: 50%;border: none;height:40px;width: 40px"
+                      tooltip="Unfriend" data-target="#exampleModal2" data-toggle="modal">
+                      <i class="fa fa-user-times fa-lg" style="color: white"></i></button>
+                  </li>
+
+                  <li *ngIf="checkFriendRequest2 == false">
+                    <button
+                      style="align-items: center;background: #ff4e01;border-radius: 50%;border: none;height: 40px;width: 40px"
+                      data-target="#exampleModal" data-toggle="modal"
+                      tooltip="Unrequest" (click)="sendFriendRequestToDelete(friendRequestWallUserAndLoginUser)">
+                      <i class="fa fa-times" style="color: white"></i></button>
+                  </li>
+
+                  <li *ngIf="checkFriendRequest == false">
+                    <button style="align-items: center"
+                            tooltip="Accept"
+                            style="align-items: center;background: #ff4e01;border-radius: 50%;border: none;height: 40px;width: 40px"
+                            (click)="acceptFriendRequest(friendRequestWallUserAndLoginUser)">
+                      <i class="fa fa-check-square" style="color: white"></i></button>
+                  </li>
+
+
+                  <li><a class="edit-seting" href="#" title="Send Message" data-toggle="tooltip"><i
+                    class="fa fa-comment"></i></a></li>
+                  <li>
+                    <div class="edit-seting" title="Edit Profile image"><i class="fa fa-sliders"></i>
+                      <ul class="more-dropdown">
+                        <li><a title="">Update Profile Photo</a></li>
+                        <li><a title="">Update Header Photo</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+              </figure>
+              <div class="profile-section">
+                <div class="row">
+                  <div class="col-lg-2 col-md-3">
+                    <div class="profile-author">
+                      <div class="profile-author-thumb">
+                        <img alt="author" src="https://i.pinimg.com/736x/e3/41/b3/e3
+													41b3ce61dd0d130bd8ab1dd04153d7.jpg">
+                        <div class="edit-dp">
+                          <label class="fileContainer">
+                            <i class="fa fa-camera"></i>
+                            <input type="file">
+                          </label>
+                        </div>
+                      </div>
+                      <div class="author-content">
+                        <a class="h4 author-name">Ho Anh Dung</a>
+                        <div class="country">Do Luong , Nghe An</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-10 col-md-9">
+                    <ul class="profile-menu">
+                      <li>
+                        <a routerLink="/timeline">Timeline</a>
+                      </li>
+                      <li>
+                        <a routerLink="/info">Information</a>
+                      </li>
+                      <li>
+                        <a class="">Friends</a>
+                      </li>
+                      <li>
+                        <a routerLink="/friend_request" class="active">Friends Request</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="listFriendRequest.length > 0">
+                <div class="central-meta padding30">
+                  <div class="row merged20">
+                    <div *ngFor="let friendRequest of listFriendRequest" class="col-lg-3 col-md-6 col-sm-6">
+                      <div class="friend-block">
+                        <figure>
+                          <img src="{{friendRequest.sendUser.userAvatar}}" alt="">
+                        </figure>
+
+                        <div class="frnd-meta">
+                          <div class="frnd-name">
+                            <a href="#" title="">{{friendRequest.sendUser.userName}}</a>
+                            <span>{{friendRequest.sendUser.address}}</span>
+                            <br>
+                            <span *ngIf="friendRequest.mutualFriends.length > 1"
+                                  (mouseover)="getMutualFriend(friendRequest.mutualFriends)" tooltip="{{mutualFriend}}">
+                            {{friendRequest.mutualFriends.length}} mutual friends
+                          </span>
+                            <span *ngIf="friendRequest.mutualFriends.length == 1"
+                                  (mouseover)="getMutualFriend(friendRequest.mutualFriends)" tooltip="{{mutualFriend}}">
+                            {{friendRequest.mutualFriends.length}} mutual friend
+                          </span>
+                            <span>
+                            </span>
+                          </div>
+
+                          <button tooltip="Add Friend" (click)="acceptFriendRequest(friendRequest)"
+                                  style="border: white;color: #ff5b0c;background: white">
+                            <i class="fa fa-check-square fa-2x" style="margin-right: 15px"></i></button>
+
+                          <button tooltip="Remove" data-target="#exampleModal" data-toggle="modal"
+                                  style="border: white;color: #ff5b0c;background: white"
+                                  (click)="sendFriendRequestToDelete(friendRequest)">
+                            <i class="fa fa-trash fa-2x"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="listFriendRequest.length == 0">
+                <div class="central-meta padding30">
+                  <h5 style="text-align: center;color: #ff5b0c;padding: 10%">
+                    Has not friend request <i class="fa fa-smile fa-2x"></i>
+                  </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+       aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">DELETE FRIENDS REQUEST</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure want to delete this request?</p>
+          <p><span style="color: red">Warning: </span>Can not undo</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteFriendRequest()"
+          >Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+       aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">UNFRIEND</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure want to delete this request?</p>
+          <p><span style="color: red">Warning: </span>Can not undo</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="unFriend()">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
