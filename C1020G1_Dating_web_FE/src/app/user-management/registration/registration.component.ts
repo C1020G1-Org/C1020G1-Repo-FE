@@ -29,9 +29,9 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.formRegistration = this.formBuilder.group({
-      accountName: [this.userStorage.account.accountName, [Validators.required, Validators.pattern("^[0-9A-Za-z]*$")]],
-      userName: [this.userStorage.user.userName, [Validators.required]],
-      password: [this.userStorage.account.password, [Validators.required]],
+      accountName: [this.userStorage.account.accountName, [Validators.required, Validators.pattern("^[0-9A-Za-z_]*$"), Validators.minLength(6), Validators.maxLength(24)]],
+      userName: [this.userStorage.user.userName, [Validators.required,Validators.minLength(6),Validators.maxLength(24)]],
+      password: [this.userStorage.account.password, [Validators.required, Validators.minLength(6),Validators.maxLength(24)]],
       rePassword: [this.userStorage.rePassword, [Validators.required]],
       occupation: [this.userStorage.user.occupation, [Validators.required]],
       birthday: [this.userStorage.user.birthday, [Validators.required]],
@@ -100,4 +100,8 @@ export class RegistrationComponent implements OnInit {
     });
   }
 
+  goToLogin() {
+    this.userStorage.clear()
+    this.router.navigateByUrl("login");
+  }
 }
