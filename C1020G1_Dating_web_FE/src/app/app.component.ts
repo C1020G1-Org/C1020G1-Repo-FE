@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
-import * as firebase from 'firebase';
+import firebase from "firebase";
 
-const config = {
+
+const firebaseConfig = {
   apiKey: 'AIzaSyC0QhNWATD5rLmNP7YeqNJYu9gae1aYRgQ',
   databaseURL: 'https://dating-web-95f9d-default-rtdb.firebaseio.com'
 };
@@ -16,6 +17,6 @@ export class AppComponent {
   title = 'project1';
 
   constructor() {
-    firebase.initializeApp(config);
+    firebase.initializeApp(firebaseConfig);
   }
 }
