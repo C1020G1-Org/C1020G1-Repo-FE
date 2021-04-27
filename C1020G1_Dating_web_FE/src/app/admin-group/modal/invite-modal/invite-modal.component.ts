@@ -1,10 +1,10 @@
-import { NotificationService } from './../../service/notification.service';
+import { NotificationGroupService } from '../../service/group-notification.service';
 import { GroupRequest } from './../../../model/group-request';
 import { User } from '../../../model/user';
 import { GroupManagementService } from '../../service/group.service';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Group } from 'src/app/model/group';
-import Notification from 'src/app/model/notification';
+import Notification from 'src/app/model/group-notification';
 
 @Component({
   selector: 'app-invite-modal',
@@ -22,7 +22,7 @@ export class InviteModalComponent implements OnInit {
   emit() {
     this.event.emit();
   }
-  constructor(private groupManagementService: GroupManagementService, private notificationService: NotificationService) { }
+  constructor(private groupManagementService: GroupManagementService, private notificationGroupService: NotificationGroupService) { }
 
   ngOnInit(): void {
     this.changeListInvite('1');
@@ -73,9 +73,10 @@ export class InviteModalComponent implements OnInit {
   noti(id: number, group: Group) {
     let notification = new Notification();
     notification.userId = id;
-    notification.content = 'You have a notify: ' + group.groupName + ' invite you to join their group.';
+    notification.content = group.groupName + ' invite you to join their group.';
     notification.sender = group.groupName;
     notification.href = '/group/' + group.groupId;
-    this.notificationService.create(notification, id);
+    notification.imageUrl = group.imageAvatarUrl;
+    this.notificationGroupService.create(notification, id);
   }
 }

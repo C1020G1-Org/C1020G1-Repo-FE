@@ -49,6 +49,6 @@ export class GroupListRequestComponent implements OnInit {
 
   addList() {
     this.page++;
-    this.groupManagementService.getListRequest(this.key, this.page).subscribe(data => this.data = data, err => console.log(err), () => this.list = this.list.concat(this.data.content));
+    this.groupManagementService.getListRequest(this.key, this.page).subscribe(data => this.data = data, err => {}, () => this.list = this.list.concat(this.data.content));
   }
 }

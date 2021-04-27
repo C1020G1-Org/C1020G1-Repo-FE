@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
-import Notification from 'src/app/model/notification';
+import NotificationGroup from 'src/app/model/group-notification';
 
 @Injectable({
   providedIn: 'root'
 })
-export class NotificationService {
-  dbPath = '/notifications';
+export class NotificationGroupService {
+  dbPath = '/group/notifications';
   notiRef: AngularFireList<Notification> = null;
 
   constructor(private db: AngularFireDatabase) {
   }
 
-  getAll(id: number): AngularFireList<Notification> {
+  getAll(id: number): AngularFireList<NotificationGroup> {
     return this.db.list(this.dbPath + '/' + id);
   }
 
-  create(notification: Notification,id: number): any {
+  create(notification: NotificationGroup,id: number): any {
     return this.db.list(this.dbPath + '/' + id).push(notification);
   }
 

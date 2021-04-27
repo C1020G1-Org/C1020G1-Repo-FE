@@ -1,9 +1,9 @@
-import { NotificationService } from './../../service/notification.service';
+import { NotificationGroupService } from '../../service/group-notification.service';
 import { Router } from '@angular/router';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import {GroupRequest} from "../../../model/group-request";
 import {GroupManagementService} from "../../service/group.service";
-import Notification from 'src/app/model/notification';
+import Notification from 'src/app/model/group-notification';
 
 @Component({
   selector: 'app-accept-modal',
@@ -23,7 +23,7 @@ export class AcceptModalComponent implements OnInit {
     this.modal.dismiss('ok close');
   }
 
-  constructor(private groupManagementService: GroupManagementService, private router: Router,private notificationService: NotificationService) { }
+  constructor(private groupManagementService: GroupManagementService, private router: Router,private notificationGroupService: NotificationGroupService) { }
 
   ngOnInit(): void {
   }
@@ -36,9 +36,10 @@ export class AcceptModalComponent implements OnInit {
     this.emit();
     let notification = new Notification();
     notification.userId = this.member.user.userId;
-    notification.content = 'You have a notify: ' + this.member.group.groupName + ' accept you to join their group.';
+    notification.content = this.member.group.groupName + ' accept you to join their group.';
     notification.sender = this.member.group.groupName;
     notification.href = '/group/' + this.member.group.groupId;
-    this.notificationService.create(notification, this.member.user.userId);
+    notification.imageUrl = this.member.group.imageAvatarUrl;
+    this.notificationGroupService.create(notification, this.member.user.userId);
   }
 }

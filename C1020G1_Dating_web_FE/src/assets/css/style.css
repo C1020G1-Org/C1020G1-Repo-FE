@@ -690,7 +690,7 @@ header.sticky {
 
 .top-area > ul {
     display: inline-block;
-    float: left;
+    /*float: left;*/
     line-height: 64px;
     list-style: outside none none;
     margin-bottom: 0;
@@ -1467,8 +1467,6 @@ header.sticky {
     font-size: 13px;
     width: 100%;
 }
-
-.activity-meta > h6 a {}
 
 .activitiez > li::before {
     content: "";
@@ -4191,6 +4189,7 @@ form .dob .form-group {
 
 .chosen-container {
     width: 100% !important;
+  display: none;
 }
 
 form .dob .form-group:last-child {

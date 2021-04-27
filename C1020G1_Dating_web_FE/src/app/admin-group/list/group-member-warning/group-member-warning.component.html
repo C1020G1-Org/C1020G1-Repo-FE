@@ -1,3 +1,4 @@
+<app-header></app-header>
 <section>
     <div class="gap2 gray-bg">
         <div class="container">
@@ -24,8 +25,10 @@
                                             <a class="cursor">{{member.user.userName}}</a>
                                             <span>{{member.user.address}}</span><br>
                                             <div class="invites-btns">
-                                                <a class="main-btn cursor margin-left-20" (click)="open(addModal)" title="" data-ripple="">Add Warning</a>
-                                                <a class="main-btn cursor margin-left-5" (click)="open(deleteModal)" title="" data-ripple="">Remove Member</a>
+                                                <a class="main-btn cursor margin-left-20" (click)="open(addModal)"
+                                                    title="" data-ripple="">Add Warning</a>
+                                                <a class="main-btn cursor margin-left-5" (click)="open(deleteModal)"
+                                                    title="" data-ripple="">Remove Member</a>
                                             </div>
                                         </div>
                                     </div>
@@ -48,7 +51,8 @@
                                     <ul class="inline pagination margin-260">
                                         <li *ngIf="page > 0"><button (click)="paging(page - 1)">{{page}}</button></li>
                                         <li><button class="focus">{{page + 1}}</button></li>
-                                        <li *ngIf="data.totalPages > page + 1"><button (click)="paging(page + 1)">{{page + 2}}</button></li>
+                                        <li *ngIf="data.totalPages > page + 1"><button (click)="paging(page + 1)">{{page
+                                                + 2}}</button></li>
                                     </ul>
                                 </div>
                             </div>
@@ -58,7 +62,8 @@
             </div>
         </div>
     </div>
-</section><!-- content -->
+</section>
+<app-footer></app-footer>
 <ng-template #addModal let-modal>
     <app-warning-member-modal [modal]="modal" [member]="member" (event)="emit()"></app-warning-member-modal>
 </ng-template>

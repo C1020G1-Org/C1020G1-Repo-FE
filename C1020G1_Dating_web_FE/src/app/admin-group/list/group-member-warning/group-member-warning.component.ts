@@ -3,7 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { GroupUser } from 'src/app/model/group-user';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { GroupWarning } from "../../../model/warning";
 import { GroupManagementService } from "../../service/group.service";
 
@@ -26,8 +26,8 @@ export class GroupMemberWarningComponent implements OnInit {
     this.title.setTitle('Group Warning');
     let id;
     this.activatedRoute.paramMap.subscribe(param => id = param.get('id'));
-    this.groupManagementService.getMember(id).subscribe(data => this.member = data, err =>
-      this.groupManagementService.navigate(err.status, this.getUrlNav()), () => {
+    this.groupManagementService.getMember(id).subscribe(data => this.member = data,() =>
+      this.groupManagementService.navigate(404, this.getUrlNav()), () => {
         this.groupManagementService.groupId = this.member.group.groupId;
         this.groupManagementService.adminGroup();
       });

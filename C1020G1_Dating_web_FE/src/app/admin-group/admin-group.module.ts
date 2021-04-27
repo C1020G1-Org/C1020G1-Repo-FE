@@ -17,18 +17,18 @@ import { FormsModule } from '@angular/forms';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
-import { ReceiveNotificationComponent } from './receive-notification/receive-notification.component';
+import { HeaderModule } from '../header/header.module';
+import { FooterModule } from '../footer/footer.module';
 
 const routes: Routes = [
   { path: 'group/member/list/:id', component: GroupMemberListComponent },
   { path: 'group/warning/:id', component: GroupMemberWarningComponent },
-  { path: 'group/request/list/:id', component: GroupListRequestComponent },
-  { path: 'noti', component: ReceiveNotificationComponent }
+  { path: 'group/request/list/:id', component: GroupListRequestComponent }
 ];
 
 @NgModule({
   declarations: [GroupListRequestComponent, GroupMemberWarningComponent, GroupMemberComponent, GroupRequestComponent, GroupMemberListComponent,
-    AcceptModalComponent, CancelRequestModalComponent, InviteModalComponent, RemoveMemberModalComponent, WarningMemberModalComponent, AsideComponent, ReceiveNotificationComponent
+    AcceptModalComponent, CancelRequestModalComponent, InviteModalComponent, RemoveMemberModalComponent, WarningMemberModalComponent, AsideComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +36,11 @@ const routes: Routes = [
     NgbToastModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    HeaderModule,
+    FooterModule
+  ],
+  exports: [
   ]
 })
 export class AdminGroupModule { }

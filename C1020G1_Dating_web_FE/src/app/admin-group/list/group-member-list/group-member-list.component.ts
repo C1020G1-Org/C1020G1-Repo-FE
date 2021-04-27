@@ -21,6 +21,7 @@ export class GroupMemberListComponent implements OnInit {
   ngOnInit(): void {
     this.title.setTitle('Group Member List');
     this.activatedRoute.paramMap.subscribe(param => this.groupManagementService.groupId = parseFloat(param.get('id')));
+    this.groupManagementService.adminGroup();
     this.set();
   }
 

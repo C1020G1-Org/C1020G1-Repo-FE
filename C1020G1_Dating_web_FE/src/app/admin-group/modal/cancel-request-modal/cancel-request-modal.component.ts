@@ -1,8 +1,8 @@
-import { NotificationService } from './../../service/notification.service';
+import { NotificationGroupService } from '../../service/group-notification.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { GroupRequest } from 'src/app/model/group-request';
-import Notification from 'src/app/model/notification';
+import Notification from 'src/app/model/group-notification';
 import { GroupManagementService } from '../../service/group.service';
 
 @Component({
@@ -25,7 +25,7 @@ export class CancelRequestModalComponent implements OnInit {
     this.show = true;
   }
 
-  constructor(private groupManagementService: GroupManagementService, private router: Router,private notificationService: NotificationService) { }
+  constructor(private groupManagementService: GroupManagementService, private router: Router,private notificationGroupService: NotificationGroupService) { }
 
   ngOnInit(): void {
   }
@@ -38,9 +38,10 @@ export class CancelRequestModalComponent implements OnInit {
     this.emit();
     let notification = new Notification();
     notification.userId = this.member.user.userId;
-    notification.content = 'You have a notify: ' + this.member.group.groupName + ' denied you.';
+    notification.content = this.member.group.groupName + ' denied you.';
     notification.sender = this.member.group.groupName;
     notification.href = '/group/' + this.member.group.groupId;
-    this.notificationService.create(notification, this.member.user.userId);
+    notification.imageUrl = this.member.group.imageAvatarUrl;
+    this.notificationGroupService.create(notification, this.member.user.userId);
   }
 }
