@@ -6,7 +6,7 @@ import {FriendRequestComponent} from "./wall/friend-request/friend-request.compo
 
 
 const routes: Routes = [
-  {path: 'friend-list/{id}', component: FriendListComponent},
+  {path: 'friend-list', component: FriendListComponent},
   {path: 'friend_request', component:FriendRequestComponent}
 ];
 

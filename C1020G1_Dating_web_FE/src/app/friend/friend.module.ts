@@ -3,17 +3,15 @@ import { CommonModule } from '@angular/common';
 import { FriendListComponent } from './friend-list/friend-list.component';
 import { FriendSuggestComponent } from './friend-suggest/friend-suggest.component';
 import {TooltipModule} from "ng2-tooltip-directive";
-import {FriendRequestComponent} from "../wall/friend-request/friend-request.component";
 
 
 
 
 @NgModule({
-    declarations: [FriendListComponent, FriendSuggestComponent, FriendRequestComponent],
+    declarations: [FriendListComponent, FriendSuggestComponent],
   exports: [
     FriendListComponent,
-    FriendSuggestComponent,
-    FriendRequestComponent
+    FriendSuggestComponent
   ],
   imports: [
     CommonModule,
