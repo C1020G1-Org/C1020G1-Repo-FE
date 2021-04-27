@@ -1,3 +1,4 @@
+import { TokenStorageService } from './../../service/auth/token-storage';
 import { Group } from './../../model/group';
 import { GroupWarning } from './../../model/warning';
 import { Router } from '@angular/router';
@@ -15,7 +16,7 @@ import { GroupRequest } from "../../model/group-request";
 export class GroupManagementService {
   url = 'http://localhost:8080/group/';
   groupId: number;
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private tokenStorage: TokenStorageService) {
   }
 
   getListMember(key: string, page: number): Observable<GroupUser[]> {
@@ -30,8 +31,8 @@ export class GroupManagementService {
     return this.http.get<GroupRequest[]>(this.url + 'request/list/group/' + this.groupId + '?key=' + key + "&page=" + page);
   }
 
-  getListInviteFriends(userId: number): Observable<User[]> {
-    return this.http.get<User[]>(this.url + 'request/invite/friends/' + this.groupId + '?userId=' + userId);
+  getListInviteFriends(): Observable<User[]> {
+    return this.http.get<User[]>(this.url + 'request/invite/friends/' + this.groupId + '?userId=' + this.userId);
   }
 
   getListInviteFriendsOfFriends(): Observable<User[]> {
@@ -86,7 +87,7 @@ export class GroupManagementService {
   }
 
   get userId() {
-    return 1; // 1 is userId is logged
+    return 1;
   }
 
   get defaultPage() {

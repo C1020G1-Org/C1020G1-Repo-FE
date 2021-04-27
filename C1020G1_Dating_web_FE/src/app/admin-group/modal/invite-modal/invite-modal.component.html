@@ -11,12 +11,18 @@
             <option class="form-control form-select" value="1">Friends</option>
             <option class="form-control" value="2">Friends Of Friends</option>
         </select>
+        <small class="text-danger">
+            {{feedback}}
+        </small>
     </div>
     <div class="form-group" style="margin:0px">
         <label for="friend">Friends</label>
         <select (change)="changeValue($event.target.value)">
             <option *ngFor="let user of list" [value]="user.userId">{{user.userName}}</option>
         </select>
+        <small class="text-danger">
+            {{friendFeedback}}
+        </small>
     </div>
     <div class="group-box" style="margin-bottom:0px">
         <div>Avatar</div>

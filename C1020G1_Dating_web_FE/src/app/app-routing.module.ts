@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { FooterComponent } from './footer/footer/footer.component';
 import { SearchingModule } from './searching/searching.module';
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
@@ -14,4 +13,5 @@ const routes: Routes = [
   exports: [RouterModule],
   declarations: []
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

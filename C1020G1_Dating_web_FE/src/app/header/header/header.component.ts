@@ -1,3 +1,4 @@
+import { TokenStorageService } from './../../service/auth/token-storage';
 import { Component, OnInit } from '@angular/core';
 import { SearchingService } from "../../service/searching/searching.service";
 import { Router } from "@angular/router";
@@ -15,11 +16,16 @@ export class HeaderComponent implements OnInit {
   notiList: Notification[] = [];
 
   constructor(private notificationGroupService: NotificationGroupService, private searchingService: SearchingService,
-    private router: Router) { }
+    private router: Router,private tokenStorageService:TokenStorageService) { }
 
   search(event: any) {
     this.searchingService.searchTerm.next(event.target.value);
     this.router.navigateByUrl('/name-search')
+  }
+
+  logout() {
+    this.tokenStorageService.logOut();
+    this.router.navigateByUrl("/login")
   }
 
   ngOnInit(): void {
