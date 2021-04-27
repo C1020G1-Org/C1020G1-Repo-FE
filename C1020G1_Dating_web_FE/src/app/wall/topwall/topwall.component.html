@@ -1,5 +1,5 @@
 <div class="col-lg-12">
-  <div class="user-profile">
+  <div class="user-profile" *ngIf="userInfo">
     <figure>
       <div class="edit-pp">
         <label class="fileContainer">
@@ -7,7 +7,7 @@
           <input type="file">
         </label>
       </div>
-      <img src="http://topanhdep.net/wp-content/uploads/2015/05/anh-bia-chibi-kure.jpg" alt="">
+      <img src="{{userInfo.userBackground}}" alt="">
       <ul class="profile-controls">
         <li><a href="#" title="Add friend" data-toggle="tooltip"><i class="fa fa-user-plus"></i></a></li>
         <li><a class="edit-seting" href="#" title="Send Message" data-toggle="tooltip"><i class="fa fa-comment"></i></a>
@@ -27,8 +27,7 @@
         <div class="col-lg-2 col-md-3">
           <div class="profile-author">
             <div class="profile-author-thumb">
-              <img alt="author" src="https://i.pinimg.com/736x/e3/41/b3/e3
-													41b3ce61dd0d130bd8ab1dd04153d7.jpg">
+              <img alt="author" src="{{userInfo.userAvatar}}">
               <div class="edit-dp">
                 <label class="fileContainer">
                   <i class="fa fa-camera"></i>
@@ -37,8 +36,8 @@
               </div>
             </div>
             <div class="author-content">
-              <a class="h4 author-name">Ho Anh Dung</a>
-              <div class="country">Do Luong , Nghe An</div>
+              <a class="h4 author-name">{{userInfo.userName}}</a>
+              <div class="country">{{userInfo.ward.wardName}}</div>
             </div>
           </div>
         </div>
@@ -61,5 +60,4 @@
       </div>
     </div>
   </div>
-
 </div>

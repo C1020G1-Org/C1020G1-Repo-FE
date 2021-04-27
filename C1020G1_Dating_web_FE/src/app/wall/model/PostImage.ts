@@ -1,4 +1,4 @@
 export interface PostImage {
-  postImageId: number,
-  image: string
+  postImageId: number;
+  image: string;
 }

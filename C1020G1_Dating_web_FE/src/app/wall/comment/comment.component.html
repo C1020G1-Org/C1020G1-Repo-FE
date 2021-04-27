@@ -1,0 +1,246 @@
+<!--<ul class="we-comet">-->
+<!--  &lt;!&ndash; firts comment  &ndash;&gt;-->
+<!--  <li *ngFor="let parentComment of parentComments">-->
+<!--    &lt;!&ndash; main comment &ndash;&gt;-->
+<!--    <div>-->
+<!--      <div class="comet-avatar">-->
+<!--        <img src="{{ parentComment.user.userAvatar }}" alt="" />-->
+<!--      </div>-->
+<!--      <div class="we-comment">-->
+<!--        <h5>-->
+<!--          <a>{{parentComment.user.userName}}</a>-->
+<!--        </h5>-->
+<!--        <p style="display: block">-->
+<!--          {{ parentComment.content }}-->
+<!--        </p>-->
+<!--        <div class="inline-itms" *ngIf="parentComment.user.userName == userLogging.userName">-->
+<!--          <a class="we-reply" data-toggle="collapse"  role="button" aria-expanded="false" title="Reply">Reply <i class="fa fa-reply"></i></a>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; child comments &ndash;&gt;-->
+<!--    <ul class="we-comet collapse"  *ngIf="parentComment.childComments">-->
+<!--      <li *ngFor="let childComment of parentComment.childComments">-->
+<!--        <div class="comet-avatar">-->
+<!--          <img src="{{ childComment.user.userAvatar }}" alt="" />-->
+<!--        </div>-->
+<!--        <div class="we-comment">-->
+<!--          <h5>-->
+<!--            <a  title="">{{childComment.user.userName}}</a>-->
+<!--          </h5>-->
+<!--          <p>{{childComment.content}}<i class="em em-smiley"></i>-->
+<!--          </p>-->
+<!--          <div class="inline-itms" *ngIf="childComment.user.userName == userLogging.userName">-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </li>-->
+
+<!--      &lt;!&ndash; user comment &ndash;&gt;-->
+<!--      <li class="post-comment">-->
+<!--        <div class="comet-avatar" *ngIf="userLogging">-->
+<!--          <img src="{{ userLogging.userAvatar }}" alt="" />-->
+<!--        </div>-->
+<!--        <div class="post-comt-box" style="width: 89%">-->
+<!--            <input-->
+<!--              class="form-control comment-input"-->
+<!--              placeholder="Post your comment"-->
+<!--              style="-->
+<!--                background: #edf2f6 none repeat scroll 0 0;-->
+<!--                border-color: transparent;-->
+<!--                border-radius: 5px;-->
+<!--                color: inherit;-->
+<!--                font-size: 13px;-->
+<!--                height: 60px;-->
+<!--                line-height: 16px;-->
+<!--             "/>-->
+<!--            <input type="hidden"/>-->
+<!--            <div class="add-smiles">-->
+<!--              <div class="uploadimage">-->
+<!--                <i class="fa fa-image"></i>-->
+<!--                <label class="fileContainer">-->
+<!--                  <input type="file" />-->
+<!--                </label>-->
+<!--              </div>-->
+<!--              <span class="em em-expressionless" title="add icon"></span>-->
+<!--              <div class="smiles-bunch">-->
+<!--                <i class="em em-&#45;&#45;1"></i>-->
+<!--                <i class="em em-smiley"></i>-->
+<!--                <i class="em em-anguished"></i>-->
+<!--                <i class="em em-laughing"></i>-->
+<!--                <i class="em em-angry"></i>-->
+<!--                <i class="em em-astonished"></i>-->
+<!--                <i class="em em-blush"></i>-->
+<!--                <i class="em em-disappointed"></i>-->
+<!--                <i class="em em-worried"></i>-->
+<!--                <i class="em em-kissing_heart"></i>-->
+<!--                <i class="em em-rage"></i>-->
+<!--                <i class="em em-stuck_out_tongue"></i>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--  </li>-->
+<!--</ul>-->
+<ul class="we-comet">
+  <!-- firts comment  -->
+  <li *ngFor="let parentComment of parentComments">
+    <!-- main comment -->
+    <div>
+      <div class="comet-avatar">
+        <img src="{{ parentComment.user.userAvatar }}" alt="" />
+      </div>
+      <div class="we-comment">
+        <h5>
+          <a href="time-line.html" title="">{{
+            parentComment.user.userName
+            }}</a>
+        </h5>
+        <p style="display: block">
+          {{ parentComment.content }}
+        </p>
+        <figure *ngIf="parentComment.commentImage">
+          <div class="row">
+            <div class="img-bunch">
+              <div class="col-lg-3 col-md-3 col-sm-3"></div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <figure>
+                  <a
+                    class="strip"
+                    href="{{ parentComment.commentImage }}"
+                    title=""
+                    data-strip-group="mygroup"
+                    data-strip-group-options="loop: false"
+                  >
+                    <img src="{{ parentComment.commentImage }}" alt="" />
+                  </a>
+                </figure>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3"></div>
+            </div>
+          </div>
+        </figure>
+        <div class="inline-itms">
+          <a
+            class="we-reply"
+            data-toggle="collapse"
+            href="{{ '#blockChildComment' + parentComment.parentCommentId }}"
+            role="button"
+            aria-expanded="false"
+            aria-controls="childComment1"
+            title="Reply">Reply <i class="fa fa-reply"></i></a>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- child comments -->
+    <ul
+      class="we-comet collapse"
+      id="{{ 'blockChildComment' + parentComment.parentCommentId }}"
+      *ngIf="parentComment.childComments"
+    >
+      <li *ngFor="let childComment of parentComment.childComments">
+        <div class="comet-avatar">
+          <img src="{{ childComment.user.userAvatar }}" alt="" />
+        </div>
+        <div class="we-comment">
+          <h5>
+            <a href="time-line.html" title="">{{
+              childComment.user.userName
+              }}</a>
+          </h5>
+          <p>
+            {{ childComment.content }}
+            <i class="em em-smiley"></i>
+          </p>
+          <figure *ngIf="childComment.commentImage">
+            <div class="row">
+              <div class="img-bunch">
+                <div class="col-lg-3 col-md-3 col-sm-3"></div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <figure>
+                    <a
+                      class="strip"
+                      href="{{ childComment.commentImage }}"
+                      title=""
+                      data-strip-group="mygroup"
+                      data-strip-group-options="loop: false"
+                    >
+                      <img src="{{ childComment.commentImage }}" alt="" />
+                    </a>
+                  </figure>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3"></div>
+              </div>
+            </div>
+          </figure>
+          <div
+            class="inline-itms"
+            *ngIf="childComment.user.userName == userLogging.userName">
+          </div>
+        </div>
+      </li>
+
+      <!-- user comment in child block-->
+      <li class="post-comment">
+        <div class="comet-avatar">
+          <img src="{{ userLogging.userAvatar }}" alt="" />
+        </div>
+        <div class="post-comt-box" style="width: 89%">
+            <input
+              class="form-control comment-input"
+              placeholder="Post your comment"
+              formControlName="content"
+              style="
+                background: #edf2f6 none repeat scroll 0 0;
+                border-color: transparent;
+                border-radius: 5px;
+                color: inherit;
+                font-size: 13px;
+                height: 60px;
+                line-height: 16px;
+              "
+            />
+            <input type="hidden" formControlName="commentImage" />
+            <input type="hidden" formControlName="parentComment" />
+            <input type="hidden" formControlName="user" />
+            <figure>
+              <div class="row">
+                <div class="img-bunch">
+                  <div class="col-lg-3 col-md-3 col-sm-3"></div>
+                  <div class="col-lg-6 col-md-6 col-sm-6">
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-sm-3"></div>
+                </div>
+              </div>
+            </figure>
+            <div class="add-smiles">
+              <div class="uploadimage">
+                <i class="fa fa-image"></i>
+                <label class="fileContainer">
+                  <input type="file" />
+                </label>
+              </div>
+              <span class="em em-expressionless" title="add icon"></span>
+              <div class="smiles-bunch">
+                <i class="em em---1"></i>
+                <i class="em em-smiley"></i>
+                <i class="em em-anguished"></i>
+                <i class="em em-laughing"></i>
+                <i class="em em-angry"></i>
+                <i class="em em-astonished"></i>
+                <i class="em em-blush"></i>
+                <i class="em em-disappointed"></i>
+                <i class="em em-worried"></i>
+                <i class="em em-kissing_heart"></i>
+                <i class="em em-rage"></i>
+                <i class="em em-stuck_out_tongue"></i>
+              </div>
+            </div>
+        </div>
+      </li>
+    </ul>
+  </li>
+</ul>

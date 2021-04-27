@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {UserServiceService} from "../user-service.service";
+
 import {ActivatedRoute} from "@angular/router";
 import {Post} from "../model/Post";
+import {UserService} from "../service/user.service";
+import {User} from "../model/User";
+import {ParentComment} from "../model/ParentComment";
 
 
 @Component({
@@ -11,8 +14,10 @@ import {Post} from "../model/Post";
 })
 export class TimelineComponent implements OnInit {
    postInfos: Post[] ;
+  userLogging: User;
+  parentComments: ParentComment[];
   constructor(
-    public userService : UserServiceService,
+    public userService : UserService,
     private activatedRoute: ActivatedRoute
   ) { }
 
