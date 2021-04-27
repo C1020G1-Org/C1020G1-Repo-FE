@@ -7,6 +7,19 @@ $(window).load(function(){
 jQuery(document).ready(function($) {
 	
 	"use strict";
+
+	// function loadEmoji () {
+	// 	$(".emoji").emojioneArea({
+	// 	  pickerPosition: "left",
+	// 	  tonesStyle: "bullet",
+	// 	  events: {
+	// 		keyup: function (editor, event) {
+	// 		  console.log(editor.html());
+	// 		  console.log(this.getText());
+	// 		},
+	// 	  },
+	// 	});
+	//   }
 	
 //----- popup display on window load	
 		function delay(){
@@ -19,7 +32,7 @@ jQuery(document).ready(function($) {
 		  return false;
 		});
 	// popup end	
-	
+
 //------- Notifications Dropdowns
   $('.top-area > .setting-area > li > a').on("click",function(){
 	 var $parent = $(this).parent('li');
@@ -256,7 +269,7 @@ $('.user-img').on('click', function() {
 	
 //------ scrollbar plugin
 	if ($.isFunction($.fn.perfectScrollbar)) {
-		$('.dropdowns, .twiter-feed, .invition, .followers, .chatting-area, .peoples, #people-list, .chat-list > ul, .message-list, .chat-users, .left-menu, .sugestd-photo-caro, .popup.events, .related-tube-psts, .music-list, .more-songs, .media > ul, .conversations, .msg-pepl-list, .menu-slide, .frnds-stories, .modal-body .we-comet').perfectScrollbar();
+		$('.dropdowns, .twiter-feed, .invition, .followers, .chatting-area, .peoples, #people-list, .chat-list > ul, .message-list, .chat-users, .left-menu, .sugestd-photo-caro, .popup.events, .related-tube-psts, .music-list, .more-songs, .media > ul, .conversations, .msg-pepl-list, .menu-slide, .frnds-stories, .modal-body, .we-comet').perfectScrollbar();
 	}
 
 /*--- socials menu scritp ---*/	
@@ -466,14 +479,14 @@ $('#nightmode').on('change', function() {
 	}	
 	
 if ($.isFunction($.fn.loadMoreResults)) {	
-	$('.loadMore').loadMoreResults({
-		displayedItems: 3,
-		showItems: 1,
-		button: {
-		  'class': 'btn-load-more',
-		  'text': 'Load More'
-		}
-	});	
+	// $('.loadMore').loadMoreResults({
+	// 	displayedItems: 3,
+	// 	showItems: 1,
+	// 	button: {
+	// 	  'class': 'btn-load-more',
+	// 	  'text': 'Load More'
+	// 	}
+	// });	
 	
 	$('.load-more').loadMoreResults({
 		displayedItems: 8,
