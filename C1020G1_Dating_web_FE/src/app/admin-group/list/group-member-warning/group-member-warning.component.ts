@@ -25,7 +25,7 @@ export class GroupMemberWarningComponent implements OnInit {
   ngOnInit(): void {
     this.title.setTitle('Group Warning');
     let id;
-    this.activatedRoute.paramMap.subscribe(param => id = param.get('id'));
+    this.activatedRoute.paramMap.subscribe(param => id = param.get('guid'));
     this.groupManagementService.getMember(id).subscribe(data => this.member = data,() =>
       this.groupManagementService.navigate(404, this.getUrlNav()), () => {
         this.groupManagementService.groupId = this.member.group.groupId;
@@ -34,7 +34,7 @@ export class GroupMemberWarningComponent implements OnInit {
     this.set(id);
   }
 
-  set(id) {
+  set(id: number) {
     this.groupManagementService.getListWarning(id, this.page).subscribe(data => this.data = data, () => console.log('no warning'), () => this.setList());
   }
 

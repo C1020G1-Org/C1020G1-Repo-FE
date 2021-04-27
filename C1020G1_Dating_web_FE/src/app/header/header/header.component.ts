@@ -56,6 +56,6 @@ export class HeaderComponent implements OnInit {
   }
 
   get userId(): number {
-    return this.tokenStorageService.getUser().userId;
+    return 5;
   }
 }

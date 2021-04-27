@@ -3,6 +3,6 @@
     <a routerLink="/profile/{{member.user.userId}}">{{member.user.userName}}</a>
     <span>{{member.user.address}}</span><br>
     <div class="invites-btns">
-        <a class="main-btn cursor accept" routerLink="/group/warning/{{member.groupUserId}}" title="Go to Action" data-ripple="">Action</a>
+        <a class="main-btn cursor accept" routerLink="/group/warning/{{member.group.groupId}}/{{member.groupUserId}}" title="Go to Action" data-ripple="">Action</a>
     </div>
 </div>

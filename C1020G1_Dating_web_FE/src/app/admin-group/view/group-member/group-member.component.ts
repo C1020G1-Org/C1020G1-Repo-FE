@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import {GroupUser} from "../../../model/group-user";
 
 @Component({
-  selector: 'app-group-member',
+  selector: 'app-group-memberz',
   templateUrl: './group-member.component.html',
   styleUrls: ['./group-member.component.css']
 })

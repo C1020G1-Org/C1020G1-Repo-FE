@@ -51,7 +51,7 @@ export class WarningMemberModalComponent implements OnInit {
         groupUser: this.member,
         warningDate: dateStr
       }
-      this.groupManagementService.warningMember(groupWarning).subscribe(() => { }, err => console.log(err), () => {
+      this.groupManagementService.warningMember(groupWarning).subscribe(() => { }, () => {}, () => {
         this.noti();
         this.modal.dismiss('ok close');
       });

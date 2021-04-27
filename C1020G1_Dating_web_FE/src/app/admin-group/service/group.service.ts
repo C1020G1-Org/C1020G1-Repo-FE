@@ -74,6 +74,7 @@ export class GroupManagementService {
   adminGroup() {
     let group: Group;
     this.getGroupById().subscribe(data => group = data, err => console.log(err), () => {
+      console.log(group.groupId);
       if (group.admin.userId != this.userId){
         this.navigate(404,'/');
       }
