@@ -19,6 +19,16 @@ import {AngularFireModule} from "@angular/fire";
 import {environment} from "../environments/environment";
 import {AngularFireDatabaseModule} from "@angular/fire/database";
 import {AngularFireStorageModule} from "@angular/fire/storage";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {LoadingComponent} from "./user-management/loading/loading.component";
+import {ChangePasswordComponent} from "./user-management/change-password/change-password.component";
+import {UpdateStatusComponent} from "./user-management/update-status/update-status.component";
+import {UpdateAvatarComponent} from "./user-management/update-avatar/update-avatar.component";
+import {WebcamComponent} from "./user-management/webcam/webcam.component";
+import {WebcamModule} from "ngx-webcam";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatDialogModule} from "@angular/material/dialog";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -26,20 +36,31 @@ import {AngularFireStorageModule} from "@angular/fire/storage";
     AppComponent,
     ErrorPageComponent,
     HeaderComponent,
+    WebcamComponent,
+    UpdateAvatarComponent,
+    UpdateStatusComponent,
+    ChangePasswordComponent,
+    LoadingComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        LoginModule,
-      SocialLoginModule,
-      HeaderModule,
-      FooterModule,
-      SearchingModule,
-      UserManagementModule,
-      AngularFireModule.initializeApp(environment.firebaseConfig),
-      AngularFireDatabaseModule,
-      AngularFireStorageModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    LoginModule,
+    SocialLoginModule,
+    HeaderModule,
+    FooterModule,
+    SearchingModule,
+    UserManagementModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireStorageModule,
+    NgbModule,
+    WebcamModule,
+    MatDialogModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    FormsModule
+  ],
   providers: [{
     provide: 'SocialAuthServiceConfig',
     useValue: {
