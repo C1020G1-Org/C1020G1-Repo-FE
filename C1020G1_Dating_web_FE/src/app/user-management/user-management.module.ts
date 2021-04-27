@@ -9,8 +9,8 @@ import {HttpClientModule} from "@angular/common/http";
 @NgModule({
   declarations: [RegistrationComponent, InitialInformationComponent],
   exports: [
-    RegistrationComponent,
-    InitialInformationComponent
+      RegistrationComponent,
+      InitialInformationComponent
   ],
   imports: [
     CommonModule,

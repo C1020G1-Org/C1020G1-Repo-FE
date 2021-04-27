@@ -26,6 +26,8 @@ export class InitialInformationComponent implements OnInit {
   public reasons: Array<Reason>;
   public fileMessageAvatar: string = null;
   public fileMessageBackground: string = null;
+  public messageRegistry: string;
+  public isLoggin: boolean;
 
   constructor(public formBuilder: FormBuilder,
               public userCreate: UserCreateService,
@@ -151,6 +153,10 @@ export class InitialInformationComponent implements OnInit {
   }
 
   async submit() {
+    this.messageRegistry="Registration in progress..."
+    this.isLoggin= false;
+    $('#successModal').modal('toggle');
+
     this.userStorage.user.marriaged = this.formInitial.value.marriaged;
 
     this.userStorage.favourites = [];
@@ -173,7 +179,8 @@ export class InitialInformationComponent implements OnInit {
     await this.saveBackground();
 
     this.userCreate.createUser(this.userStorage.backendObject).subscribe(() => {
-      $('#successModal').modal('toggle');
+      this.messageRegistry="Your account is registry successfully!";
+      this.isLoggin = true;
       this.userStorage.clear()
     }, (error) => {
       this.userStorage.serverError = error;
@@ -214,6 +221,7 @@ export class InitialInformationComponent implements OnInit {
   }
 
   goToLogin() {
+    this.userStorage.clear()
     this.router.navigateByUrl("login");
   }
 }
