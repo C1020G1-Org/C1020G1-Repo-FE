@@ -337,7 +337,7 @@
 
                               <div class="c-form" style="margin-bottom: 20px;">
                                 <label>Date Of Birth:
-                                  <input type="date"
+                                  <input type="text" [value]="editUserForm.get('birthday').value | date: 'dd/MM/yyyy'"
                                          class="form-control" formControlName="birthday">
                                 </label>
                               </div>
