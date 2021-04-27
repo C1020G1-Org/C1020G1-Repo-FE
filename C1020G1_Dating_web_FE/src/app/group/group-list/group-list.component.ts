@@ -27,14 +27,12 @@ export class GroupListComponent implements OnInit {
 
     this.groupService.getAllGroup().subscribe(data => {
       this.groups = data;
-      console.log(this.groups);
     });
   }
 
   onSubmit() {
     this.groupService.getGroupByName(this.searchForm.get("search").value).subscribe(data=>{
       this.groups = data;
-      console.log(this.groups);
 
     });
   }

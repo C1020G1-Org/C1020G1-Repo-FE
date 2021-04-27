@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {GroupService} from "../service/group.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
@@ -11,18 +11,22 @@ import {Title} from "@angular/platform-browser";
 export class GroupDetailComponent implements OnInit {
   public group;
 
+
   constructor(public groupService: GroupService,
               private activatedRoute: ActivatedRoute,
               public router: Router,
-              private title: Title){}
+              private title: Title) {
+  }
 
-  ngOnInit(){
+  ngOnInit() {
     this.title.setTitle("Group-detail");
     this.activatedRoute.paramMap.subscribe(data => {
-      this.groupService.getGroupById(data.get("id")).subscribe(group =>{
+      this.groupService.getGroupById(data.get("id")).subscribe(group => {
         this.group = group;
+
       })
-      console.log(this.group);
+
+
     });
   }
 

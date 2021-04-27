@@ -29,4 +29,18 @@ export class GroupService {
   getAllMemberGroup(groupId): Observable<any>{
     return this.http.get(this.API+'-member/'+ groupId);
   }
+
+  getGroupUserByGroupIdAndUserId(groupId,userId){
+    return this.http.get(this.API + '-detail/'+groupId+'/'+userId);
+  }
+
+  saveRequest(groupRequest){
+    console.log(groupRequest.group)
+    return this.http.post( 'http://localhost:8080/request/save' , groupRequest);
+  }
+
+  getAllGroupRequest(userId){
+    return this.http.get(this.API+"-request/"+userId);
+
+  }
 }

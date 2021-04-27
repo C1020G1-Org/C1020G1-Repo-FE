@@ -9,8 +9,11 @@
       </div>
       <img src="{{group.imageBackground}}" style="height: 500px" alt="">
       <ul class="profile-controls">
-        <li><a href="#" title="Join Group" data-toggle="tooltip"><i
-          class="fa fa-user-plus"></i></a></li>
+
+        <li *ngIf="!isJoin" >
+          <button class="btn" (click)="saveRequest()" style="align-items: center; background: #ff4e01; border-radius: 50%; height: 40px; width: 40px" title="Join Group" data-toggle="tooltip">
+            <i class="fa fa-user-plus " style="color: white" ></i></button></li>
+
         <li><a class="send-mesg" href="#" title="Send Message" data-toggle="tooltip"><i
           class="fa fa-comment"></i></a></li>
         <li>

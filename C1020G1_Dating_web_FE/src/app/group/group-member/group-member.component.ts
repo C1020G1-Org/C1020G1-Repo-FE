@@ -21,11 +21,8 @@ export class GroupMemberComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(data => {
 
       this.groupService.getAllMemberGroup(data.get("id")).subscribe(groupUser=> {
-        console.log(groupUser);
         this.groupMember = groupUser;
       });
       })
-      console.log(this.groupMember);
-      console.log(this.group);
   }
 }
