@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="/assets/css/main.min.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/color.css">
+<link rel="stylesheet" href="/assets/css/responsive.css">
+<div *ngIf="isCameraExist;">
+  <div style="text-align:center">
+    <i class="fa fa-camera  font-italic"> Photography Interface</i>
+    <webcam (initError)="handleInitError($event)" imageType="png" [height]="500" [width]="1000"
+            [trigger]="triggerObservable" (imageCapture)="handleImage($event)"
+            *ngIf="showWebcam" [switchCamera]="nextWebcamObservable">
+    </webcam>
+    <img id="image-2" [src]="image">
+    <br>
+    <div>
+      <button class="btn-outline-success rounded-pill btn-lg" (click)="takeSnapshot()"><i
+        class="fa fa-camera-retro"></i></button>
+      <button *ngIf="typeClass==='on'" class="btn-outline-secondary rounded-pill radius btn-lg ml-3" (click)="return()">
+        <i
+          class="fa fa-undo"></i></button>
+      <button *ngIf="typeClass==='on'" class="btn-outline-info rounded-pill btn-lg ml-3" (click)="saveAvatar(image)"><i
+        class="fa fa-save"></i>
+      </button>
+      <button class="btn-outline-danger rounded-pill radius btn-lg ml-3" (click)="close()"><i
+        class="fa fa-window-close"></i></button>
+    </div>
+  </div>
+</div>

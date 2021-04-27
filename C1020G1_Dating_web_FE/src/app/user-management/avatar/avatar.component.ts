@@ -8,12 +8,11 @@ import {WebcamComponent} from '../webcam/webcam.component';
 import {LoadingComponent} from '../loading/loading.component';
 
 @Component({
-  selector: 'app-update-avatar',
-  templateUrl: './update-avatar.component.html',
-  styleUrls: ['./update-avatar.component.css']
+  selector: 'app-avatar',
+  templateUrl: './avatar.component.html',
+  styleUrls: ['./avatar.component.scss']
 })
-export class UpdateAvatarComponent implements OnInit {
-
+export class AvatarComponent implements OnInit {
   selectedImage: any = null;
   selectedBackground: any = null;
   avatar;
@@ -195,5 +194,4 @@ export class UpdateAvatarComponent implements OnInit {
   showInfoAvatar(content5) {
     this.modalService.open(content5, {windowClass: 'dark-modal'});
   }
-}
 }
