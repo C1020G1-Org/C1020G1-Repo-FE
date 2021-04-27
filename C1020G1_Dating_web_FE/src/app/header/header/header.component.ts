@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
   }
 
   setNotiList() {
-    this.notificationGroupService.getAll(5).snapshotChanges().pipe( // 5 is userId is logged
+    this.notificationGroupService.getAll(this.userId).snapshotChanges().pipe(
       map(changes =>
         changes.map(data => ({ key: data.payload.key, ...data.payload.val() })
         )
@@ -44,7 +44,7 @@ export class HeaderComponent implements OnInit {
   }
 
   deleteAll() {
-    this.notificationGroupService.deleteAll(5).then(() => console.log('delete all success!')); // 5 is userId is logged
+    this.notificationGroupService.deleteAll(this.userId).then(() => console.log('delete all success!'));
   }
 
   nav(noti: Notification) {
@@ -53,5 +53,9 @@ export class HeaderComponent implements OnInit {
 
   clear(noti: Notification){
     this.notificationGroupService.delete(noti.key, 5).then(() => console.log('delete success!'));
+  }
+
+  get userId(): number {
+    return this.tokenStorageService.getUser().userId;
   }
 }

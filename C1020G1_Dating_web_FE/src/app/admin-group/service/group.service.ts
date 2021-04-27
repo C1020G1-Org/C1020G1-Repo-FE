@@ -87,7 +87,7 @@ export class GroupManagementService {
   }
 
   get userId() {
-    return 1;
+    return this.tokenStorage.getUser().userId;
   }
 
   get defaultPage() {

@@ -57,7 +57,6 @@ export class InviteModalComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.member);
     if (this.member != undefined || this.member != null) {
       let group: Group;
       let user: User;
