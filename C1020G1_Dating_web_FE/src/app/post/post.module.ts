@@ -77,8 +77,6 @@ export interface PostEditImage {
   updateImages: Array<PostImage2>;
 }
 
-
-
 @NgModule({
   declarations: [CreatePostComponent, EditPostComponent],
   exports: [
@@ -92,3 +90,4 @@ export interface PostEditImage {
 })
 export class PostModule {
 }
+

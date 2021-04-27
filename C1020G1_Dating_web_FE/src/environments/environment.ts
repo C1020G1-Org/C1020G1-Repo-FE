@@ -5,13 +5,13 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "AIzaSyBCYgI0cCpFZwJXyckyvLHQ2qcb1QWKbek",
-    authDomain: "fir-upload-image-a3404.firebaseapp.com",
-    projectId: "fir-upload-image-a3404",
-    storageBucket: "fir-upload-image-a3404.appspot.com",
-    messagingSenderId: "844992296891",
-    appId: "1:844992296891:web:67460da65523d580c5369e",
-    measurementId: "G-TSLXKH63JT"
+    apiKey: "AIzaSyAqXKJYP5KoUlB4Pe-GyT5of52DCXso2Tk",
+    authDomain: "social-d792e.firebaseapp.com",
+    projectId: "social-d792e",
+    storageBucket: "social-d792e.appspot.com",
+    messagingSenderId: "1057724187940",
+    appId: "1:1057724187940:web:ca792eadc0c59d6b171fb1"
+
   }
 };
 
