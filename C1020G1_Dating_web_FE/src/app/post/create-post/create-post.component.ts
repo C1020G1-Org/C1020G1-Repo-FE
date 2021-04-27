@@ -2,16 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {PostServiceService} from "../service/post-service.service";
 import {Router} from "@angular/router";
-import {Observable} from "rxjs";
-import {AngularFirestore} from "@angular/fire/firestore";
 import {AngularFireStorage} from "@angular/fire/storage";
-import {tap} from 'rxjs/operators';
 import {finalize} from 'rxjs/operators';
-import {map, filter, switchMap, take} from 'rxjs/operators';
-import * as firebase from 'firebase';
-
-
-import {combineLatest} from 'rxjs';
 import {DomSanitizer} from "@angular/platform-browser";
 
 
@@ -38,6 +30,7 @@ export class CreatePostComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.fileImage = [];
     this.user = {
       userId: 1,
       userName: "son",
@@ -108,45 +101,7 @@ export class CreatePostComponent implements OnInit {
     return this.formCreatePost.get('postStatus');
   }
 
-  // importImages(event) {
-  //   const fileList = event.target.files;
-  //   this.fileImage = event.target.files;
-  //   for (const file of fileList) {
-  //     this.afs.collection('files').add({
-  //       url: URL.createObjectURL(file)
-  //     });
-  //   }
-  // }
-
-  // addImageToFireBase() {
-  //     this.uploads = [];
-  //     this.urlImage = [];
-  //     console.log(this.fileImage);
-  //     for (const file of this.fileImage) {
-  //       const path = `files/${file.name}`;
-  //       const ref = this.storage.ref(path);
-  //       const task = this.storage.upload(path, file);
-  //       const _percentage$ = task.percentageChanges();
-  //
-  //       // create composed objects with different information. ADAPT THIS ACCORDING to YOUR NEED
-  //       const uploadTrack = {
-  //         fileName: file.name,
-  //         percentage: _percentage$
-  //       };
-  //       //
-  //       // push each upload into the array
-  //       this.uploads.push(uploadTrack);
-  //
-  //       const _t = task.then((f) => {
-  //         return f.ref.getDownloadURL().then((url) => {
-  //           this.urlImage.push(url);
-  //         })
-  //       })
-  //     }
-  // }
-
   importImages(event) {
-    this.fileImage = [];
     let files = event.target.files;
     if (files) {
       for (let file of files) {
@@ -182,5 +137,11 @@ export class CreatePostComponent implements OnInit {
         resolve(1)
       });
     });
+  }
+
+  deleteUpdateImage(event) {
+    let index = event.target.attributes['data-index'].value;
+    this.fileImage = this.fileImage.slice(0, index).concat(this.fileImage.slice(index + 1, this.fileImage.length));
+    console.log(this.fileImage);
   }
 }

@@ -44,9 +44,9 @@
           </textarea>
           </div>
         </div>
-        <div *ngFor="let file of this.fileImage" class="d-block w-100">
-          <img [src]="file.url" style="margin:3px; height: 300px; width: 200px; float: left">
-<!--            [src]="dom.bypassSecurityTrustUrl(file.url)"-->
+        <div *ngFor="let file of this.fileImage; let i = index" class="d-inline-block" style="margin: 0">
+          <span><i class="fa fa-trash delete-icon d-inline" (click)="deleteUpdateImage($event)" [attr.data-index]="i"></i></span>
+          <img [src]="file.url" style="margin:3px; height: 100px; width: auto; float: left">
         </div>
         <button class="post-btn" id="myButton" (click)="addNewPost()">Post</button>
         <img src=""/>

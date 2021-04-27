@@ -64,6 +64,20 @@ export interface PostImage {
   postImages: Array<string>;
 }
 
+export interface PostImage2 {
+  postImageId: number;
+  post: number;
+  image: string;
+}
+
+export interface PostEditImage {
+  post: Post;
+  postImages: Array<PostImage2>;
+  deleteImages: Array<PostImage2>;
+  updateImages: Array<PostImage2>;
+}
+
+
 
 @NgModule({
   declarations: [CreatePostComponent, EditPostComponent],

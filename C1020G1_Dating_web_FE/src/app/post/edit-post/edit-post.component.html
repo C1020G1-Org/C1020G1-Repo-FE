@@ -9,8 +9,7 @@
             <li>
               <i class="fa fa-image"></i>
               <label class="fileContainer">
-                <input type="file" id="upload_file" name="upload_file[]"
-                       onchange="preview_image();" multiple/>
+                <input type="file" (change)="updateImage($event)" multiple>
               </label>
             </li>
             <li>
@@ -46,7 +45,14 @@
           </textarea>
           </div>
         </div>
-        <div id="image_preview" class="d-block w-100"></div>
+        <div *ngFor="let postImage of this.postImages"  style="margin-left: 0; display: inline-block">
+          <span><i class="fa fa-trash delete-icon d-inline" (click)="deleteImage($event)" [attr.data-index]="postImage.postImageId"></i></span>
+          <img [src]="postImage.image" style="margin:3px; height: 120px; width: auto; float: left">
+        </div>
+        <div *ngFor="let postImage of this.updateFileImage; let i = index" style="margin-left: 0; display: inline-block">
+          <span><i class="fa fa-trash delete-icon d-inline" (click)="deleteUpdateImage($event)" [attr.data-index]="i"></i></span>
+          <img [src]="postImage.url" style="margin:3px; height: 120px; width: auto; float: left">
+        </div>
         <button class="post-btn" (click)="editPost()">Save</button>
       </form>
     </div>

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Post, PostImage} from "../post.module";
+import {Post, PostEditImage, PostImage} from "../post.module";
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class PostServiceService {
     return this.httpClient.post(this.API, postImage);
   }
 
-  updatePost(post: Post): Observable<any> {
-    return this.httpClient.put(this.API + '/' + post.postId, post)
+  updatePost(postEditImage: PostEditImage): Observable<any> {
+    return this.httpClient.put(this.API + '/' + postEditImage.post.postId, postEditImage)
   }
 }
