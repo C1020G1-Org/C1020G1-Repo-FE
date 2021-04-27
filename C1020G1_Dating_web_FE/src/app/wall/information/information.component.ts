@@ -1,12 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from "../../model/user";
-import {FriendRequest} from "../../model/friend_request";
-import {Status} from "../../model/status";
-import {Account} from "../../model/account";
-import {Ward} from "../../model/ward";
-import {Province} from "../../model/province";
-import {District} from "../../model/district";
-import {WallService} from "../wall.service";
+import {FriendRequestService} from "../../services/friend-request.service";
+
 
 @Component({
   selector: 'app-information',
@@ -19,7 +14,7 @@ export class InformationComponent implements OnInit {
   userInfo: User;
   userLogin: User;
 
-  constructor(private wallService: WallService) {
+  constructor(private friendRequestService: FriendRequestService) {
   }
 
   ngOnInit(): void {

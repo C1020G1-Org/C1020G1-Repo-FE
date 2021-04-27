@@ -34,7 +34,7 @@
                     <button
                       style="align-items: center;background: #ff4e01;border-radius: 50%;border: none;height: 40px;width: 40px"
                       data-target="#exampleModal" data-toggle="modal"
-                      tooltip="Unrequest" (click)="sendIdRequest(friendRequestWallUserAndLoginUser.friendRequestId)">
+                      tooltip="Unrequest" (click)="sendFriendRequestToDelete(friendRequestWallUserAndLoginUser)">
                       <i class="fa fa-times" style="color: white"></i></button>
                   </li>
 
@@ -123,13 +123,13 @@
                             </span>
                           </div>
 
-                          <button title="Add Friend" (click)="acceptFriendRequest(friendRequest)"
+                          <button tooltip="Add Friend" (click)="acceptFriendRequest(friendRequest)"
                                   style="border: white;color: #ff5b0c;background: white">
                             <i class="fa fa-check-square fa-2x" style="margin-right: 15px"></i></button>
 
-                          <button title="Remove" data-target="#exampleModal" data-toggle="modal"
+                          <button tooltip="Remove" data-target="#exampleModal" data-toggle="modal"
                                   style="border: white;color: #ff5b0c;background: white"
-                                  (click)="sendIdRequest(friendRequest.friendRequestId)">
+                                  (click)="sendFriendRequestToDelete(friendRequest)">
                             <i class="fa fa-trash fa-2x"></i></button>
                         </div>
                       </div>

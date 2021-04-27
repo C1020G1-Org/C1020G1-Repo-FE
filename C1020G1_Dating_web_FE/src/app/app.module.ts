@@ -7,6 +7,9 @@ import {HeaderModule} from "./header/header.module";
 import {HttpClientModule} from "@angular/common/http";
 import {WallModule} from "./wall/wall.module";
 import {TooltipModule} from "ng2-tooltip-directive";
+import {AngularFireModule} from "@angular/fire";
+import {AngularFireDatabaseModule} from "@angular/fire/database";
+import {environment} from "../environments/environment";
 
 
 @NgModule({
@@ -19,7 +22,9 @@ import {TooltipModule} from "ng2-tooltip-directive";
     HeaderModule,
     WallModule,
     HttpClientModule,
-    TooltipModule
+    TooltipModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule
   ],
   providers: [],
   bootstrap: [AppComponent]
