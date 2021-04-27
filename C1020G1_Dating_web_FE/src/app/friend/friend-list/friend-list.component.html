@@ -41,7 +41,7 @@
                             <li><span>Job: </span> {{friend.friend.occupation}}</li>
                             <li><span>Gender:</span>{{friend.friend.gender}}</li>
                             <li><span>Email: </span>{{friend.friend.email}}</li>
-                            <li><span>Birthday: </span> {{friend.friend.birthday | date: 'dd/MM/yyyy'}}</li>
+                            <li><span>Birthday: </span> {{friend.friend.birthday | date: 'dd-MM-yyyy'}}</li>
                             <li><span>Marriage: </span> {{friend.friend.marriaged}}</li>
                           </ul>
                           <a href="#" title="Delete" data-toggle="modal" data-target="#exampleModal"
@@ -49,8 +49,12 @@
                         </div>
                       </div>
                     </div>
+                    <div *ngIf="friends.length == 0" style="margin-left: 30%">
+                        <h5 style="color: orangered" class="d-flex justify-content-center align-items-lg-center">
+                          Currently there are no friends !!<i class="fa fa-frown-o fa-3x" style="margin-left: 20px" ></i>
+                        </h5>
+                    </div>
                   </div>
-
                 </div>
               </div>
             </div>

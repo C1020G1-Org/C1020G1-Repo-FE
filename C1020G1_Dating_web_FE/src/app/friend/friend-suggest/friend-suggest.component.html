@@ -19,13 +19,26 @@
                           <div class="frnd-name">
                             <a href="#" title="">{{f.suggestFriend.userName}}</a>
                             <span>{{f.suggestFriend.address}}</span>
-                            <p><span>{{f.mutualFriends.length}}</span> Mutual Friends</p>
+                            <br>
+                            <span *ngIf="f.mutualFriends.length > 1"
+                                (mouseover)="getMutualFriend(f.mutualFriends)" tooltip="{{mutualFriend}}" >
+                              {{f.mutualFriends.length}} Mutual Friends
+                            </span>
+                            <span *ngIf="f.mutualFriends.length == 1"
+                                  (mouseover)="getMutualFriend(f.mutualFriends)" tooltip="{{mutualFriend}}" >
+                              {{f.mutualFriends.length}} Mutual Friend
+                            </span>
                           </div>
                           <ul class="add-remove-frnd">
                             <li class="add-tofrndlist" style="margin-left: 50px"><a href="#" title="Add friend"><i class="fa fa-user-plus"></i></a></li>
                           </ul>
                         </div>
                       </div>
+                    </div>
+                    <div *ngIf="suggestFriend.length == 0" style="margin-left: 30%">
+                      <h5 style="color: orangered" class="d-flex justify-content-center align-items-center">
+                        No friend suggestions yet !!<i class="fa fa-frown-o fa-3x" style="margin-left: 20px" ></i>
+                      </h5>
                     </div>
                   </div>
 
