@@ -1,0 +1,63 @@
+<div class="col-lg-12">
+  <div class="user-profile" *ngIf="userInfo">
+    <figure>
+      <div class="edit-pp">
+        <label class="fileContainer">
+          <i class="fa fa-camera"></i>
+          <input type="file">
+        </label>
+      </div>
+      <img src="{{userInfo.userBackground}}" alt="">
+      <ul class="profile-controls">
+        <li><a href="#" title="Add friend" data-toggle="tooltip"><i class="fa fa-user-plus"></i></a></li>
+        <li><a class="edit-seting" href="#" title="Send Message" data-toggle="tooltip"><i class="fa fa-comment"></i></a>
+        </li>
+        <li>
+          <div class="edit-seting" title="Edit Profile image"><i class="fa fa-sliders"></i>
+            <ul class="more-dropdown">
+              <li><a title="">Update Profile Photo</a></li>
+              <li><a title="">Update Header Photo</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </figure>
+    <div class="profile-section">
+      <div class="row">
+        <div class="col-lg-2 col-md-3">
+          <div class="profile-author">
+            <div class="profile-author-thumb">
+              <img alt="author" src="{{userInfo.userAvatar}}">
+              <div class="edit-dp">
+                <label class="fileContainer">
+                  <i class="fa fa-camera"></i>
+                  <input type="file">
+                </label>
+              </div>
+            </div>
+            <div class="author-content">
+              <a class="h4 author-name">{{userInfo.userName}}</a>
+              <div class="country">{{userInfo.ward.wardName}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-10 col-md-9">
+          <ul class="profile-menu">
+            <li>
+              <a [routerLink]="['/timeline' , 1 ]">Timeline</a>
+            </li>
+            <li>
+              <a [routerLink]="['/info' , 1 ]">Information</a>
+            </li>
+            <li>
+              <a class="">Friends</a>
+            </li>
+            <li>
+              <a class="">Friends Request</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

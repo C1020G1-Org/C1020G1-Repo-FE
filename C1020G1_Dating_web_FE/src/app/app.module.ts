@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NewsfeedComponent } from './news-feed/newsfeed/newsfeed.component';
@@ -21,6 +20,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import {AngularFireDatabaseModule} from "@angular/fire/database";
 import {AngularFirestoreModule} from "@angular/fire/firestore";
 import {PostModule} from "./post/post.module";
+import {WallModule} from "./wall/wall.module";
 
 @NgModule({
   declarations: [
@@ -42,12 +42,10 @@ import {PostModule} from "./post/post.module";
         AngularFireDatabaseModule,
         AngularFireStorageModule,
         AngularFirestoreModule,
-        PostModule
+        PostModule,
+        WallModule
         // ReactiveFormsModule,
         // FormsModule
-
-        
-
     ],
   providers: [{
     provide: 'SocialAuthServiceConfig',
