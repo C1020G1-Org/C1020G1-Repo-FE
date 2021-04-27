@@ -1,0 +1,89 @@
+<div class="theme-layout">
+
+  <section>
+    <div class="gap2 gray-bg">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row merged20" id="page-contents">
+              <div class="col-lg-12">
+                <div class="central-meta">
+                  <div class="title-block">
+                    <div class="row">
+                      <div class="col-lg-6"></div>
+                      <div class="col-lg-6">
+                        <div class="row merged20">
+                          <div class="col-lg-7 col-lg-7 col-sm-7">
+                            <form method="post" style="margin-left: 180px">
+                              <input type="text" placeholder="Search Friend">
+                              <button type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- title block -->
+                <div class="central-meta padding30"> <!-- Hiện thị 1 row trong List friend -->
+                  <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6" *ngFor="let friend of friends">
+                      <div class="friend-box">
+                        <figure>
+                          <img src="{{friend.friend.userBackground}}" alt="#" style="width: 240px; height: 150px;">
+                        </figure>
+                        <div class="frnd-meta">
+                          <img src="{{friend.friend.userAvatar}}" style="width: 100px;height: 100px" alt="">
+                          <div class="frnd-name">
+                            <a href="#" title="">{{friend.friend.userName}}</a>
+                            <span>{{friend.friend.address}}</span>
+                          </div>
+                          <ul class="frnd-info">
+                            <li><span>Job: </span> {{friend.friend.occupation}}</li>
+                            <li><span>Gender:</span>{{friend.friend.gender}}</li>
+                            <li><span>Email: </span>{{friend.friend.email}}</li>
+                            <li><span>Birthday: </span> {{friend.friend.birthday | date: 'dd-MM-yyyy'}}</li>
+                            <li><span>Marriage: </span> {{friend.friend.marriaged}}</li>
+                          </ul>
+                          <a href="#" title="Delete" data-toggle="modal" data-target="#exampleModal"
+                          (click)="showDelete(friend.friendsId,friend.friend.userName)"><i class="fa fa-trash fa-3x" style="margin-left: 170px"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngIf="friends.length == 0" style="margin-left: 30%">
+                        <h5 style="color: orangered" class="d-flex justify-content-center align-items-lg-center">
+                          Currently there are no friends !!<i class="fa fa-frown-o fa-3x" style="margin-left: 20px" ></i>
+                        </h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section><!-- content -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">DELETE FRIEND</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete <span style="color: red">{{friendName}}</span> ?</p>
+          <p class="text-warning">This action cannot be undone.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="delete()">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

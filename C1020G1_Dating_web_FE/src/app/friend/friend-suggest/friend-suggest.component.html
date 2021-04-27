@@ -1,0 +1,54 @@
+<div class="theme-layout">
+
+  <section>
+    <div class="gap2 gray-bg">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row merged20" id="page-contents">
+              <div class="col-lg-12">
+                <div class="central-meta padding30">
+                  <div class="row merged20">
+                    <div class="col-lg-3 col-md-6 col-sm-6" *ngFor="let f of suggestFriend">
+                      <div class="friend-block">
+                        <figure>
+                          <img src="{{f.suggestFriend.userAvatar}}" alt="" style="width: 80px; height: 80px">
+                        </figure>
+
+                        <div class="frnd-meta">
+                          <div class="frnd-name">
+                            <a href="#" title="">{{f.suggestFriend.userName}}</a>
+                            <span>{{f.suggestFriend.address}}</span>
+                            <br>
+                            <span *ngIf="f.mutualFriends.length > 1"
+                                (mouseover)="getMutualFriend(f.mutualFriends)" tooltip="{{mutualFriend}}" >
+                              {{f.mutualFriends.length}} Mutual Friends
+                            </span>
+                            <span *ngIf="f.mutualFriends.length == 1"
+                                  (mouseover)="getMutualFriend(f.mutualFriends)" tooltip="{{mutualFriend}}" >
+                              {{f.mutualFriends.length}} Mutual Friend
+                            </span>
+                          </div>
+                          <ul class="add-remove-frnd">
+                            <li class="add-tofrndlist" style="margin-left: 50px"><a href="#" title="Add friend"><i class="fa fa-user-plus"></i></a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngIf="suggestFriend.length == 0" style="margin-left: 30%">
+                      <h5 style="color: orangered" class="d-flex justify-content-center align-items-center">
+                        No friend suggestions yet !!<i class="fa fa-frown-o fa-3x" style="margin-left: 20px" ></i>
+                      </h5>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section><!-- content -->
+
+</div>
