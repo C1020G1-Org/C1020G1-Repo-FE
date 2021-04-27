@@ -5,33 +5,22 @@ $(window).load(function(){
 });
 
 jQuery(document).ready(function($) {
-	
+
 	"use strict";
 
-	// function loadEmoji () {
-	// 	$(".emoji").emojioneArea({
-	// 	  pickerPosition: "left",
-	// 	  tonesStyle: "bullet",
-	// 	  events: {
-	// 		keyup: function (editor, event) {
-	// 		  console.log(editor.html());
-	// 		  console.log(this.getText());
-	// 		},
-	// 	  },
-	// 	});
-	//   }
-	
-//----- popup display on window load	
+//----- popup display on window load
+
 		function delay(){
 			$(".popup-wraper.subscription").fadeIn();
 		}
 		window.setTimeout( delay, 3000 );
-		
+
 		$('.popup-closed').on('click', function() {
 		  $('.popup-wraper.subscription').addClass('closed');
 		  return false;
 		});
-	// popup end	
+
+	// popup end
 
 //------- Notifications Dropdowns
   $('.top-area > .setting-area > li > a').on("click",function(){
@@ -44,10 +33,10 @@ jQuery(document).ready(function($) {
 
   $("body *").not('.top-area > .setting-area > li > a').on("click", function() {
 	 $(".top-area > .setting-area > li > a").removeClass('active');
-	
  });
-	
-	
+
+
+
 // New submit post box
 	$(".new-postbox").click(function () {
 	    $(".postoverlay").fadeIn(500);
@@ -92,7 +81,9 @@ jQuery(document).ready(function($) {
 	});
 		$('.close-story').on('click', function () {
 		$('.stories-wraper').removeClass('active');
-	});	
+
+	});
+
 
 // add popup upload photo
 	$('.edit-prof').on('click', function () {
@@ -100,24 +91,24 @@ jQuery(document).ready(function($) {
 	});
 		$('.popup-closed').on('click', function () {
 		$('.popup-wraper, .popup-wraper1').removeClass('active');
-	});	
-	
+	});
+
 	// Create group friend
 	$('.item-upload').on('click', function () {
 		$('.popup-wraper4').addClass('active');
 	});
 		$('.popup-closed').on('click', function () {
 		$('.popup-wraper4').removeClass('active');
-	});	
-	
+	});
+
 	// Create group friend
 	$('.item-upload.album').on('click', function () {
 		$('.popup-wraper5').addClass('active');
 	});
 		$('.popup-closed').on('click', function () {
 		$('.popup-wraper5').removeClass('active');
-	});	
-	
+	});
+
 // popup event
 	$('.event-title h4').on('click', function () {
 		$('.popup-wraper7').addClass('active');
@@ -159,7 +150,7 @@ jQuery(document).ready(function($) {
 		$('.popup-wraper1').addClass('active');
 		return false;
 	});
-	
+  
 // popup report post
 	$('.bad-report').on('click', function () {
 		$('.popup-wraper3').addClass('active');
@@ -175,12 +166,14 @@ jQuery(document).ready(function($) {
 		$('.show-comt').bind('click', function () {
 			$('.pit-comet-wraper').addClass('active');  
 		});	
+
 	});
 // comments popup
 	$('.add-pitrest > a, .pitred-links > .main-btn, .create-pst').on('click', function () {
 		$('.popup-wraper').addClass('active');
 		return false;
 	});
+
 	
 // share post popup	
 $('.share-pst').on('click', function () {
@@ -214,6 +207,7 @@ $('.audio-call, .video-call').on('click', function () {
 	    }).disableSelection();
 	}
 
+
 //--- heart like and unlike 
 	var counter = 0;
 	var animated = false;
@@ -238,7 +232,7 @@ $('.audio-call, .video-call').on('click', function () {
 	  });
 		return false;
 	});
-	
+
 	$('.cancel-search').on('click', function () {
 	  $( ".searchees" ).fadeOut( "slow", function() {
 	  });
@@ -255,7 +249,6 @@ $('.audio-call, .video-call').on('click', function () {
 $('.user-img').on('click', function() {
 	$('.user-setting').toggleClass("active");
 });
-
 	
 //--- side message box	
 	$('.friendz-list > li, .chat-users > li, .drops-menu > li > a.show-mesg').on('click', function() {
@@ -311,7 +304,6 @@ $('.save-post, .bane, .get-link').on("click", function() {
 	$('.f-page > figure i').on("click", function() {
 	    $(".drop").toggleClass("active");
 	});
-
 	
 //select photo in upload photo popup	
 	$('.sugestd-photo-caro > li').on('click', function() {
@@ -385,7 +377,6 @@ $('.save-post, .bane, .get-link').on("click", function() {
 		}
 	}
 
-	
 //===== Search Filter =====//
 	(function ($) {
 	// custom css expression for a case-insensitive contains()
@@ -418,20 +409,19 @@ $('.save-post, .bane, .get-link').on("click", function() {
 	$(function () {
 	  listFilter($("#searchDir"), $("#people-list"));
 	});
-	}(jQuery));	
 
+	}(jQuery));	
 //progress line for page loader
 	$('body').show();
 	NProgress.start();
 	setTimeout(function() { NProgress.done(); $('.fade').removeClass('out'); }, 2000);
-	
+
 //--- bootstrap tooltip and popover	
 	$(function () {
 	  $('[data-toggle="tooltip"]').tooltip();
 		$('[data-toggle="popover"]').popover();
 	});
 	
-// Sticky Sidebar & header
 	if($(window).width() < 981) {
 		$(".sidebar").children().removeClass("stick-widget");
 	}
@@ -442,7 +432,7 @@ $('.save-post, .bane, .get-link').on("click", function() {
 			offset_top: 60,
 		});
 
-		
+
 		$('.stick').stick_in_parent({
 		    parent: 'body',
             offset_top: 0,
@@ -468,7 +458,7 @@ $('#nightmode').on('change', function() {
 
 //chosen select plugin
 	if ($.isFunction($.fn.chosen)) {
-		$("select").chosen();
+		$(".select").chosen();
 	}
 
 //----- add item plus minus button
@@ -496,7 +486,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 		  'text': 'Load More'
 		}
 	});
-	
+  
 	$('.load-more4').loadMoreResults({
 		displayedItems: 8,
 		showItems: 1,
@@ -533,7 +523,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 				}
 
 		});
-		
+    
 		//contributors on tube channel
 		$('.contributorz').owlCarousel({
 			items: 6,
@@ -560,7 +550,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 				}
 
 		});
-		
+
 		/*--- timeline page ---*/
 		$('.suggested-frnd-caro').owlCarousel({
 			items: 4,
@@ -586,7 +576,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 				}
 			}
 		});
-		
+
 		$('.frndz-list').owlCarousel({
 			items: 5,
 			loop: true,
@@ -611,7 +601,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 					}
 				}
 		});
-		
+
 		$('.photos-list').owlCarousel({
 			items: 5,
 			loop: true,
@@ -636,7 +626,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 					}
 				}
 		});
-		
+
 		$('.videos-list').owlCarousel({
 			items: 3,
 			loop: true,
@@ -661,7 +651,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 					}
 				}
 		});
-		
+
 		//Badges carousel on badges page
 		$('.badge-caro').owlCarousel({
 			items: 6,
@@ -688,7 +678,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 					}
 				}
 		});
-		
+
 		// Related groups on groups page
 		$('.related-groups').owlCarousel({
 			items: 6,
@@ -716,7 +706,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 					}
 				}
 		});
-		
+
 		// trending pitred posts
 		$('.pitred-trendings.six').owlCarousel({
 			items: 6,
@@ -744,7 +734,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 					}
 				}
 		});
-		
+
 		// trending pitred posts
 		$('.pitred-trendings').owlCarousel({
 			items: 4,
@@ -772,7 +762,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 					}
 				}
 		});
-		
+
 		// Success couples caro in pitpoint page
 		$('.succes-people').owlCarousel({
 			items: 1,
@@ -799,7 +789,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 					}
 				}
 		});
-		
+
 		// Featured area fade caro soundnik page
 		$('.soundnik-featured').owlCarousel({
 			items: 1,
@@ -828,7 +818,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 					}
 				}
 		});
-		
+
 		// Promo Caro classified page
 		$('.promo-caro').owlCarousel({
 			items: 3,
@@ -855,7 +845,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 					}
 				}
 		});
-		
+
 	// Promo Caro classified page
 		$('.testi-caro').owlCarousel({
 			items: 1,
@@ -881,8 +871,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 						items:1,
 					}
 				}
-		});	
-		
+
 	//featured-text-caro
 		$('.text-caro').owlCarousel({
 			items:1,
@@ -923,7 +912,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 				}
 			}
 		});
-		
+
 	//team section carousel
 		$('.team-carouzel').owlCarousel({
 			loop:true,
@@ -1001,7 +990,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
         fade: true,
         cssEase: 'linear'
     });
-		
+
 
     $('.slider-for').slick({
         slidesToShow: 1,
@@ -1077,7 +1066,7 @@ if ($.isFunction($.fn.loadMoreResults)) {
 			sundayStart: true
 		});
 	}
-	
+
 //---- responsive header
 if ($.isFunction($.fn.mmenu)) {
 	$(function() {
@@ -1118,33 +1107,31 @@ if ($.isFunction($.fn.mmenu)) {
 	     $(".side-panel").removeClass('active');
 	});
 
-	  
 // login & register form
 	$('button.signup').on("click", function(){
 		$('.login-reg-bg').addClass('show');
 		return false;
 	});
-	  
+
 	$('.already-have').on("click", function(){
 		$('.login-reg-bg').removeClass('show');
 		return false;
 	});
-	
-//----- count down timer		
+
 	if ($.isFunction($.fn.downCount)) {
 		$('.countdown').downCount({
 			date: '11/12/2021 12:00:00',
 			offset: +10
 		});
 	}
-	
+
 //counter for funfacts
 		if ($.isFunction($.fn.counterUp)) {
 		$('.counter').counterUp({
 			delay: 10,
 			time: 1000
 		});
-		}	
+
 /** Post a Comment **/
 jQuery(".post-comt-box textarea").on("keydown", function(event) {
 
@@ -1155,6 +1142,7 @@ jQuery(".post-comt-box textarea").on("keydown", function(event) {
 		$(comment_HTML).insertBefore(parent);
 		jQuery(this).val('');
 	}
+
 }); 
 	
 //inbox page 	
@@ -1169,7 +1157,6 @@ jQuery(".post-comt-box textarea").on("keydown", function(event) {
     	$(this).toggleClass('important-done');
     });
 
-    
 
 // Listen for click on toggle checkbox
 	$('#select_all').on("click", function(event) {
@@ -1199,8 +1186,7 @@ jQuery(".post-comt-box textarea").on("keydown", function(event) {
 		$(this).addClass('selected');
 		$(this).parent().siblings().children('.category-box').removeClass('selected');
 	});*/
-	
-	
+
 // Responsive nav dropdowns
 	$('li.menu-item-has-children > a').on('click', function () {
 		$(this).parent().siblings().children('ul').slideUp();
@@ -1209,7 +1195,7 @@ jQuery(".post-comt-box textarea").on("keydown", function(event) {
 		$(this).parent().toggleClass('active');
 		return false;
 	});
-	
+
 // Slider box
 	$(function() {
 	  $("#price-range").slider({
@@ -1224,7 +1210,7 @@ jQuery(".post-comt-box textarea").on("keydown", function(event) {
 	  });
 	  $("#priceRange").val( $("#price-range").slider("value") + " Years");
 	});
-//--- range slider 	
+
  $( function() {
 		$( "#slider-range" ).slider({
 		  range: true,
@@ -1238,13 +1224,12 @@ jQuery(".post-comt-box textarea").on("keydown", function(event) {
 		$( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
 		  " - $" + $( "#slider-range" ).slider( "values", 1 ) );
 	  } );
-		
-	
+
 });//document ready end
 
 /*--- progress circle with percentage ---*/
 (function() {
-	
+
 	window.onload = function() {
     var totalProgress, progres;
 		const circles = document.querySelectorAll('.progres');
@@ -1252,13 +1237,13 @@ jQuery(".post-comt-box textarea").on("keydown", function(event) {
 			totalProgress = circles[i].querySelector('circle').getAttribute('stroke-dasharray');
 			progress = circles[i].parentElement.getAttribute('data-percent');
       circles[i].querySelector('.bar').style['stroke-dashoffset'] = totalProgress * progress / 100;
-      
+
 		}
 	};
 })();
 
 
-	
+
 
 
 

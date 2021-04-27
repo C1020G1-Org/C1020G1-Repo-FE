@@ -19,7 +19,8 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import {AngularFireDatabaseModule} from "@angular/fire/database";
-
+import {AngularFirestoreModule} from "@angular/fire/firestore";
+import {PostModule} from "./post/post.module";
 
 @NgModule({
   declarations: [
@@ -39,7 +40,9 @@ import {AngularFireDatabaseModule} from "@angular/fire/database";
         SocialLoginModule,
         AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFireDatabaseModule,
-        AngularFireStorageModule
+        AngularFireStorageModule,
+        AngularFirestoreModule,
+        PostModule
         // ReactiveFormsModule,
         // FormsModule
 

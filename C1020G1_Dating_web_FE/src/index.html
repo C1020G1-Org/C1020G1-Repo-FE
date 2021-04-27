@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -28,9 +29,6 @@
     />
   </head>
   <body>
-    <!-- <div class="row" style="width: 400px">
-      <input type="text" class="form-control" id="emoj8" />
-    </div> -->
     <app-root></app-root>
   </body>
 
@@ -39,25 +37,20 @@
   <script src="./assets/js/script.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8c55_YHLvDHGACkQscgbGLtLRdxBDCfI"></script>
 
-  <script>
-    $(document).ready(function () {
-      $(".emoj8").emojioneArea({
-        pickerPosition: "left",
-        tonesStyle: "radio",
-      });
+  <script type="text/javascript">
+  $(document).ready(function () {
+    $("#myText").emojioneArea({
+      pickerPosition: "right",
+      tonesStyle: "radio"
     });
+  });
 
-    // $(document).ready(function () {
-    //   $("#emoj8").emojioneArea({
-    //     pickerPosition: "left",
-    //     tonesStyle: "bullet",
-    //     events: {
-    //       keyup: function (editor, event) {
-    //         console.log(editor.html());
-    //         console.log(this.getText());
-    //       },
-    //     },
-    //   });
-    // });
-  </script>
+  $(document).ready(function () {
+    $("#myButton").click(function (e) {
+      e.preventDefault();
+      $(".emojionearea-editor").html('');
+    });
+  });
+</script>
+
 </html>
