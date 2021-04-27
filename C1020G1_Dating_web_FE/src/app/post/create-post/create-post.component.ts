@@ -141,7 +141,6 @@ export class CreatePostComponent implements OnInit {
 
   deleteUpdateImage(event) {
     let index = event.target.attributes['data-index'].value;
-    this.fileImage = this.fileImage.slice(0, index).concat(this.fileImage.slice(index + 1, this.fileImage.length));
-    console.log(this.fileImage);
+    this.fileImage.splice(index, 1);
   }
 }
