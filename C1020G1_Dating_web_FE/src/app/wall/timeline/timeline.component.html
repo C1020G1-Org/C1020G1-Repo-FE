@@ -1,338 +1,418 @@
-  <section>
-    <div class="gap2 gray-bg">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="row merged20" id="page-contents">
-              <div class="user-profile">
-                <figure>
-                  <div class="edit-pp">
-                    <label class="fileContainer">
-                      <i class="fa fa-camera"></i>
-                      <input type="file">
-                    </label>
-                  </div>
-                  <img src="http://topanhdep.net/wp-content/uploads/2015/05/anh-bia-chibi-kure.jpg" alt="">
-                  <ul class="profile-controls">
-                    <li><a href="#" title="Add friend" data-toggle="tooltip"><i  class ="fa fa-user-plus"></i></a></li>
-                    <li><a class="edit-seting" href="#" title="Send Message" data-toggle="tooltip"><i class="fa fa-comment"></i></a></li>
-                    <li>
-                      <div class="edit-seting" title="Edit Profile image"><i class="fa fa-sliders"></i>
-                        <ul class="more-dropdown">
-                          <li><a  title="">Update Profile Photo</a></li>
-                          <li><a  title="">Update Header 	Photo</a></li>
-                        </ul>
-                      </div>
-                    </li>
-                  </ul>
-                </figure>
-                <div class="profile-section">
-                  <div class="row">
-                    <div class="col-lg-2 col-md-3">
-                      <div class="profile-author">
-                        <div class="profile-author-thumb">
-                          <img alt="author" src="https://i.pinimg.com/736x/e3/41/b3/e3
-													41b3ce61dd0d130bd8ab1dd04153d7.jpg">
-                          <div class="edit-dp">
-                            <label class="fileContainer">
-                              <i class="fa fa-camera"></i>
-                              <input type="file">
-                            </label>
-                          </div>
-                        </div>
-                        <div class="author-content">
-                          <a class="h4 author-name" >Ho Anh Dung</a>
-                          <div class="country">Do Luong , Nghe An</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-10 col-md-9">
-                      <ul class="profile-menu">
-                        <li>
-                          <a class="active" routerLink="/timeline" >Timeline</a>
-                        </li>
-                        <li>
-                          <a routerLink="/info" >Information</a>
-                        </li>
-                        <li>
-                          <a class="" >Friends</a>
-                        </li>
+<section>
+  <div class="gap2 gray-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row merged20" id="page-contents">
+            <div class="user-profile">
+              <figure>
+                <div class="edit-pp">
+                  <label class="fileContainer">
+                    <i class="fa fa-camera"></i>
+                    <input type="file">
+                  </label>
+                </div>
+                <img src="http://topanhdep.net/wp-content/uploads/2015/05/anh-bia-chibi-kure.jpg" alt="">
+                <ul class="profile-controls">
+                  <li
+                    *ngIf="checkFriend == true && userLogin.userId != userWall.userId && checkFriendRequest == true && checkFriendRequest2 == true">
+                    <button class="btn"
+                            style="align-items: center;background: #ff4e01;border-radius: 50%;height: 40px;width: 40px"
+                            tooltip="Add Friend"
+                            (click)="createFriendRequest()">
+                      <i class="fa fa-user-plus" style="color: white"></i></button>
+                  </li>
+
+                  <li *ngIf="checkFriend == false">
+                    <button
+                      style="align-items: center;background: #ff4e01;border-radius: 50%;border: none;height:40px;width: 40px"
+                      tooltip="Unfriend" data-target="#exampleModal2" data-toggle="modal">
+                      <i class="fa fa-user-times fa-lg" style="color: white"></i></button>
+                  </li>
+
+                  <li *ngIf="checkFriendRequest2 == false">
+                    <button
+                      style="align-items: center;background: #ff4e01;border-radius: 50%;border: none;height: 40px;width: 40px"
+                      data-target="#exampleModal" data-toggle="modal"
+                      tooltip="Unrequest" (click)="sendFriendRequestToDelete(friendRequestWallUserAndLoginUser)">
+                      <i class="fa fa-times" style="color: white"></i></button>
+                  </li>
+
+                  <li *ngIf="checkFriendRequest == false">
+                    <button style="align-items: center"
+                            tooltip="Accept"
+                            style="align-items: center;background: #ff4e01;border-radius: 50%;border: none;height: 40px;width: 40px"
+                            (click)="acceptFriendRequest(friendRequestWallUserAndLoginUser)">
+                      <i class="fa fa-check-square" style="color: white"></i></button>
+                  </li>
+                  <li><a class="edit-seting" href="#" title="Send Message" data-toggle="tooltip"><i class="fa fa-comment"></i></a></li>
+                  <li *ngIf="userLogin.userId == userWall.userId">
+                    <div class="edit-seting" title="Edit Profile image"><i class="fa fa-sliders"></i>
+                      <ul class="more-dropdown">
+                        <li><a  title="">Update Profile Photo</a></li>
+                        <li><a  title="">Update Header 	Photo</a></li>
                       </ul>
                     </div>
+                  </li>
+                </ul>
+              </figure>
+              <div class="profile-section">
+                <div class="row">
+                  <div class="col-lg-2 col-md-3">
+                    <div class="profile-author">
+                      <div class="profile-author-thumb">
+                        <img alt="author" src="https://i.pinimg.com/736x/e3/41/b3/e3
+													41b3ce61dd0d130bd8ab1dd04153d7.jpg">
+                        <div class="edit-dp">
+                          <label class="fileContainer">
+                            <i class="fa fa-camera"></i>
+                            <input type="file">
+                          </label>
+                        </div>
+                      </div>
+                      <div class="author-content">
+                        <a class="h4 author-name" >Ho Anh Dung</a>
+                        <div class="country">Do Luong , Nghe An</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-10 col-md-9">
+                    <ul class="profile-menu">
+                      <li>
+                        <a class="active" routerLink="/timeline" >Timeline</a>
+                      </li>
+                      <li>
+                        <a routerLink="/info" >Information</a>
+                      </li>
+                      <li>
+                        <a class="" >Friends</a>
+                      </li>
+                      <li *ngIf="userLogin.userId == userWall.userId">
+                        <a routerLink="/friend_request">Friends Request</a>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-3">
-              </div>
-              <div class="col-lg-6">
-                <div class="central-meta postbox">
-                  <span class="create-post">Create post</span>
-                  <div class="new-postbox">
-                    <figure>
-                      <img src="src/assets/images/resources/admin.jpg" alt="">
-                    </figure>
-                    <div class="newpst-input">
-                      <form method="post">
-                        <textarea rows="2" placeholder="Share some what you are thinking?"></textarea>
-                      </form>
-                    </div>
-                    <div class="attachments">
-                      <ul>
-                        <li>
+            </div>
+            <div class="col-lg-3">
+            </div>
+            <div class="col-lg-6">
+              <div class="central-meta postbox">
+                <span class="create-post">Create post</span>
+                <div class="new-postbox">
+                  <figure>
+                    <img src="src/assets/images/resources/admin.jpg" alt="">
+                  </figure>
+                  <div class="newpst-input">
+                    <form method="post">
+                      <textarea rows="2" placeholder="Share some what you are thinking?"></textarea>
+                    </form>
+                  </div>
+                  <div class="attachments">
+                    <ul>
+                      <li>
 													<span class="add-loc">
 														<i class="fa fa-map-marker"></i>
 													</span>
-                        </li>
-                        <li>
-                          <i class="fa fa-music"></i>
-                          <label class="fileContainer">
-                            <input type="file">
-                          </label>
-                        </li>
-                        <li>
-                          <i class="fa fa-image"></i>
-                          <label class="fileContainer">
-                            <input type="file">
-                          </label>
-                        </li>
-                        <li>
-                          <i class="fa fa-video-camera"></i>
-                          <label class="fileContainer">
-                            <input type="file">
-                          </label>
-                        </li>
-                        <li>
-                          <i class="fa fa-camera"></i>
-                          <label class="fileContainer">
-                            <input type="file">
-                          </label>
-                        </li>
-                        <li class="preview-btn">
-                          <button class="post-btn-preview" type="submit" data-ripple="">Preview</button>
-                        </li>
-                      </ul>
-                      <button class="post-btn" type="submit" data-ripple="">Post</button>
-                    </div>
+                      </li>
+                      <li>
+                        <i class="fa fa-music"></i>
+                        <label class="fileContainer">
+                          <input type="file">
+                        </label>
+                      </li>
+                      <li>
+                        <i class="fa fa-image"></i>
+                        <label class="fileContainer">
+                          <input type="file">
+                        </label>
+                      </li>
+                      <li>
+                        <i class="fa fa-video-camera"></i>
+                        <label class="fileContainer">
+                          <input type="file">
+                        </label>
+                      </li>
+                      <li>
+                        <i class="fa fa-camera"></i>
+                        <label class="fileContainer">
+                          <input type="file">
+                        </label>
+                      </li>
+                      <li class="preview-btn">
+                        <button class="post-btn-preview" type="submit" data-ripple="">Preview</button>
+                      </li>
+                    </ul>
+                    <button class="post-btn" type="submit" data-ripple="">Post</button>
                   </div>
                 </div>
-                <div class="loadMore">
-                  <div class="central-meta item">
-                    <div class="user-post">
-                      <div class="friend-info">
-                        <figure>
-                          <img src="src/assets/images/resources/nearly1.jpg" alt="">
-                        </figure>
-                        <div class="friend-name">
-                          <div class="more">
-                            <div class="more-post-optns"><i class="ti-more-alt"></i>
-                              <ul>
-                                <li><i class="fa fa-pencil-square-o"></i>Edit Post</li>
-                                <li><i class="fa fa-trash-o"></i>Delete Post</li>
-                                <li class="bad-report"><i class="fa fa-flag"></i>Report Post</li>
-                              </ul>
-                            </div>
-                          </div>
-                          <ins><a  title="">Ho Anh Dung</a></ins>
-                          <span>Public <i class="fa fa-globe"></i></span>
-                        </div>
-                        <div class="post-meta">
-                          <figure>
-                            <img src="https://www.elle.vn/wp-content/uploads/2017/07/25/hinh-anh-dep-1.jpg" alt="">
-                          </figure>
-                          <div class="description">
-                            <p>
-                              Great Picture ????
-                            </p>
-                          </div>
-                          <div class="we-video-info">
+              </div>
+              <div class="loadMore">
+                <div class="central-meta item">
+                  <div class="user-post">
+                    <div class="friend-info">
+                      <figure>
+                        <img src="src/assets/images/resources/nearly1.jpg" alt="">
+                      </figure>
+                      <div class="friend-name">
+                        <div class="more">
+                          <div class="more-post-optns"><i class="ti-more-alt"></i>
                             <ul>
-                              <li>
-                                <div class="likes heart" title="Like/Dislike"> ❤ <span>6</span></div>
-                              </li>
-                              <li>
+                              <li><i class="fa fa-pencil-square-o"></i>Edit Post</li>
+                              <li><i class="fa fa-trash-o"></i>Delete Post</li>
+                              <li class="bad-report"><i class="fa fa-flag"></i>Report Post</li>
+                            </ul>
+                          </div>
+                        </div>
+                        <ins><a  title="">Ho Anh Dung</a></ins>
+                        <span>Public <i class="fa fa-globe"></i></span>
+                      </div>
+                      <div class="post-meta">
+                        <figure>
+                          <img src="https://www.elle.vn/wp-content/uploads/2017/07/25/hinh-anh-dep-1.jpg" alt="">
+                        </figure>
+                        <div class="description">
+                          <p>
+                            Great Picture ????
+                          </p>
+                        </div>
+                        <div class="we-video-info">
+                          <ul>
+                            <li>
+                              <div class="likes heart" title="Like/Dislike"> ❤ <span>6</span></div>
+                            </li>
+                            <li>
 																<span class="comment" title="Comments">
 																	<i class="fa fa-commenting"></i>
 																	<ins>1</ins>
 																</span>
-                              </li>
+                            </li>
 
-                              <li>
+                            <li>
 																<span>
 																	<a class="share-pst" href="#" title="Share">
 																		<i class="fa fa-share-alt"></i>
 																	</a>
 																	<ins>15</ins>
 																</span>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="coment-area" style="display: block;">
-                          <ul class="we-comet">
-                            <li>
-                              <div class="comet-avatar">
-                                <img src="src/assets/images/resources/nearly3.jpg" alt="">
-                              </div>
-                              <div class="we-comment">
-                                <h5><a title="">Thanh Tung</a></h5>
-                                <p>Like Sh** :D</p>
-                                <div class="inline-itms">
-                                  <span>1 minute ago</span>
-                                  <a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
-                                </div>
-                              </div>
-
-                            </li>
-                            <li class="post-comment">
-                              <div class="comet-avatar">
-                                <img src="src/assets/images/resources/nearly1.jpg" alt="">
-                              </div>
-                              <div class="post-comt-box">
-                                <form method="post">
-                                  <textarea placeholder="Post your comment"></textarea>
-                                  <div class="add-smiles">
-                                    <div class="uploadimage">
-                                      <i class="fa fa-image"></i>
-                                      <label class="fileContainer">
-                                        <input type="file">
-                                      </label>
-                                    </div>
-                                    <span class="em em-expressionless" title="add icon"></span>
-                                    <div class="smiles-bunch">
-                                      <i class="em em---1"></i>
-                                      <i class="em em-smiley"></i>
-                                      <i class="em em-anguished"></i>
-                                      <i class="em em-laughing"></i>
-                                      <i class="em em-angry"></i>
-                                      <i class="em em-astonished"></i>
-                                      <i class="em em-blush"></i>
-                                      <i class="em em-disappointed"></i>
-                                      <i class="em em-worried"></i>
-                                      <i class="em em-kissing_heart"></i>
-                                      <i class="em em-rage"></i>
-                                      <i class="em em-stuck_out_tongue"></i>
-                                    </div>
-                                  </div>
-                                  <button type="submit"></button>
-                                </form>
-                              </div>
                             </li>
                           </ul>
                         </div>
                       </div>
-                    </div>
-                    <div class="user-post">
-                      <div class="friend-info">
-                        <figure>
-                          <img src="src/assets/images/resources/nearly1.jpg" alt="">
-                        </figure>
-                        <div class="friend-name">
-                          <div class="more">
-                            <div class="more-post-optns"><i class="ti-more-alt"></i>
-                              <ul>
-                                <li><i class="fa fa-pencil-square-o"></i>Edit Post</li>
-                                <li><i class="fa fa-trash-o"></i>Delete Post</li>
-                                <li class="bad-report"><i class="fa fa-flag"></i>Report Post</li>
-                              </ul>
+                      <div class="coment-area" style="display: block;">
+                        <ul class="we-comet">
+                          <li>
+                            <div class="comet-avatar">
+                              <img src="src/assets/images/resources/nearly3.jpg" alt="">
                             </div>
-                          </div>
-                          <ins><a  title="">Ho Anh Dung</a></ins>
-                          <span>Public <i class="fa fa-globe"></i></span>
-                        </div>
-                        <div class="post-meta">
-                          <figure>
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Vinfast-D.Beckham-cropped.jpg/1200px-Vinfast-D.Beckham-cropped.jpg" alt="">
-                          </figure>
-                          <div class="description">
-                            <p>
-                              How Are You , Today???
-                            </p>
-                          </div>
-                          <div class="we-video-info">
+                            <div class="we-comment">
+                              <h5><a title="">Thanh Tung</a></h5>
+                              <p>Like Sh** :D</p>
+                              <div class="inline-itms">
+                                <span>1 minute ago</span>
+                                <a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
+                              </div>
+                            </div>
+
+                          </li>
+                          <li class="post-comment">
+                            <div class="comet-avatar">
+                              <img src="src/assets/images/resources/nearly1.jpg" alt="">
+                            </div>
+                            <div class="post-comt-box">
+                              <form method="post">
+                                <textarea placeholder="Post your comment"></textarea>
+                                <div class="add-smiles">
+                                  <div class="uploadimage">
+                                    <i class="fa fa-image"></i>
+                                    <label class="fileContainer">
+                                      <input type="file">
+                                    </label>
+                                  </div>
+                                  <span class="em em-expressionless" title="add icon"></span>
+                                  <div class="smiles-bunch">
+                                    <i class="em em---1"></i>
+                                    <i class="em em-smiley"></i>
+                                    <i class="em em-anguished"></i>
+                                    <i class="em em-laughing"></i>
+                                    <i class="em em-angry"></i>
+                                    <i class="em em-astonished"></i>
+                                    <i class="em em-blush"></i>
+                                    <i class="em em-disappointed"></i>
+                                    <i class="em em-worried"></i>
+                                    <i class="em em-kissing_heart"></i>
+                                    <i class="em em-rage"></i>
+                                    <i class="em em-stuck_out_tongue"></i>
+                                  </div>
+                                </div>
+                                <button type="submit"></button>
+                              </form>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="user-post">
+                    <div class="friend-info">
+                      <figure>
+                        <img src="src/assets/images/resources/nearly1.jpg" alt="">
+                      </figure>
+                      <div class="friend-name">
+                        <div class="more">
+                          <div class="more-post-optns"><i class="ti-more-alt"></i>
                             <ul>
-                              <li>
-                                <div class="likes heart" title="Like/Dislike"> ❤ <span>8</span></div>
-                              </li>
-                              <li>
+                              <li><i class="fa fa-pencil-square-o"></i>Edit Post</li>
+                              <li><i class="fa fa-trash-o"></i>Delete Post</li>
+                              <li class="bad-report"><i class="fa fa-flag"></i>Report Post</li>
+                            </ul>
+                          </div>
+                        </div>
+                        <ins><a  title="">Ho Anh Dung</a></ins>
+                        <span>Public <i class="fa fa-globe"></i></span>
+                      </div>
+                      <div class="post-meta">
+                        <figure>
+                          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Vinfast-D.Beckham-cropped.jpg/1200px-Vinfast-D.Beckham-cropped.jpg" alt="">
+                        </figure>
+                        <div class="description">
+                          <p>
+                            How Are You , Today???
+                          </p>
+                        </div>
+                        <div class="we-video-info">
+                          <ul>
+                            <li>
+                              <div class="likes heart" title="Like/Dislike"> ❤ <span>8</span></div>
+                            </li>
+                            <li>
 																<span class="comment" title="Comments">
 																	<i class="fa fa-commenting"></i>
 																	<ins>1</ins>
 																</span>
-                              </li>
+                            </li>
 
-                              <li>
+                            <li>
 																<span>
 																	<a class="share-pst" href="#" title="Share">
 																		<i class="fa fa-share-alt"></i>
 																	</a>
 																	<ins>20</ins>
 																</span>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="coment-area" style="display: block;">
-                          <ul class="we-comet">
-                            <li>
-                              <div class="comet-avatar">
-                                <img src="src/assets/images/resources/nearly3.jpg" alt="">
-                              </div>
-                              <div class="we-comment">
-                                <h5><a title="">Phuc Pham</a></h5>
-                                <p>I'm Fine , Tks you</p>
-                                <div class="inline-itms">
-                                  <span>1 minute ago</span>
-                                  <a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
-                                </div>
-                              </div>
-                            </li>
-                            <li class="post-comment">
-                              <div class="comet-avatar">
-                                <img src="src/assets/images/resources/nearly1.jpg" alt="">
-                              </div>
-                              <div class="post-comt-box">
-                                <form method="post">
-                                  <textarea placeholder="Post your comment"></textarea>
-                                  <div class="add-smiles">
-                                    <div class="uploadimage">
-                                      <i class="fa fa-image"></i>
-                                      <label class="fileContainer">
-                                        <input type="file">
-                                      </label>
-                                    </div>
-                                    <span class="em em-expressionless" title="add icon"></span>
-                                    <div class="smiles-bunch">
-                                      <i class="em em---1"></i>
-                                      <i class="em em-smiley"></i>
-                                      <i class="em em-anguished"></i>
-                                      <i class="em em-laughing"></i>
-                                      <i class="em em-angry"></i>
-                                      <i class="em em-astonished"></i>
-                                      <i class="em em-blush"></i>
-                                      <i class="em em-disappointed"></i>
-                                      <i class="em em-worried"></i>
-                                      <i class="em em-kissing_heart"></i>
-                                      <i class="em em-rage"></i>
-                                      <i class="em em-stuck_out_tongue"></i>
-                                    </div>
-                                  </div>
-                                  <button type="submit"></button>
-                                </form>
-                              </div>
                             </li>
                           </ul>
                         </div>
+                      </div>
+                      <div class="coment-area" style="display: block;">
+                        <ul class="we-comet">
+                          <li>
+                            <div class="comet-avatar">
+                              <img src="src/assets/images/resources/nearly3.jpg" alt="">
+                            </div>
+                            <div class="we-comment">
+                              <h5><a title="">Phuc Pham</a></h5>
+                              <p>I'm Fine , Tks you</p>
+                              <div class="inline-itms">
+                                <span>1 minute ago</span>
+                                <a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
+                              </div>
+                            </div>
+                          </li>
+                          <li class="post-comment">
+                            <div class="comet-avatar">
+                              <img src="src/assets/images/resources/nearly1.jpg" alt="">
+                            </div>
+                            <div class="post-comt-box">
+                              <form method="post">
+                                <textarea placeholder="Post your comment"></textarea>
+                                <div class="add-smiles">
+                                  <div class="uploadimage">
+                                    <i class="fa fa-image"></i>
+                                    <label class="fileContainer">
+                                      <input type="file">
+                                    </label>
+                                  </div>
+                                  <span class="em em-expressionless" title="add icon"></span>
+                                  <div class="smiles-bunch">
+                                    <i class="em em---1"></i>
+                                    <i class="em em-smiley"></i>
+                                    <i class="em em-anguished"></i>
+                                    <i class="em em-laughing"></i>
+                                    <i class="em em-angry"></i>
+                                    <i class="em em-astonished"></i>
+                                    <i class="em em-blush"></i>
+                                    <i class="em em-disappointed"></i>
+                                    <i class="em em-worried"></i>
+                                    <i class="em em-kissing_heart"></i>
+                                    <i class="em em-rage"></i>
+                                    <i class="em em-stuck_out_tongue"></i>
+                                  </div>
+                                </div>
+                                <button type="submit"></button>
+                              </form>
+                            </div>
+                          </li>
+                        </ul>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-3">
-              </div>
+            </div>
+            <div class="col-lg-3">
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+       aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">DELETE FRIENDS REQUEST</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure want to delete this request?</p>
+          <p><span style="color: red">Warning: </span>Can not undo</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteFriendRequest()"
+          >Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+       aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">UNFRIEND</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure want to delete this request?</p>
+          <p><span style="color: red">Warning: </span>Can not undo</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="unFriend()">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

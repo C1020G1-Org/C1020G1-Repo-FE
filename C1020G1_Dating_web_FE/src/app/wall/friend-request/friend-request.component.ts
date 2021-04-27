@@ -1,32 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import {UserServiceService} from "../user-service.service";
-import {ActivatedRoute} from "@angular/router";
-import {Status} from "../../model/status";
+import {Component, Injectable, OnInit} from '@angular/core';
+import {FriendRequest} from "../../model/friend_request";
 import {Account} from "../../model/account";
+import {Status} from "../../model/status";
 import {Province} from "../../model/province";
 import {District} from "../../model/district";
 import {Ward} from "../../model/ward";
 import {User} from "../../model/user";
-import {FriendRequest} from "../../model/friend_request";
-import {FriendRequestService} from "../../services/friend-request.service";
 import {Friends} from "../../model/friends";
+import Notification from "../../model/notification"
 import {NotificationService} from "../../services/notification.service";
-import Notification from "../../model/notification";
+import {FriendRequestService} from "../../services/friend-request.service";
 import {map} from "rxjs/operators";
 
 @Component({
-  selector: 'app-timeline',
-  templateUrl: './timeline.component.html',
-  styleUrls: ['./timeline.component.css']
+  selector: 'app-friend-request',
+  templateUrl: './friend-request.component.html',
+  styleUrls: ['./friend-request.component.css']
 })
-export class TimelineComponent implements OnInit {
-  public postInfo ;
-  constructor(
-    public userService : UserServiceService,
-    private activatedRoute: ActivatedRoute,
-    private friendRequestService: FriendRequestService,
-    private notificationService: NotificationService
-  ) { }
+export class FriendRequestComponent implements OnInit {
+
+  constructor(private friendRequestService: FriendRequestService, private notificationService: NotificationService) {
+  }
 
   listFriendRequest: FriendRequest[];
 
@@ -64,13 +58,7 @@ export class TimelineComponent implements OnInit {
 
   ngOnInit(): void {
 
-    let id = this.activatedRoute.snapshot.params['id'];
-    this.userService.findPostById(id).subscribe(data => {
-      this.postInfo = data;
-    });
-
     this.setNotiList();
-
     this.status = {
       statusId: 1,
       statusName: "Online"
@@ -102,14 +90,14 @@ export class TimelineComponent implements OnInit {
     };
 
     this.userLogin = {
-      userId: 4,
-      userName: "Tùng 3",
+      userId: 10,
+      userName: "Tùng 9",
       birthday: "1995-11-24",
       gender: "Nam",
       occupation: "Abc",
       address: "Đà Nẵng",
       email: "abc@gmail.com",
-      userAvatar: "https://cdn.icon-icons.com/icons2/1736/PNG/512/4043260-avatar-male-man-portrait_113269.png",
+      userAvatar: "https://www.w3schools.com/w3images/avatar2.png",
       userBackground: "link",
       marriaged: "Yes",
       status: this.status,
@@ -148,7 +136,6 @@ export class TimelineComponent implements OnInit {
   }
 
   deleteFriendRequest() {
-    console.log(this.friendRequestToDelete);
     this.friendRequestService.setCheckFriendRequest2True();
     this.friendRequestService.deleteFriendRequest(
       this.friendRequestToDelete.receiveUser.userId,
@@ -251,8 +238,9 @@ export class TimelineComponent implements OnInit {
     });
   }
 
-  //Check friend between user login and user wall
   checkFriendUserWall() {
+
+    //Check friend between user login and user wall
     this.friendRequestService.getAllFriendOfUser(this.userLogin.userId).subscribe(data => {
       if (data != null) {
         let friends: Friends[] = data;
