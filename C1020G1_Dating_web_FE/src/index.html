@@ -18,10 +18,19 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
     <link rel="stylesheet" href="./assets/css/color.css" />
     <link rel="stylesheet" href="./assets/css/responsive.css" />
-      <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
   <body>
+    <!-- <div class="row" style="width: 400px">
+      <input type="text" class="form-control" id="emoj8" />
+    </div> -->
     <app-root></app-root>
   </body>
 
@@ -29,24 +38,26 @@
   <script src="./assets/js/toast-notificatons.js"></script>
   <script src="./assets/js/script.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8c55_YHLvDHGACkQscgbGLtLRdxBDCfI"></script>
-  <!-- <script
-    type="text/javascript"
-    src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"
-  ></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.js"></script>
-  <script
-    type="text/javascript"
-    src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular-route.min.js"
-  ></script>
+
   <script>
     $(document).ready(function () {
-      $("#contentComment").emojioneArea();
+      $(".emoj8").emojioneArea({
+        pickerPosition: "left",
+        tonesStyle: "radio",
+      });
     });
-  </script>
-</html> -->
 
-  <!-- //{
-  pickerPosition: "right",
-  tonesStyle: "radio",
-} -->
+    // $(document).ready(function () {
+    //   $("#emoj8").emojioneArea({
+    //     pickerPosition: "left",
+    //     tonesStyle: "bullet",
+    //     events: {
+    //       keyup: function (editor, event) {
+    //         console.log(editor.html());
+    //         console.log(this.getText());
+    //       },
+    //     },
+    //   });
+    // });
+  </script>
 </html>

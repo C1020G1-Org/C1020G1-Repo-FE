@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CommentComponent } from './comment/comment.component';
 import { CommentService } from '../service/comment.service';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 
 
@@ -11,8 +12,7 @@ import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    FormsModule
-  ],
+    FormsModule],
   exports: [CommentComponent]
 })
 export class CommentsModule { }

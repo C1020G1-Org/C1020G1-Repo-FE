@@ -15,6 +15,10 @@ import { DeleteDialogComponent } from './dialogs/delete-dialog/delete-dialog.com
 import { LoginModule } from './login/login.module';
 import { ErrorModule } from './error/error.module';
 import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import {AngularFireDatabaseModule} from "@angular/fire/database";
 
 
 @NgModule({
@@ -32,7 +36,10 @@ import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, So
         MatDialogModule,
         LoginModule,
         ErrorModule,
-        SocialLoginModule
+        SocialLoginModule,
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        AngularFireDatabaseModule,
+        AngularFireStorageModule
         // ReactiveFormsModule,
         // FormsModule
 

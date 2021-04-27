@@ -2,11 +2,15 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 import { TokenStorageService } from './auth/token-storage';
+import { Post } from './../model/Post';
+import { ParentComment } from '../model/ParentComment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
+  postsInService : Post[];
+  parentCommentsInService : ParentComment[];
   httpOptions:any;
   baseUrl : string = 'http://localhost:8080/api/post';
 

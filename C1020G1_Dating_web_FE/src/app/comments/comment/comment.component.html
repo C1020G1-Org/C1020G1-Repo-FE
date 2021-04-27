@@ -15,14 +15,32 @@
         <p style="display: block">
           {{ parentComment.content }}
         </p>
-        <div
-          class="inline-itms"
-          *ngIf="parentComment.user.userName == user.userName"
-        >
+        <figure *ngIf="parentComment.commentImage">
+          <div class="row">
+            <div class="img-bunch">
+              <div class="col-lg-3 col-md-3 col-sm-3"></div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <figure>
+                  <a
+                    class="strip"
+                    href="{{ parentComment.commentImage }}"
+                    title=""
+                    data-strip-group="mygroup"
+                    data-strip-group-options="loop: false"
+                  >
+                    <img src="{{ parentComment.commentImage }}" alt="" />
+                  </a>
+                </figure>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3"></div>
+            </div>
+          </div>
+        </figure>
+        <div class="inline-itms">
           <a
             class="we-reply"
             data-toggle="collapse"
-            href="#chilCommentBlock"
+            href="{{ '#blockChildComment' + parentComment.parentCommentId }}"
             role="button"
             aria-expanded="false"
             aria-controls="childComment1"
@@ -30,17 +48,22 @@
             >Reply <i class="fa fa-reply"></i
           ></a>
           <a
+            *ngIf="parentComment.user.userName == user.userName"
             href=""
             class="we-reply"
             data-toggle="modal"
-            data-target="#editModal"
-            (click)="sendEditParentComment(parentComment)"
+            data-target="#editParentCommentModal"
+            (click)="sendEditingParentComment(parentComment)"
           >
             Edit <i class="fa fa-edit"></i>
           </a>
           <a
+            *ngIf="parentComment.user.userName == user.userName"
+            href=""
             class="we-reply"
-            (click)="openDeleteDialog(parentComment.parentCommentId)"
+            data-toggle="modal"
+            data-target="#deleteParentCommentModal"
+            (click)="sendDeletingParentComment(parentComment.parentCommentId)"
           >
             Delete <i class="fa fa-remove"></i>
           </a>
@@ -51,7 +74,7 @@
     <!-- child comments -->
     <ul
       class="we-comet collapse"
-      id="chilCommentBlock"
+      id="{{ 'blockChildComment' + parentComment.parentCommentId }}"
       *ngIf="parentComment.childComments"
     >
       <li *ngFor="let childComment of parentComment.childComments">
@@ -68,6 +91,27 @@
             {{ childComment.content }}
             <i class="em em-smiley"></i>
           </p>
+          <figure *ngIf="childComment.commentImage">
+            <div class="row">
+              <div class="img-bunch">
+                <div class="col-lg-3 col-md-3 col-sm-3"></div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <figure>
+                    <a
+                      class="strip"
+                      href="{{ childComment.commentImage }}"
+                      title=""
+                      data-strip-group="mygroup"
+                      data-strip-group-options="loop: false"
+                    >
+                      <img src="{{ childComment.commentImage }}" alt="" />
+                    </a>
+                  </figure>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3"></div>
+              </div>
+            </div>
+          </figure>
           <div
             class="inline-itms"
             *ngIf="childComment.user.userName == user.userName"
@@ -76,14 +120,17 @@
               href=""
               class="we-reply"
               data-toggle="modal"
-              data-target="#editModal"
-              (click)="sendEditParentComment(parentComment)"
+              data-target="#editChildCommentModal"
+              (click)="sendEditingChildComment(childComment)"
             >
               Edit <i class="fa fa-edit"></i>
             </a>
             <a
+              href=""
               class="we-reply"
-              (click)="openDeleteDialog(parentComment.parentCommentId)"
+              data-toggle="modal"
+              data-target="#deleteChildCommentModal"
+              (click)="sendDeletingChildComment(childComment.childCommentId)"
             >
               Delete <i class="fa fa-remove"></i>
             </a>
@@ -91,7 +138,7 @@
         </div>
       </li>
 
-      <!-- user comment -->
+      <!-- user comment in child block-->
       <li class="post-comment">
         <div class="comet-avatar">
           <img src="{{ user.userAvatar }}" alt="" />
@@ -116,11 +163,26 @@
               "
             />
             <input type="hidden" formControlName="commentImage" />
+            <input type="hidden" formControlName="parentComment" />
+            <input type="hidden" formControlName="user" />
+            <figure *ngIf="imageUrlFromLocal">
+              <div class="row">
+                <div class="img-bunch">
+                  <div class="col-lg-3 col-md-3 col-sm-3"></div>
+                  <div class="col-lg-6 col-md-6 col-sm-6">
+                    <figure>
+                      <img src="{{ imageUrlFromLocal }}" alt="" />
+                    </figure>
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-sm-3"></div>
+                </div>
+              </div>
+            </figure>
             <div class="add-smiles">
               <div class="uploadimage">
                 <i class="fa fa-image"></i>
                 <label class="fileContainer">
-                  <input type="file" />
+                  <input type="file" (change)="getImageFromLocal($event)" />
                 </label>
               </div>
               <span class="em em-expressionless" title="add icon"></span>

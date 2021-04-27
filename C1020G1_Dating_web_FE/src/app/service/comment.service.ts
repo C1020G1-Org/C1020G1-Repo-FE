@@ -26,6 +26,10 @@ export class CommentService {
     return this.http.get<any>(this.baseUrl + `/parent/`+ postId, this.httpOptions);
   }
 
+  findParentCommentById(parentCommentId : number) : Observable<any>{
+    return this.http.get<any>(this.baseUrl + `/parent/find/`+ parentCommentId, this.httpOptions);
+  }
+
   createParentComment(parentComment : ParentComment) : Observable<any>{
     return this.http.post<any>(this.baseUrl + `/parent`, parentComment , this.httpOptions);
   }

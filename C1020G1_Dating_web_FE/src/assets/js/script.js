@@ -7,6 +7,19 @@ $(window).load(function(){
 jQuery(document).ready(function($) {
 	
 	"use strict";
+
+	// function loadEmoji () {
+	// 	$(".emoji").emojioneArea({
+	// 	  pickerPosition: "left",
+	// 	  tonesStyle: "bullet",
+	// 	  events: {
+	// 		keyup: function (editor, event) {
+	// 		  console.log(editor.html());
+	// 		  console.log(this.getText());
+	// 		},
+	// 	  },
+	// 	});
+	//   }
 	
 //----- popup display on window load	
 		function delay(){
@@ -256,7 +269,7 @@ $('.user-img').on('click', function() {
 	
 //------ scrollbar plugin
 	if ($.isFunction($.fn.perfectScrollbar)) {
-		$('.dropdowns, .twiter-feed, .invition, .followers, .chatting-area, .peoples, #people-list, .chat-list > ul, .message-list, .chat-users, .left-menu, .sugestd-photo-caro, .popup.events, .related-tube-psts, .music-list, .more-songs, .media > ul, .conversations, .msg-pepl-list, .menu-slide, .frnds-stories, .modal-body .we-comet').perfectScrollbar();
+		$('.dropdowns, .twiter-feed, .invition, .followers, .chatting-area, .peoples, #people-list, .chat-list > ul, .message-list, .chat-users, .left-menu, .sugestd-photo-caro, .popup.events, .related-tube-psts, .music-list, .more-songs, .media > ul, .conversations, .msg-pepl-list, .menu-slide, .frnds-stories, .modal-body, .we-comet').perfectScrollbar();
 	}
 
 /*--- socials menu scritp ---*/	
