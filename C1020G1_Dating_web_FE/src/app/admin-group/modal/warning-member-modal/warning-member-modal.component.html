@@ -5,12 +5,13 @@
     </button>
 </div>
 <div class="modal-body">
-    <label for="type">Type Warning</label>
-    <select id="type" [(ngModel)]="type" class="form-control form-select">
+    <label for="type">Reason</label>
+    <select id="type" (change)="changeValue($event.target.value)" class="form-control form-select">
         <option value="18+ post" selected>18+ post</option>
         <option value="Impolite post">Impolite post</option>
         <option value="Racism post">Racism post</option>
     </select>
+    <small *ngIf="!isValid" class="text-danger">Reason invalid!</small>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('Cross click')">Cancel</button>

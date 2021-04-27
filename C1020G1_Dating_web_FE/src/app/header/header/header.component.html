@@ -103,21 +103,24 @@
         </div>
       </li>
       <li>
-        <a title="Notification" href="#" data-ripple="">
-          <i class="fa fa-bell cursor"></i><em class="bg-purple">{{notiList.length}}</em>
+        <a title="Notification" data-ripple="">
+          <i class="fa fa-bell cursor color-999999"></i><em class="bg-purple">{{notiList.length}}</em>
         </a>
         <div class="dropdowns">
           <span>{{notiList.length}} New Notifications <a class="cursor" (click)="deleteAll()" title="">Clear
               All</a></span>
           <ul class="drops-menu">
             <li *ngFor="let noti of notiList">
-              <a (click)="nav(noti)" title="" class="show-mesg">
-                <div class="mesg-meta cursor">
+              <a title="" class="show-mesg">
+                <div class="mesg-meta cursor width-90">
                   <figure>
                     <img class="noti-image" [src]="noti.imageUrl" alt="">
-                    <h6 class="sender">{{noti.sender}}</h6>
                   </figure>
-                  <div>{{noti.content}}</div>
+                  <div (click)="nav(noti)" class="mesg-meta">
+                    <h6>{{noti.sender}}</h6>
+                    <span class="content-span">{{noti.content}}</span>
+                  </div>
+                  <a (click)="clear(noti)" class="clear-noti"><i class="fa fa-times-circle"></i></a>
                 </div>
               </a>
             </li>

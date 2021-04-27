@@ -48,7 +48,10 @@ export class HeaderComponent implements OnInit {
   }
 
   nav(noti: Notification) {
-    this.notificationGroupService.delete(noti.key, 5).then(() => console.log('delete success!')); // 5 is userId is logged
     this.router.navigateByUrl(noti.href);
+  }
+
+  clear(noti: Notification){
+    this.notificationGroupService.delete(noti.key, 5).then(() => console.log('delete success!'));
   }
 }

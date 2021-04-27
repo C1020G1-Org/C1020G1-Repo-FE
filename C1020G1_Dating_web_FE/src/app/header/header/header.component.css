@@ -1,14 +1,29 @@
 .cursor {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .noti-image {
-    width: 40px;
-    height: 40px;
-    border-radius: 100% !important;
+  width: 40px;
+  height: 40px;
+  border-radius: 100% !important;
 }
 
-.sender {
-    display: inline-block !important;
-    margin-left: 10px !important;
+.content-span {
+  max-width: 100%;
+  overflow-x: unset;
+  white-space: normal;
+  text-overflow: unset;
+}
+
+.width-90 {
+  width: 95% !important;
+}
+
+.clear-noti {
+  display: inline-block;
+  margin-left: 1%;
+}
+
+.color-999999 {
+    color: #999999;
 }
