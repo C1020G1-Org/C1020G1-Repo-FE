@@ -24,9 +24,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/custom-theme.scss",
+              "src/styles.css",
+              "node_modules/emojionearea/dist/emojionearea.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/emojionearea/dist/emojionearea.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -119,6 +123,8 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "project1"
 }
+

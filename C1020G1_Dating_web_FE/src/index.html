@@ -1,24 +1,55 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Sprint1</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="icon" href="./assets/images/fav.png" type="image/png" sizes="16x16">
-  <link rel="stylesheet" href="./assets/css/main.min.css">
-  <link rel="stylesheet" href="./assets/css/style.css">
-  <link rel="stylesheet" href="./assets/css/color.css">
-  <link rel="stylesheet" href="./assets/css/responsive.css">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sprint1</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
 
-</head>
-<body>
-<app-root></app-root>
-</body>
+    <link
+      rel="icon"
+      href="./assets/images/fav.png"
+      type="image/png"
+      sizes="16x16"
+    />
 
+    <link rel="stylesheet" href="./assets/css/main.min.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/color.css" />
+    <link rel="stylesheet" href="./assets/css/responsive.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <app-root></app-root>
+  </body>
 
-<script src="./assets/js/main.min.js"></script>
-<script src="./assets/js/toast-notificatons.js"></script>
-<script src="./assets/js/script.js"></script>
+  <script src="./assets/js/main.min.js"></script>
+  <script src="./assets/js/toast-notificatons.js"></script>
+  <script src="./assets/js/script.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8c55_YHLvDHGACkQscgbGLtLRdxBDCfI"></script>
+
+  <script type="text/javascript">
+  $(document).ready(function () {
+    $("#myText").emojioneArea({
+      pickerPosition: "right",
+      tonesStyle: "radio"
+    });
+  });
+
+  $(document).ready(function () {
+    $("#myButton").click(function (e) {
+      e.preventDefault();
+      $(".emojionearea-editor").html('');
+    });
+  });
+</script>
+
 </html>
