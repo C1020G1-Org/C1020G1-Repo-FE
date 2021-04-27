@@ -7,103 +7,13 @@
     <div class="top-area">
       <div class="top-search">
         <form method="post" class="">
-          <input type="text" placeholder="Search People">
+          <!--        <input (change)="search($event.target.value)" type="text" placeholder="Search People">-->
+          <input (keydown.enter)="search($event)" type="text" placeholder="Search People">
           <button data-ripple><i class="ti-search"></i></button>
         </form>
       </div>
       <ul class="setting-area pr-5">
         <li><a href="newsfeed.html" title="Home" data-ripple=""><i class="fa fa-home"></i></a></li>
-        <li>
-          <a href="#" title="Friend Requests" data-ripple="">
-            <i class="fa fa-user"></i><em class="bg-red">5</em>
-          </a>
-          <div class="dropdowns">
-            <span>5 New Requests <a href="#" title="">View all Requests</a></span>
-            <ul class="drops-menu">
-              <li>
-                <div>
-                  <figure>
-                    <img src="../../../assets/images/resources/thumb-2.jpg" alt="">
-                  </figure>
-                  <div class="mesg-meta">
-                    <h6><a href="#" title="">Loren</a></h6>
-                    <span><b>Amy</b> is mutule friend</span>
-                    <i>yesterday</i>
-                  </div>
-                  <div class="add-del-friends">
-                    <a href="#" title=""><i class="fa fa-heart"></i></a>
-                    <a href="#" title=""><i class="fa fa-trash"></i></a>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div>
-                  <figure>
-                    <img src="../../../assets/images/resources/thumb-3.jpg" alt="">
-                  </figure>
-                  <div class="mesg-meta">
-                    <h6><a href="#" title="">Tina Trump</a></h6>
-                    <span><b>Simson</b> is mutule friend</span>
-                    <i>2 days ago</i>
-                  </div>
-                  <div class="add-del-friends">
-                    <a href="#" title=""><i class="fa fa-heart"></i></a>
-                    <a href="#" title=""><i class="fa fa-trash"></i></a>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div>
-                  <figure>
-                    <img src="../../../assets/images/resources/thumb-4.jpg" alt="">
-                  </figure>
-                  <div class="mesg-meta">
-                    <h6><a href="#" title="">Andrew</a></h6>
-                    <span><b>Bikra</b> is mutule friend</span>
-                    <i>4 hours ago</i>
-                  </div>
-                  <div class="add-del-friends">
-                    <a href="#" title=""><i class="fa fa-heart"></i></a>
-                    <a href="#" title=""><i class="fa fa-trash"></i></a>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div>
-                  <figure>
-                    <img src="../../../assets/images/resources/thumb-5.jpg" alt="">
-                  </figure>
-                  <div class="mesg-meta">
-                    <h6><a href="#" title="">Dasha</a></h6>
-                    <span><b>Sarah</b> is mutule friend</span>
-                    <i>9 hours ago</i>
-                  </div>
-                  <div class="add-del-friends">
-                    <a href="#" title=""><i class="fa fa-heart"></i></a>
-                    <a href="#" title=""><i class="fa fa-trash"></i></a>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div>
-                  <figure>
-                    <img src="../../../assets/images/resources/thumb-1.jpg" alt="">
-                  </figure>
-                  <div class="mesg-meta">
-                    <h6><a href="#" title="">Emily</a></h6>
-                    <span><b>Amy</b> is mutule friend</span>
-                    <i>4 hours ago</i>
-                  </div>
-                  <div class="add-del-friends">
-                    <a href="#" title=""><i class="fa fa-heart"></i></a>
-                    <a href="#" title=""><i class="fa fa-trash"></i></a>
-                  </div>
-                </div>
-              </li>
-            </ul>
-            <a href="friend-requests.html" title="" class="more-mesg">View All</a>
-          </div>
-        </li>
         <li>
           <a href="#" title="Notification" data-ripple="">
             <i class="fa fa-bell"></i><em class="bg-purple">7</em>
@@ -378,30 +288,38 @@
                 <div class="central-meta">
                   <div class="about">
                     <div class="d-flex flex-row mt-2">
-                      <ul class="nav nav-tabs nav-tabs--vertical nav-tabs--left" >
+                      <ul class="nav nav-tabs nav-tabs--vertical nav-tabs--left">
                         <li class="nav-item">
-                          <a href="#edit-profile" class="nav-link" data-toggle="tab" >Edit Profile</a>
+                          <a href="#edit-profile" class="nav-link" data-toggle="tab">Edit Profile</a>
                         </li>
-<!--                        <li class="nav-item">-->
-<!--                          <a href="#edit-avatar" class="nav-link " data-toggle="tab" ><i class="far fa-edit"></i> Change avatar</a>-->
-<!--                        </li>-->
-<!--                        <li class="nav-item">-->
-<!--                          <a href="#change-password" class="nav-link " data-toggle="tab" ><i class="far fa-edit"></i> Change password</a>-->
-<!--                        </li>-->
+                        <!--                        <li class="nav-item">-->
+                        <!--                          <a href="#edit-avatar" class="nav-link " data-toggle="tab" ><i class="far fa-edit"></i> Change avatar</a>-->
+                        <!--                        </li>-->
+                        <!--                        <li class="nav-item">-->
+                        <!--                          <a href="#change-password" class="nav-link " data-toggle="tab" ><i class="far fa-edit"></i> Change password</a>-->
+                        <!--                        </li>-->
                       </ul>
                       <div class="tab-content">
-                        <div class="active" id="edit-profile" >
+                        <div class="active" id="edit-profile">
                           <div class="set-title">
                             <h5>Edit Profile</h5>
-<!--                            <span>People on Pitnik will get to know you with the info below</span>-->
                           </div>
                           <div class="stg-form-area">
-                            <form method="post" class="c-form" [formGroup]="editUserForm" (ngSubmit)="updateUser()">
+                            <form method="post" class="c-form" [formGroup]="editUserForm" (ngSubmit)="submit()">
+                              <div>
+                                <input type="hidden" class="form-control" formControlName="userId">
+                              </div>
+
+
                               <div>
                                 <label>User Name:
                                   <input type="text" class="form-control" formControlName="userName">
                                 </label>
                               </div>
+                              <div class="alert alert-danger"
+                                   *ngIf="editUserForm.controls.userName.errors?.required">
+                                <i class="fa fa-exclamation-circle"></i><i> User name must not be blank</i>
+                                </div>
                               <!-- name -->
 
 
@@ -419,7 +337,8 @@
 
                               <div class="c-form" style="margin-bottom: 20px;">
                                 <label>Date Of Birth:
-                                  <input type="text" [value]="editUserForm.get('birthday').value | date: 'dd/MM/yyyy'" class="form-control" formControlName="birthday">
+                                  <input type="date"
+                                         class="form-control" formControlName="birthday">
                                 </label>
                               </div>
                               <!-- dob -->
@@ -441,6 +360,10 @@
                                   <input type="text" class="form-control" formControlName="occupation">
                                 </label>
                               </div>
+                              <div class="alert alert-danger"
+                                   *ngIf="editUserForm.controls.occupation.errors?.required">
+                                <i class="fa fa-exclamation-circle"></i><i> Occupation must not be blank</i>
+                              </div>
                               <!-- occupation -->
 
 
@@ -448,6 +371,14 @@
                                 <label>Email:
                                   <input type="text" class="form-control" formControlName="email">
                                 </label>
+                              </div>
+                              <div class="alert alert-danger"
+                                   *ngIf="editUserForm.controls.email.errors?.required">
+                                <i class="fa fa-exclamation-circle"></i><i> Email must not be blank</i>
+                              </div>
+                              <div class="alert alert-danger"
+                                   *ngIf="editUserForm.controls.email.errors?.email">
+                                <i class="fa fa-exclamation-circle"></i><i> Email must be in format abc@abc.abc</i>
                               </div>
                               <!-- email -->
 
@@ -457,12 +388,17 @@
                                   <textarea class="form-control" formControlName="address"></textarea>
                                 </label>
                               </div>
+                              <div class="alert alert-danger"
+                                   *ngIf="editUserForm.controls.address.errors?.required">
+                                <i class="fa fa-exclamation-circle"></i><i> Address must not be blank</i>
+                              </div>
                               <!-- address -->
 
 
                               <div>
                                 <label>Province:
-                                  <select [compareWith]="compareProvince" class="form-control d-inline-block"  formControlName="province">
+                                  <select [compareWith]="compareProvince" class="form-control d-inline-block"
+                                          formControlName="province">
                                     <option *ngFor="let province of provinces" [ngValue]="province">
                                       {{province.provinceName}}
                                     </option>
@@ -474,7 +410,8 @@
 
                               <div>
                                 <label>District:
-                                  <select [compareWith]="compareDistrict" class="form-control d-inline-block"  formControlName="district">
+                                  <select [compareWith]="compareDistrict" class="form-control d-inline-block"
+                                          formControlName="district">
                                     <option *ngFor="let district of districts" [ngValue]="district">
                                       {{district.districtName}}
                                     </option>
@@ -486,7 +423,8 @@
 
                               <div>
                                 <label>Ward:
-                                  <select [compareWith]="compareWard" class="form-control d-inline-block"  formControlName="ward">
+                                  <select [compareWith]="compareWard" class="form-control d-inline-block"
+                                          formControlName="ward">
                                     <option *ngFor="let ward of wards" [ngValue]="ward">
                                       {{ward.wardName}}
                                     </option>
@@ -497,8 +435,8 @@
 
 
                               <div class="">
-                                <button class="btn btn-outline-success" type="submit" data-ripple="">Save</button>
-                                <button class="btn btn-outline-warning" type="submit" data-ripple="">Cancel</button>
+                                <button class="btn btn-outline-success" [disabled]="!editUserForm.valid" (click)="submit()" data-toggle="modal">Save</button>
+                                <button class="btn btn-outline-warning" (click)="cancel()" data-toggle="modal" href="#cancelModal">Cancel</button>
 
                               </div>
 
@@ -506,65 +444,65 @@
                           </div>
                         </div>
 
-<!--                        <div class="tab-pane fade" id="change-password">-->
-<!--                          <div class="set-title">-->
-<!--                            <h5>Change Password</h5>-->
-<!--                            <span>You will change your password here, we will assist with your security issues</span>-->
-<!--                          </div>-->
-<!--                          <div class="stg-form-area">-->
-<!--                            <form method="post" class="c-form">-->
-<!--                              <div>-->
-<!--                                <input type="password" placeholder="Current password">-->
-<!--                              </div>-->
-<!--                              <div>-->
-<!--                                <input type="password" class="mt-3"-->
-<!--                                       placeholder="A new password">-->
-<!--                              </div>-->
-<!--                              <div>-->
-<!--                                <input type="password" class="mt-3"-->
-<!--                                       placeholder="Confirm password">-->
-<!--                              </div>-->
-<!--                              <div>-->
-<!--                                <button type="submit" class="btn-secondary"-->
-<!--                                        data-ripple="">Cancel-->
-<!--                                </button>-->
-<!--                                <button type="submit" class="btn-info" data-ripple="">-->
-<!--                                  Save-->
-<!--                                </button>-->
-<!--                              </div>-->
-<!--                            </form>-->
-<!--                          </div>-->
-<!--                        </div>&lt;!&ndash; change - password &ndash;&gt;-->
-<!--                        <div class="tab-pane fade" id="edit-avatar">-->
-<!--                          <div class="set-title">-->
-<!--                            <h5><i class="fa fa-file-image"></i> Edit Avatar</h5>-->
-<!--                            <span>Update your avatar regularly so that everyone can see you every day</span>-->
-<!--                          </div>-->
-<!--                          <div class="setting-meta">-->
-<!--                            <div class="stg-form-area">-->
-<!--                              <div class="change-photo">-->
-<!--                                <div class="zoomin">-->
-<!--                                  <img id="image" src="admin2.jpg"-->
-<!--                                       alt="">-->
-<!--                                </div>-->
-<!--                                <div class="edit-img">-->
-<!--                                  <form class="edit-phto">-->
-<!--                                    <label class="fileContainer">-->
-<!--                                      <i class="fa fa-upload"></i>-->
-<!--                                      Upload Photos-->
-<!--                                      <input type="file">-->
-<!--                                    </label>-->
-<!--                                  </form>-->
-<!--                                </div>-->
-<!--                                <div class="mt-3">-->
-<!--                                  <input min="0" max="100" class="form-range"-->
-<!--                                         oninput="changeImage(event.target)"-->
-<!--                                         type="range">-->
-<!--                                </div>-->
-<!--                              </div>-->
-<!--                            </div>-->
-<!--                          </div>-->
-<!--                        </div>&lt;!&ndash; edit - avatar &ndash;&gt;-->
+                        <!--                        <div class="tab-pane fade" id="change-password">-->
+                        <!--                          <div class="set-title">-->
+                        <!--                            <h5>Change Password</h5>-->
+                        <!--                            <span>You will change your password here, we will assist with your security issues</span>-->
+                        <!--                          </div>-->
+                        <!--                          <div class="stg-form-area">-->
+                        <!--                            <form method="post" class="c-form">-->
+                        <!--                              <div>-->
+                        <!--                                <input type="password" placeholder="Current password">-->
+                        <!--                              </div>-->
+                        <!--                              <div>-->
+                        <!--                                <input type="password" class="mt-3"-->
+                        <!--                                       placeholder="A new password">-->
+                        <!--                              </div>-->
+                        <!--                              <div>-->
+                        <!--                                <input type="password" class="mt-3"-->
+                        <!--                                       placeholder="Confirm password">-->
+                        <!--                              </div>-->
+                        <!--                              <div>-->
+                        <!--                                <button type="submit" class="btn-secondary"-->
+                        <!--                                        data-ripple="">Cancel-->
+                        <!--                                </button>-->
+                        <!--                                <button type="submit" class="btn-info" data-ripple="">-->
+                        <!--                                  Save-->
+                        <!--                                </button>-->
+                        <!--                              </div>-->
+                        <!--                            </form>-->
+                        <!--                          </div>-->
+                        <!--                        </div>&lt;!&ndash; change - password &ndash;&gt;-->
+                        <!--                        <div class="tab-pane fade" id="edit-avatar">-->
+                        <!--                          <div class="set-title">-->
+                        <!--                            <h5><i class="fa fa-file-image"></i> Edit Avatar</h5>-->
+                        <!--                            <span>Update your avatar regularly so that everyone can see you every day</span>-->
+                        <!--                          </div>-->
+                        <!--                          <div class="setting-meta">-->
+                        <!--                            <div class="stg-form-area">-->
+                        <!--                              <div class="change-photo">-->
+                        <!--                                <div class="zoomin">-->
+                        <!--                                  <img id="image" src="admin2.jpg"-->
+                        <!--                                       alt="">-->
+                        <!--                                </div>-->
+                        <!--                                <div class="edit-img">-->
+                        <!--                                  <form class="edit-phto">-->
+                        <!--                                    <label class="fileContainer">-->
+                        <!--                                      <i class="fa fa-upload"></i>-->
+                        <!--                                      Upload Photos-->
+                        <!--                                      <input type="file">-->
+                        <!--                                    </label>-->
+                        <!--                                  </form>-->
+                        <!--                                </div>-->
+                        <!--                                <div class="mt-3">-->
+                        <!--                                  <input min="0" max="100" class="form-range"-->
+                        <!--                                         oninput="changeImage(event.target)"-->
+                        <!--                                         type="range">-->
+                        <!--                                </div>-->
+                        <!--                              </div>-->
+                        <!--                            </div>-->
+                        <!--                          </div>-->
+                        <!--                        </div>&lt;!&ndash; edit - avatar &ndash;&gt;-->
                       </div>
                     </div>
                   </div>
@@ -591,6 +529,26 @@
   </div>
 
 
+</div>
+
+
+<div id="cancelModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Cancel update user</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to cancel?</p>
+        <p class="text-warning"><small>After that will router to HO ANH DUNG SCREEN.</small></p>
+      </div>
+      <div class="modal-footer">
+        <input type="submit" class="btn btn-default" data-dismiss="modal" value="Cancel">
+        <input type="submit" class="btn btn-danger" data-dismiss="modal" value="OK" (click)="cancel()">
+      </div>
+    </div>
+  </div>
 </div>
 
 

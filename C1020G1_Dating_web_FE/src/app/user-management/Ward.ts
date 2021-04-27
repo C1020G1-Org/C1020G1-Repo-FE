@@ -1,6 +1,6 @@
 import {District} from "./District";
 
-export class Ward{
+export class Ward {
   private _wardId: number;
   private _districtId: District;
   private _wardName: string;
