@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+
 import {Router} from "@angular/router";
-import {TokenStorageService} from "../service/auth/token-storage";
 import {SearchingService} from "../service/searching/searching.service";
+import {TokenStorageService} from "../service/auth/token-storage";
 import {User} from "../user-management/model/user-model";
 
 @Component({
@@ -10,7 +11,7 @@ import {User} from "../user-management/model/user-model";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  keySearch: any;
+  name: any;
   user: User;
 
   constructor(private searchingService: SearchingService,
@@ -21,9 +22,10 @@ export class HeaderComponent implements OnInit {
     this.user = this.tokenStorage.getUser();
   }
 
-  search(keySearch: any) {
-    // this.router.navigate(['/name-search'],{queryParams:{search: keySearch}})
-    this.router.navigate(['/name-search/'], )
+  search(event: any) {
+    this.searchingService.searchTerm.next(event.target.value);
+    // this.searchingService.getKeySearch(event.target.value);
+    this.router.navigateByUrl('/name-search')
   }
 
   logout() {

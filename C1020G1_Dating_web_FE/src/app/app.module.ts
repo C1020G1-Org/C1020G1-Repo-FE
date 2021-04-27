@@ -10,7 +10,7 @@ import {
   GoogleLoginProvider,
   FacebookLoginProvider
 } from 'angularx-social-login';
-import {HeaderModule} from "./header/header.module";
+// import {HeaderModule} from "./header/header.module";
 import {FooterModule} from "./footer/footer.module";
 import {SearchingModule} from "./searching/searching.module";
 import {HeaderComponent} from "./header/header.component";
@@ -19,27 +19,35 @@ import {AngularFireModule} from "@angular/fire";
 import {environment} from "../environments/environment";
 import {AngularFireDatabaseModule} from "@angular/fire/database";
 import {AngularFireStorageModule} from "@angular/fire/storage";
+import {HeaderModule} from "./header/header.module";
+import {FooterComponent} from "./footer/footer.component";
+import {AdvancedSearchComponent} from "./searching/advanced-search/advanced-search.component";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ErrorPageComponent,
-    HeaderComponent,
+    FooterComponent,
+    // HeaderComponent,
+    AdvancedSearchComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        LoginModule,
-      SocialLoginModule,
-      HeaderModule,
-      FooterModule,
-      SearchingModule,
-      UserManagementModule,
-      AngularFireModule.initializeApp(environment.firebaseConfig),
-      AngularFireDatabaseModule,
-      AngularFireStorageModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    LoginModule,
+    SocialLoginModule,
+    // HeaderModule,
+    FooterModule,
+    SearchingModule,
+    UserManagementModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireStorageModule,
+    HeaderModule,
+    FormsModule
+  ],
   providers: [{
     provide: 'SocialAuthServiceConfig',
     useValue: {
