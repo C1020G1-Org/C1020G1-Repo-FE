@@ -65,6 +65,7 @@
                     </textarea>
                   </div>
                 </div>
+                <!-- <div style="overflow-y: scroll; max-height: 150px;"> -->
                 <div
                   *ngFor="let postImage of this.postImages"
                   style="margin-left: 0; display: inline-block"
@@ -97,6 +98,7 @@
                     style="margin: 3px; height: 120px; width: auto; float: left"
                   />
                 </div>
+                <!-- </div> -->
                 <button
                   class="post-btn"
                   (click)="editPost()"

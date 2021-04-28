@@ -33,6 +33,8 @@ export class EditPostComponent implements OnInit, OnChanges {
               public storage: AngularFireStorage) {
   }
   ngOnChanges(): void {
+  //   this.updateFileImage = [];
+  // this.deleteImages = [];
       this.setValue(this.postIDInUrl);
   }
   ngOnInit(): void {
@@ -77,7 +79,7 @@ export class EditPostComponent implements OnInit, OnChanges {
       this.updateImages = this.updateUrlImage.map(x => {
         return {
           postImageId: null,
-          post: this.post.postId,
+          postId: this.post.postId,
           image: x
         };
       });
@@ -145,6 +147,7 @@ export class EditPostComponent implements OnInit, OnChanges {
       this.postService.findPostById(editingPostId).subscribe(data => {
         console.log(data);
         this.post = data.post;
+        console.log(this.post);
         this.postImages = data.postImages;
         this.formEditPost.setValue(this.post);
         console.log('fdfds');

@@ -7,7 +7,7 @@ export interface PostImage{
 
 export interface PostImage2 {
     postImageId: number;
-    post: number;
+    postId: number;
     image: string;
 }
 
