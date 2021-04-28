@@ -19,7 +19,7 @@ export class GroupHeaderComponent implements OnInit {
   isJoin: boolean = false;
   requestType: string = 'none';
   groupUser: GroupUser;
-  groupRequest: GroupRequest[] = [];
+  groupRequest: GroupRequest[];
   request: GroupRequest;
 
 
@@ -32,7 +32,7 @@ export class GroupHeaderComponent implements OnInit {
       this.groupService.getGroupById(data.get("id")).subscribe(group => {
         this.group = group;
         this.groupService.getAllGroupRequest(this.tokenStorage.getUser().userId).subscribe(data1 => {
-          this.groupRequest = data1.content;
+          this.groupRequest = data1;
           for (let i = 0; i < this.groupRequest.length; i++) {
             if (this.group.groupId == this.groupRequest[i].group.groupId) {
               this.isJoin = true;
