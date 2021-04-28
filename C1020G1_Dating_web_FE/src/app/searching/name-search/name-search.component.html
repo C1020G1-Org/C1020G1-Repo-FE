@@ -1,4 +1,6 @@
-<div class="theme-layout w-100 h-100 gap2 gray-bg">
+
+
+<div class="theme-layout gap2 gray-bg">
   <section>
     <div class="gap2 gray-bg">
       <div class="container">
@@ -24,15 +26,17 @@
                 <div class="search-tab">
                   <div class="tab-content">
                     <div class="tab-pane active fade show " id="All">
-                      <div class="central-meta item">
+                      <div class="central-meta item" *ngIf="listUser != null">
                         <span class="create-post">People<a title="" href="#">See All</a></span>
-                        <div class="pit-friends" *ngFor="let user of listUser">
+                        <div class="pit-friends" *ngFor="let userFavourite of listUser">
                           <figure><a href="#" title=""><img
-                            src="../../../assets/images/resources/searching1.jpg" alt=""></a></figure>
+                            src="{{userFavourite.user.userAvatar}}" alt="" style="height: 50px; width: 50px"></a></figure>
                           <!--                            src="{{user.userAvatar}}" alt=""></a></figure>-->
                           <div class="pit-frnz-meta">
-                            <a href="#" title="">{{user.userName}}</a>
-                            <i>{{user.address}}</i>
+                            <a href="#" title="">{{userFavourite.user.userName}}</a>
+                            <i>Address: {{userFavourite.user.ward.district.province.provinceName}}</i>
+                            <i *ngIf="userFavourite.favourites.length != 0">, Favourites: {{userFavourite.favourites}}</i>
+                            <i *ngIf="userFavourite.favourites.length == 0">, Favourites: None </i>
                             <ul class="add-remove-frnd">
                               <li class="add-tofrndlist">
                                 <a title="Add friend" href="#"><i
@@ -46,16 +50,22 @@
                           </div>
                         </div>
                       </div><!-- searched peoples -->
+                      <div *ngIf="(first == true) && (listUser == null)">
+                      </div>
+                      <div class="central-meta item" *ngIf="(first == false) && (listUser == null)">
+                        <h2 style="color: red">No results found</h2>
+                      </div>
                       <div class="central-meta item">
                                                 <span class="create-post">Recommend Friends<a title=""
                                                                                               href="#">See All</a></span>
-                        <div class="pit-friends" *ngFor="let user of listRecommendation">
+                        <div class="pit-friends" *ngFor="let userFavourite of listRecommendation">
                           <figure><a href="#" title=""><img
-                            src="../../../assets/images/resources/searching1.jpg" alt=""></a></figure>
+                            src="{{userFavourite.user.userAvatar}}" alt="" style="height: 50px; width: 50px"></a></figure>
                           <!--                            src="{{user.userAvatar}}" alt=""></a></figure>-->
                           <div class="pit-frnz-meta">
-                            <a href="#" title="">{{user.userName}}</a>
-                            <i>{{user.address}}</i>
+                            <a href="#" title="">{{userFavourite.user.userName}}</a>
+                            <i>{{userFavourite.user.ward.district.province.provinceName}}</i>
+                            <i>, Favourites: {{userFavourite.favourites}}</i>
                             <ul class="add-remove-frnd">
                               <li class="add-tofrndlist">
                                 <a title="Add friend" href="#"><i

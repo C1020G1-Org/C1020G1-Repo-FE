@@ -44,7 +44,11 @@ export class SearchingService {
   }
 
   getAllRecommendation(id): Observable<any> {
-    return this.http.get(this.API + '/recommend?id=' + id, this.httpOptions)
+    return this.http.get(this.API + '/recommend?id=' + id, this.httpOptions);
+  }
+
+  getListFavourites(): Observable<any> {
+    return this.http.get('http://localhost:8080/misc/favourites', this.httpOptions);
   }
 
   passKeySearch() {

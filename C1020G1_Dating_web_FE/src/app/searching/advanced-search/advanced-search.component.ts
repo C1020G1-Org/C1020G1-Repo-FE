@@ -17,16 +17,13 @@ export class AdvancedSearchComponent implements OnInit {
   listProvince: Array<string> = [];
 
   selectedFavourites = [];
-  listFavourites: Array<string> = [
-    "music",
-    "book",
-    "sport"
-  ];
+  listFavourites: Array<string> = [];
   province: string;
   selectedGender: any;
   gender: string;
   user;
   listRecommendation;
+  first: boolean = true;
 
   constructor(private searchingService: SearchingService,
               private tokenStorageService: TokenStorageService) {
@@ -36,13 +33,16 @@ export class AdvancedSearchComponent implements OnInit {
     this.user = this.tokenStorageService.getUser();
     this.setYear();
     this.getProvince();
+    this.getFavourites()
     this.searchingService.getAllRecommendation(this.user.userId).subscribe((data) => {
       this.listRecommendation = data;
     })
   }
 
   doSearchName() {
-    this.searchingService.doAdvancedSearch(this.name, this.birthday, this.selectedFavourites, this.province, this.gender).subscribe((data) => {
+    this.first = false;
+    this.searchingService.doAdvancedSearch(this.name, this.birthday, this.selectedFavourites,
+      this.province, this.gender).subscribe((data) => {
       this.listUser = data;
     })
   }
@@ -56,6 +56,12 @@ export class AdvancedSearchComponent implements OnInit {
   getProvince() {
     this.searchingService.getAllProvince().subscribe((data) => {
       this.listProvince = data
+    })
+  }
+
+  getFavourites() {
+    this.searchingService.getListFavourites().subscribe((data) => {
+      this.listFavourites = data
     })
   }
 
