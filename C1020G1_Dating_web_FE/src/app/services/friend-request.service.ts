@@ -13,6 +13,7 @@ export class FriendRequestService {
   friends: Friends[];
   friendsRequest: FriendRequest[];
   checkFriendRequest2: boolean;
+  checkLoadMore: boolean;
 
   constructor(private http: HttpClient) {
   }
@@ -54,12 +55,25 @@ export class FriendRequestService {
     return notification;
   }
 
-  saveListFriendRequest(listFriendsRequest: FriendRequest[]) {
+  saveListFriendRequest(listFriendsRequest) {
     this.friendsRequest = listFriendsRequest;
   }
 
-  getListFriendRequest(): FriendRequest[] {
-    return this.friendsRequest;
+  getListFriendRequest(numberSplice:number): FriendRequest[] {
+    let friendRequest:FriendRequest[] = [];
+    friendRequest = friendRequest.concat(this.friendsRequest);
+    if (friendRequest.length <= numberSplice){
+      this.checkLoadMore = false;
+      return friendRequest;
+    } else {
+      this.checkLoadMore = true;
+      friendRequest.splice(numberSplice);
+      return friendRequest;
+    }
+  }
+
+  getCheckLoadMore(){
+    return this.checkLoadMore;
   }
 
   deleteFriendRequestFE(idSendUser : number){

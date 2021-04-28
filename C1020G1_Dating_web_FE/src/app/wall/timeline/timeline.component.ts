@@ -128,6 +128,10 @@ export class TimelineComponent implements OnInit {
     this.checkFriendRequestUserWall();
 
     this.checkFriendUserWall();
+
+    console.log(this.checkFriend);
+    console.log(this.checkFriendRequest);
+    console.log(this.checkFriendRequest2);
   }
 
 
