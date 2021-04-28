@@ -27,8 +27,8 @@
 
                   </div>
                   <div class="lodmore">
-                    <span>View more 1-4 of members</span>
-                    <button class="btn-view btn-load-more " title="Load More" data-toggle="tooltip"
+                    <span>View more {{groupMember.length}} of {{data.totalElements}} members</span>
+                    <button *ngIf="groupMember.length != data.totalElements" class="btn-view btn-load-more " title="Load More" data-toggle="tooltip"
                             (click)="loadMoreMember()"></button>
                   </div>
                 </div>

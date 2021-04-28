@@ -12,6 +12,7 @@ export class GroupMemberComponent implements OnInit {
    groupMember: any;
    group;
    public pageNumber = 0;
+   data;
 
   constructor(
     public groupService: GroupService,
@@ -20,10 +21,10 @@ export class GroupMemberComponent implements OnInit {
 
   getAllGroupMember(){
     this.activatedRoute.paramMap.subscribe(data =>{
-      console.log(data);
       this.groupService.getAllMemberGroup(data.get("id"), this.pageNumber).subscribe(data1 => {
         // this.groupMember = data1;
         let listMembers = data1.content;
+        this.data = data1;
         if (this.groupMember != null){
           this.groupMember = this.groupMember.concat(listMembers);
         }else {

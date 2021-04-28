@@ -21,8 +21,6 @@ export class GroupManagementService {
   url = 'http://localhost:8080';
   groupId: number;
   constructor(private http: HttpClient, private router: Router, private tokenStorage: TokenStorageService) {
-    tokenStorage.logOut();
-    tokenStorage.saveUser(this.user);
   }
 
   getListMember(key: string, page: number): Observable<GroupUser[]> {
@@ -90,42 +88,6 @@ export class GroupManagementService {
 
   get userId() {
     return this.tokenStorage.getUser().userId;
-  }
-
-  get user(): User {
-    return {
-      "userId": 5,
-      "userName": "Lê Quang Dương",
-      "birthday": null,
-      "gender": "Female",
-      "occupation": "Test",
-      "email": "duong@duong.duong",
-      "userAvatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw4GNR2siRC9kCo-LYtqq0Ohcw_pH4d_rtdw&usqp=CAU",
-      "userBackground": "abc",
-      "marriaged": "yes",
-      "ward": {
-        "wardId": 1,
-        "district": {
-          "districtId": 1,
-          "province": {
-            "provinceId": 1,
-            "provinceName": "Da Nang"
-          },
-          "districtName": "1"
-        },
-        "wardName": "1"
-      },
-      "address": "Hải Phòng",
-      "status": {
-        "statusId": 1,
-        "statusName": "online"
-      },
-      "account": {
-        "accountId": 5,
-        "accountName": "5",
-        "password": "5"
-      }
-    }
   }
 
   get defaultPage() {
