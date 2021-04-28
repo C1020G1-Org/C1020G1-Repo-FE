@@ -16,7 +16,6 @@
                         <figure>
                           <img src="{{member.user.userAvatar}}" alt="">
                         </figure>
-
                         <div class="frnd-meta">
                           <div class="frnd-name">
                             <a href="#" title="">{{member.user.userName}}</a>
@@ -25,6 +24,12 @@
                         </div>
                       </div>
                     </div>
+
+                  </div>
+                  <div class="lodmore">
+                    <span>View more 1-4 of members</span>
+                    <button class="btn-view btn-load-more " title="Load More" data-toggle="tooltip"
+                            (click)="loadMoreMember()"></button>
                   </div>
                 </div>
               </div>

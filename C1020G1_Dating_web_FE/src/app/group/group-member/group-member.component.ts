@@ -11,18 +11,35 @@ import { GroupService } from 'src/app/service/group.service';
 export class GroupMemberComponent implements OnInit {
    groupMember: any;
    group;
+   public pageNumber = 0;
 
-  constructor(public groupService: GroupService,
-              private activatedRoute: ActivatedRoute,
-              private title:Title) { }
+  constructor(
+    public groupService: GroupService,
+    private activatedRoute: ActivatedRoute,
+    private title:Title) { }
 
-  ngOnInit(){
-    this.title.setTitle("Group Member");
-    this.activatedRoute.paramMap.subscribe(data => {
-
-      this.groupService.getAllMemberGroup(data.get("id")).subscribe(groupUser=> {
-        this.groupMember = groupUser;
+  getAllGroupMember(){
+    this.activatedRoute.paramMap.subscribe(data =>{
+      console.log(data);
+      this.groupService.getAllMemberGroup(data.get("id"), this.pageNumber).subscribe(data1 => {
+        // this.groupMember = data1;
+        let listMembers = data1.content;
+        if (this.groupMember != null){
+          this.groupMember = this.groupMember.concat(listMembers);
+        }else {
+          this.groupMember = listMembers;
+        }
       });
-      })
+    })
+
+  }
+  ngOnInit() {
+    this.title.setTitle("Group Member");
+    this.getAllGroupMember();
+  }
+
+  loadMoreMember() {
+    this.pageNumber++;
+    this.getAllGroupMember();
   }
 }

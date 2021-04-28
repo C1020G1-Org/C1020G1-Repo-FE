@@ -19,7 +19,6 @@ export class GroupDetailComponent implements OnInit {
               private title: Title,
               private tokenStorage: TokenStorageService) {
   }
-
   ngOnInit() {
     this.title.setTitle("Group-detail");
     this.activatedRoute.paramMap.subscribe(data => {

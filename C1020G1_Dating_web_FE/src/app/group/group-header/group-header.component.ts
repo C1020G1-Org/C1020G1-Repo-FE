@@ -19,7 +19,7 @@ export class GroupHeaderComponent implements OnInit {
   isJoin: boolean = false;
   requestType: string = 'none';
   groupUser: GroupUser;
-  groupRequest: GroupRequest[];
+  groupRequest: GroupRequest[] = [];
   request: GroupRequest;
 
 
@@ -45,6 +45,7 @@ export class GroupHeaderComponent implements OnInit {
       this.groupService.getGroupUserByGroupIdAndUserId(data.get("id"), this.tokenStorage.getUser().userId).subscribe(data => {
         this.isJoin = true;
       });
+
     });
   }
 

@@ -1,7 +1,7 @@
 import { TokenStorageService } from './../../service/auth/token-storage';
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import {Title} from "@angular/platform-browser";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { Title } from "@angular/platform-browser";
 import { GroupService } from 'src/app/service/group.service';
 
 
@@ -12,7 +12,9 @@ import { GroupService } from 'src/app/service/group.service';
 })
 export class GroupListComponent implements OnInit {
   public groups;
+  public pageNumber = 0;
   searchForm: FormGroup;
+  data;
 
   constructor(
     public groupService: GroupService,
@@ -21,25 +23,36 @@ export class GroupListComponent implements OnInit {
     private tokenStorage: TokenStorageService
   ) { }
 
-  ngOnInit(){
+  getAllGroup() {
+    this.groupService.getAllGroup(this.pageNumber,this.searchForm.get("search").value.trim()).subscribe(data => {
+      if (this.groups != null){
+        this.groups = this.groups.concat(data.content);
+      } else {
+        this.groups = data.content;
+      }
+      this.data = data;
+    });
+  }
+
+  ngOnInit() {
     this.title.setTitle("Group List");
     this.searchForm = this.formBuilder.group({
-      search:""
-    })
-
-    this.groupService.getAllGroup().subscribe(data => {
-      this.groups = data;
+      search: ""
     });
+    this.getAllGroup();
   }
 
   onSubmit() {
-    this.groupService.getGroupByName(this.searchForm.get("search").value).subscribe(data=>{
-      this.groups = data;
-
-    });
+    this.pageNumber = 0;
+    this.groups = null;
+    this.getAllGroup();
+  }
+  get user() {
+    return this.tokenStorage.getUser();
   }
 
-  get user() {
-     return this.tokenStorage.getUser();
+  loadMoreGroup() {
+    this.pageNumber++;
+    this.getAllGroup();
   }
 }

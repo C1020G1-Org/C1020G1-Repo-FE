@@ -94,7 +94,7 @@ export class GroupManagementService {
 
   get user(): User {
     return {
-      "userId": 2,
+      "userId": 5,
       "userName": "Lê Quang Dương",
       "birthday": null,
       "gender": "Female",
