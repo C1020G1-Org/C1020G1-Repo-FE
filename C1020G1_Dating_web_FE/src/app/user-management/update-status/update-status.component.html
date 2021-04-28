@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content=""/>
+  <meta name="keywords" content=""/>
+  <title>Edit profile prototype</title>
+  <link rel="icon" href="/assets/images/male.png" type="image/png" sizes="16x16">
+  ​
+  <link rel="stylesheet" href="/assets/css/main.min.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/color.css">
+  <link rel="stylesheet" href="/assets/css/responsive.css">
+</head>
+<body>
+<div class="set-title">
+  <h1><i class="fa fa-bell"> Update Status</i></h1>
+  <span>Update your status regularly so people can know if you're busy or ready to chat with them</span>
+</div>
+<form [formGroup]="updateStatus" *ngIf="updateStatus">
+  <div class="form-radio">
+    <div class="radio mt-5">
+      <label>
+        <input type="radio" formControlName="radio" [value]="1"  name="radio"><i
+        class="check-box"></i>Online <i
+        class="fa fa-smile text-success"></i>
+      </label>
+      <br>
+      <i class="small">This lets others know you are active for
+        interaction.</i>
+    </div>
+    <br>
+    <div class="radio mt-3">
+      <label>
+        <input type="radio" formControlName="radio" [value]="2" name="radio"><i
+        class="check-box"></i>Busy <i class="fa fa-frown text-warning"></i>
+      </label>
+      <br>
+      <i class="small">This lets others know that you are busy for a
+        while.</i>
+    </div>
+    <br>
+    <div class="radio mt-3">
+      <label>
+        <input type="radio" formControlName="radio" [value]="3" name="radio"><i
+        class="check-box"></i>Offline <i
+        class="fa fa-times-circle text-secondary"></i>
+      </label>
+      <br>
+      <i class="small">This thing for you are not active on this page
+        more.</i>
+    </div>
+    <p class="text-success font-italic font-weight-bolder mt-4">{{messageUpdateSuccessful}}</p>
+    <div class="onoff-options ">
+        <div class="submit-btns">
+          <button (click)="return()" type="button" class="btn-secondary" data-ripple="">
+            <span>Cancel</span></button>
+          <button (click)="openWindowCustomClass(content)" type="button"  data-ripple="">
+            <span>Save</span></button>
+        </div>
+    </div>
+  </div>
+</form>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title text-dark font-italic font-weight-bolder"><i class="fa fa-bell"></i> Update Status</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p class="text-dark font-italic font-weight-bolder">Are you sure you will update <span class="color-orange">{{valueStatus}}</span> status?</p>
+    <span class="text-secondary font-italic font-weight-bolder">*Note:</span>
+    <p class="text-secondary font-italic font-weight-bolder">{{messageStatus}}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary color-orange" (click)="updateStatusUser();modal.close('Close click')">OK</button>
+    <button type="button" class="btn btn-secondary color-black" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
+<script src="/assets/js/main.min.js"></script>
+<script src="/assets/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+.zoomin {
+  height: 160px;
+  width: 160px;
+  overflow: hidden;
+  border-radius: 50rem;
+  border: solid lightgrey 4px;
+}
+
+.zoomin img {
+  height: 160px;
+  width: 160px;
+  transform: scale(1.5);
+  border-radius: 50rem;
+}
+
+#image-1 {
+  width: 560px;
+  height: 400px;
+}
+#image-3{
+  border: solid lightgrey 4px;
+}

@@ -11,6 +11,9 @@ import {RecoverPasswordComponent} from "./login/recover-password/recover-passwor
 import {RegistrationComponent} from "./user-management/registration/registration.component";
 import {InitialInformationComponent} from "./user-management/initial-information/initial-information.component";
 import {RegisGuardService} from "./user-management/service/regis-guard";
+import {UpdateAvatarComponent} from "./user-management/update-avatar/update-avatar.component";
+import {UpdateStatusComponent} from "./user-management/update-status/update-status.component";
+import {ChangePasswordComponent} from "./user-management/change-password/change-password.component";
 
 
 const routes: Routes = [
@@ -28,7 +31,10 @@ const routes: Routes = [
   {path: 'recover', component: RecoverPasswordComponent},
   {path: 'home', component: ErrorPageComponent, canActivate: [AuthGuardService]},
   {path: 'registration', component: RegistrationComponent},
-  {path: 'initial-information', component: InitialInformationComponent, canActivate: [RegisGuardService]}
+  {path: 'initial-information', component: InitialInformationComponent, canActivate: [RegisGuardService]},
+  {path: 'update-avatar', component: UpdateAvatarComponent, canActivate: [AuthGuardService]},
+  {path: 'status', component: UpdateStatusComponent, canActivate: [AuthGuardService]},
+  {path: 'changePassword', component: ChangePasswordComponent, canActivate: [AuthGuardService]}
 ];
 
 @NgModule({

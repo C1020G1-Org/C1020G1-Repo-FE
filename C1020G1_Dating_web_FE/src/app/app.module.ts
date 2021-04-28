@@ -10,7 +10,6 @@ import {
   GoogleLoginProvider,
   FacebookLoginProvider
 } from 'angularx-social-login';
-// import {HeaderModule} from "./header/header.module";
 import {FooterModule} from "./footer/footer.module";
 import {SearchingModule} from "./searching/searching.module";
 import {HeaderComponent} from "./header/header.component";
@@ -19,18 +18,31 @@ import {AngularFireModule} from "@angular/fire";
 import {environment} from "../environments/environment";
 import {AngularFireDatabaseModule} from "@angular/fire/database";
 import {AngularFireStorageModule} from "@angular/fire/storage";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {LoadingComponent} from "./user-management/loading/loading.component";
+import {ChangePasswordComponent} from "./user-management/change-password/change-password.component";
+import {UpdateStatusComponent} from "./user-management/update-status/update-status.component";
+import {UpdateAvatarComponent} from "./user-management/update-avatar/update-avatar.component";
+import {WebcamComponent} from "./user-management/webcam/webcam.component";
+import {WebcamModule} from "ngx-webcam";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatDialogModule} from "@angular/material/dialog";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HeaderModule} from "./header/header.module";
 import {FooterComponent} from "./footer/footer.component";
 import {AdvancedSearchComponent} from "./searching/advanced-search/advanced-search.component";
-import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ErrorPageComponent,
+    WebcamComponent,
+    UpdateAvatarComponent,
+    UpdateStatusComponent,
+    ChangePasswordComponent,
+    LoadingComponent,
     FooterComponent,
-    // HeaderComponent,
     AdvancedSearchComponent
   ],
   imports: [
@@ -38,14 +50,18 @@ import {FormsModule} from "@angular/forms";
     AppRoutingModule,
     LoginModule,
     SocialLoginModule,
-    // HeaderModule,
+    HeaderModule,
     FooterModule,
     SearchingModule,
     UserManagementModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireStorageModule,
-    HeaderModule,
+    NgbModule,
+    WebcamModule,
+    MatDialogModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
     FormsModule
   ],
   providers: [{
