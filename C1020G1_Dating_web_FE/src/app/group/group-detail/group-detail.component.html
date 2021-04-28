@@ -41,7 +41,7 @@
                   </div>
                 </aside>
               </div>
-              <div class="col-lg-6">
+              <div class="col-lg-6" *ngIf="group.scope == 'public' || isJoin">
                 <div class="central-meta postbox">
                   <span class="create-post">Create post</span>
                   <div class="new-postbox">
@@ -285,8 +285,7 @@
                               </div>
                               <div class="post-comt-box">
                                 <form method="post">
-                                                                    <textarea
-                                                                      placeholder="Post your comment"></textarea>
+                                  <textarea placeholder="Post your comment"></textarea>
                                   <div class="add-smiles">
                                     <div class="uploadimage">
                                       <i class="fa fa-image"></i>

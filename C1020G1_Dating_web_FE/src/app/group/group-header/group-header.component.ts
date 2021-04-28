@@ -14,6 +14,7 @@ export class GroupHeaderComponent implements OnInit {
   public isJoin: boolean = false;
   public groupUser;
   public groupRequest;
+  public isAdmin: boolean = false;
 
 
   constructor(public groupService: GroupService,
@@ -80,6 +81,7 @@ export class GroupHeaderComponent implements OnInit {
         this.isJoin = true;
       }, err => {
       });
+
     });
 
   }

@@ -16,7 +16,7 @@
 
         <li><a class="send-mesg" href="#" title="Send Message" data-toggle="tooltip"><i
           class="fa fa-comment"></i></a></li>
-        <li>
+        <li *ngIf="userLogin.userId == group.admin.userId">
           <div class="edit-seting" title="Edit Profile image"><i
             class="fa fa-sliders"></i>
             <ul class="more-dropdown">
