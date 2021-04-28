@@ -12,8 +12,8 @@ export class FriendService {
 
   constructor(public http: HttpClient) { }
 
-  public getAllFriend(id: number): Observable<any>{
-    return this.http.get(this.API + '/' + id)
+  public getAllFriend(id: number, pageNumber: number): Observable<any>{
+    return this.http.get(this.API + '/' + id + '?page=' + pageNumber)
   }
 
   public deleteFriend(friendId: number): Observable<any> {
