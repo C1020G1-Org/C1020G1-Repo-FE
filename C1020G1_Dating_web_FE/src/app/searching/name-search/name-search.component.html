@@ -1,8 +1,6 @@
-<<<<<<< HEAD
+
+
 <div class="theme-layout gap2 gray-bg">
-=======
-<div class="theme-layout w-100 h-100 gap2 gray-bg">
->>>>>>> 0898c5a1071376cb90aae3c6b4d1fb327ff38dc4
   <section>
     <div class="gap2 gray-bg">
       <div class="container">
@@ -28,7 +26,7 @@
                 <div class="search-tab">
                   <div class="tab-content">
                     <div class="tab-pane active fade show " id="All">
-                      <div class="central-meta item">
+                      <div class="central-meta item" *ngIf="listUser != null">
                         <span class="create-post">People<a title="" href="#">See All</a></span>
                         <div class="pit-friends" *ngFor="let userFavourite of listUser">
                           <figure><a href="#" title=""><img
@@ -52,6 +50,11 @@
                           </div>
                         </div>
                       </div><!-- searched peoples -->
+                      <div *ngIf="(first == true) && (listUser == null)">
+                      </div>
+                      <div class="central-meta item" *ngIf="(first == false) && (listUser == null)">
+                        <h2 style="color: red">No results found</h2>
+                      </div>
                       <div class="central-meta item">
                                                 <span class="create-post">Recommend Friends<a title=""
                                                                                               href="#">See All</a></span>

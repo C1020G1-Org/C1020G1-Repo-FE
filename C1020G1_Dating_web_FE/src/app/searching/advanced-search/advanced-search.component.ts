@@ -23,6 +23,7 @@ export class AdvancedSearchComponent implements OnInit {
   gender: string;
   user;
   listRecommendation;
+  first: boolean = true;
 
   constructor(private searchingService: SearchingService,
               private tokenStorageService: TokenStorageService) {
@@ -39,7 +40,9 @@ export class AdvancedSearchComponent implements OnInit {
   }
 
   doSearchName() {
-    this.searchingService.doAdvancedSearch(this.name, this.birthday, this.selectedFavourites, this.province, this.gender).subscribe((data) => {
+    this.first = false;
+    this.searchingService.doAdvancedSearch(this.name, this.birthday, this.selectedFavourites,
+      this.province, this.gender).subscribe((data) => {
       this.listUser = data;
     })
   }

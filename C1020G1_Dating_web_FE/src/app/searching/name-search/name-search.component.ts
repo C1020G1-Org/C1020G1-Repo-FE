@@ -15,7 +15,7 @@ export class NameSearchComponent implements OnInit {
   listUser;
   listRecommendation;
   public name = '';
-  listFavourite;
+  first: boolean = true;
 
   constructor(private searchingService: SearchingService,
               private activeRouter: Router,
@@ -23,20 +23,20 @@ export class NameSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.listUser = [];
     this.user = this.tokenStorageService.getUser();
     this.search = this.searchingService.passKeySearch();
     this.searchingService.doNameSearch(this.search).subscribe((data) => {
       this.listUser = data;
     });
     this.searchingService.getAllRecommendation(this.user.userId).subscribe((data) => {
-      console.log(data);
       this.listRecommendation = data;
     });
   };
 
   doSearchName() {
+    this.first = false;
     this.searchingService.doNameSearch(this.name).subscribe((data) => {
-      console.log(data);
       this.listUser = data;
     })
   }
