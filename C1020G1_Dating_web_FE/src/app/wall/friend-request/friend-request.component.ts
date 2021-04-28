@@ -58,7 +58,7 @@ export class FriendRequestComponent implements OnInit {
 
   checkLoadMore: boolean;
 
-  numberSplice = 8;
+  numberSplice = 4;
 
   ngOnInit(): void {
 
@@ -259,7 +259,7 @@ export class FriendRequestComponent implements OnInit {
   }
 
   loadMoreFriendRequest(){
-    this.numberSplice += 8;
+    this.numberSplice += 4;
     this.listFriendRequest = this.friendRequestService.getListFriendRequest(this.numberSplice);
     this.checkLoadMore = this.friendRequestService.getCheckLoadMore();
   }
