@@ -11,8 +11,8 @@ import {User} from "../models/user-model";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  name: any;
   user: User;
+  displayStatus: string;
 
   constructor(private searchingService: SearchingService,
               private router: Router,
@@ -20,6 +20,16 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.tokenStorage.getUser();
+    console.log(this.user.status)
+    if (this.user.status.statusId == 1) {
+      this.displayStatus = "status f-online"
+    }
+    if (this.user.status.statusId == 2) {
+      this.displayStatus = "status f-away"
+    }
+    if (this.user.status.statusId == 3) {
+      this.displayStatus = "status f-offline"
+    }
   }
 
   search(event: any) {

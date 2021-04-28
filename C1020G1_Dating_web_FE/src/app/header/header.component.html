@@ -254,14 +254,8 @@
     <div class="user-img">
       <h5>{{user.userName}}</h5>
       <img src="{{user.userAvatar}}" alt="" style="height: 45px; width: 45px;">
-      <span class="status f-online"></span>
+      <span class="{{displayStatus}}"></span>
       <div class="user-setting pr-5">
-        <span class="seting-title">Chat setting <a href="#" title="">see all</a></span>
-        <ul class="chat-setting">
-          <li><a href="#" title=""><span class="status f-online"></span>online</a></li>
-          <li><a href="#" title=""><span class="status f-away"></span>away</a></li>
-          <li><a href="#" title=""><span class="status f-off"></span>offline</a></li>
-        </ul>
         <span class="seting-title">User setting <a href="#" title="">see all</a></span>
         <ul class="log-out">
           <li><a href="about.html" title=""><i class="ti-user"></i> view profile</a></li>

@@ -56,19 +56,28 @@ export class EditComponent implements OnInit {
       district: new FormControl('', [Validators.required]),
     });
     this.user = this.tokenStorage.getUser();
-    console.log(this.user);
     this.editUserForm.patchValue(this.user);
     this.editUserForm.controls.province.setValue(this.user.ward.district.province);
     this.editUserForm.controls.district.setValue(this.user.ward.district);
     this.editUserForm.controls.birthday.setValue(this.user.birthday.toString().slice(0,10))
-    console.log(this.editUserForm.value)
     this.getData()
   }
 
 
   submit() {
-    this.editService.updateUser(this.editUserForm.value.userId, this.editUserForm.value).subscribe(data => {
-      console.log(this.editUserForm.value);
+    console.log(this.editUserForm.value);
+    this.user.userName = this.editUserForm.value.userName;
+    this.user.gender = this.editUserForm.value.gender;
+    this.user.birthday = this.editUserForm.value.birthday;
+    this.user.userName = this.editUserForm.value.userName;
+    this.user.marriaged = this.editUserForm.value.marriaged;
+    this.user.occupation = this.editUserForm.value.occupation;
+    this.user.email = this.editUserForm.value.email;
+    this.user.address = this.editUserForm.value.address;
+    this.user.ward = this.editUserForm.value.ward;
+    this.editService.updateUser( this.user).subscribe(data => {
+      this.tokenStorage.saveUser(this.user);
+      this.router.navigateByUrl("/home")
     })
   }
 
