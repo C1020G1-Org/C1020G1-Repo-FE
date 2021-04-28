@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {TokenStorageService} from "../../service/auth/token-storage";
+import {User, Ward} from "../../models/user-model";
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,24 @@ export class EditService {
   changePassword(accountName: string, oldPassword: string, newPassword: string, confirmPassword: string): Observable<any> {
     return this.http.put(this.API_ACCOUNT + '/' + accountName + '/changePassword?oldPassword=' + oldPassword +
       '&&newPassword=' + newPassword + '&&confirmPassword=' + confirmPassword, newPassword, this.httpOptions);
+  }
+
+  public updateUser(userId, user ): Observable<any>{
+    return this.http.put(this.API_USER + '/' + 1, user,this.httpOptions);
+  }
+
+  public getWard(): Observable<any>{
+    return this.http.get(this.API_USER + '/ward',this.httpOptions);
+  }
+
+  public getDistrict(): Observable<any>{
+    return this.http.get(this.API_USER + '/district',this.httpOptions);
+
+  }
+
+  public getProvince(): Observable<any>{
+    return this.http.get(this.API_USER + '/province',this.httpOptions);
+
   }
 
 }

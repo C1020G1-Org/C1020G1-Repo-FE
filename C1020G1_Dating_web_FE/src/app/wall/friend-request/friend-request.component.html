@@ -1,0 +1,83 @@
+
+<div *ngIf="listFriendRequest.length > 0">
+  <div class="central-meta padding30">
+    <div class="row">
+      <div *ngFor="let friendRequest of listFriendRequest" class="col-lg-3 col-md-6 col-sm-6">
+        <div class="friend-box">
+          <figure>
+            <img src="{{friendRequest.sendUser.userBackground}}" style="width: 100%;height: 100px">
+          </figure>
+
+          <div class="frnd-meta">
+            <figure>
+              <img src="{{friendRequest.sendUser.userAvatar}}"
+                   style="width: 80px;height: 80px;border-radius: 50%;padding-top: 5px">
+            </figure>
+            <div class="frnd-name">
+              <a href="#" title="">{{friendRequest.sendUser.userName}}</a>
+              <span>Address: {{friendRequest.sendUser.address}}</span>
+              <br>
+              <span>Gender: {{friendRequest.sendUser.gender}}</span>
+              <br>
+              <span>Marriaged: {{friendRequest.sendUser.marriaged}}</span>
+              <span *ngIf="friendRequest.mutualFriends.length > 1"
+                    (mouseover)="getMutualFriend(friendRequest.mutualFriends)" tooltip="{{mutualFriend}}">
+                            {{friendRequest.mutualFriends.length}} mutual friends
+                          </span>
+              <span *ngIf="friendRequest.mutualFriends.length == 1"
+                    (mouseover)="getMutualFriend(friendRequest.mutualFriends)" tooltip="{{mutualFriend}}">
+                            {{friendRequest.mutualFriends.length}} mutual friend
+                          </span>
+              <span>
+                            </span>
+            </div>
+
+            <button tooltip="Add Friend" (click)="acceptFriendRequest(friendRequest)"
+                    style="border: white;color: #ff5b0c;background: white">
+              <i class="fa fa-check-square fa-2x" style="margin-right: 15px"></i></button>
+
+            <button tooltip="Remove" data-target="#exampleModal" data-toggle="modal"
+                    style="border: white;color: #ff5b0c;background: white"
+                    (click)="sendFriendRequestToDelete(friendRequest)">
+              <i class="fa fa-trash fa-2x"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button *ngIf="checkLoadMore" (click)="loadMoreFriendRequest()" class="btn-load-more btn-view"></button>
+  </div>
+</div>
+<div *ngIf="listFriendRequest.length == 0">
+  <div class="central-meta padding30">
+    <h5 style="text-align: center;color: #ff5b0c;padding: 10%">
+      Has not friend request <i class="fa fa-smile fa-2x"></i>
+    </h5>
+  </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">DELETE FRIENDS REQUEST</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure want to delete this request?</p>
+        <p><span style="color: red">Warning: </span>Can not undo</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteFriendRequest()"
+        >Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

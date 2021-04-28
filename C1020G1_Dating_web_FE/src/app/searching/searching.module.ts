@@ -12,6 +12,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forChild(routes),
     CommonModule
+
   ]
 })
 export class SearchingModule { }

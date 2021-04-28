@@ -78,13 +78,13 @@
 </div>
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 class="modal-title text-dark font-italic font-weight-bolder"><i class="fa fa-file-image"></i> Update Avatar</h4>
+    <h1 class="modal-title text-dark font-italic font-weight-bolder"><i class="fa fa-file-image"></i> Update Avatar</h1>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <p class="text-dark font-italic font-weight-bolder">Are you sure you will choose this image as your avatar ?</p>
+    <h2 class="text-dark font-italic font-weight-bolder">Are you sure you will choose this image as your avatar ?</h2>
     <img class="img-fluid" [src]="avatar">
   </div>
   <div class="modal-footer">
@@ -94,13 +94,13 @@
 </ng-template>
 <ng-template #content2 let-modal>
   <div class="modal-header">
-    <h4 class="modal-title text-dark font-italic font-weight-bolder"><i class="fa fa-file-image"></i> Update Avatar</h4>
+    <h1 class="modal-title text-dark font-italic font-weight-bolder"><i class="fa fa-file-image"></i> Update Avatar</h1>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <p class="text-dark font-italic font-weight-bolder">Are you sure you will choose this image as your background ?</p>
+    <h2 class="text-dark font-italic font-weight-bolder">Are you sure you will choose this image as your background ?</h2>
     <img class="img-fluid" [src]="background">
   </div>
   <div class="modal-footer">
@@ -110,13 +110,13 @@
 </ng-template>
 <ng-template #content3 let-modal>
   <div class="modal-header">
-    <h4 class="modal-title text-dark font-italic font-weight-bolder"><i class="fa fa-window-close"></i> Remove Image</h4>
+    <h1 class="modal-title text-dark font-italic font-weight-bolder"><i class="fa fa-window-close"></i> Remove Image</h1>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <p class="text-dark font-italic font-weight-bolder">Are you sure you will remove this avatar?</p>
+    <h2 class="text-dark font-italic font-weight-bolder">Are you sure you will remove this avatar?</h2>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary color-orange" (click)="removeImage();modal.close('Close click')">OK</button>

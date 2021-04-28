@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Account, Favourite, Reason, Status, User, Ward} from "../model/user-model";
+import {Account, Favourite, Reason, Status, User, Ward} from "../../models/user-model";
 
 @Injectable({
   providedIn: 'root'

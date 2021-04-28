@@ -21,6 +21,8 @@ export class LoginComponent implements OnInit {
   title = "Sign In Now And Meet The Awesome Friends Around The World.";
   socialUser: SocialUser;
   userLogged: SocialUser;
+  isError = false;
+
 
 
   constructor(private route: ActivatedRoute,
@@ -158,7 +160,8 @@ export class LoginComponent implements OnInit {
       this.tokenStorage.saveAccountName(this.getAccountName().value);
       this.router.navigateByUrl("/home");
     } else {
-      this.title = "<i class=\"fa fa-exclamation-circle\"></i><i>Your account is not correct, please check your username or password</i>";
+      this.title = "Your account is not correct, please check your username or password";
+      this.isError = true;
     }
   }
 

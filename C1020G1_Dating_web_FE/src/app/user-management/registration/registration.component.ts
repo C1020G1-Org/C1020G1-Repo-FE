@@ -4,7 +4,7 @@ import {UserCreateService} from "../service/user-create.service";
 import {UserStorageService} from "../service/user-storage.service";
 import {ConfirmPasswordValidator} from "../validator/password.validator";
 import {ConfirmEmailValidator} from "../validator/email.validator";
-import {District, Province, Ward} from "../model/user-model";
+import {District, Province, Ward} from "../../models/user-model";
 import {Router} from "@angular/router";
 import {BirthdayValidator} from "../validator/birthdayValidator";
 import {TokenStorageService} from "../../service/auth/token-storage";
@@ -26,19 +26,18 @@ export class RegistrationComponent implements OnInit {
               public userCreate: UserCreateService,
               public userStorage: UserStorageService,
               public router: Router,
-              private tokenStorage: TokenStorageService) {
+              public tokenStorage: TokenStorageService) {
   }
 
   ngOnInit(): void {
-    if (this.tokenStorage.getUser() != null) {
-      this.userStorage.user.userName = this.tokenStorage.getUser().userName;
-      this.userStorage.user.email = this.tokenStorage.getUser().email;
-    }
+
+    this.userStorage.user.userName = this.tokenStorage.getUser().userName;
+    this.userStorage.user.email = this.tokenStorage.getUser().email;
 
     this.formRegistration = this.formBuilder.group({
-      accountName: [this.userStorage.account.accountName, [Validators.required, Validators.pattern("^[0-9A-Za-z]*$")]],
-      userName: [this.userStorage.user.userName, [Validators.required]],
-      password: [this.userStorage.account.password, [Validators.required]],
+      accountName: [this.userStorage.account.accountName, [Validators.required, Validators.pattern("^[0-9A-Za-z_]*$"), Validators.minLength(6), Validators.maxLength(24)]],
+      userName: [this.userStorage.user.userName, [Validators.required,Validators.minLength(6),Validators.maxLength(24)]],
+      password: [this.userStorage.account.password, [Validators.required, Validators.minLength(6),Validators.maxLength(24)]],
       rePassword: [this.userStorage.rePassword, [Validators.required]],
       occupation: [this.userStorage.user.occupation, [Validators.required]],
       birthday: [this.userStorage.user.birthday, [Validators.required]],
@@ -46,7 +45,7 @@ export class RegistrationComponent implements OnInit {
       reEmail: [this.userStorage.reEmail, [Validators.required]],
       province: [this.userStorage.province, [Validators.required]],
       district: [this.userStorage.district, [Validators.required]],
-      ward: [(this.userStorage.user.ward.wardId) ? this.userStorage.user.ward.wardId : "", [Validators.required]],
+      ward: [(this.userStorage.user.ward.wardId)? this.userStorage.user.ward.wardId: "", [Validators.required]],
       address: [this.userStorage.user.address, [Validators.required]],
       gender: [this.userStorage.user.gender, [Validators.required]],
       termOfService: [this.userStorage.termOfService, [Validators.required]],
@@ -63,10 +62,10 @@ export class RegistrationComponent implements OnInit {
     this.userCreate.getWardByDistrict(this.userStorage.district).subscribe(data => {
       this.wards = data;
     });
-
   }
 
   submit() {
+
     this.userStorage.account.accountName = this.formRegistration.value.accountName;
     this.userStorage.account.password = this.formRegistration.value.password;
     this.userStorage.user.userName = this.formRegistration.value.userName;
@@ -81,8 +80,8 @@ export class RegistrationComponent implements OnInit {
     this.userStorage.reEmail = this.formRegistration.value.reEmail;
     this.userStorage.rePassword = this.formRegistration.value.rePassword;
     this.userStorage.termOfService = this.formRegistration.value.termOfService;
-    this.userStorage.registed();
-    this.router.navigateByUrl("initial-information");
+    this.userStorage.registed()
+    this.router.navigateByUrl("/initial-information");
     console.log(this.userStorage)
   }
 
@@ -109,4 +108,9 @@ export class RegistrationComponent implements OnInit {
     });
   }
 
+  goToLogin() {
+    this.userStorage.clear()
+    this.router.navigateByUrl("login");
+  }
 }
+

@@ -19,7 +19,7 @@
             <div class="we-login-register">
               <div class="form-title">
                 <i class="fa fa-key"></i>login
-                <span>{{title}}</span>
+                <span><i class="fa fa-exclamation-circle" *ngIf="isError"></i> {{title}}</span>
               </div>
               <form class="we-form" method="post" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <input type="text" placeholder="Account Name" formControlName="accountName">

@@ -31,19 +31,18 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HeaderModule} from "./header/header.module";
 import {FooterComponent} from "./footer/footer.component";
 import {AdvancedSearchComponent} from "./searching/advanced-search/advanced-search.component";
+import {TooltipModule} from "ng2-tooltip-directive";
+import {WallModule} from "./wall/wall.module";
+import {TopwallComponent} from "./wall/topwall/topwall.component";
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ErrorPageComponent,
-    WebcamComponent,
-    UpdateAvatarComponent,
-    UpdateStatusComponent,
-    ChangePasswordComponent,
-    LoadingComponent,
     FooterComponent,
-    AdvancedSearchComponent
+    AdvancedSearchComponent,
+    TopwallComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +61,9 @@ import {AdvancedSearchComponent} from "./searching/advanced-search/advanced-sear
     MatDialogModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    TooltipModule,
+    WallModule,
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',

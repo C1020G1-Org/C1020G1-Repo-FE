@@ -40,10 +40,12 @@ export class UpdateAvatarComponent implements OnInit {
   }
 
   openWindowAvatar(content) {
-    const name = this.selectedImage.name;
-    const stringImage = name.substring(name.length - 3).toLowerCase();
-    if (stringImage === 'png' || stringImage === 'jpg') {
-      this.modalService.open(content, {windowClass: 'dark-modal'});
+    if (this.selectedImage !== null) {
+      const name = this.selectedImage.name;
+      const stringImage = name.substring(name.length - 3).toLowerCase();
+      if (stringImage === 'png' || stringImage === 'jpg') {
+        this.modalService.open(content, {windowClass: 'dark-modal'});
+      }
     }
   }
 
@@ -156,7 +158,6 @@ export class UpdateAvatarComponent implements OnInit {
 
   removeImage() {
     const imageDf = 'https://firebasestorage.googleapis.com/v0/b/project-4584214944750813303.appspot.com/o/userProject.png?alt=media&token=4a21ef0d-f9ab-425e-adfa-8304926d39e80';
-    this.openLoading();
     this.editService.updateAvatar(this.user.userId, imageDf, 'png').subscribe((data) => {
       this.messageUpdateSuccessful = 'Successful avatar remove !';
       this.ngOnInit();
@@ -173,7 +174,8 @@ export class UpdateAvatarComponent implements OnInit {
     const dialogRef = this.dialog.open(WebcamComponent, {
       width: '800px',
       height: '640px',
-      disableClose: true
+      disableClose: true,
+      data: {dataUI: this.user.userId},
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');

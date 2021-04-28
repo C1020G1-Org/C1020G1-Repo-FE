@@ -1,4 +1,4 @@
-import {User} from "../../user-management/model/user-model";
+import {User} from "../../models/user-model";
 
 
 export class JwtResponse {

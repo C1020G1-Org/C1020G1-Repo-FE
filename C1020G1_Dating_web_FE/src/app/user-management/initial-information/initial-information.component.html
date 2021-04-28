@@ -27,7 +27,7 @@
             </div>
           </div>
           <label style="text-transform: none; text-align: center">Please choose avatar and background image <span
-            class="color-orange">*</span></label>
+            class="color-orange">(*)</span></label>
           <span class="color-red d-block" style="font-size: 12px"
                 *ngIf="this.fileMessageAvatar != null"><i
             class="fa fa-warning"></i><i> {{this.fileMessageAvatar}}</i>
@@ -42,7 +42,7 @@
         </div>
         <hr>
         <div>
-          <label style="text-transform: none">Marital status <span class="color-orange">*</span></label>
+          <label style="text-transform: none">Marital status <span class="color-orange">(*)</span></label>
           <div class="form-radio pl-4">
             <div class="radio">
               <label>
@@ -61,7 +61,7 @@
         <hr>
         <div class="row m-lg-0 p-lg-0">
           <div class="col-lg-6 mx-lg-0 p-lg-0 pr-lg-3" style="margin-bottom: 20px;">
-            <label style="text-transform: none">Reason for participation <span class="color-orange">*</span></label>
+            <label style="text-transform: none">Reason for participation <span class="color-orange">(*)</span></label>
             <div class="checkbox pl-4">
               <label class="color-orange" *ngFor="let reason of reasons">
                 <input type="checkbox" [checked]="checkArray(reason.reasonId, this.formInitial.controls.reason.value)"
@@ -76,7 +76,7 @@
             </span>
           </div>
           <div class="col-lg-6 mx-lg-0 p-lg-0 pl-lg-3" style="margin-bottom: 20px;">
-            <label style="text-transform: none">Favourites <span class="color-orange">*</span></label>
+            <label style="text-transform: none">Favourites <span class="color-orange">(*)</span></label>
             <div class="checkbox pl-4">
               <label class="color-orange" *ngFor="let favourite of favourites">
                 <input type="checkbox"
@@ -85,16 +85,16 @@
                 class="check-box"></i>
                 {{favourite.favouriteName}}
               </label>
-            </div>
-            <span class="color-red" style="font-size: 12px"
-                  *ngIf="this.formInitial.controls.favourites.hasError('requireCheckboxToBeChecked') && (formInitial.controls.favourites?.touched ||formInitial.controls.favourites?.dirty)"><i
-              class="fa fa-warning"></i><i>At least a favourite is checked</i>
+              <span class="color-red ml-4" style="font-size: 12px"
+                    *ngIf="this.formInitial.controls.favourites.hasError('requireCheckboxToBeChecked') && (formInitial.controls.favourites?.touched ||formInitial.controls.favourites?.dirty)"><i
+                class="fas fa-warning"></i><i>At least a favourite is checked</i>
             </span>
+            </div>
           </div>
         </div>
         <hr>
         <div class="d-flex justify-content-center">
-          <button class="main-btn3" data-ripple="">Cancel</button>
+          <button class="main-btn3" data-ripple="" (click)="goToLogin()">Cancel</button>
           <button class="main-btn2" data-ripple="" (click)="backToRegistration()">Back</button>
           <button
             [class]="(formInitial.valid && this.avatarFile != null && this.backgroundFile != null)? 'main-btn':'main-btn3'"
@@ -111,9 +111,9 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content c-form color-box darker-box">
       <div class="modal-body">
-        <h5 style="text-align: center" class="color-green">Your account is create successfully</h5>
+        <h5 style="text-align: center" class="color-green">{{this.messageRegistry}}</h5>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer" [hidden]="!this.isLoggin">
         <button type="button" class="btn main-btn3 purple-box" data-dismiss="modal" (click)="goToLogin()">Login Page
         </button>
       </div>

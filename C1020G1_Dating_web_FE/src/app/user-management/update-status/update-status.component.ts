@@ -28,6 +28,7 @@ export class UpdateStatusComponent implements OnInit {
   user;
   messageStatus;
   messageUpdateSuccessful;
+  checkSave = false;
 
   openWindowCustomClass(content) {
     if (this.updateStatus.value.radio !== this.statusId) {

@@ -11,10 +11,10 @@ import {UserStorageService} from "./user-storage.service";
 export class RegisGuardService implements CanActivate {
 
   constructor(private router: Router,
-              private useStorage: UserStorageService) { }
+              private userStorage: UserStorageService) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (this.useStorage.isRegis())
+    if (this.userStorage.isRegis())
       return true;
 
     this.router.navigate(['registration']);

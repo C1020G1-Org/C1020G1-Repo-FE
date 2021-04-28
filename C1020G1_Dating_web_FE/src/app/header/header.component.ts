@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {SearchingService} from "../service/searching/searching.service";
 import {TokenStorageService} from "../service/auth/token-storage";
-import {User} from "../user-management/model/user-model";
+import {User} from "../models/user-model";
 
 @Component({
   selector: 'app-header',

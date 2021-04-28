@@ -6,8 +6,7 @@ import {Router} from "@angular/router";
 import {atLeastOneCheckboxValidator} from "../validator/atleast.validator";
 import {finalize} from "rxjs/operators";
 import {AngularFireStorage} from "@angular/fire/storage";
-import {Favourite, Reason} from "../model/user-model";
-import {TokenStorageService} from "../../service/auth/token-storage";
+import {Favourite, Reason} from "../../models/user-model";
 
 declare const $: any;
 
@@ -27,13 +26,14 @@ export class InitialInformationComponent implements OnInit {
   public reasons: Array<Reason>;
   public fileMessageAvatar: string = null;
   public fileMessageBackground: string = null;
+  public messageRegistry: string;
+  public isLoggin: boolean;
 
   constructor(public formBuilder: FormBuilder,
               public userCreate: UserCreateService,
               public userStorage: UserStorageService,
               public router: Router,
-              public storage: AngularFireStorage,
-              public tokenStorage: TokenStorageService) {
+              public storage: AngularFireStorage) {
   }
 
   ngOnInit(): void {
@@ -153,6 +153,10 @@ export class InitialInformationComponent implements OnInit {
   }
 
   async submit() {
+    this.messageRegistry="Registration in progress..."
+    this.isLoggin= false;
+    $('#successModal').modal('toggle');
+
     this.userStorage.user.marriaged = this.formInitial.value.marriaged;
 
     this.userStorage.favourites = [];
@@ -175,15 +179,14 @@ export class InitialInformationComponent implements OnInit {
     await this.saveBackground();
 
     this.userCreate.createUser(this.userStorage.backendObject).subscribe(() => {
-      $('#successModal').modal('toggle');
+      this.messageRegistry="Your account is registry successfully!";
+      this.isLoggin = true;
       this.userStorage.clear()
     }, (error) => {
       this.userStorage.serverError = error;
-      console.log(error);
-      console.log(this.userStorage.serverError.error.errors['account'])
+      $('#successModal').modal('toggle');
       this.router.navigateByUrl("registration");
     });
-
     this.userStorage.clearRegis();
   }
 
@@ -218,7 +221,7 @@ export class InitialInformationComponent implements OnInit {
   }
 
   goToLogin() {
-    this.tokenStorage.logOut();
+    this.userStorage.clear()
     this.router.navigateByUrl("login");
   }
 }

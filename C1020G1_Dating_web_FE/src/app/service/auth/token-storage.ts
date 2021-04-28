@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {User} from "../../user-management/model/user-model";
+import {User} from "../../models/user-model";
 
 const TOKEN_KEY = 'AuthToken';
 const ACCOUNT_NAME_KEY = 'AuthAccountName';

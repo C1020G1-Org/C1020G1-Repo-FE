@@ -14,6 +14,9 @@ import {RegisGuardService} from "./user-management/service/regis-guard";
 import {UpdateAvatarComponent} from "./user-management/update-avatar/update-avatar.component";
 import {UpdateStatusComponent} from "./user-management/update-status/update-status.component";
 import {ChangePasswordComponent} from "./user-management/change-password/change-password.component";
+import {EditComponent} from "./user-management/edit/edit.component";
+import {FriendRequestComponent} from "./wall/friend-request/friend-request.component";
+import {TopwallComponent} from "./wall/topwall/topwall.component";
 
 
 const routes: Routes = [
@@ -21,7 +24,8 @@ const routes: Routes = [
     path: '',
     children: [
       {path: 'name-search', component: NameSearchComponent},
-      {path: 'advanced-search', component: AdvancedSearchComponent}
+      {path: 'advanced-search', component: AdvancedSearchComponent},
+      {path: 'friend-request/:id', component: TopwallComponent},
     ],
     component: ErrorPageComponent, canActivate: [AuthGuardService]
   },
@@ -34,7 +38,8 @@ const routes: Routes = [
   {path: 'initial-information', component: InitialInformationComponent, canActivate: [RegisGuardService]},
   {path: 'update-avatar', component: UpdateAvatarComponent, canActivate: [AuthGuardService]},
   {path: 'status', component: UpdateStatusComponent, canActivate: [AuthGuardService]},
-  {path: 'changePassword', component: ChangePasswordComponent, canActivate: [AuthGuardService]}
+  {path: 'changePassword', component: ChangePasswordComponent, canActivate: [AuthGuardService]},
+  {path: 'edit', component: EditComponent, canActivate: [AuthGuardService]}
 ];
 
 @NgModule({

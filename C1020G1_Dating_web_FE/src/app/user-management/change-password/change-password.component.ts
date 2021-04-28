@@ -104,9 +104,15 @@ export class ChangePasswordComponent implements OnInit {
         this.modalService.open(content, {windowClass: 'dark-modal'});
       } else {
         this.messageErrorNewPassword = '*The new password is the same as the old one!!';
+        setTimeout(()=>{
+          this.messageErrorNewPassword = '';
+        },5000)
       }
     } else {
       this.messageErrorOldPassword = '*The password you entered is incorrect !!';
+      setTimeout(()=>{
+        this.messageErrorOldPassword = '';
+      },5000)
     }
   }
 
@@ -117,14 +123,9 @@ export class ChangePasswordComponent implements OnInit {
       this.openLoading();
       this.editService.changePassword(this.account.accountName, formChangePassword.oldPassword, formChangePassword.newPassword,
         formChangePassword.confirmPassword).subscribe((data) => {
-
-        setTimeout(() => {
-
-        }, 5000);
-
+        this.dialog.closeAll();
         this.tokenStorage.logOut();
         this.router.navigateByUrl("/login");
-
       });
     }
   }
@@ -153,9 +154,5 @@ export class ChangePasswordComponent implements OnInit {
       height: '200px',
       disableClose: true
     });
-    setTimeout(() => {
-      this.dialog.closeAll();
-      this.messageSuccessChangePassword = 'Change password successful !';
-    }, 1500);
   }
 }
