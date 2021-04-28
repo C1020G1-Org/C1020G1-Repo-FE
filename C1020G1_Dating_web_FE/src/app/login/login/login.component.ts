@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthenticationService} from "../../service/auth/authentication-service";
-import {TokenStorageService} from "../../service/auth/token-storage";
-import {Account} from "../../service/auth/account";
-import {ActivatedRoute, Router} from "@angular/router";
-import {FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser} from "angularx-social-login";
-import {JwtResponse} from "../../service/auth/JwtResponse";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AuthenticationService } from "../../service/auth/authentication-service";
+import { TokenStorageService } from "../../service/auth/token-storage";
+import { Account } from "../../service/auth/account";
+import { ActivatedRoute, Router } from "@angular/router";
+import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser } from "angularx-social-login";
+import { JwtResponse } from "../../service/auth/JwtResponse";
 
 
 @Component({
@@ -24,17 +24,16 @@ export class LoginComponent implements OnInit {
 
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              private auth: AuthenticationService,
-              private form: FormBuilder,
-              private tokenStorage: TokenStorageService,
-              private authService: SocialAuthService) {
+    private router: Router,
+    private auth: AuthenticationService,
+    private form: FormBuilder,
+    private tokenStorage: TokenStorageService,
+    private authService: SocialAuthService) {
   }
 
   ngOnInit(): void {
-
     this.loginForm = this.form.group({
-      accountName: ['', [Validators.required]],
+      accountName: ['', [Validators.required, Validators.pattern("^[0-9A-Za-z]*$")]],
       password: ['', Validators.required],
       remember: false
     });
@@ -48,16 +47,16 @@ export class LoginComponent implements OnInit {
       const tokenGoogle = new JwtResponse(this.socialUser.idToken)
       console.log(data)
       this.auth.google(tokenGoogle).subscribe(req => {
-          if (req.token == "") {
-            this.tokenStorage.saveUser(req.user);
-            this.router.navigateByUrl("/registration");
-          } else {
-            this.tokenStorage.saveToken(req.token);
-            this.tokenStorage.saveUser(req.user);
-            this.tokenStorage.saveAccountName(req.accountName);
-            this.router.navigateByUrl("/home");
-          }
-        },
+        if (req.token == "") {
+          this.tokenStorage.saveUser(req.user);
+          this.router.navigateByUrl("/registration");
+        } else {
+          this.tokenStorage.saveToken(req.token);
+          this.tokenStorage.saveUser(req.user);
+          this.tokenStorage.saveAccountName(req.accountName);
+          this.router.navigateByUrl("/home");
+        }
+      },
         error => {
           console.log(error);
           this.logOut()
@@ -74,17 +73,17 @@ export class LoginComponent implements OnInit {
       this.socialUser = data;
       const tokenFacebook = new JwtResponse(this.socialUser.authToken)
       this.auth.facebook(tokenFacebook).subscribe(req => {
-          if (req.token == "") {
-            this.tokenStorage.saveUser(req.user);
-            this.router.navigateByUrl("/registration");
-          } else {
-            this.tokenStorage.saveToken(req.token);
-            this.tokenStorage.saveUser(req.user);
-            this.tokenStorage.saveAccountName(req.accountName);
-            this.router.navigateByUrl("/home");
-          }
+        if (req.token == "") {
+          this.tokenStorage.saveUser(req.user);
+          this.router.navigateByUrl("/registration");
+        } else {
+          this.tokenStorage.saveToken(req.token);
+          this.tokenStorage.saveUser(req.user);
+          this.tokenStorage.saveAccountName(req.accountName);
+          this.router.navigateByUrl("/home");
+        }
 
-        },
+      },
         error => {
           console.log(error);
           this.logOut()
@@ -158,7 +157,7 @@ export class LoginComponent implements OnInit {
       this.tokenStorage.saveAccountName(this.getAccountName().value);
       this.router.navigateByUrl("/home");
     } else {
-      this.title = "Your account is not correct, please check your username or password";
+      this.title = "<i class=\"fa fa-exclamation-circle\"></i><i>Your account is not correct, please check your username or password</i>";
     }
   }
 

@@ -11,9 +11,6 @@ import {Router} from "@angular/router";
 })
 export class ErrorPageComponent implements OnInit {
 
-
-
-
   constructor(private accountService: AccountService,
               private tokenStorage: TokenStorageService,
               private router: Router) { }

@@ -1,1 +1,164 @@
-<p>advanced-search works!</p>
+<div class="theme-layout">
+  <section>
+    <div class="gap2 gray-bg">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row merged20" id="page-contents">
+              <div class="col-lg-12 pb-4">
+                <div>
+                  <label for="inputName">Name:</label>
+                  <input type="text" (keydown.enter)="doSearchName()" [(ngModel)]="name" class="form-control"
+                         id="inputName" placeholder="">
+                </div>
+                <div class="container p-0" id="myDIV" style="display: none">
+                  <div class="form-row">
+                    <div class="col-6">
+                      <label for="inputBirthday">Birthday:</label>
+<!--                      <select  id="inputBirthday" class="form-control d-inline-block" [(ngModel)]="birthday">-->
+                      <select  [(ngModel)]="selectedLevel" (change)="selected()" class="form-control d-inline-block"
+                      id="inputBirthday">
+<!--                        <option value="1999">1999</option>-->
+<!--                        <option value="2000">2000</option>-->
+<!--                        <option value="2001">2001</option>-->
+<!--                        <option value="2002">2002</option>-->
+<!--                        <option value="2003">2003</option>-->
+                        <option *ngFor="let item of listBirthYear" [ngValue]="item.year">{{item.year}}</option>
+                      </select>
+                    </div>
+                    <div class="col-6">
+                      <label for="inputGender">Gender:</label>
+                      <select id="inputGender" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label for="inputAddress">Address:</label>
+                    <select id="inputAddress" class="form-control">
+                      <option selected>Choose...</option>
+                      <option>...</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label for="inputOccupation">Occupation:</label>
+                    <input type="text" class="form-control" id="inputOccupation" placeholder="">
+                  </div>
+
+                  <div>
+                    <label for="inputInterests">Favourites:</label>
+                    <input type="text" class="form-control" id="inputInterests" placeholder="">
+                  </div>
+                </div>
+                <div class="pt-3">
+                  <button (click)="doSearchName()" class="btn btn-outline-primary">Search</button>
+                </div>
+                <div>
+                  <button onclick="myFunctionAdvancedSearch()" class="btn btn-outline-info">Advanced Search</button>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="search-tab">
+                  <div class="tab-content">
+                    <div class="tab-pane active fade show " id="All">
+                      <div class="central-meta item">
+                        <span class="create-post">People<a title="" href="#">See All</a></span>
+                        <div class="pit-friends" *ngFor ="let user of listUser">
+                          <figure><a href="#" title=""><img
+                            src="../../../assets/images/resources/searching1.jpg" alt=""></a></figure>
+                          <div class="pit-frnz-meta">
+                            <a href="#" title="">{{user.userName}}</a>
+                            <i>{{user.address}}</i>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="central-meta item">
+                                                <span class="create-post">Recommend Friends<a title=""
+                                                                                              href="#">See All</a></span>
+                        <div class="pit-friends">
+                          <figure><a href="#" title=""><img
+                            src="images/resources/searching1.jpg" alt=""></a></figure>
+                          <div class="pit-frnz-meta">
+                            <a href="#" title="">Jack Carter</a>
+                            <i>Tornoto</i>
+                            <ul class="add-remove-frnd">
+                              <li class="add-tofrndlist">
+                                <a title="Add friend" href="#"><i
+                                  class="fa fa-user-plus"></i></a>
+                              </li>
+                              <li class="remove-frnd">
+                                <a title="Send Message" href="#"><i
+                                  class="fa fa-comment"></i></a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="pit-friends">
+                          <figure><a href="#" title=""><img
+                            src="images/resources/searching2.jpg" alt=""></a></figure>
+                          <div class="pit-frnz-meta">
+                            <a href="#" title="">Jack Carter jackson</a>
+                            <i>Tornoto</i>
+                            <ul class="add-remove-frnd">
+                              <li class="add-tofrndlist">
+                                <a title="Add friend" href="#"><i
+                                  class="fa fa-user-plus"></i></a>
+                              </li>
+                              <li class="remove-frnd">
+                                <a title="Send Message" href="#"><i
+                                  class="fa fa-comment"></i></a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="pit-friends">
+                          <figure><a href="#" title=""><img
+                            src="images/resources/searching3.jpg" alt=""></a></figure>
+                          <div class="pit-frnz-meta">
+                            <a href="#" title="">Jack jackson</a>
+                            <i>manitoba</i>
+                            <ul class="add-remove-frnd">
+                              <li class="add-tofrndlist">
+                                <a title="Add friend" href="#"><i
+                                  class="fa fa-user-plus"></i></a>
+                              </li>
+                              <li class="remove-frnd">
+                                <a title="Send Message" href="#"><i
+                                  class="fa fa-comment"></i></a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="pit-friends">
+                          <figure><a href="#" title=""><img
+                            src="images/resources/searching4.jpg" alt=""></a></figure>
+                          <div class="pit-frnz-meta">
+                            <a href="#" title="">Jack william</a>
+                            <i>Nova Scotia</i>
+                            <ul class="add-remove-frnd">
+                              <li class="add-tofrndlist">
+                                <a title="Add friend" href="#"><i
+                                  class="fa fa-user-plus"></i></a>
+                              </li>
+                              <li class="remove-frnd">
+                                <a title="Send Message" href="#"><i
+                                  class="fa fa-comment"></i></a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div><!-- recommend peoples -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

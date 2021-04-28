@@ -1,3 +1,4 @@
+import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {RecoverPasswordComponent} from "./recover-password/recover-password.component";
@@ -6,6 +7,7 @@ import {RecoverPasswordComponent} from "./recover-password/recover-password.comp
 
 const routes: Routes = [
   {path: 'recover' , component: RecoverPasswordComponent},
+  {path: 'login' , component: LoginComponent}
 ];
 
 @NgModule({

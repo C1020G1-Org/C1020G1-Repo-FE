@@ -4,13 +4,14 @@
 
 export const environment = {
   production: false,
-  firebaseConfig: {
-    apiKey: "AIzaSyAqXKJYP5KoUlB4Pe-GyT5of52DCXso2Tk",
-    authDomain: "social-d792e.firebaseapp.com",
-    projectId: "social-d792e",
-    storageBucket: "social-d792e.appspot.com",
-    messagingSenderId: "1057724187940",
-    appId: "1:1057724187940:web:ca792eadc0c59d6b171fb1"
+  firebase: {
+    apiKey: 'AIzaSyBv6lg3DpeTcr4I_MgVRFolwR8zuhjwFOM',
+    authDomain: 'binz-firebase.firebaseapp.com',
+    projectId: 'binz-firebase',
+    storageBucket: 'binz-firebase.appspot.com',
+    messagingSenderId: '33556486343',
+    appId: '1:33556486343:web:e4530b507fe341a25f86e2',
+    measurementId: 'G-79N359R3BZ'
   }
 };
 

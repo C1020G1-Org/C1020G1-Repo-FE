@@ -12,3 +12,7 @@
 .fa-google-plus-square:hover {
   color: #ca212a;
 }
+
+.cursor {
+  cursor: pointer;
+}
