@@ -139,6 +139,10 @@ export class TimelineComponent implements OnInit {
     this.checkFriendRequestUserWall();
 
     this.checkFriendUserWall();
+
+    console.log(this.checkFriend);
+    console.log(this.checkFriendRequest);
+    console.log(this.checkFriendRequest2);
   }
 
 
@@ -226,7 +230,7 @@ export class TimelineComponent implements OnInit {
           }
         }
         this.friendRequestService.saveListFriendRequest(data);
-        this.listFriendRequest = this.friendRequestService.getListFriendRequest();
+        this.listFriendRequest = this.friendRequestService.getListFriendRequest(listFriendRequest.length);
         this.friendRequestService.setCheckFriendRequest2True();
         console.log(this.checkFriendRequest2);
       }

@@ -13,22 +13,23 @@
       <li><a href="#" title="Home" data-ripple=""><i class="fa fa-home"></i></a></li>
       <li>
         <a href="#" title="Friend Requests" data-ripple="">
-          <i class="fa fa-user"></i><em class="bg-red">{{notiList.length}}</em>
+          <i class="fa fa-user"></i><em class="bg-red" *ngIf="notiList.length > 0">{{notiList.length}}</em>
         </a>
         <div class="dropdowns">
-          <span><a routerLink="/friend_request" title="">View all Requests</a></span>
-          <ul class="drops-menu">
+          <span *ngIf="notiList.length > 0"><a routerLink="/friend_request" title="">View all Requests</a></span>
+          <ul class="drops-menu" *ngIf="notiList.length > 0">
             <li *ngFor="let notify of notiList">
               <div>
                 <figure>
-                  <img src="{{notify.friendRequest.sendUser.userAvatar}}" alt="" style="height: 15%;width: 15%;margin-left: 5px">
+                  <img src="{{notify.friendRequest.sendUser.userAvatar}}" alt=""
+                       style="height: 15%;width: 15%;margin-left: 5px">
                 </figure>
                 <div class="mesg-meta">
                   <h6><a href="#" title="">{{notify.friendRequest.sendUser.userName}}</a></h6>
                 </div>
                 <div class="add-del-friends" style="margin-top: 10px">
                   <button title="Add Friend" style="border: none;background: white"
-                  (click)="acceptFriendRequestInHeader(notify.friendRequest,notify.key)">
+                          (click)="acceptFriendRequestInHeader(notify.friendRequest,notify.key)">
                     <i class="fa fa-check-square fa-2x" style="color: #ff6e16"></i>
                   </button>
                   <button title="Unrequest" style="border: none;background: white" data-toggle="modal"
@@ -37,6 +38,11 @@
                     </i></button>
                 </div>
               </div>
+            </li>
+          </ul>
+          <ul class="drops-menu" *ngIf="notiList.length == 0">
+            <li style="color: #ff6e16;text-align: center;margin-top: 10%;margin-bottom: 10%">Has not friend request
+              <i class="fa fa-smile fa-2x"></i>
             </li>
           </ul>
         </div>

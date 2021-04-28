@@ -56,6 +56,10 @@ export class FriendRequestComponent implements OnInit {
 
   userWall: User;
 
+  checkLoadMore: boolean;
+
+  numberSplice = 4;
+
   ngOnInit(): void {
 
     this.setNotiList();
@@ -212,10 +216,10 @@ export class FriendRequestComponent implements OnInit {
             break;
           }
         }
-        this.friendRequestService.saveListFriendRequest(data);
-        this.listFriendRequest = this.friendRequestService.getListFriendRequest();
+        this.friendRequestService.saveListFriendRequest(listFriendRequest);
+        this.listFriendRequest = this.friendRequestService.getListFriendRequest(this.numberSplice);
+        this.checkLoadMore = this.friendRequestService.getCheckLoadMore();
         this.friendRequestService.setCheckFriendRequest2True();
-        console.log(this.checkFriendRequest2);
       }
     });
   }
@@ -234,7 +238,6 @@ export class FriendRequestComponent implements OnInit {
         }
       }
       this.checkFriendRequest2 = this.friendRequestService.getCheckFriendRequest2();
-      console.log(this.checkFriendRequest2);
     });
   }
 
@@ -253,5 +256,11 @@ export class FriendRequestComponent implements OnInit {
         }
       }
     });
+  }
+
+  loadMoreFriendRequest(){
+    this.numberSplice += 4;
+    this.listFriendRequest = this.friendRequestService.getListFriendRequest(this.numberSplice);
+    this.checkLoadMore = this.friendRequestService.getCheckLoadMore();
   }
 }
