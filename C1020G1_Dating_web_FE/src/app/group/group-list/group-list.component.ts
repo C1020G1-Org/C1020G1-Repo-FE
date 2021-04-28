@@ -11,6 +11,7 @@ import {Title} from "@angular/platform-browser";
 })
 export class GroupListComponent implements OnInit {
   public groups;
+  public pageNumber = 0;
   searchForm: FormGroup;
 
   constructor(
@@ -19,21 +20,34 @@ export class GroupListComponent implements OnInit {
     private title: Title
   ) { }
 
+  getAllGroup(){
+    this.groupService.getAllGroup(this.pageNumber).subscribe(data => {
+      let listGroups = data.content;
+      if (this.groups != null){
+        this.groups = this.groups.concat(listGroups);
+      }else {
+        this.groups = listGroups;
+      }
+    });
+  }
+
   ngOnInit(){
     this.title.setTitle("Group List");
     this.searchForm = this.formBuilder.group({
       search:""
-    })
-
-    this.groupService.getAllGroup().subscribe(data => {
-      this.groups = data;
     });
+    this.getAllGroup();
   }
 
   onSubmit() {
     this.groupService.getGroupByName(this.searchForm.get("search").value).subscribe(data=>{
       this.groups = data;
-
+    this.loadMoreGroup();
     });
+  }
+
+  loadMoreGroup() {
+    this.pageNumber ++;
+    this.getAllGroup();
   }
 }

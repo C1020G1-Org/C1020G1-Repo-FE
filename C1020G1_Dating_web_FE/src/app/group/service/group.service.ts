@@ -10,8 +10,8 @@ export class GroupService {
   public API: string = 'http://localhost:8080/group';
   constructor(public http: HttpClient) {}
 
-  getAllGroup(): Observable<any> {
-    return this.http.get(this.API);
+  getAllGroup(pageNumber: number): Observable<any> {
+    return this.http.get(this.API + '?page=' + pageNumber);
   }
 
   getGroupById(groupId): Observable<any>{
@@ -26,8 +26,8 @@ export class GroupService {
     return this.http.get(this.API + '-search/'+ groupName);
   }
 
-  getAllMemberGroup(groupId): Observable<any>{
-    return this.http.get(this.API+'-member/'+ groupId);
+  getAllMemberGroup(groupId, pageNumber: number): Observable<any>{
+    return this.http.get(this.API+'-member/'+ groupId + '?page=' + pageNumber);
   }
 
   getGroupUserByGroupIdAndUserId(groupId,userId){

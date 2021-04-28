@@ -87,7 +87,7 @@
                     <div class="row">
                       <div class="col-lg-6">
                         <div class="align-left">
-                          <h5>Groups <span>56</span></h5>
+                          <h5>Groups <span>{{groups.length}}</span></h5>
                         </div>
                       </div>
                       <div class="col-lg-6">
@@ -126,10 +126,11 @@
                       </div>
                     </div>
                   </div>
-<!--                  <div class="lodmore">-->
-<!--                    <span>Viewing 1-11 of 302 Groups</span>-->
-<!--                    <button class="btn-view btn-load-more"></button>-->
-<!--                  </div>-->
+                  <div class="lodmore">
+                    <span>Viewing 1-5 of Groups</span>
+                    <button class="btn-view btn-load-more" title="Load More" data-toggle="tooltip"
+                              (click)="loadMoreGroup()"></button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -232,3 +233,39 @@
   </div>
 </div><!-- send message popup -->
 
+<!--<script>-->
+<!--  jQuery(function($){-->
+<!--    $('.misha_loadmore').click(function(){-->
+
+<!--      let button = $(this),-->
+<!--        data = {-->
+<!--          'action': 'loadmore',-->
+<!--          'query': misha_loadmore_params.posts, // that's how we get params from wp_localize_script() function-->
+<!--          'page' : misha_loadmore_params.current_page-->
+<!--        };-->
+
+<!--      $.ajax({-->
+<!--        url : misha_loadmore_params.ajaxurl, // AJAX handler-->
+<!--        data : data,-->
+<!--        type : 'POST',-->
+<!--        beforeSend : function ( xhr ) {-->
+<!--          button.text('Loading...'); // change the button text, you can also add a preloader image-->
+<!--        },-->
+<!--        success : function( data ){-->
+<!--          if( data ) {-->
+<!--            button.text( 'More posts' ).prev().before(data); // insert new posts-->
+<!--            misha_loadmore_params.current_page++;-->
+
+<!--            if ( misha_loadmore_params.current_page == misha_loadmore_params.max_page )-->
+<!--              button.remove(); // if last page, remove the button-->
+
+<!--            // you can also fire the "post-load" event here if you use a plugin that requires it-->
+<!--            // $( document.body ).trigger( 'post-load' );-->
+<!--          } else {-->
+<!--            button.remove(); // if no data, remove the button as well-->
+<!--          }-->
+<!--        }-->
+<!--      });-->
+<!--    });-->
+<!--  });-->
+<!--</script>-->

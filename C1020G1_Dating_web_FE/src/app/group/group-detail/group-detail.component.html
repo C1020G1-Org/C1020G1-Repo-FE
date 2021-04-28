@@ -41,7 +41,7 @@
                   </div>
                 </aside>
               </div>
-              <div class="col-lg-6" *ngIf="group.scope == 'public' || isJoin">
+              <div class="col-lg-6" *ngIf="group.scope == 'public' || isJoin ; else elseBlock1">
                 <div class="central-meta postbox">
                   <span class="create-post">Create post</span>
                   <div class="new-postbox">
@@ -1322,6 +1322,11 @@
                   </div>
                 </div>
               </div><!-- central meta -->
+
+              <ng-template #elseBlock1>
+                <h5 style="color: orange">You have join in group to see all post and information this group !!</h5>
+              </ng-template>
+
               <div class="col-lg-3">
 
               </div>
