@@ -99,18 +99,25 @@
               </div>
               <div *ngIf="listFriendRequest.length > 0">
                 <div class="central-meta padding30">
-                  <div class="row merged20">
+                  <div class="row">
                     <div *ngFor="let friendRequest of listFriendRequest" class="col-lg-3 col-md-6 col-sm-6">
-                      <div class="friend-block">
+                      <div class="friend-box">
                         <figure>
-                          <img src="{{friendRequest.sendUser.userAvatar}}" alt="">
+                          <img src="{{friendRequest.sendUser.userBackground}}" style="width: 100%;height: 100px">
                         </figure>
 
                         <div class="frnd-meta">
+                          <figure>
+                            <img src="{{friendRequest.sendUser.userAvatar}}"
+                                 style="width: 80px;height: 80px;border-radius: 50%;padding-top: 5px">
+                          </figure>
                           <div class="frnd-name">
                             <a href="#" title="">{{friendRequest.sendUser.userName}}</a>
-                            <span>{{friendRequest.sendUser.address}}</span>
+                            <span>Address: {{friendRequest.sendUser.address}}</span>
                             <br>
+                            <span>Gender: {{friendRequest.sendUser.gender}}</span>
+                            <br>
+                            <span>Marriaged: {{friendRequest.sendUser.marriaged}}</span>
                             <span *ngIf="friendRequest.mutualFriends.length > 1"
                                   (mouseover)="getMutualFriend(friendRequest.mutualFriends)" tooltip="{{mutualFriend}}">
                             {{friendRequest.mutualFriends.length}} mutual friends
@@ -135,8 +142,7 @@
                       </div>
                     </div>
                   </div>
-                  <div>
-                  </div>
+                  <button *ngIf="checkLoadMore" (click)="loadMoreFriendRequest()" class="btn-load-more btn-view"></button>
                 </div>
               </div>
               <div *ngIf="listFriendRequest.length == 0">
