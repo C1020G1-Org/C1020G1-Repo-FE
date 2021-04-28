@@ -1,0 +1,19 @@
+<div class="modal-header">
+    <h4 class="modal-title">Warning Member</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <label for="type">Reason</label>
+    <select id="type" (change)="changeValue($event.target.value)" class="form-control form-select">
+        <option value="18+ post" selected>18+ post</option>
+        <option value="Impolite post">Impolite post</option>
+        <option value="Racism post">Racism post</option>
+    </select>
+    <small *ngIf="!isValid" class="text-danger">Reason invalid!</small>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('Cross click')">Cancel</button>
+    <button type="button" class="btn btn-outline-danger" (click)="warning()">OK</button>
+</div>
