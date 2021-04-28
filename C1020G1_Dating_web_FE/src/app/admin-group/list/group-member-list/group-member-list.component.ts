@@ -1,8 +1,8 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { GroupUser } from 'src/app/model/group-user';
-import {GroupManagementService} from "../../service/group.service";
 import { Title } from '@angular/platform-browser';
+import { GroupManagementService } from 'src/app/service/group-management.service';
 
 @Component({
   selector: 'app-group-member-list',

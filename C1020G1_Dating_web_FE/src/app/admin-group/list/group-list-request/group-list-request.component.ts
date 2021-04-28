@@ -2,9 +2,9 @@ import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/model/user';
-import { GroupManagementService } from "../../service/group.service";
 import { GroupRequest } from "../../../model/group-request";
 import { Title } from '@angular/platform-browser';
+import { GroupManagementService } from 'src/app/service/group-management.service';
 
 
 @Component({
@@ -15,7 +15,6 @@ import { Title } from '@angular/platform-browser';
 export class GroupListRequestComponent implements OnInit {
   data;
   list: GroupRequest[] = [];
-  listInvite: User[];
   page = 0;
   key = "";
   request: GroupRequest;

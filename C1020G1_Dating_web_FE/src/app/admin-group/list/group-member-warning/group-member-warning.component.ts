@@ -5,7 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GroupWarning } from "../../../model/warning";
-import { GroupManagementService } from "../../service/group.service";
+import { GroupManagementService } from 'src/app/service/group-management.service';
 
 @Component({
   selector: 'app-group-member-warning',
@@ -57,12 +57,12 @@ export class GroupMemberWarningComponent implements OnInit {
     return {
       groupUserId: 0, group: null, user:
       {
-        userId: null, userName: '', userAvatar: '', userBackground: '', account: null, address: '', birthday: '', email: '', gender: '',
+        userId: null, userName: '', userAvatar: '', userBackground: '', account: null, address: '', birthday: null, email: '', gender: '',
         marriaged: '', occupation: '', status: null, ward: null
       }
     };
   }
-
+  
   emit() {
     this.page = 0;
     this.set(this.member.groupUserId);

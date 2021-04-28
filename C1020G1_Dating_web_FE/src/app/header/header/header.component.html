@@ -10,10 +10,10 @@
       </form>
     </div>
     <ul class="setting-area pr-5">
-      <li><a href="newsfeed.html" title="Home" data-ripple=""><i class="fa fa-home"></i></a></li>
+      <li><a routerLink="/" title="Home" data-ripple=""><i class="fa fa-home"></i></a></li>
       <li>
-        <a href="#" title="Friend Requests" data-ripple="">
-          <i class="fa fa-user"></i><em class="bg-red">5</em>
+        <a title="Friend Requests" data-ripple="">
+          <i class="fa fa-user cursor color-999999"></i><em class="bg-red">5</em>
         </a>
         <div class="dropdowns">
           <span>5 New Requests <a href="#" title="">View all Requests</a></span>
@@ -116,11 +116,11 @@
                   <figure>
                     <img class="noti-image" [src]="noti.imageUrl" alt="">
                   </figure>
-                  <div (click)="nav(noti)" class="mesg-meta">
+                  <div (click)="nav(noti.href)" class="mesg-meta">
                     <h6>{{noti.sender}}</h6>
                     <span class="content-span">{{noti.content}}</span>
                   </div>
-                  <a (click)="clear(noti)" class="clear-noti"><i class="fa fa-times-circle"></i></a>
+                  <a (click)="clear(noti.key)" class="clear-noti"><i class="fa fa-times-circle"></i></a>
                 </div>
               </a>
             </li>
@@ -207,8 +207,8 @@
       </li>
     </ul>
     <div class="user-img">
-      <h5>Jack Carter</h5>
-      <img src="../../../assets/images/resources/admin.jpg" alt="">
+      <h5>Kim Phương</h5>
+      <img src="https://static2.yan.vn/YanNews/202005/202005220338210409-bee6f138-0608-4d56-bce3-27148a855654.png" style="width:45px;height:45px;" alt="">
       <span class="status f-online"></span>
       <div class="user-setting">
         <span class="seting-title">Chat setting <a href="#" title="">see all</a></span>

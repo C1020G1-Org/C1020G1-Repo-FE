@@ -27,3 +27,7 @@
 .color-999999 {
     color: #999999;
 }
+
+a {
+  text-decoration: none;
+}

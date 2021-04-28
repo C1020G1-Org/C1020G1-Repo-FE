@@ -1,10 +1,11 @@
-import { NotificationGroupService } from '../../service/group-notification.service';
+import { TokenStorageService } from './../../../service/auth/token-storage';
 import { GroupRequest } from './../../../model/group-request';
-import { User } from '../../../model/user';
-import { GroupManagementService } from '../../service/group.service';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Group } from 'src/app/model/group';
 import Notification from 'src/app/model/group-notification';
+import { NotificationGroupService } from 'src/app/service/group-notification.service';
+import { GroupManagementService } from 'src/app/service/group-management.service';
+import { User } from 'src/app/user-management/model/user-model';
 
 @Component({
   selector: 'app-invite-modal',
@@ -24,7 +25,7 @@ export class InviteModalComponent implements OnInit {
   emit() {
     this.event.emit();
   }
-  constructor(private groupManagementService: GroupManagementService, private notificationGroupService: NotificationGroupService) { }
+  constructor(private groupManagementService: GroupManagementService, private notificationGroupService: NotificationGroupService, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
     this.changeListInvite('1');
@@ -33,10 +34,10 @@ export class InviteModalComponent implements OnInit {
   changeListInvite(value: string) {
     if (value == '1') {
       this.feedback = '';
-      this.groupManagementService.getListInviteFriends().subscribe(data => this.list = data, () => {}, () => this.member = this.list[0]);
+      this.groupManagementService.getListInviteFriends().subscribe(data => this.list = data, () => { }, () => this.member = this.list[0]);
     } else if (value == '2') {
       this.feedback = '';
-      this.groupManagementService.getListInviteFriendsOfFriends().subscribe(data => this.list = data, () => {}, () => this.member = this.list[0]);
+      this.groupManagementService.getListInviteFriendsOfFriends().subscribe(data => this.list = data, () => { }, () => this.member = this.list[0]);
     } else {
       this.feedback = 'Type invalid!';
     }
@@ -47,8 +48,8 @@ export class InviteModalComponent implements OnInit {
     const id = parseFloat(value);
     this.member = undefined;
     this.friendFeedback = 'Friend invalid!';
-    for (let user of this.list){
-      if (user.userId == id){
+    for (let user of this.list) {
+      if (user.userId == id) {
         this.member = user;
         this.friendFeedback = '';
         break;
@@ -59,23 +60,21 @@ export class InviteModalComponent implements OnInit {
   submit() {
     if (this.member != undefined || this.member != null) {
       let group: Group;
-      let user: User;
       let groupRequest: GroupRequest;
       this.groupManagementService.getGroupById().subscribe(data => group = data, err => console.log(err), () =>
-        this.groupManagementService.getUserById(this.member.userId).subscribe(data => user = data, () => { },
-          () => {
-            groupRequest = {
-              groupRequestId: null,
-              sender: 'admin',
-              group: group,
-              user: user
-            }
-            this.groupManagementService.inviteMember(groupRequest).subscribe(() => { }, err => console.log(err), () => {
-              this.emit();
-              this.noti(user.userId, group);
-              this.modal.dismiss('ok close');
-            })
-          }));
+        {
+          groupRequest = {
+            groupRequestId: null,
+            sender: 'admin',
+            group: group,
+            user: this.member
+          }
+          this.groupManagementService.inviteMember(groupRequest).subscribe(() => { }, err => console.log(err), () => {
+            this.emit();
+            this.noti(this.member.userId, group);
+            this.modal.dismiss('ok close');
+          })
+        });
     } else {
       this.friendFeedback = 'Friend invalid!';
     }

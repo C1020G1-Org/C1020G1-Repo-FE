@@ -1,9 +1,9 @@
-import { NotificationGroupService } from '../../service/group-notification.service';
-import { GroupManagementService } from './../../service/group.service';
 import { GroupUser } from './../../../model/group-user';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { GroupWarning } from 'src/app/model/warning';
 import Notification from 'src/app/model/group-notification';
+import { NotificationGroupService } from 'src/app/service/group-notification.service';
+import { GroupManagementService } from 'src/app/service/group-management.service';
 
 @Component({
   selector: 'app-warning-member-modal',
@@ -51,7 +51,7 @@ export class WarningMemberModalComponent implements OnInit {
         groupUser: this.member,
         warningDate: dateStr
       }
-      this.groupManagementService.warningMember(groupWarning).subscribe(() => { }, () => {}, () => {
+      this.groupManagementService.warningMember(groupWarning).subscribe(() => { }, () => { }, () => {
         this.noti();
         this.modal.dismiss('ok close');
       });
@@ -62,7 +62,7 @@ export class WarningMemberModalComponent implements OnInit {
     this.emit();
     let notification = new Notification();
     notification.userId = this.member.user.userId;
-    notification.content = this.member.group.groupName + ' Warning you.';
+    notification.content = this.member.group.groupName + ' Warn you for ' + this.type;
     notification.sender = this.member.group.groupName;
     notification.href = '/group/' + this.member.group.groupId;
     notification.imageUrl = this.member.group.imageAvatarUrl;

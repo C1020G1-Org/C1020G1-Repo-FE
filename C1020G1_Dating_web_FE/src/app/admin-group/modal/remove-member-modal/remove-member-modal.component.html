@@ -7,6 +7,9 @@
 <div class="modal-body">
     <p><strong>Are you sure you want to remove <span class="text-danger">{{member.user.userName}}</span>?</strong>
     </p>
+    <p>All information associated to this user profile will be permanently deleted.
+        <span class="text-danger">This operation can not be undone.</span>
+    </p>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('Cross click')">Cancel</button>

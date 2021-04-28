@@ -1,12 +1,16 @@
-.group-box > figure > img {
-    width: 100px;
-    height: 100px;
+.group-box>figure>img {
+  width: 100px;
+  height: 100px;
 }
 
 .cursor {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .invites-btns {
-    margin-top: 5px !important;
+  margin-top: 5px !important;
+}
+
+a {
+  text-decoration: none !important;
 }

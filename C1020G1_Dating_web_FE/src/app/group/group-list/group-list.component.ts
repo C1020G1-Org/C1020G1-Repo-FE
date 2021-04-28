@@ -1,7 +1,8 @@
+import { TokenStorageService } from './../../service/auth/token-storage';
 import { Component, OnInit } from '@angular/core';
-import {GroupService} from '../service/group.service';
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {Title} from "@angular/platform-browser";
+import { GroupService } from 'src/app/service/group.service';
 
 
 @Component({
@@ -16,7 +17,8 @@ export class GroupListComponent implements OnInit {
   constructor(
     public groupService: GroupService,
     private formBuilder: FormBuilder,
-    private title: Title
+    private title: Title,
+    private tokenStorage: TokenStorageService
   ) { }
 
   ngOnInit(){
@@ -35,5 +37,9 @@ export class GroupListComponent implements OnInit {
       this.groups = data;
 
     });
+  }
+
+  get user() {
+     return this.tokenStorage.getUser();
   }
 }

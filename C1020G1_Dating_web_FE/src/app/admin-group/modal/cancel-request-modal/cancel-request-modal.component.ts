@@ -1,9 +1,9 @@
-import { NotificationGroupService } from '../../service/group-notification.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { GroupRequest } from 'src/app/model/group-request';
 import Notification from 'src/app/model/group-notification';
-import { GroupManagementService } from '../../service/group.service';
+import { NotificationGroupService } from 'src/app/service/group-notification.service';
+import { GroupManagementService } from 'src/app/service/group-management.service';
 
 @Component({
   selector: 'app-cancel-request-modal',

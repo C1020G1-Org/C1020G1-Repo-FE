@@ -1,4 +1,4 @@
-import { GroupManagementService } from './../service/group.service';
+import { GroupManagementService } from '../../service/group-management.service';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({

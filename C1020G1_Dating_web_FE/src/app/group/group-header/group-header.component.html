@@ -1,4 +1,3 @@
-<!-- <div class="row" id="page-contents"> -->
 <div class="user-profile">
   <figure>
     <div class="edit-pp">
@@ -8,18 +7,31 @@
       </label>
     </div>
     <img src="{{group.imageBackground}}" style="height: 400px" alt="">
-    <ul class="profile-controls" *ngIf="userId !== group.admin.userId">
+    <ul class="profile-controls">
 
       <li *ngIf="!isJoin">
-        <button class="btn" (click)="saveRequest()"
-          style="align-items: center; background: #ff4e01; border-radius: 50%; height: 40px; width: 40px"
-          title="Join Group" data-toggle="tooltip">
+        <button class="btn btn-j" (click)="saveRequest()" title="Join Group" data-toggle="tooltip">
           <i class="fa fa-user-plus " style="color: white"></i></button>
+      </li>
+      <li *ngIf="requestType === 'user'">
+        <button class="btn btn-j" (click)="deniedRequest()" title="Denied Request" data-toggle="tooltip">
+          <i class="fa fa-times text-light"></i>
+        </button>
+      </li>
+      <li *ngIf="requestType === 'admin'">
+        <button class="btn btn-j" (click)="acceptRequest()" title="Accept" data-toggle="tooltip">
+          <i class="fa fa-check text-light"></i>
+        </button>
+      </li>
+      <li *ngIf="requestType === 'admin'">
+        <button class="btn btn-j" (click)="deniedRequest()" title="Denied" data-toggle="tooltip">
+          <i class="fa fa-times text-light"></i>
+        </button>
       </li>
 
       <li><a class="send-mesg" href="#" title="Send Message" data-toggle="tooltip"><i class="fa fa-comment"></i></a>
       </li>
-      <li>
+      <li *ngIf="group.admin.userId === userId">
         <div class="edit-seting" title="Edit Profile image"><i class="fa fa-sliders"></i>
           <ul class="more-dropdown">
             <li><a href="" title="">Update Profile Photo</a></li>
@@ -54,16 +66,20 @@
       <div class="col-lg-10 col-md-9">
         <ul class="profile-menu">
           <li>
-            <a class="" routerLink="/group-detail/{{group.groupId}}">Timeline</a>
+            <a [class.active]='router.url === "/group/details/"+group.groupId'
+              routerLink="/group/details/{{group.groupId}}">Timeline</a>
           </li>
           <li *ngIf="group.admin.userId !== userId">
-            <a class="" routerLink="/group-member/{{group.groupId}}">Member</a>
+            <a [class.active]='router.url === "/group/request/"+group.groupId'
+              routerLink="/group/member/{{group.groupId}}">Member</a>
           </li>
           <li *ngIf="group.admin.userId === userId">
-            <a class="" routerLink="/group/member/list/{{group.groupId}}">Member</a>
+            <a [class.active]='router.url === "/group/member/list/"+group.groupId'
+              routerLink="/group/member/list/{{group.groupId}}">Member</a>
           </li>
           <li *ngIf="group.admin.userId === userId">
-            <a class="" routerLink="/group/request/list/{{group.groupId}}">Request participation</a>
+            <a [class.active]='router.url === "/group/request/list/"+group.groupId'
+              routerLink="/group/request/list/{{group.groupId}}">Request participation</a>
           </li>
         </ul>
       </div>
@@ -81,7 +97,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Are you sure you want to delete <span style="color: red">{{group.groupName}}</span> ?</p>
+        <p>Are you sure you want to delete <span class="text-danger">{{group.groupName}}</span> ?</p>
         <p class="text-warning">This action cannot be undone.</p>
       </div>
       <div class="modal-footer">

@@ -22,8 +22,8 @@
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12">
                                             <div class="group-box">
-                                                <figure><img [src]="member.user.userAvatar" style="width:100px !important"
-                                                        alt=""></figure>
+                                                <figure><img [src]="member.user.userAvatar"
+                                                        style="width:100px !important" alt=""></figure>
                                                 <a class="cursor">{{member.user.userName}}</a>
                                                 <span>{{member.user.address}}</span><br>
                                                 <div class="invites-btns">
@@ -51,10 +51,18 @@
                                             </tbody>
                                         </table>
                                         <ul class="inline pagination margin-260">
-                                            <li *ngIf="page > 0"><button (click)="paging(page - 1)">{{page}}</button></li>
-                                            <li><button class="focus">{{page + 1}}</button></li>
-                                            <li *ngIf="data.totalPages > page + 1"><button (click)="paging(page + 1)">{{page
+                                            <li><button (click)="paging(0)"><span
+                                                        aria-hidden="true">&laquo;</span></button></li>
+                                            <li *ngIf="page > 0"><button (click)="paging(page - 1)">{{page}}</button>
+                                            </li>
+                                            <li *ngIf="data.totalPages > 1"><button class="focus">{{page + 1}}</button>
+                                            </li>
+                                            <li *ngIf="data.totalPages > page + 1"><button
+                                                    (click)="paging(page + 1)">{{page
                                                     + 2}}</button></li>
+                                            <li><button (click)="paging(data.totalPages - 1)"><span
+                                                        aria-hidden="true">&raquo;</span></button></li>
+
                                         </ul>
                                     </div>
                                 </div>

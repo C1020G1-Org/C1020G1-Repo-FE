@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {GroupService} from "../service/group.service";
 import {ActivatedRoute} from "@angular/router";
 import {Title} from "@angular/platform-browser";
+import { GroupService } from 'src/app/service/group.service';
 
 @Component({
   selector: 'app-group-member',

@@ -2,9 +2,9 @@ import { TokenStorageService } from './../../service/auth/token-storage';
 import { Component, OnInit } from '@angular/core';
 import { SearchingService } from "../../service/searching/searching.service";
 import { Router } from "@angular/router";
-import { NotificationGroupService } from 'src/app/admin-group/service/group-notification.service';
 import { map } from 'rxjs/operators';
 import Notification from 'src/app/model/group-notification';
+import { NotificationGroupService } from 'src/app/service/group-notification.service';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
   notiList: Notification[] = [];
 
   constructor(private notificationGroupService: NotificationGroupService, private searchingService: SearchingService,
-    private router: Router,private tokenStorageService:TokenStorageService) { }
+    private router: Router, private tokenStorageService: TokenStorageService) { }
 
   search(event: any) {
     this.searchingService.searchTerm.next(event.target.value);
@@ -31,7 +31,10 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.setNotiList();
   }
-
+  /**
+   * @author PhinNL
+   * get all group notification by user logged
+   */
   setNotiList() {
     this.notificationGroupService.getAll(this.userId).snapshotChanges().pipe(
       map(changes =>
@@ -43,19 +46,31 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  /**
+   * @author PhinNL
+   * clear all group notification by user logged
+   */
   deleteAll() {
     this.notificationGroupService.deleteAll(this.userId).then(() => console.log('delete all success!'));
   }
 
-  nav(noti: Notification) {
-    this.router.navigateByUrl(noti.href);
+  /**
+   * @author PhinNL
+   * navigate to sender page
+   */
+  nav(href: string) {
+    this.router.navigateByUrl(href);
   }
 
-  clear(noti: Notification){
-    this.notificationGroupService.delete(noti.key, 5).then(() => console.log('delete success!'));
+  /**
+   * @author PhinNL
+   * clear one group notification by user logged
+   */
+  clear(key: string) {
+    this.notificationGroupService.delete(key, this.userId).then(() => console.log('delete success!'));
   }
 
   get userId(): number {
-    return 5;
+    return this.tokenStorageService.getUser().userId;
   }
 }

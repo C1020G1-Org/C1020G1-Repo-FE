@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div class="theme-layout">
 
 
@@ -15,7 +16,7 @@
                       <input type="file">
                     </label>
                   </div>
-                  <img src="images/resources/profile-image.jpg" alt="">
+                  <img [src]="user.userBackground" style="height:400px;" alt="">
                   <ul class="profile-controls">
                     <li><a href="#" title="Add friend" data-toggle="tooltip"><i class="fa fa-user-plus"></i></a></li>
                     <li><a class="send-mesg" href="#" title="Send Message" data-toggle="tooltip"><i class="fa fa-comment"></i></a></li>
@@ -40,7 +41,7 @@
                     <div class="col-lg-2 col-md-3">
                       <div class="profile-author">
                         <div class="profile-author-thumb">
-                          <img alt="author" src="images/resources/author.jpg">
+                          <img alt="author" [src]="user.userAvatar">
                           <div class="edit-dp">
                             <label class="fileContainer">
                               <i class="fa fa-camera"></i>
@@ -50,8 +51,8 @@
                         </div>
 
                         <div class="author-content">
-                          <a class="h4 author-name" href="about.html">Jack Carter</a>
-                          <div class="country">Ontario, CA</div>
+                          <a class="h4 author-name" href="about.html">{{user.userName}}</a>
+                          <div class="country">{{user.ward.district.province.provinceName}}</div>
                         </div>
                       </div>
                     </div>
@@ -137,18 +138,7 @@
         </div>
       </div>
     </div>
-  </section><!-- content -->
-
-
-  <div class="bottombar">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <span class="copyright">© C1020. All rights reserved.</span>
-        </div>
-      </div>
-    </div>
-  </div><!-- bottom bar -->
+  </section>
 </div>
 <div class="popup-wraper4">
   <div class="popup creat-group">
@@ -188,7 +178,7 @@
       </div>
     </div>
   </div>
-</div><!-- Create friends Group -->
+</div>
 
 <div class="popup-wraper1">
   <div class="popup direct-mesg">
@@ -230,5 +220,5 @@
       </div>
     </div>
   </div>
-</div><!-- send message popup -->
-
+</div>
+<app-footer></app-footer>

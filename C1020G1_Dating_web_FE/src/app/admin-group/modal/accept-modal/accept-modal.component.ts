@@ -1,9 +1,9 @@
-import { NotificationGroupService } from '../../service/group-notification.service';
 import { Router } from '@angular/router';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import {GroupRequest} from "../../../model/group-request";
-import {GroupManagementService} from "../../service/group.service";
+import {GroupManagementService} from "../../../service/group-management.service";
 import Notification from 'src/app/model/group-notification';
+import { NotificationGroupService } from 'src/app/service/group-notification.service';
 
 @Component({
   selector: 'app-accept-modal',

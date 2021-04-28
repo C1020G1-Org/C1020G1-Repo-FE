@@ -5,6 +5,11 @@ import NotificationGroup from 'src/app/model/group-notification';
 @Injectable({
   providedIn: 'root'
 })
+
+  /**
+   * @author PhinNL
+   * manage group notification
+   */
 export class NotificationGroupService {
   dbPath = '/group/notifications';
   notiRef: AngularFireList<Notification> = null;

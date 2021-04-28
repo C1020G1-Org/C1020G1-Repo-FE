@@ -1,9 +1,9 @@
 import { GroupUser } from 'src/app/model/group-user';
-import { GroupManagementService } from '../../service/group.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Notification from 'src/app/model/group-notification';
-import { NotificationGroupService } from '../../service/group-notification.service';
+import { GroupManagementService } from 'src/app/service/group-management.service';
+import { NotificationGroupService } from 'src/app/service/group-notification.service';
 
 @Component({
   selector: 'app-remove-member-modal',

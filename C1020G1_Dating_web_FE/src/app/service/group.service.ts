@@ -1,3 +1,4 @@
+import { GroupManagementService } from 'src/app/service/group-management.service';
 import {HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
@@ -8,14 +9,14 @@ import {Observable} from 'rxjs';
 })
 export class GroupService {
   public API: string = 'http://localhost:8080/group';
-  constructor(public http: HttpClient) {}
+  constructor(public http: HttpClient,private groupManager:GroupManagementService) {}
 
   getAllGroup(): Observable<any> {
     return this.http.get(this.API);
   }
 
   getGroupById(groupId): Observable<any>{
-    return this.http.get(this.API + '/group/get/'+ groupId);
+    return this.http.get(this.API + '-detail/'+ groupId);
   }
 
   deleteGroup(groupId): Observable<any>{
@@ -35,12 +36,10 @@ export class GroupService {
   }
 
   saveRequest(groupRequest){
-    console.log(groupRequest.group)
     return this.http.post( 'http://localhost:8080/request/save' , groupRequest);
   }
 
   getAllGroupRequest(userId){
-    return this.http.get(this.API+"-request/"+userId);
-
+    return this.http.get("http://localhost:8080/request/list/user/"+userId);
   }
 }
