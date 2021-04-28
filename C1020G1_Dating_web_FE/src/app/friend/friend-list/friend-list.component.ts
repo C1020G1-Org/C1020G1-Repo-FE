@@ -47,7 +47,7 @@ export class FriendListComponent implements OnInit {
 
   delete() {
     this.friendService.deleteFriend(this.friendId).subscribe(data => {
-      console.log('kkk')
+      console.log('kkk');
       window.location.reload();
     })
   }
