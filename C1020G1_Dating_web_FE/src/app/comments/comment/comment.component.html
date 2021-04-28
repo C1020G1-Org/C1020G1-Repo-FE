@@ -170,8 +170,23 @@
                 <div class="img-bunch">
                   <div class="col-lg-3 col-md-3 col-sm-3"></div>
                   <div class="col-lg-6 col-md-6 col-sm-6">
-                    <figure>
-                      <img src="{{ imageUrlFromLocal }}" alt="" />
+                    <figure style="margin-top: 10px">
+                      <span
+                        ><i
+                          style="
+                            position: absolute;
+                            top: 2%;
+                            left: 90%;
+                          "
+                          class="fa fa-trash delete-icon"
+                          (click)="deleteUpdateImage()"
+                        ></i
+                      ></span>
+                      <img
+                        style="width: 100%"
+                        src="{{ imageUrlFromLocal }}"
+                        alt=""
+                      />
                     </figure>
                   </div>
                   <div class="col-lg-3 col-md-3 col-sm-3"></div>

@@ -1,13 +1,7 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ChildComment } from 'src/app/model/ChildComment';
 import { ParentComment } from 'src/app/model/ParentComment';
-import { Post } from 'src/app/model/Post';
-import { User } from 'src/app/model/User';
-import { PostService } from 'src/app/service/post.service';
 import { CommentService } from '../../service/comment.service';
-import {MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { DeleteDialogComponent } from 'src/app/dialogs/delete-dialog/delete-dialog.component';
 import { UserDto } from 'src/app/dto/user-dto';
 import { TokenStorageService } from 'src/app/service/auth/token-storage';
 import { ObserverService } from 'src/app/service/observer.service';
@@ -32,7 +26,6 @@ export class CommentComponent implements OnInit {
   imageFile : File;
  
   constructor(private commentService : CommentService,
-              private matDialog: MatDialog,
               private tokenStorageService : TokenStorageService,
               private observerService : ObserverService,
               public storage: AngularFireStorage) { }
@@ -48,6 +41,7 @@ export class CommentComponent implements OnInit {
     });
   }
 
+  // submit form to create a new child-comment
   async submitChildForm(parentComment : ParentComment){
     this.childCommentForm.get('parentComment').setValue(parentComment);
     this.childCommentForm.get('user').setValue(this.user);
@@ -56,45 +50,41 @@ export class CommentComponent implements OnInit {
       await this.saveImagetoFirebase();
     }
 
-    console.log(this.childCommentForm.value);
-
     this.commentService.createChildComment(this.childCommentForm.value).subscribe(data => {
       console.log('ok');
       this.imageUrlFromLocal = null;
     }, error => console.log(error))
   }
 
+  //  pass editing-parent-comment to newsfeed-component
   sendEditingParentComment(editingParentComment : any){
-    console.log(editingParentComment);
     this.onEditingParentCommentPicked.emit(editingParentComment);
   }
 
+  // pass deleting-parent-comment to newsfeed-component
   sendDeletingParentComment(parentCommentId : any){
     this.onDeletingParentCommentPicked.emit(parentCommentId);
   }
 
+  // pass editing-child-comment to newsfeed-component
   sendEditingChildComment(editingChildComment : any){
-    console.log(editingChildComment);
     this.onEditingChildCommentPicked.emit(editingChildComment);
   }
 
+  // pass deleting-child-comment to newsfeed-component
   sendDeletingChildComment(childCommentId : any){
     this.onDeletingChildCommentPicked.emit(childCommentId);
   }
 
+  // get url of image uploaded from local computer
   getImageFromLocal(event) {
-    console.log('ok1');
-
     if (event.target.files && event.target.files[0]) {
       this.fileMessageImage = null;
       const file = event.target.files[0].name;
       if (file.match(/.*\.(png|jpeg|jpg|PNG|JPEG|JPG)$/)) {
         const reader = new FileReader();
-
         reader.onload = (e: any) => {
           this.imageUrlFromLocal = e.target.result;
-          console.log(this.imageUrlFromLocal);
-          console.log('done')  ;
         }
         reader.readAsDataURL(event.target.files[0]);
 
@@ -103,13 +93,10 @@ export class CommentComponent implements OnInit {
         this.fileMessageImage = "Image extension must be .png or .jpeg/.jpg";
 
       }
-    }
-
-    console.log(this.imageFile);
-    
-    console.log('ok2');
+    }    
   }
 
+  // save image to firebase and get url-firebase to child-comment
   saveImagetoFirebase() {
     return new Promise(resolve => {
       const name = this.imageFile.name;
@@ -124,6 +111,10 @@ export class CommentComponent implements OnInit {
           })).subscribe();
       }
     });
+  }
+
+  deleteUpdateImage(){
+    this.imageUrlFromLocal = null;
   }
 
 }

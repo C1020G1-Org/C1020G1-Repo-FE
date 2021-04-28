@@ -1,4 +1,4 @@
-<div class="wavy-wraper">
+<!-- <div class="wavy-wraper">
   <div class="wavy">
     <span style="--i: 1">L</span>
     <span style="--i: 2">E</span>
@@ -11,7 +11,7 @@
     <span style="--i: 9">A</span>
     <span style="--i: 10">O</span>
   </div>
-</div>
+</div> -->
 <div class="theme-layout">
   <div class="topbar stick">
     <h4 style="text-align: center">Navbar của Hữu Kiên</h4>
@@ -30,9 +30,8 @@
               <!-- sidebar -->
 
               <div class="col-lg-6">
-                <div class="central-meta postbox border border-primary">
-                  <h4>Khung đăng bài của Hồng Sơn</h4>
-                </div>
+                <!-- Khung create post of SonHP -->
+                <app-create-post></app-create-post>
 
                 <!-- add post new box -->
 
@@ -55,8 +54,17 @@
                               <i class="ti-more-alt"></i>
                               <ul>
                                 <li>
-                                  <i class="fa fa-pencil-square-o"></i>Edit Post
+                                  <a
+                                    href=""
+                                    data-toggle="modal"
+                                    data-target="#editPostModal"
+                                    (click)="sendEditPostId(post.postId)"
+                                  >
+                                    <i class="fa fa-pencil-square-o"></i>Edit
+                                    Post
+                                  </a>
                                 </li>
+
                                 <li>
                                   <i class="fa fa-trash-o"></i>Delete Post
                                 </li>
@@ -237,7 +245,32 @@
                                       line-height: 16px;
                                     "
                                   />
-
+                                  <!-- <div
+                                    *ngIf="
+                                      !parentCommentForm.valid ||
+                                      content.touched
+                                    "
+                                  >
+                                    <div
+                                      class="alert alert-danger"
+                                      role="alert"
+                                      [hidden]="!content.errors.required"
+                                    >
+                                      Content is required!!
+                                    </div>
+                                  </div> -->
+                                  <!-- <div
+                                    style="margin-top: 10px"
+                                    class="alert alert-danger"
+                                    role="alert"
+                                    *ngIf="
+                                      parentCommentForm.get('content')
+                                        .invalid &&
+                                      parentCommentForm.get('content').touched
+                                    "
+                                  >
+                                    Content must be not blank !
+                                  </div> -->
                                   <input
                                     type="hidden"
                                     formControlName="commentImage"
@@ -254,9 +287,24 @@
                                         <div
                                           class="col-lg-3 col-md-3 col-sm-3"
                                         ></div>
-                                        <div class="col-lg-6 col-md-6 col-sm-6">
-                                          <figure>
+                                        <div
+                                          class="col-lg-6 col-md-6 col-sm-6"
+                                          style="position: relative"
+                                        >
+                                          <figure style="margin-top: 10px">
+                                            <span
+                                              ><i
+                                                style="
+                                                  position: absolute;
+                                                  top: 2%;
+                                                  left: 90%;
+                                                "
+                                                class="fa fa-trash delete-icon"
+                                                (click)="deleteUpdateImage()"
+                                              ></i
+                                            ></span>
                                             <img
+                                              style="width: 100%"
                                               src="{{ imageUrlFromLocal }}"
                                               alt=""
                                             />
@@ -355,10 +403,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form
-          [formGroup]="parentCommentForm"
-          (ngSubmit)="submitEditParentForm()"
-        >
+        <form [formGroup]="parentCommentForm">
           <div class="form-group" style="margin-top: 0; margin-bottom: 0">
             <label for="message-text" class="col-form-label"
               >Your comment:</label
@@ -387,8 +432,19 @@
                 <div class="img-bunch">
                   <div class="col-lg-3 col-md-3 col-sm-3"></div>
                   <div class="col-lg-6 col-md-6 col-sm-6">
-                    <figure>
-                      <img src="{{ imageUrlFromLocal }}" alt="" />
+                    <figure style="margin-top: 10px">
+                      <span
+                        ><i
+                          style="position: absolute; top: 2%; left: 90%"
+                          class="fa fa-trash delete-icon"
+                          (click)="deleteUpdateImage()"
+                        ></i
+                      ></span>
+                      <img
+                        style="width: 100%"
+                        src="{{ imageUrlFromLocal }}"
+                        alt=""
+                      />
                     </figure>
                   </div>
                   <div class="col-lg-3 col-md-3 col-sm-3"></div>
@@ -418,12 +474,15 @@
                 <i class="em em-stuck_out_tongue"></i>
               </div>
             </div>
-            <input
+            <button
+              type="button"
               style="margin-top: 10px"
-              type="submit"
-              value="Save"
-              class="btn btn-primary profile-button"
-            />
+              class="btn btn-primary profile-button form-control"
+              data-dismiss="modal"
+              (click)="submitEditParentForm()"
+            >
+              Save
+            </button>
           </div>
         </form>
       </div>
@@ -459,6 +518,7 @@
         <button
           type="button"
           class="btn btn-danger"
+          data-dismiss="modal"
           (click)="submitDeleteParentComment()"
         >
           Delete
@@ -491,7 +551,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="childCommentForm" (ngSubmit)="submitEditchildForm()">
+        <form [formGroup]="childCommentForm">
           <div class="form-group" style="margin-top: 0; margin-bottom: 0">
             <label for="message-text" class="col-form-label"
               >Your comment:</label
@@ -518,8 +578,19 @@
                 <div class="img-bunch">
                   <div class="col-lg-3 col-md-3 col-sm-3"></div>
                   <div class="col-lg-6 col-md-6 col-sm-6">
-                    <figure>
-                      <img src="{{ imageUrlFromLocal }}" alt="" />
+                    <figure style="margin-top: 10px">
+                      <span
+                        ><i
+                          style="position: absolute; top: 2%; left: 90%"
+                          class="fa fa-trash delete-icon"
+                          (click)="deleteUpdateImage()"
+                        ></i
+                      ></span>
+                      <img
+                        style="width: 100%"
+                        src="{{ imageUrlFromLocal }}"
+                        alt=""
+                      />
                     </figure>
                   </div>
                   <div class="col-lg-3 col-md-3 col-sm-3"></div>
@@ -549,12 +620,15 @@
                 <i class="em em-stuck_out_tongue"></i>
               </div>
             </div>
-            <input
+            <button
+              type="button"
               style="margin-top: 10px"
-              type="submit"
-              value="Save"
-              class="btn btn-primary profile-button"
-            />
+              class="btn btn-primary profile-button form-control"
+              data-dismiss="modal"
+              (click)="submitEditchildForm()"
+            >
+              Save
+            </button>
           </div>
         </form>
       </div>
@@ -590,6 +664,7 @@
         <button
           type="button"
           class="btn btn-danger"
+          data-dismiss="modal"
           (click)="submitDeleteChildComment()"
         >
           Delete
@@ -598,3 +673,5 @@
     </div>
   </div>
 </div>
+
+<app-edit-post [postIDInUrl] = "editingPostId"></app-edit-post>

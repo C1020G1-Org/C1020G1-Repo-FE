@@ -1,16 +1,17 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { CommentService } from 'src/app/service/comment.service';
 import { ParentComment } from 'src/app/model/ParentComment';
 import { Post } from 'src/app/model/Post';
 import { PostService } from 'src/app/service/post.service';
-import { finalize, flatMap, map, mergeMap } from 'rxjs/operators';
-import { AccountService } from 'src/app/service/auth/account-service';
-import { UserDto } from 'src/app/dto/user-dto';
+import { finalize} from 'rxjs/operators';
 import { TokenStorageService } from 'src/app/service/auth/token-storage';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ChildComment } from 'src/app/model/ChildComment';
 import { ObserverService } from 'src/app/service/observer.service';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { UserDto } from 'src/app/dto/user-dto';
+
+declare const $: any;
 
 @Component({
   selector: 'app-newsfeed',
@@ -21,17 +22,19 @@ export class NewsfeedComponent implements OnInit{
   posts : Post[];
   pageNumber = 0;
   user : UserDto;
-  parentCommentForm : FormGroup;
-  childCommentForm : FormGroup;
-  editingParentComment : ParentComment;
-  deletingParentCommentId : number;
-  editingChildComment : ChildComment;
-  deletingChildCommentId : number;
   fileMessageImage : string;
   imageUrlFromLocal : string;
   imageFile : File;
+  editingPostId : number;
 
+  parentCommentForm : FormGroup;
+  editingParentComment : ParentComment;
+  deletingParentCommentId : number;
 
+  childCommentForm : FormGroup; 
+  editingChildComment : ChildComment;
+  deletingChildCommentId : number;
+  
   constructor(private postService : PostService,
               private tokenStorageService : TokenStorageService,
               private commentService : CommentService,
@@ -61,41 +64,47 @@ export class NewsfeedComponent implements OnInit{
     })
 
     this.getAllPostInNewsFeed(this.user.userId,this.pageNumber);
-
-    
   }
 
+  // get all post in newsfeed
   getAllPostInNewsFeed(userId : number, pageNumber : number){
     this.postService.findAllPostInNewsFeed(userId,pageNumber).subscribe(listPageablePost =>{
-      let listPostsFromDb = listPageablePost.content;
-      
-      if(this.posts != null){
-        this.posts = this.posts.concat(listPostsFromDb);
+      if(listPageablePost == null){
+        console.log("end page");
       }else {
-        this.posts= listPostsFromDb;
-      }
+        let listPostsFromDb = listPageablePost.content;
       
-      console.log(this.posts);
-
+        if(this.posts != null){
+          this.posts = this.posts.concat(listPostsFromDb);
+        }else {
+          this.posts= listPostsFromDb;
+        }
+        
+        console.log(this.posts);
+      }
     })                    
   };
 
+  // create function loadmore post in newsfeed
   loadMorePost() {
     this.pageNumber ++;
     this.getAllPostInNewsFeed(this.user.userId,this.pageNumber);
   }
 
+  // submit form to create or update parent-comment
   async submitParentForm(post : Post){
     this.parentCommentForm.get('post').setValue(post);
     this.parentCommentForm.get('user').setValue(this.user);
 
-    console.log(this.imageUrlFromLocal);
+    console.log(this.parentCommentForm.get('content').value);
+
+    if(this.imageUrlFromLocal == null && this.parentCommentForm.get('content').value == ''){
+      return ;
+    }
 
     if(this.imageUrlFromLocal){
       await this.saveParentImagetoFirebase();
     }
-
-    console.log(this.parentCommentForm.value);
 
     this.commentService.createParentComment(this.parentCommentForm.value).subscribe(() =>{
       console.log('ok');
@@ -103,11 +112,9 @@ export class NewsfeedComponent implements OnInit{
     }, error => console.log(error))
   }
 
+  // get editing-parent-comment from comment-component
   getEditingParentComment(editingParentComment : any, post : Post){
-    // console.log(editingParentComment);
-
     this.imageUrlFromLocal = editingParentComment.commentImage;
-
 
     this.parentCommentForm.get('parentCommentId').setValue(editingParentComment.parentCommentId);
     this.parentCommentForm.get('content').setValue(editingParentComment.content);
@@ -116,14 +123,19 @@ export class NewsfeedComponent implements OnInit{
     this.parentCommentForm.get('user').setValue(this.user);
 
     this.editingParentComment = this.parentCommentForm.value;
-    console.log(this.editingParentComment);
   }
 
-  async submitEditParentForm(){
-    console.log(this.parentCommentForm.value);
+  // get deleting-parent-comment from comment-component
+  getDeletingParentComment(parentCommentId : any){
+    this.deletingParentCommentId = parentCommentId;
+  }
 
+  // submit form to update a parent-comment
+  async submitEditParentForm(){
     if(this.imageUrlFromLocal){
       await this.saveParentImagetoFirebase();
+    }else{
+      this.parentCommentForm.get('commentImage').setValue(null);
     }
 
     this.commentService.editParentComment(this.editingParentComment.parentCommentId, this.parentCommentForm.value).subscribe(() =>{
@@ -132,24 +144,16 @@ export class NewsfeedComponent implements OnInit{
     }, error => console.log(error))
   }
 
-  getDeletingParentComment(parentCommentId : any){
-    this.deletingParentCommentId = parentCommentId;
-  }
-
+  // call service to delete parent-comment
   submitDeleteParentComment(){
-    // console.log('deleting :' + this.deletingParentCommentId);
-
     this.commentService.deleteParentComment(this.deletingParentCommentId).subscribe(data => {
       console.log('successfully deleted !');
     }, error => console.log(error));
-
   }
 
+  // get editing-child-comment from comment-component
   getEditingChildComment(editingChildComment : any){
-    console.log(editingChildComment);
-
     this.imageUrlFromLocal = editingChildComment.commentImage;
-
 
     this.childCommentForm.get('content').setValue(editingChildComment.content);
     this.childCommentForm.get('childCommentId').setValue(editingChildComment.childCommentId);
@@ -157,34 +161,36 @@ export class NewsfeedComponent implements OnInit{
     this.childCommentForm.get('user').setValue(editingChildComment.user);
 
     this.editingChildComment = this.childCommentForm.value;
-    console.log(this.editingChildComment);
-
   }
 
+  // submit form to update child-comment
   async submitEditchildForm(){
-    console.log(this.childCommentForm.value);
-    await this.saveChildImagetoFirebase();
-    
+    if(this.imageUrlFromLocal){
+      await this.saveChildImagetoFirebase();
+    }else{
+      this.childCommentForm.get('commentImage').setValue(null);
+    }
 
+    
     this.commentService.editChildComment(this.editingChildComment.childCommentId, this.childCommentForm.value).subscribe(() =>{
       console.log('ok');
       this.imageUrlFromLocal = null;
     }, error => console.log(error))
   }
 
+  // get deleting-child-comment from comment-component
   getDeletingChildComment(childCommentId : any){
     this.deletingChildCommentId = childCommentId;
   }
 
+  // call service to delete child-comment
   submitDeleteChildComment(){
-    console.log(this.deletingChildCommentId);
-    
     this.commentService.deleteChildComment(this.deletingChildCommentId).subscribe(data => {
       console.log('successfully deleted !');
     }, error => console.log(error));
-
   }
 
+  // get url of image uploaded from local computer
   getImageFromLocal(event) {
     if (event.target.files && event.target.files[0]) {
       this.fileMessageImage = null;
@@ -194,8 +200,6 @@ export class NewsfeedComponent implements OnInit{
 
         reader.onload = (e: any) => {
           this.imageUrlFromLocal = e.target.result;
-          console.log(this.imageUrlFromLocal);
-          console.log('done')  ;
         }
         reader.readAsDataURL(event.target.files[0]);
 
@@ -207,6 +211,7 @@ export class NewsfeedComponent implements OnInit{
     }
   }
 
+  // save uploaded image to firebase and get firebase-url of that image to parent-comment
   saveParentImagetoFirebase() {
     return new Promise(resolve => {
       const name = this.imageFile.name;
@@ -223,6 +228,7 @@ export class NewsfeedComponent implements OnInit{
     });
   }
 
+  // save uploaded image to firebase and get firebase-url of that image to child-comment
   saveChildImagetoFirebase() {
     return new Promise(resolve => {
       const name = this.imageFile.name;
@@ -239,5 +245,12 @@ export class NewsfeedComponent implements OnInit{
     });
   }
 
-  
+  deleteUpdateImage(){
+    this.imageUrlFromLocal = null;
+  }
+
+  // send editing post to edit-post-component
+  sendEditPostId(editingPostId : number){
+    this.editingPostId = editingPostId;
+  }
 }

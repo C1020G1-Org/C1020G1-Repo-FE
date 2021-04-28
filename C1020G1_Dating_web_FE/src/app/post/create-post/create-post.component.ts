@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {PostServiceService} from "../service/post-service.service";
 import {Router} from "@angular/router";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {finalize} from 'rxjs/operators';
 import {DomSanitizer} from "@angular/platform-browser";
+import { PostService } from 'src/app/service/post.service';
+import { TokenStorageService } from 'src/app/service/auth/token-storage';
+import { UserDto } from 'src/app/dto/user-dto';
 
 
 declare const $: any;
@@ -16,54 +18,23 @@ declare const $: any;
 })
 export class CreatePostComponent implements OnInit {
   public formCreatePost: FormGroup;
-  public user: {};
+  public user: UserDto;
   public check: boolean = false;
   public contentTemp: any;
   public fileImage: any;
   public urlImage: Array<string>;
 
   constructor(public formBuilder: FormBuilder,
-              public postService: PostServiceService,
+              public postService: PostService,
               public router: Router,
               public storage: AngularFireStorage,
-              public dom: DomSanitizer) {
+              public dom: DomSanitizer,
+              private tokenStorageService : TokenStorageService) {
   }
 
   ngOnInit(): void {
     this.fileImage = [];
-    this.user = {
-      userId: 1,
-      userName: "son",
-      birthday: "1997-10-24",
-      gender: "Nam",
-      occupation: "student",
-      address: "tay ninh",
-      email: "son@gmail.com",
-      userAvatar: "bac.png",
-      userBackground: "abc.png",
-      marriaged: "No",
-      ward: {
-        wardId: 3,
-        district: {
-          districtId: 3,
-          province: {
-            provinceId: 1,
-            provinceName: "danang"
-          },
-          districtName: "lienchieu"
-        },
-        wardName: "abc"
-      },
-      status: {
-        statusId: 1,
-        statusName: "online"
-      },
-      account: {
-        accountId: 1,
-        accountName: "account_1",
-        password: "123456"
-      }
-    };
+    this.user = this.tokenStorageService.getUser();
 
     this.formCreatePost = this.formBuilder.group({
       postStatus: ['public', [Validators.required]],
@@ -102,7 +73,7 @@ export class CreatePostComponent implements OnInit {
   }
 
   importImages(event) {
-    let files = event.target.files;
+  let files = event.target.files;
     if (files) {
       for (let file of files) {
         let reader = new FileReader();

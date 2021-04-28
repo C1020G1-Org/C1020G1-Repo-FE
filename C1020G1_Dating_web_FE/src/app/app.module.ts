@@ -2,15 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NewsfeedComponent } from './news-feed/newsfeed/newsfeed.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NewsFeedModule } from './news-feed/news-feed.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CommentComponent } from './comments/comment/comment.component';
 import { CommentsModule } from './comments/comment.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
-import { DeleteDialogComponent } from './dialogs/delete-dialog/delete-dialog.component';
 import { LoginModule } from './login/login.module';
 import { ErrorModule } from './error/error.module';
 import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
@@ -24,8 +20,7 @@ import {WallModule} from "./wall/wall.module";
 
 @NgModule({
   declarations: [
-    AppComponent,
-    DeleteDialogComponent
+    AppComponent
   ],
     imports: [
         NewsFeedModule,
@@ -65,7 +60,6 @@ import {WallModule} from "./wall/wall.module";
       ]
     } as SocialAuthServiceConfig,
   }],
-  bootstrap: [AppComponent],
-  entryComponents : [DeleteDialogComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

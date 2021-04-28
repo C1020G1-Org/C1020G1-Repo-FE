@@ -8,7 +8,6 @@ import {AuthGuardService} from "./service/auth/auth-guard.service";
 import {RecoverPasswordComponent} from "./login/recover-password/recover-password.component";
 import { NewsfeedComponent } from './news-feed/newsfeed/newsfeed.component';
 import {CreatePostComponent} from "./post/create-post/create-post.component";
-import {BrowserModule} from "@angular/platform-browser";
 import {EditPostComponent} from "./post/edit-post/edit-post.component";
 import {TimelineComponent} from "./wall/timeline/timeline.component";
 import {InformationComponent} from "./wall/information/information.component";
