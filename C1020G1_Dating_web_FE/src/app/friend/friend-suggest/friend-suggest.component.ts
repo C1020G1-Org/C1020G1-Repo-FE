@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {SuggestFriend} from "../SuggestFriend";
-import {FriendService} from "../friend.service";
-import {User} from "../User";
+import {FriendService} from "../../services/friend.service";
+import {SuggestFriend} from "../../model/SuggestFriend";
+import {User} from "../../model/user";
 
 @Component({
   selector: 'app-friend-suggest',

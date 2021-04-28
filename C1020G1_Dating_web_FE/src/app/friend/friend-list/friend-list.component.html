@@ -41,7 +41,7 @@
                             <li><span>Job: </span> {{friend.friend.occupation}}</li>
                             <li><span>Gender:</span>{{friend.friend.gender}}</li>
                             <li><span>Email: </span>{{friend.friend.email}}</li>
-                            <li><span>Birthday: </span> {{friend.friend.birthday | date: 'dd-MM-yyyy'}}</li>
+                            <li><span>Birthday: </span> {{friend.friend.birthday}}</li>
                             <li><span>Marriage: </span> {{friend.friend.marriaged}}</li>
                           </ul>
                           <a href="#" title="Delete" data-toggle="modal" data-target="#exampleModal"
@@ -94,3 +94,4 @@
   </div>
 
 </div>
+<app-friend-suggest></app-friend-suggest>
