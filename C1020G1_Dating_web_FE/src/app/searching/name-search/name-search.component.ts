@@ -15,6 +15,7 @@ export class NameSearchComponent implements OnInit {
   listUser;
   listRecommendation;
   public name = '';
+  listFavourite;
 
   constructor(private searchingService: SearchingService,
               private activeRouter: Router,
@@ -28,13 +29,14 @@ export class NameSearchComponent implements OnInit {
       this.listUser = data;
     });
     this.searchingService.getAllRecommendation(this.user.userId).subscribe((data) => {
+      console.log(data);
       this.listRecommendation = data;
-    })
+    });
   };
-
 
   doSearchName() {
     this.searchingService.doNameSearch(this.name).subscribe((data) => {
+      console.log(data);
       this.listUser = data;
     })
   }

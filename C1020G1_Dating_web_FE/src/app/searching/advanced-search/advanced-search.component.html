@@ -55,8 +55,8 @@
                     <div class="form-check form-check-inline" *ngFor="let favourite of listFavourites;let i = index"
                          id="inputInterests">
                       <input class="form-check-input" type="checkbox" id="inputInterests{{i}}"
-                             (input)="addFavourite($event.target.checked, favourite)">
-                      <label class="form-check-label" for="inputInterests{{i}}">{{favourite}}</label>
+                             (input)="addFavourite($event.target.checked, favourite.favouriteName)">
+                      <label class="form-check-label" for="inputInterests{{i}}">{{favourite.favouriteName}}</label>
                     </div>
                   </div>
                 </div>
@@ -73,13 +73,15 @@
                     <div class="tab-pane active fade show " id="All">
                       <div class="central-meta item">
                         <span class="create-post">People<a title="" href="#">See All</a></span>
-                        <div class="pit-friends" *ngFor="let user of listUser">
+                        <div class="pit-friends" *ngFor="let userFavourite of listUser">
                           <figure><a href="#" title=""><img
-                            src="../../../assets/images/resources/searching1.jpg" alt=""></a></figure>
+                            src="{{userFavourite.user.userAvatar}}" alt="" style="height: 50px; width: 50px"></a></figure>
                           <!--                            src="{{user.userAvatar}}" alt=""></a></figure>-->
                           <div class="pit-frnz-meta">
-                            <a href="#" title="">{{user.userName}}</a>
-                            <i>{{user.address}}</i>
+                            <a href="#" title="">{{userFavourite.user.userName}}</a>
+                            <i>Address: {{userFavourite.user.ward.district.province.provinceName}}</i>
+                            <i *ngIf="userFavourite.favourites.length != 0">, Favourites: {{userFavourite.favourites}}</i>
+                            <i *ngIf="userFavourite.favourites.length == 0">, Favourites: None </i>
                             <ul class="add-remove-frnd">
                               <li class="add-tofrndlist">
                                 <a title="Add friend" href="#"><i
@@ -96,13 +98,15 @@
                       <div class="central-meta item">
                                                 <span class="create-post">Recommend Friends<a title=""
                                                                                               href="#">See All</a></span>
-                        <div class="pit-friends" *ngFor="let user of listRecommendation">
+                        <div class="pit-friends" *ngFor="let userFavourite of listRecommendation">
                           <figure><a href="#" title=""><img
-                            src="../../../assets/images/resources/searching1.jpg" alt=""></a></figure>
+                            src="{{userFavourite.user.userAvatar}}" alt="" style="height: 50px; width: 50px"></a></figure>
                           <!--                            src="{{user.userAvatar}}" alt=""></a></figure>-->
                           <div class="pit-frnz-meta">
-                            <a href="#" title="">{{user.userName}}</a>
-                            <i>{{user.address}}</i>
+                            <a href="#" title="">{{userFavourite.user.userName}}</a>
+                            <i>Address: {{userFavourite.user.ward.district.province.provinceName}}</i>
+                            <i *ngIf="userFavourite.favourites.length != 0">, Favourites: {{userFavourite.favourites}}</i>
+                            <i *ngIf="userFavourite.favourites.length == 0">, Favourites: None </i>
                             <ul class="add-remove-frnd">
                               <li class="add-tofrndlist">
                                 <a title="Add friend" href="#"><i
