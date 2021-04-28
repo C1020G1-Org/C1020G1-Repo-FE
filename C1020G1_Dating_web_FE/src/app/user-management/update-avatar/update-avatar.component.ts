@@ -156,6 +156,7 @@ export class UpdateAvatarComponent implements OnInit {
 
   removeImage() {
     const imageDf = 'https://firebasestorage.googleapis.com/v0/b/project-4584214944750813303.appspot.com/o/userProject.png?alt=media&token=4a21ef0d-f9ab-425e-adfa-8304926d39e80';
+    this.openLoading();
     this.editService.updateAvatar(this.user.userId, imageDf, 'png').subscribe((data) => {
       this.messageUpdateSuccessful = 'Successful avatar remove !';
       this.ngOnInit();

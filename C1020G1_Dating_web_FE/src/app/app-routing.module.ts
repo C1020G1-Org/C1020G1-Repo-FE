@@ -2,6 +2,8 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {LoginComponent} from "./login/login/login.component";
 import {ErrorPageComponent} from "./error/error-page/error-page.component";
+import {NameSearchComponent} from "./searching/name-search/name-search.component";
+import {AdvancedSearchComponent} from "./searching/advanced-search/advanced-search.component";
 import {LoginRoutingModule} from "./login/login-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import {AuthGuardService} from "./service/auth/auth-guard.service";
@@ -15,6 +17,14 @@ import {ChangePasswordComponent} from "./user-management/change-password/change-
 
 
 const routes: Routes = [
+  {
+    path: '',
+    children: [
+      {path: 'name-search', component: NameSearchComponent},
+      {path: 'advanced-search', component: AdvancedSearchComponent}
+    ],
+    component: ErrorPageComponent, canActivate: [AuthGuardService]
+  },
   {path: 'c10tinder', pathMatch: 'full', redirectTo: 'home'},
   {path: 'login', component: LoginComponent},
   {path: '', component: LoginComponent},

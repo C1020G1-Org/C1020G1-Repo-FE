@@ -141,11 +141,11 @@ export class ChangePasswordComponent implements OnInit {
     return this.formChangePassword.get('confirmPassword');
   }
 
-  // return() {
-  //   this.messageErrorNewPassword = '';
-  //   this.messageErrorOldPassword = '';
-  //   this.formChangePassword.reset();
-  // }
+  return() {
+    this.messageErrorNewPassword = '';
+    this.messageErrorOldPassword = '';
+    this.formChangePassword.reset();
+  }
 
   openLoading() {
     this.dialog.open(LoadingComponent, {

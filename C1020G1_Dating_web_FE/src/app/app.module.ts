@@ -10,7 +10,6 @@ import {
   GoogleLoginProvider,
   FacebookLoginProvider
 } from 'angularx-social-login';
-import {HeaderModule} from "./header/header.module";
 import {FooterModule} from "./footer/footer.module";
 import {SearchingModule} from "./searching/searching.module";
 import {HeaderComponent} from "./header/header.component";
@@ -29,18 +28,22 @@ import {WebcamModule} from "ngx-webcam";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDialogModule} from "@angular/material/dialog";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HeaderModule} from "./header/header.module";
+import {FooterComponent} from "./footer/footer.component";
+import {AdvancedSearchComponent} from "./searching/advanced-search/advanced-search.component";
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ErrorPageComponent,
-    HeaderComponent,
     WebcamComponent,
     UpdateAvatarComponent,
     UpdateStatusComponent,
     ChangePasswordComponent,
-    LoadingComponent
+    LoadingComponent,
+    FooterComponent,
+    AdvancedSearchComponent
   ],
   imports: [
     BrowserModule,
