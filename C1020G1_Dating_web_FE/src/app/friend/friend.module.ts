@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FriendListComponent } from './friend-list/friend-list.component';
 import { FriendSuggestComponent } from './friend-suggest/friend-suggest.component';
 import {TooltipModule} from "ng2-tooltip-directive";
+import {RouterModule} from "@angular/router";
 
 
 
@@ -12,9 +13,10 @@ import {TooltipModule} from "ng2-tooltip-directive";
     FriendListComponent,
     FriendSuggestComponent
   ],
-  imports: [
-    CommonModule,
-    TooltipModule
-  ]
+    imports: [
+        CommonModule,
+        TooltipModule,
+        RouterModule
+    ]
 })
 export class FriendModule { }
