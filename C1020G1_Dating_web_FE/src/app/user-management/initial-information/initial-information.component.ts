@@ -183,9 +183,8 @@ export class InitialInformationComponent implements OnInit {
       this.isLoggin = true;
       this.userStorage.clear()
     }, (error) => {
+      $('#successModal').modal('toggle');
       this.userStorage.serverError = error;
-      console.log(error);
-      console.log(this.userStorage.serverError.error.errors['account'])
       this.router.navigateByUrl("registration");
     });
   }

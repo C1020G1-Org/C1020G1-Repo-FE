@@ -82,7 +82,14 @@
         <div class="row m-lg-0 p-lg-0">
           <div class="col-lg-6 mx-lg-0 p-lg-0 pr-lg-3" style="margin-bottom: 20px;">
             <label>Occupation <span class="color-orange">*</span></label>
-            <input type="text" placeholder="Occupation" formControlName="occupation">
+            <select formControlName="occupation">
+              <option disabled value="">Choose occupation</option>
+              <option value="engineer">Engineer</option>
+              <option value="driver">Driver</option>
+              <option value="student">Student</option>
+              <option value="doctor">Doctor</option>
+              <option value="teacher">Teacher</option>
+            </select>
             <span class="color-red" style="font-size: 12px"
                   *ngIf="formRegistration.controls.occupation.errors?.required && (formRegistration.controls.occupation?.touched ||formRegistration.controls.occupation?.dirty)"><i
               class="fa fa-exclamation-circle"></i><i> Occupation is required</i>
@@ -114,7 +121,7 @@
               class="fa fa-exclamation-circle"></i><i> Wrong format email</i>
             </span>
             <span class="color-red" style="font-size: 12px"
-                  *ngIf="this.userStorage.serverError?.error.errors['user']"><i class="fa fa-exclamation-circle"></i><i> Email is already used</i>
+                  *ngIf="userStorage.serverError?.error.errors['user']"><i class="fa fa-exclamation-circle"></i><i> Email is already used</i>
             </span>
           </div>
           <div class="col-lg-6 mx-lg-0 p-lg-0 pl-lg-3" style="margin-bottom: 20px;">
