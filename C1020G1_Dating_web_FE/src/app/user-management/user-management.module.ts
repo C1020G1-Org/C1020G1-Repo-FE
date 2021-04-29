@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {InitialInformationComponent} from "./initial-information/initial-information.component";
@@ -11,7 +11,9 @@ import {ChangePasswordComponent} from "./change-password/change-password.compone
 import {LoadingComponent} from "./loading/loading.component";
 import {WebcamModule} from "ngx-webcam";
 import {EditComponent} from "./edit/edit.component";
-
+import {HeaderModule} from "../header/header.module";
+import {EditDetailComponent} from './edit/edit-detail/edit-detail.component';
+import {EditModule} from "./edit/edit.module";
 
 
 @NgModule({
@@ -23,14 +25,16 @@ import {EditComponent} from "./edit/edit.component";
     UpdateStatusComponent,
     ChangePasswordComponent,
     LoadingComponent,
-    EditComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    WebcamModule
+    WebcamModule,
+    HeaderModule,
+    EditModule
   ]
 })
-export class UserManagementModule { }
+export class UserManagementModule {
+}

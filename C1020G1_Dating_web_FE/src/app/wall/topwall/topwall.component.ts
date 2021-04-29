@@ -87,12 +87,12 @@ export class TopwallComponent implements OnInit {
 
   //Check friend between user login and user wall
   checkFriendUserWall() {
-    console.log(this.userInfo);
+
     this.friendRequestService.getAllFriendOfUser(this.userInfo.userId).subscribe(data => {
       if (data != null) {
         let friends: Friends[] = data;
         for (let i = 0; i < friends.length; i++) {
-          if (friends[i].friend.userId == this.userInfo.userId) {
+          if (friends[i].friend.userId == this.userLogging.userId) {
             this.friends = friends[i];
             this.checkFriend = false;
             break;

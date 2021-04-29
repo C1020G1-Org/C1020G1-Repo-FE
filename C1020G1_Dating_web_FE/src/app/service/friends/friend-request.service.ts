@@ -45,7 +45,7 @@ export class FriendRequestService {
   }
 
   getAllFriendOfUser(idUser: number): Observable<any> {
-    return this.http.get('http://localhost:8080/friend-list/' + idUser , this.httpOptions);
+    return this.http.get('http://localhost:8080/friend-list-all/' + idUser , this.httpOptions);
   }
 
   unFriend(id: number): Observable<any> {

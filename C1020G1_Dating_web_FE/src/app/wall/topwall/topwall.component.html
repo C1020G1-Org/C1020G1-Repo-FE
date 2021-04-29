@@ -11,7 +11,7 @@
                   <input type="file">
                 </label>
               </div>
-              <img src="{{userInfo.userBackground}}" alt="">
+              <img src="{{userInfo.userBackground}}" id="background">
               <ul class="profile-controls">
                 <li
                   *ngIf="checkFriend == true && userLogging.userId != userInfo.userId && checkFriendRequest == true && checkFriendRequest2 == true">
@@ -44,8 +44,8 @@
                           (click)="acceptFriendRequest(friendRequestWallUserAndLoginUser)">
                     <i class="fa fa-check-square" style="color: white"></i></button>
                 </li>
-                <li><a class="edit-seting" href="#" title="Send Message" data-toggle="tooltip"><i
-                  class="fa fa-comment"></i></a>
+                <li><a class="edit-seting"  title="Send Message" data-toggle="tooltip">
+                  <i class="fa fa-comment"></i></a>
                 </li>
                 <li>
                   <div class="edit-seting" title="Edit Profile image"><i class="fa fa-sliders"></i>
@@ -79,27 +79,28 @@
                 <div class="col-lg-10 col-md-9">
                   <ul class="profile-menu">
                     <li>
-                      <a [routerLink]="['/timeline' , 1 ]">Timeline</a>
+                      <a [routerLink]="['timeline' , this.userInfo.userId ]">Timeline</a>
                     </li>
                     <li>
-                      <a [routerLink]="['/info' , 1 ]">Information</a>
+                      <a [routerLink]="['info' , this.userInfo.userId ]">Information</a>
                     </li>
                     <li>
-                      <a class="">Friends</a>
+                      <a [routerLink]="['friends' , this.userInfo.userId ]">Friends</a>
                     </li>
-                    <li>
-                      <a class="">Friends Request</a>
+                    <li *ngIf="userLogging.userId == userInfo.userId">
+                      <a [routerLink]="['friend_request' , this.userLogging.userId]">Friends Request</a>
                     </li>
                   </ul>
                 </div>
               </div>
             </div>
+
           </div>
+          <router-outlet></router-outlet>
         </div>
       </div>
     </div>
   </div>
-<!--  <app-friend-request></app-friend-request>-->
 </section>
 
 <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

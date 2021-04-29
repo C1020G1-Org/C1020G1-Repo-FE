@@ -12,18 +12,13 @@ import {
 } from 'angularx-social-login';
 import {FooterModule} from "./footer/footer.module";
 import {SearchingModule} from "./searching/searching.module";
-import {HeaderComponent} from "./header/header.component";
+
 import {UserManagementModule} from "./user-management/user-management.module";
 import {AngularFireModule} from "@angular/fire";
 import {environment} from "../environments/environment";
 import {AngularFireDatabaseModule} from "@angular/fire/database";
 import {AngularFireStorageModule} from "@angular/fire/storage";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {LoadingComponent} from "./user-management/loading/loading.component";
-import {ChangePasswordComponent} from "./user-management/change-password/change-password.component";
-import {UpdateStatusComponent} from "./user-management/update-status/update-status.component";
-import {UpdateAvatarComponent} from "./user-management/update-avatar/update-avatar.component";
-import {WebcamComponent} from "./user-management/webcam/webcam.component";
 import {WebcamModule} from "ngx-webcam";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDialogModule} from "@angular/material/dialog";
@@ -34,6 +29,8 @@ import {AdvancedSearchComponent} from "./searching/advanced-search/advanced-sear
 import {TooltipModule} from "ng2-tooltip-directive";
 import {WallModule} from "./wall/wall.module";
 import {TopwallComponent} from "./wall/topwall/topwall.component";
+import {GroupModule} from "./group/group.module";
+import {AdminGroupModule} from "./admin-group/admin-group.module";
 
 
 @NgModule({
@@ -64,6 +61,8 @@ import {TopwallComponent} from "./wall/topwall/topwall.component";
     FormsModule,
     TooltipModule,
     WallModule,
+    GroupModule,
+    AdminGroupModule
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',

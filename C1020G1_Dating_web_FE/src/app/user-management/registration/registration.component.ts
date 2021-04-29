@@ -82,6 +82,7 @@ export class RegistrationComponent implements OnInit {
     this.userStorage.termOfService = this.formRegistration.value.termOfService;
     this.userStorage.registed()
     this.router.navigateByUrl("/initial-information");
+    this.tokenStorage.logOut();
     console.log(this.userStorage)
   }
 
@@ -109,7 +110,8 @@ export class RegistrationComponent implements OnInit {
   }
 
   goToLogin() {
-    this.userStorage.clear()
+    this.userStorage.clear();
+    this.tokenStorage.logOut();
     this.router.navigateByUrl("login");
   }
 }

@@ -21,6 +21,6 @@ export class UserServiceService {
   }
 
   findPostById(id: number): Observable<any> {
-      return this.http.get('http://localhost:8080/post' + '/' + id , this.httpOptions );
+      return this.http.get('http://localhost:8080/api/post/wall' + '/' + id , this.httpOptions );
   }
 }

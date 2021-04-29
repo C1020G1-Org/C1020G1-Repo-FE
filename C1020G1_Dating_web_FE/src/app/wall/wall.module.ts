@@ -6,11 +6,14 @@ import {TooltipModule} from "ng2-tooltip-directive";
 import { InformationComponent } from './information/information.component';
 import {RouterModule} from "@angular/router";
 import {FriendRequestComponent} from "./friend-request/friend-request.component";
+import {FriendsComponent} from "./friends/friends.component";
 @NgModule({
-  declarations: [TimelineComponent, InformationComponent, FriendRequestComponent],
+  declarations: [TimelineComponent, InformationComponent, FriendRequestComponent , FriendsComponent],
   exports: [
     TimelineComponent,
-    FriendRequestComponent
+    FriendRequestComponent,
+    InformationComponent,
+    FriendsComponent
   ],
   imports: [
     CommonModule,

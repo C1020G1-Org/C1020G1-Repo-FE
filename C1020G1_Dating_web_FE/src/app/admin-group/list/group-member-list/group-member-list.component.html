@@ -1,0 +1,53 @@
+<app-header></app-header>
+<section>
+    <div class="gap2 gray-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row merged20" id="page-contents">
+                        <app-group-header></app-group-header>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <app-aside [totalMember]="data.totalElements" [type]="'member'"></app-aside>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="central-meta padding30">
+                                    <div class="row member-amount">
+                                        <div class="col-lg-4">
+                                            <div class="align-left">
+                                                <h5>Member<span>{{data.totalElements}}</span></h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <div class="col-lg-9 col-md-12">
+                                                    <input type="search" placeholder="Member Name..." class="form-control"
+                                                        [(ngModel)]="key">
+                                                </div>
+                                                <div class="col-lg-3 col-md-12 padding-left-0">
+                                                    <button class="btn btn-outline-success" (click)="set()">Search</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 col-sm-4" *ngFor="let memberGroup of list">
+                                            <app-group-memberz [member]="memberGroup"></app-group-memberz>
+                                        </div>
+                                    </div>
+                                    <div class="lodmore">
+                                        <span>Viewing {{list.length}} of {{data.totalElements}} member</span><br>
+                                        <p class="p-0 cursor" (click)="addList()">
+                                            <i [class.text-primary]="data.totalElements != list.length" class="fa fa-chevron-circle-down font-250" data-toggle="tooltip"
+                                                title="More"></i>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

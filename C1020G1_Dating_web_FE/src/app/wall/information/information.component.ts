@@ -21,7 +21,6 @@ export class InformationComponent implements OnInit {
     let id = this.activatedRoute.snapshot.params['id'];
     this.userService.findUserById(id).subscribe(data => {
       this.userInfo = data;
-
     });
   }
 

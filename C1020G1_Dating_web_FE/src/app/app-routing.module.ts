@@ -17,6 +17,12 @@ import {ChangePasswordComponent} from "./user-management/change-password/change-
 import {EditComponent} from "./user-management/edit/edit.component";
 import {FriendRequestComponent} from "./wall/friend-request/friend-request.component";
 import {TopwallComponent} from "./wall/topwall/topwall.component";
+import {EditDetailComponent} from "./user-management/edit/edit-detail/edit-detail.component";
+import {TimelineComponent} from "./wall/timeline/timeline.component";
+import {InformationComponent} from "./wall/information/information.component";
+import firebase from "firebase";
+import Auth = firebase.auth.Auth;
+import {FriendsComponent} from "./wall/friends/friends.component";
 
 
 const routes: Routes = [
@@ -25,7 +31,16 @@ const routes: Routes = [
     children: [
       {path: 'name-search', component: NameSearchComponent},
       {path: 'advanced-search', component: AdvancedSearchComponent},
-      {path: 'friend-request/:id', component: TopwallComponent},
+      {
+        path: 'wall/:id',
+        children: [
+          {path: 'friend_request/:id', component: FriendRequestComponent},
+          {path: 'friends/:id', component: FriendsComponent},
+          {path: 'timeline/:id', component: TimelineComponent},
+          {path: 'info/:id', component: InformationComponent},
+        ],
+        component: TopwallComponent, canActivate: [AuthGuardService]
+      }
     ],
     component: ErrorPageComponent, canActivate: [AuthGuardService]
   },
@@ -33,13 +48,23 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: '', component: LoginComponent},
   {path: 'recover', component: RecoverPasswordComponent},
-  {path: 'home', component: ErrorPageComponent, canActivate: [AuthGuardService]},
+  {path: 'home', component: UpdateAvatarComponent, canActivate: [AuthGuardService]},
   {path: 'registration', component: RegistrationComponent},
   {path: 'initial-information', component: InitialInformationComponent, canActivate: [RegisGuardService]},
-  {path: 'update-avatar', component: UpdateAvatarComponent, canActivate: [AuthGuardService]},
-  {path: 'status', component: UpdateStatusComponent, canActivate: [AuthGuardService]},
-  {path: 'changePassword', component: ChangePasswordComponent, canActivate: [AuthGuardService]},
-  {path: 'edit', component: EditComponent, canActivate: [AuthGuardService]}
+
+
+  {
+    path: 'edit',
+    children: [
+      {path: 'update-avatar', component: UpdateAvatarComponent},
+      {path: 'status', component: UpdateStatusComponent},
+      {path: 'changePassword', component: ChangePasswordComponent},
+      {path: 'detail', component: EditDetailComponent}
+    ],
+    component: EditComponent, canActivate: [AuthGuardService]
+  },
+
+
 ];
 
 @NgModule({
