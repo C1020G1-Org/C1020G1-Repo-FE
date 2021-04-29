@@ -1,11 +1,11 @@
-import { Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { CommentService } from 'src/app/service/comment.service';
 import { ParentComment } from 'src/app/model/ParentComment';
 import { Post } from 'src/app/model/Post';
 import { PostService } from 'src/app/service/post.service';
 import { finalize} from 'rxjs/operators';
 import { TokenStorageService } from 'src/app/service/auth/token-storage';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup} from '@angular/forms';
 import { ChildComment } from 'src/app/model/ChildComment';
 import { ObserverService } from 'src/app/service/observer.service';
 import { AngularFireStorage } from '@angular/fire/storage';
@@ -16,7 +16,8 @@ declare const $: any;
 @Component({
   selector: 'app-newsfeed',
   templateUrl: './newsfeed.component.html',
-  styleUrls: ['./newsfeed.component.css']
+  styleUrls: ['./newsfeed.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class NewsfeedComponent implements OnInit{
   posts : Post[];
@@ -31,15 +32,15 @@ export class NewsfeedComponent implements OnInit{
   editingParentComment : ParentComment;
   deletingParentCommentId : number;
 
-  childCommentForm : FormGroup; 
+  childCommentForm : FormGroup;
   editingChildComment : ChildComment;
   deletingChildCommentId : number;
-  
+
   constructor(private postService : PostService,
               private tokenStorageService : TokenStorageService,
               private commentService : CommentService,
               private observerService : ObserverService,
-              public storage: AngularFireStorage) { 
+              public storage: AngularFireStorage) {
                 // this.observerService.getChangeEvent().subscribe(() =>{
                 //   this.getAllPostInNewsFeed(this.user.userId, this.pageNumber);
                 // })
@@ -73,16 +74,16 @@ export class NewsfeedComponent implements OnInit{
         console.log("end page");
       }else {
         let listPostsFromDb = listPageablePost.content;
-      
+
         if(this.posts != null){
           this.posts = this.posts.concat(listPostsFromDb);
         }else {
           this.posts= listPostsFromDb;
         }
-        
+
         console.log(this.posts);
       }
-    })                    
+    })
   };
 
   // create function loadmore post in newsfeed
@@ -171,7 +172,7 @@ export class NewsfeedComponent implements OnInit{
       this.childCommentForm.get('commentImage').setValue(null);
     }
 
-    
+
     this.commentService.editChildComment(this.editingChildComment.childCommentId, this.childCommentForm.value).subscribe(() =>{
       console.log('ok');
       this.imageUrlFromLocal = null;

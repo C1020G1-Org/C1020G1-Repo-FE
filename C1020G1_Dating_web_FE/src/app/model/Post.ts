@@ -1,6 +1,7 @@
 import { GroupSocial } from "./GroupSocial";
 import { ParentComment } from "./ParentComment";
 import { User } from "./User";
+import {PostImage2} from "./PostImage";
 
 export class Post {
     postId : number;
@@ -9,5 +10,6 @@ export class Post {
     postPublished : string;
     user : User;
     groupSocial : GroupSocial;
-    // parentComments : ParentComment[];
+    parentComments : ParentComment[];
+    postImages : PostImage2[];
 }
