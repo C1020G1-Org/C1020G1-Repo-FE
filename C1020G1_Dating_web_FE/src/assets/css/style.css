@@ -740,6 +740,7 @@ header.sticky {
 }
 
 .top-area > ul {
+<<<<<<< HEAD
   display: inline-block;
   float: left;
   line-height: 64px;
@@ -747,6 +748,15 @@ header.sticky {
   margin-bottom: 0;
   padding-left: 10px;
   vertical-align: middle;
+=======
+    display: inline-block;
+    /*float: left;*/
+    line-height: 64px;
+    list-style: outside none none;
+    margin-bottom: 0;
+    padding-left: 10px;
+    vertical-align: middle;
+>>>>>>> a6bc1569abb4436b695003aa8756643418243777
 }
 
 .top-area > ul > li {

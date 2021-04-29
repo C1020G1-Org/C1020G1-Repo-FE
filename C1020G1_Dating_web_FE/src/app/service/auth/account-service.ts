@@ -10,7 +10,7 @@ import {TokenStorageService} from "./token-storage";
 })
 export class AccountService {
   httpOptions:any;
-  baseURL="http://localhost:8080/"
+  baseURL="http://localhost:8080/";
   constructor(private http: HttpClient, private tokenStorage: TokenStorageService ) {
     this.httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json','Authorization': `Bearer `+this.tokenStorage.getToken()})

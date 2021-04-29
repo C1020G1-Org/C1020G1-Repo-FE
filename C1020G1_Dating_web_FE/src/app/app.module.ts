@@ -1,6 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
+
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 
@@ -21,6 +22,11 @@ import {UserManagementModule} from "./user-management/user-management.module";
 import {AngularFireModule} from "@angular/fire";
 import {AngularFireDatabaseModule} from "@angular/fire/database";
 import {AngularFireStorageModule} from "@angular/fire/storage";
+import {CommonModule, DatePipe} from "@angular/common";
+import {HttpClientModule} from "@angular/common/http";
+import {WallModule} from "./wall/wall.module";
+
+// import {TooltipModule} from "ng2-tooltip-directive";
 
 
 @NgModule({
@@ -28,6 +34,7 @@ import {AngularFireStorageModule} from "@angular/fire/storage";
     AppComponent,
     ErrorPageComponent,
     HeaderComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -41,7 +48,8 @@ import {AngularFireStorageModule} from "@angular/fire/storage";
     AngularFireDatabaseModule,
     AngularFireStorageModule,
     ChatModule,
-    AngularFireModule
+    AngularFireModule,
+    CommonModule,
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',
@@ -59,10 +67,11 @@ import {AngularFireStorageModule} from "@angular/fire/storage";
           provider: new FacebookLoginProvider('1763676513806884')
         }
       ]
-    } as SocialAuthServiceConfig,
-  }],
+    } as SocialAuthServiceConfig
+  },DatePipe],
 
   bootstrap: [AppComponent]
 })
 export class AppModule {
+
 }
