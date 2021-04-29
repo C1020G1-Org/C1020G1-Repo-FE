@@ -6,6 +6,7 @@ import { CommonModule } from "@angular/common";
 
 
 const routes: Routes = [
+
 ];
 
 @NgModule({

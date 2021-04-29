@@ -28,25 +28,25 @@ export class GroupHeaderComponent implements OnInit {
     public router: Router, private tokenStorage: TokenStorageService, private groupManagementService: GroupManagementService) { }
 
   ngOnInit() {
-    this.activatedRoute.paramMap.subscribe(data => {
-      this.groupService.getGroupById(data.get("id")).subscribe(group => {
-        this.group = group;
-        this.groupService.getAllGroupRequest(this.tokenStorage.getUser().userId).subscribe(data1 => {
-          this.groupRequest = data1;
-          for (let i = 0; i < this.groupRequest.length; i++) {
-            if (this.group.groupId == this.groupRequest[i].group.groupId) {
-              this.isJoin = true;
-              this.request = this.groupRequest[i];
-              this.requestType = this.request.sender;
-            }
-          }
-        })
-      })
-      this.groupService.getGroupUserByGroupIdAndUserId(data.get("id"), this.tokenStorage.getUser().userId).subscribe(data => {
-        this.isJoin = true;
-      });
-
-    });
+    // this.activatedRoute.paramMap.subscribe(data => {
+    //   this.groupService.getGroupById(data.get("id")).subscribe(group => {
+    //     this.group = group;
+    //     this.groupService.getAllGroupRequest(this.tokenStorage.getUser().userId).subscribe(data1 => {
+    //       this.groupRequest = data1;
+    //       for (let i = 0; i < this.groupRequest.length; i++) {
+    //         if (this.group.groupId == this.groupRequest[i].group.groupId) {
+    //           this.isJoin = true;
+    //           this.request = this.groupRequest[i];
+    //           this.requestType = this.request.sender;
+    //         }
+    //       }
+    //     })
+    //   })
+    //   this.groupService.getGroupUserByGroupIdAndUserId(data.get("id"), this.tokenStorage.getUser().userId).subscribe(data => {
+    //     this.isJoin = true;
+    //   });
+    //
+    // });
   }
 
   saveRequest() {
