@@ -474,14 +474,14 @@ $('#nightmode').on('change', function() {
 	}
 
 if ($.isFunction($.fn.loadMoreResults)) {
-	$('.loadMore').loadMoreResults({
-		displayedItems: 3,
-		showItems: 1,
-		button: {
-		  'class': 'btn-load-more',
-		  'text': 'Load More'
-		}
-	});
+	// $('.loadMore').loadMoreResults({
+	// 	displayedItems: 3,
+	// 	showItems: 1,
+	// 	button: {
+	// 	  'class': 'btn-load-more',
+	// 	  'text': 'Load More'
+	// 	}
+	// });
 
 	$('.load-more').loadMoreResults({
 		displayedItems: 8,

@@ -23,6 +23,7 @@ import {InformationComponent} from "./wall/information/information.component";
 import firebase from "firebase";
 import Auth = firebase.auth.Auth;
 import {FriendsComponent} from "./wall/friends/friends.component";
+import {NewsfeedComponent} from "./news-feed/newsfeed.component";
 
 
 const routes: Routes = [
@@ -48,7 +49,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: '', component: LoginComponent},
   {path: 'recover', component: RecoverPasswordComponent},
-  {path: 'home', component: UpdateAvatarComponent, canActivate: [AuthGuardService]},
+  {path: 'home', component: NewsfeedComponent, canActivate: [AuthGuardService]},
   {path: 'registration', component: RegistrationComponent},
   {path: 'initial-information', component: InitialInformationComponent, canActivate: [RegisGuardService]},
 

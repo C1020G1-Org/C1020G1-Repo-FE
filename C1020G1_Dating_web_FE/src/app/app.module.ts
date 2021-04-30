@@ -31,6 +31,9 @@ import {WallModule} from "./wall/wall.module";
 import {TopwallComponent} from "./wall/topwall/topwall.component";
 import {GroupModule} from "./group/group.module";
 import {AdminGroupModule} from "./admin-group/admin-group.module";
+import {PostModule} from "./post/post.module";
+import {NewsFeedModule} from "./news-feed/news-feed.module";
+import {CommentsModule} from "./comments/comment.module";
 
 
 @NgModule({
@@ -62,7 +65,10 @@ import {AdminGroupModule} from "./admin-group/admin-group.module";
     TooltipModule,
     WallModule,
     GroupModule,
-    AdminGroupModule
+    AdminGroupModule,
+    PostModule,
+    NewsFeedModule,
+    CommentsModule
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',

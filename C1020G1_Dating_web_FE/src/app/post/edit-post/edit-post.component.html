@@ -1,0 +1,116 @@
+<div class="modal fade" id="editPostModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="central-meta postbox">
+          <span class="create-post">Edit post</span>
+          <div class="new-postbox">
+            <div class="newpst-input d-block w-100">
+              <form [formGroup]="formEditPost">
+                <input type="hidden" formControlName="postId" name="postId" />
+                <div class="attachments">
+                  <ul>
+                    <li>
+                      <i class="fa fa-image"></i>
+                      <label class="fileContainer">
+                        <input
+                          type="file"
+                          (change)="updateImage($event)"
+                          multiple
+                        />
+                      </label>
+                    </li>
+                    <li>
+                      <select
+                        class="fa form-control"
+                        formControlName="postStatus"
+                        id="postStatus"
+                        name="postStatus"
+                        style="height: 30px; width: 125px; font-size: 15px"
+                      >
+                        <option value="public">&#xf0ac; &nbsp; Public</option>
+                        <option value="friend">&#xf0c0; &nbsp; Friend</option>
+                        <option value="onlyMe">&#xf023; &nbsp; Only Me</option>
+                      </select>
+                      <div
+                        *ngIf="
+                          !postStatus.valid &&
+                          (postStatus.dirty || postStatus.touched)
+                        "
+                      >
+                        <div
+                          class="alert alert-danger"
+                          role="alert"
+                          [hidden]="!postStatus.errors.required"
+                        >
+                          Status is required!!
+                        </div>
+                      </div>
+                      <div *ngIf="check">
+                        <div class="alert alert-danger" role="alert">
+                          Content is required!!
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                  <div class="d-block w-100">
+                    <textarea
+                      rows="2"
+                      formControlName="postContent"
+                      name="postContent"
+                      id="myText"
+                      class="select-status"
+                      style="height: 100px"
+                    >
+                    </textarea>
+                  </div>
+                </div>
+                <!-- <div style="overflow-y: scroll; max-height: 150px"> -->
+                <div
+                  *ngFor="let postImage of this.postImages"
+                  style="margin-left: 0; display: inline-block"
+                >
+                  <span
+                    ><i
+                      class="fa fa-trash delete-icon d-inline"
+                      (click)="deleteImage($event)"
+                      [attr.data-index]="postImage.postImageId"
+                    ></i
+                  ></span>
+                  <img
+                    [src]="postImage.image"
+                    style="margin: 3px; height: 120px; width: auto; float: left"
+                  />
+                </div>
+                <div
+                  *ngFor="let postImage of this.updateFileImage; let i = index"
+                  style="margin-left: 0; display: inline-block"
+                >
+                  <span
+                    ><i
+                      class="fa fa-trash delete-icon d-inline"
+                      (click)="deleteUpdateImage($event)"
+                      [attr.data-index]="i"
+                    ></i
+                  ></span>
+                  <img
+                    [src]="postImage.url"
+                    style="margin: 3px; height: 120px; width: auto; float: left"
+                  />
+                </div>
+                <!-- </div> -->
+                <button
+                  class="post-btn"
+                  (click)="editPost()"
+                  data-dismiss="modal"
+                >
+                  Save
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

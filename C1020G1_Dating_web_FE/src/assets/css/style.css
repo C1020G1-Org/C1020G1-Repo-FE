@@ -9746,13 +9746,13 @@ input[type="checkbox"]:checked + label {
   color: #fff;
 }
 
-.btn-secondary {
-  background-color: #888da8;
-  border: medium none;
-  border-radius: 30px;
-  font-size: 14px;
-  margin-bottom: 10px;
-}
+/*.btn-secondary {*/
+/*  background-color: #888da8;*/
+/*  border: medium none;*/
+/*  border-radius: 30px;*/
+/*  font-size: 14px;*/
+/*  margin-bottom: 10px;*/
+/*}*/
 
 .ico-box {
   background: #eee none repeat scroll 0 0;

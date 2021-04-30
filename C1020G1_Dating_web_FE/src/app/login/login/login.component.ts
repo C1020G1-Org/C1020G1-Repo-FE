@@ -55,6 +55,7 @@ export class LoginComponent implements OnInit {
             this.router.navigateByUrl("/registration");
           } else {
             this.tokenStorage.saveToken(req.token);
+            req.user.account = null;
             this.tokenStorage.saveUser(req.user);
             this.tokenStorage.saveAccountName(req.accountName);
             this.router.navigateByUrl("/home");
@@ -81,6 +82,7 @@ export class LoginComponent implements OnInit {
             this.router.navigateByUrl("/registration");
           } else {
             this.tokenStorage.saveToken(req.token);
+            req.user.account = null;
             this.tokenStorage.saveUser(req.user);
             this.tokenStorage.saveAccountName(req.accountName);
             this.router.navigateByUrl("/home");
@@ -142,11 +144,13 @@ export class LoginComponent implements OnInit {
   loginWithCheckRemember(accountReg) {
     if (!this.loginForm.get("remember").value) {
       this.auth.sendLogin(accountReg).subscribe(data => {
+        data.user.account = null;
         this.tokenStorage.saveUser(data.user);
         this.login(data)
       })
     } else {
       this.auth.sendLogin(accountReg).subscribe(data => {
+        data.user.account = null;
         this.tokenStorage.saveUser(data.user);
         this.loginRemember(data);
 

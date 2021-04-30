@@ -1,0 +1,56 @@
+<div class="central-meta postbox">
+  <span class="create-post">Create post</span>
+  <div class="new-postbox">
+    <div class="newpst-input d-block w-100">
+      <form [formGroup]="formCreatePost">
+        <div class="attachments">
+          <ul>
+            <li>
+              <i class="fa fa-image"></i>
+              <label class="fileContainer">
+                <input type="file" (change)="importImages($event)" multiple>
+              </label>
+            </li>
+            <li>
+              <select class="fa form-control" formControlName="postStatus" id="postStatus" name="postStatus"
+                      style="height: 30px;width: 125px;font-size: 15px">
+                <option value="public">
+                  &#xf0ac; &nbsp; Public
+                </option>
+                <option value="friend">
+                  &#xf0c0; &nbsp; Friend
+                </option>
+                <option value="onlyMe">
+                  &#xf023; &nbsp; Only Me
+                </option>
+              </select>
+              <div
+                *ngIf="!postStatus.valid && (postStatus.dirty ||postStatus.touched)">
+                <div class="alert alert-danger" role="alert" [hidden]="!postStatus.errors.required">
+                  Status is required!!
+                </div>
+              </div>
+              <div
+                *ngIf="check">
+                <div class="alert alert-danger" role="alert">
+                  Content is required!!
+                </div>
+              </div>
+            </li>
+          </ul>
+          <div class="d-block w-100">
+          <textarea rows="2" formControlName="postContent" name="postContent" id="myText" class="select-status"
+                    style="height: 100px" placeholder="Share some what you are thinking?">
+          </textarea>
+          </div>
+        </div>
+        <div *ngFor="let file of this.fileImage; let i = index" class="d-inline-block" style="margin: 0">
+          <span><i class="fa fa-trash delete-icon d-inline" (click)="deleteUpdateImage($event)" [attr.data-index]="i"></i></span>
+          <img [src]="file.url" style="margin:3px; height: 100px; width: auto; float: left">
+        </div>
+        <button class="post-btn" id="myButton" (click)="addNewPost()">Post</button>
+        <img src=""/>
+      </form>
+    </div>
+  </div>
+</div>
