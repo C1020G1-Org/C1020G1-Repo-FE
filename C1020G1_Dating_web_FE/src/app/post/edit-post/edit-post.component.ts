@@ -90,7 +90,11 @@ export class EditPostComponent implements OnInit, OnChanges {
         deleteImages: this.deleteImages
       };
       console.log(JSON.stringify(this.postEditImage));
-      this.postService.updatePost(this.postEditImage).subscribe()
+      this.postService.updatePost(this.postEditImage).subscribe(data =>{
+        console.log('from db');
+        console.log(data);
+        this.postService.observeEditingPost(data);
+      })
     } else {
       this.check = true;
     }

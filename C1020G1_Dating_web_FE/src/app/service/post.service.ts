@@ -66,16 +66,37 @@ export class PostService {
   }
 
   observeCreatingComment(observablePost: Post, observableParentComment: ParentComment, observableChildComment: ChildComment) {
-    for (let post of this.postsInService) {
-      if (post.postId == observablePost.postId) {
-        if (observableParentComment != null) {
-          post.parentComments.push(observableParentComment);
-          if (observableChildComment != null) {
-            for (let parentComment of post.parentComments) {
-              if (parentComment.parentCommentId == observableParentComment.parentCommentId) {
-                parentComment.childComments.push(observableChildComment);
-                return;
-              }
+    // for (let post of this.postsInService) {
+    //   if (post.postId == observablePost.postId) {
+    //     if (observableParentComment != null) {
+    //       post.parentComments.push(observableParentComment);
+    //       if (observableChildComment != null) {
+    //         for (let parentComment of post.parentComments) {
+    //           if (parentComment.parentCommentId == observableParentComment.parentCommentId) {
+    //             parentComment.childComments.push(observableChildComment);
+    //             return;
+    //           }
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+
+    if (observableChildComment == null) {
+      for (let post of this.postsInService) {
+        if (post.postId == observablePost.postId) {
+          if (observableParentComment != null) {
+            post.parentComments.push(observableParentComment);
+          }
+        }
+      }
+    } else {
+      for (let post of this.postsInService) {
+        if (post.postId == observablePost.postId) {
+          for (let parentComment of post.parentComments) {
+            if (parentComment.parentCommentId == observableParentComment.parentCommentId) {
+              parentComment.childComments.push(observableChildComment);
+              return;
             }
           }
         }
@@ -107,11 +128,11 @@ export class PostService {
     }
   }
 
-  observeEditingComment(observableParentComment : ParentComment, followChildComments : ChildComment[] ,observableChildComment : ChildComment){
-    for (let post of this.postsInService){
-      if(observableParentComment != null){
-        for (let i = 0; i < post.parentComments.length ; i++){
-          if(post.parentComments[i].parentCommentId == observableParentComment.parentCommentId){
+  observeEditingComment(observableParentComment: ParentComment, followChildComments: ChildComment[], observableChildComment: ChildComment) {
+    for (let post of this.postsInService) {
+      if (observableParentComment != null) {
+        for (let i = 0; i < post.parentComments.length; i++) {
+          if (post.parentComments[i].parentCommentId == observableParentComment.parentCommentId) {
             console.log('nhan tu db');
             console.log(observableParentComment);
 
@@ -128,10 +149,10 @@ export class PostService {
         }
       }
 
-      if(observableChildComment != null){
-        for (let parentComment of post.parentComments){
-          for(let j = 0; j < parentComment.childComments.length; j++){
-            if(parentComment.childComments[j].childCommentId == observableChildComment.childCommentId){
+      if (observableChildComment != null) {
+        for (let parentComment of post.parentComments) {
+          for (let j = 0; j < parentComment.childComments.length; j++) {
+            if (parentComment.childComments[j].childCommentId == observableChildComment.childCommentId) {
               parentComment.childComments[j] = observableChildComment;
               return;
             }
@@ -141,4 +162,28 @@ export class PostService {
     }
   }
 
+  observeEditingPost(observablePost: any) {
+    console.log(this.postsInService);
+    console.log(observablePost);
+    for (let i = 0; i < this.postsInService.length; i++) {
+      console.log('truoc khi vao if');
+      if (this.postsInService[i].postId == observablePost.post.postId) {
+        let tempParentComment = this.postsInService[i].parentComments;
+
+        console.log('truoc khi thay doi');
+        console.log(this.postsInService[i]);
+
+        this.postsInService[i] = observablePost.post;
+
+        this.postsInService[i].parentComments = tempParentComment;
+
+        console.log('sau khi thay doi');
+        console.log(this.postsInService[i]);
+
+        console.log('from service');
+        console.log(this.postsInService[i]);
+        return;
+      }
+    }
+  }
 }

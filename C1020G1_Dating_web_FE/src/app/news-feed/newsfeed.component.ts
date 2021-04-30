@@ -55,7 +55,7 @@ export class NewsfeedComponent implements OnInit {
       commentImage: new FormControl(''),
       post: new FormControl(''),
       user: new FormControl(''),
-      childComments : new FormControl('')
+      childComments : new FormControl(null)
     });
 
     this.childCommentForm = new FormGroup({
