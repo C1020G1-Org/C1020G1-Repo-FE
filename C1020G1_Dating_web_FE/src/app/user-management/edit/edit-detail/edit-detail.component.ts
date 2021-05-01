@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {District, Province, User, Ward} from "../../../models/user-model";
 import {EditService} from "../../service/edit.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {TokenStorageService} from "../../../service/auth/token-storage";
+import {UserCreateService} from "../../service/user-create.service";
 
 @Component({
   selector: 'app-edit-detail',
@@ -20,23 +21,12 @@ export class EditDetailComponent implements OnInit {
   provinces: Province[];
   user: User;
 
-  compareWard(c1: Ward, c2: Ward): boolean {
-    return c1 && c2 ? c1.wardId === c2.wardId : false;
-  }
-
-  compareDistrict(c1: District, c2: District): boolean {
-    return c1 && c2 ? c1.districtId === c2.districtId : false;
-  }
-
-  compareProvince(c1: Province, c2: Province): boolean {
-    return c1 && c2 ? c1.provinceId === c2.provinceId : false;
-  }
-
   constructor(
     private editService: EditService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private tokenStorage: TokenStorageService
+    private tokenStorage: TokenStorageService,
+    private userCreate: UserCreateService
   ) {
   }
 
@@ -55,16 +45,33 @@ export class EditDetailComponent implements OnInit {
       district: new FormControl('', [Validators.required]),
     });
     this.user = this.tokenStorage.getUser();
-    this.editUserForm.patchValue(this.user);
-    this.editUserForm.controls.province.setValue(this.user.ward.district.province);
-    this.editUserForm.controls.district.setValue(this.user.ward.district);
-    this.editUserForm.controls.birthday.setValue(this.user.birthday.toString().slice(0,10))
-    this.getData()
+
+    this.editUserForm.controls.userName.setValue(this.user.userName);
+    this.editUserForm.controls.gender.setValue(this.user.gender);
+    this.editUserForm.controls.marriaged.setValue(this.user.marriaged);
+    this.editUserForm.controls.occupation.setValue(this.user.occupation);
+    this.editUserForm.controls.email.setValue(this.user.email);
+    this.editUserForm.controls.address.setValue(this.user.address);
+    this.editUserForm.controls.province.setValue(this.user.ward.district.province.provinceId);
+    this.editUserForm.controls.district.setValue(this.user.ward.district.districtId);
+    this.editUserForm.controls.birthday.setValue(this.user.birthday.toString().slice(0, 10));
+    this.editUserForm.controls.ward.setValue(this.user.ward.wardId);
+
+    this.userCreate.getAllProvinces().subscribe(data => {
+      this.provinces = data;
+    });
+
+    this.userCreate.getDistrictByProvince(this.user.ward.district.province.provinceId).subscribe(data => {
+      this.districts = data;
+    });
+
+    this.userCreate.getWardByDistrict(this.user.ward.district.districtId).subscribe(data => {
+      this.wards = data;
+    });
   }
 
 
   submit() {
-    console.log(this.editUserForm.value);
     this.user.userName = this.editUserForm.value.userName;
     this.user.gender = this.editUserForm.value.gender;
     this.user.birthday = this.editUserForm.value.birthday;
@@ -73,28 +80,33 @@ export class EditDetailComponent implements OnInit {
     this.user.occupation = this.editUserForm.value.occupation;
     this.user.email = this.editUserForm.value.email;
     this.user.address = this.editUserForm.value.address;
-    this.user.ward = this.editUserForm.value.ward;
-    this.editService.updateUser( this.user).subscribe(data => {
-      this.tokenStorage.saveUser(this.user);
+    this.user.ward.wardId = this.editUserForm.value.ward;
+    this.editService.updateUser(this.user).subscribe(data => {
+      this.tokenStorage.saveUser(data)
       window.location.reload();
     })
   }
 
-  getData() {
-    this.editService.getWard().subscribe(wards => {
-      this.wards = wards;
+  public changeDistrict(e) {
+    let id = e.target.value.split(": ")[1];
+    this.userCreate.getDistrictByProvince(id).subscribe(data => {
+      this.districts = data;
     });
-    this.editService.getDistrict().subscribe(districts => {
-      this.districts = districts;
-    });
-    this.editService.getProvince().subscribe(provinces => {
-      this.provinces = provinces;
-    })
+    this.editUserForm.controls.district.setValue("");
+    this.wards = [];
+    this.editUserForm.controls.ward.setValue("");
+  }
 
+  public changeWard(e) {
+    let id = e.target.value.split(": ")[1]
+    this.userCreate.getWardByDistrict(id).subscribe(data => {
+      this.wards = data;
+    });
+    this.editUserForm.controls.ward.setValue("");
   }
 
   cancel() {
-    console.log(this.editUserForm);
+    this.editUserForm.reset()
   }
 
 }

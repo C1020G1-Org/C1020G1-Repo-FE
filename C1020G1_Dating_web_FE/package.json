@@ -23,6 +23,7 @@
     "@angular/platform-browser": "~9.1.6",
     "@angular/platform-browser-dynamic": "~9.1.6",
     "@angular/router": "~9.1.6",
+    "@ctrl/ngx-emoji-mart": "^5.1.0",
     "@ng-bootstrap/ng-bootstrap": "^6.2.0",
     "angularx-social-login": "^3.5.6",
     "bcryptjs": "^2.4.3",

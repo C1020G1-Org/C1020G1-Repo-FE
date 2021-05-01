@@ -146,7 +146,7 @@ export class TopwallComponent implements OnInit {
     this.notification = this.friendRequestService.findNotifyByFriendRequest(this.notiList, friendRequest);
     this.friendRequestService.acceptFriendRequest(friendRequest).subscribe(data => {
       this.ngOnInit();
-      this.notificationService.delete(10, this.notification.key)
+      this.notificationService.delete(this.userLogging.userId, this.notification.key)
     });
   }
 
@@ -171,7 +171,7 @@ export class TopwallComponent implements OnInit {
       this.friendRequestToDelete.receiveUser.userId,
       this.friendRequestToDelete.sendUser.userId).subscribe(data => {
       this.ngOnInit();
-      this.notificationService.delete(10, this.notification.key)
+      this.notificationService.delete(this.userLogging.userId, this.notification.key)
     });
   }
 

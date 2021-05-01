@@ -35,7 +35,8 @@ import {PostModule} from "./post/post.module";
 import {NewsFeedModule} from "./news-feed/news-feed.module";
 import {CommentsModule} from "./comments/comment.module";
 import {FriendSuggestComponent} from "./friend-suggest/friend-suggest.component";
-
+import {ChatModule} from "./chat/chat.module";
+import {DatePipe} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import {FriendSuggestComponent} from "./friend-suggest/friend-suggest.component"
     PostModule,
     CommentsModule,
     NewsFeedModule,
+    ChatModule
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',
@@ -88,7 +90,7 @@ import {FriendSuggestComponent} from "./friend-suggest/friend-suggest.component"
         }
       ]
     } as SocialAuthServiceConfig,
-  }],
+  },DatePipe],
   exports: [
     FriendSuggestComponent
   ],

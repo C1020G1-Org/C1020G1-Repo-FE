@@ -7,6 +7,7 @@ import {NewsfeedComponent} from "./newsfeed.component";
 import {RouterModule} from "@angular/router";
 
 import {FriendSuggestComponent} from "../friend-suggest/friend-suggest.component";
+import {ChatModule} from "../chat/chat.module";
 
 @NgModule({
   declarations: [NewsfeedComponent,FriendSuggestComponent],
@@ -17,7 +18,7 @@ import {FriendSuggestComponent} from "../friend-suggest/friend-suggest.component
     FormsModule,
     PostModule,
     RouterModule,
-
+    ChatModule
   ],
   exports: [NewsfeedComponent,FriendSuggestComponent]
 })

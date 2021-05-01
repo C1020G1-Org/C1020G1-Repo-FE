@@ -7,7 +7,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser} from "angularx-social-login";
 import {ActivatedRoute, Router} from "@angular/router";
 import {User} from "../../models/user-model";
-
+import firebase from "firebase";
 
 
 @Component({
@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   userLogged: SocialUser;
   isError = false;
   user: User;
+  ref = firebase.database().ref('users/');
 
 
   constructor(private route: ActivatedRoute,
@@ -77,26 +78,26 @@ export class LoginComponent implements OnInit {
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID)
       .then(data => {
-      this.socialUser = data;
-      const tokenFacebook = new JwtResponse(this.socialUser.authToken)
-      this.auth.facebook(tokenFacebook).subscribe(req => {
-          if (req.token == "") {
-            this.tokenStorage.saveUser(req.user);
-            this.router.navigateByUrl("/registration");
-          } else {
-            this.tokenStorage.saveToken(req.token);
-            req.user.account = null;
-            this.tokenStorage.saveUser(req.user);
-            this.tokenStorage.saveAccountName(req.accountName);
-            window.location.reload();
+        this.socialUser = data;
+        const tokenFacebook = new JwtResponse(this.socialUser.authToken)
+        this.auth.facebook(tokenFacebook).subscribe(req => {
+            if (req.token == "") {
+              this.tokenStorage.saveUser(req.user);
+              this.router.navigateByUrl("/registration");
+            } else {
+              this.tokenStorage.saveToken(req.token);
+              req.user.account = null;
+              this.tokenStorage.saveUser(req.user);
+              this.tokenStorage.saveAccountName(req.accountName);
+              window.location.reload();
+            }
+          },
+          error => {
+            console.log(error);
+            this.logOut()
           }
-        },
-        error => {
-          console.log(error);
-          this.logOut()
-        }
-      )
-    }).catch(
+        )
+      }).catch(
       err => {
         console.log(err)
       }
@@ -159,6 +160,8 @@ export class LoginComponent implements OnInit {
     if (data.token != "INVALID_CREDENTIALS") {
       this.tokenStorage.saveToken(data.token);
       this.tokenStorage.saveAccountName(this.getAccountName().value);
+
+      // this.chatOfThinh()
       window.location.reload();
     } else {
       this.title = "Your account is not correct, please check your username or password";
@@ -170,9 +173,27 @@ export class LoginComponent implements OnInit {
     if (data.token != "INVALID_CREDENTIALS") {
       this.tokenStorage.saveTokenRemember(data.token);
       this.tokenStorage.saveAccountName(this.getAccountName().value);
+      // this.chatOfThinh();
       window.location.reload();
     } else {
       this.title = "Your account is not correct, please check your username or password"
     }
   }
+
+  // Thinh
+  // chatOfThinh() {
+  //   const createNewUser = firebase.database().ref('users/').push();
+  //   createNewUser.set(this.user);
+  //   const id = this.tokenStorage.getUser().userId;
+  //   this.ref.orderByChild('id').equalTo(id).once('value', snapshot => {
+  //     if (snapshot.exists()) {
+  //       localStorage.setItem('nickname1', String(id));
+  //       // firebase.database().ref('users/' + id + '/fullName'  ).update(this.tokenService.getUser());
+  //     } else {
+  //       const newUser = firebase.database().ref('users/').push();
+  //       newUser.set(this.tokenStorage.getUser());
+  //       localStorage.setItem('nickname1', String(id));
+  //     }
+  //   });
+  // }
 }

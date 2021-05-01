@@ -63,7 +63,11 @@ export class CreatePostComponent implements OnInit {
       console.log('chuan bi vao create post');
       this.postService.createPost(postImage).subscribe((data) => {
         console.log(data);
-        this.postService.postsInService.unshift(data);
+        if(this.postService.postsInService != undefined) {
+          this.postService.postsInService.unshift(data);
+        } else {
+          this.postService.pushNewPost(data);
+        }
         console.log(this.postService.postsInService);
         // this.ngOnInit();
       })

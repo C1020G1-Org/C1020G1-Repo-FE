@@ -10,7 +10,8 @@ export const environment = {
     projectId: "social-d792e",
     storageBucket: "social-d792e.appspot.com",
     messagingSenderId: "1057724187940",
-    appId: "1:1057724187940:web:ca792eadc0c59d6b171fb1"
+    appId: "1:1057724187940:web:ca792eadc0c59d6b171fb1",
+    // databaseURL: 'https://dating-web-95f9d-default-rtdb.firebaseio.com'
   }
 };
 

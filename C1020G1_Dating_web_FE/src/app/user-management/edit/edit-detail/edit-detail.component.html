@@ -54,7 +54,7 @@
 
         <div class="c-form" style="margin-bottom: 20px;">
           <label>Occupation:
-            <input type="text"  formControlName="occupation">
+            <input type="text" formControlName="occupation">
           </label>
         </div>
         <div class="alert alert-danger"
@@ -94,9 +94,9 @@
 
         <div>
           <label>Province:
-            <select [compareWith]="compareProvince"
-                    formControlName="province">
-              <option *ngFor="let province of provinces" [ngValue]="province">
+            <select formControlName="province" (change)="changeDistrict($event)">
+              <option disabled value="">Choose province</option>
+              <option *ngFor="let province of provinces" [ngValue]="province.provinceId">
                 {{province.provinceName}}
               </option>
             </select>
@@ -107,9 +107,9 @@
 
         <div>
           <label>District:
-            <select [compareWith]="compareDistrict"
-                    formControlName="district">
-              <option *ngFor="let district of districts" [ngValue]="district">
+            <select formControlName="district" (change)="changeWard($event)">
+              <option disabled value="">Choose district</option>
+              <option *ngFor="let district of districts" [ngValue]="district.districtId">
                 {{district.districtName}}
               </option>
             </select>
@@ -120,9 +120,9 @@
 
         <div>
           <label>Ward:
-            <select [compareWith]="compareWard"
-                    formControlName="ward">
-              <option *ngFor="let ward of wards" [ngValue]="ward">
+            <select formControlName="ward">
+              <option disabled value="">Choose ward</option>
+              <option *ngFor="let ward of wards" [ngValue]="ward.wardId">
                 {{ward.wardName}}
               </option>
             </select>
@@ -132,8 +132,11 @@
 
 
         <div class="">
-          <button class="btn btn-outline-success" [disabled]="!editUserForm.valid" (click)="submit()" data-toggle="modal">Save</button>
-          <button class="btn btn-outline-warning" (click)="cancel()" data-toggle="modal" href="#cancelModal">Cancel</button>
+          <button class="btn btn-outline-success" [disabled]="!editUserForm.valid" (click)="submit()"
+                  data-toggle="modal">Save
+          </button>
+          <button class="btn btn-outline-warning" (click)="cancel()" data-toggle="modal" href="#cancelModal">Cancel
+          </button>
 
         </div>
 

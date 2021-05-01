@@ -9,6 +9,8 @@ import Notification from "../../models/notification";
 import {TokenStorageService} from "../../service/auth/token-storage";
 import {ActivatedRoute} from "@angular/router";
 import {UserServiceService} from "../../service/user-service.service";
+import {UserService} from "../service/user.service";
+import firebase from "firebase";
 
 @Component({
   selector: 'app-friend-request',
@@ -44,6 +46,8 @@ export class FriendRequestComponent implements OnInit{
 
   checkPrivacy: boolean;
 
+  userWall: User;
+
   ngOnInit(): void {
 
 
@@ -54,8 +58,8 @@ export class FriendRequestComponent implements OnInit{
 
     this.findAllFriendRequest();
 
+    let id = this.activatedRoute.snapshot.params["id"];
 
-    let id = this.activatedRoute.snapshot.params['id'];
     if (id != this.userLogging.userId){
       this.checkPrivacy = false;
     } else {
@@ -80,11 +84,20 @@ export class FriendRequestComponent implements OnInit{
   }
 
   acceptFriendRequest(friendRequest: FriendRequest) {
-    console.log(friendRequest)
+    this.userWall = friendRequest.sendUser;
     this.notification = this.friendRequestService.findNotifyByFriendRequest(this.notiList, friendRequest);
     this.friendRequestService.acceptFriendRequest(friendRequest).subscribe(data => {
       this.ngOnInit();
       this.notificationService.delete(this.userLogging.userId, this.notification.key)
+      const newRoom = firebase.database().ref('rooms/').push();
+      const room = {roomname: ''};
+      room.roomname =  this.userWall.userName;
+      newRoom.set(room);
+
+      this.createRoomFromLoginToWall();
+      this.createRoomFromWallToLogin();
+
+
     });
   }
 
@@ -134,5 +147,33 @@ export class FriendRequestComponent implements OnInit{
     ).subscribe(data => {
       this.notiList = data;
     });
+  }
+
+  createRoomFromLoginToWall(){
+    const roomuser = firebase.database().ref('roomusers/').push();
+    const newroomuser1 = {roomname: '', nickname: '', id: '', status: '', avatar: '', nickNameFriend: '',getroom: ''};
+    newroomuser1.roomname = this.userWall.userName  + this.userLogging.userName;
+    newroomuser1.nickname = this.userLogging.userName;
+    newroomuser1.id = this.userLogging.userId.toString();
+    newroomuser1.status = this.userLogging.status.statusName;
+    newroomuser1.avatar = this.userLogging.userAvatar;
+    newroomuser1.nickNameFriend = this.userWall.userName;
+    newroomuser1.getroom = this.userWall.userName;
+    console.log(newroomuser1);
+    roomuser.set(newroomuser1);
+  }
+
+  createRoomFromWallToLogin(){
+    const roomuser = firebase.database().ref('roomusers/').push();
+    const newroomuser2 = {roomname: '', nickname: '', id: '', status: '', avatar: '', nickNameFriend: '',getroom: ''};
+    newroomuser2.roomname =  this.userWall.userName + this.userLogging.userName;
+    newroomuser2.nickname = this.userWall.userName;
+    newroomuser2.id = this.userWall.userId.toString();
+    newroomuser2.status = this.userWall.status.statusName;
+    newroomuser2.avatar = this.userWall.userAvatar;
+    newroomuser2.nickNameFriend = this.userLogging.userName;
+    newroomuser2.getroom = this.userLogging.userName;
+    console.log(newroomuser2);
+    roomuser.set(newroomuser2);
   }
 }

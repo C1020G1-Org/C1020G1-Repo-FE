@@ -51,6 +51,10 @@ export class PostService {
     return this.http.get<any>(this.baseUrl + `/wall/` + userId + `?page=` + pageNumber, this.httpOptions);
   }
 
+  pushNewPost(post: Post) {
+    this.postsInService.push(post)
+  }
+
 
   /**
    * Author : SonPH
