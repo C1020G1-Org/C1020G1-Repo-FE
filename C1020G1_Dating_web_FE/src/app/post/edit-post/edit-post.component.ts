@@ -6,6 +6,7 @@ import {AngularFireStorage} from "@angular/fire/storage";
 import { PostService } from 'src/app/service/post.service';
 import {Post} from "../../models/Post";
 import {PostEditImage, PostImage2} from "../../models/PostImage";
+import {ngxLoadingAnimationTypes} from "ngx-loading";
 declare const $: any;
 @Component({
   selector: 'app-edit-post',
@@ -18,6 +19,13 @@ export class EditPostComponent implements OnInit, OnChanges {
   public contentTemp: any;
   public updateFileImage: any[];
   public updateUrlImage: Array<string>;
+  public message: string;
+  public config = {
+    animationType: ngxLoadingAnimationTypes.doubleBounce,
+    primaryColour: '#006ddd',
+    backdropBorderRadius: '3px'
+  };
+  public loading = false;
 
   @Input() public postIDInUrl: number;
 
@@ -51,31 +59,21 @@ export class EditPostComponent implements OnInit, OnChanges {
       user: [''],
       groupSocial: [null]
     });
-
-    //   let postId = this.activatedRoute.snapshot.params['postId'];
-    //   this.postService.getPostById(this.postIDInUrl).subscribe(data => {
-    //     console.log(data);
-    //     this.post = data.post;
-    //     this.postImages = data.postImages;
-    //     this.formEditPost.get("postContent").setValue(this.post.postContent);
-    //     this.formEditPost.setValue(this.post);
-    //   });
-    //   console.log(this.postImages);
   }
+
   get postStatus() {
     return this.formEditPost.get('postStatus');
   }
   async editPost() {
-    console.log('vao duoc edit post');
-    console.log(this.formEditPost.get('postContent').value);
-    this.contentTemp = this.formEditPost.get('postContent').value;
-    console.log(this.contentTemp);
+    this.contentTemp = $("#editText").data("emojioneArea").getText();
+
     if (this.contentTemp != '') {
       this.check = false;
+      this.loading = true;
       await this.addImageToFireBase();
-      console.log(this.updateUrlImage);
+
       this.formEditPost.get("postContent").setValue(this.contentTemp);
-      console.log(this.formEditPost.value);
+
       this.updateImages = this.updateUrlImage.map(x => {
         return {
           postImageId: null,
@@ -89,10 +87,11 @@ export class EditPostComponent implements OnInit, OnChanges {
         postImages: null,
         deleteImages: this.deleteImages
       };
-      console.log(JSON.stringify(this.postEditImage));
+
       this.postService.updatePost(this.postEditImage).subscribe(data =>{
-        console.log('from db');
         console.log(data);
+        $('#editPostModal').click();
+        this.loading = false;
         this.postService.observeEditingPost(data);
       })
     } else {
@@ -104,26 +103,37 @@ export class EditPostComponent implements OnInit, OnChanges {
     files = event.target.files;
     if (files) {
       for (let file of files) {
-        let reader = new FileReader();
-        reader.onload = (e: any) => {
-          this.updateFileImage.push({url: e.target.result, file: file})
-        };
-        reader.readAsDataURL(file);
+        const name = file.type;
+        const size = file.size;
+        if (name.match(/(png|jpeg|jpg|PNG|JPEG|JPG)$/)) {
+          if (size <= 1000000) {
+            this.message = null;
+            let reader = new FileReader();
+            reader.onload = (e: any) => {
+              this.updateFileImage.push({url: e.target.result, file: file})
+            };
+            reader.readAsDataURL(file);
+          } else {
+            return this.message = "Big size!!"
+          }
+        } else {
+          return this.message = 'Not Image!!';
+        }
       }
     }
-    console.log(this.updateFileImage)
   }
+
   deleteImage(event) {
     let index = event.target.attributes['data-index'].value;
     this.deleteImages.push(this.postImages.filter(x => x.postImageId == index)[0]);
     this.postImages = this.postImages.filter(x => x.postImageId != index);
-    console.log(this.deleteImages);
-    console.log(this.postImages);
   }
+
   deleteUpdateImage(event) {
     let index = event.target.attributes['data-index'].value;
     this.updateFileImage.splice(index, 1);
   }
+
   addImageToFireBase() {
     return new Promise(resolve => {
       Promise.all(this.updateFileImage.map(file =>
@@ -146,6 +156,7 @@ export class EditPostComponent implements OnInit, OnChanges {
       });
     });
   }
+
   setValue(editingPostId : number) {
     if(this.postIDInUrl){
       this.postService.findPostById(editingPostId).subscribe(data => {
@@ -153,10 +164,11 @@ export class EditPostComponent implements OnInit, OnChanges {
         this.post = data.post;
         console.log(this.post);
         this.postImages = data.postImages;
+        $("#editText").data("emojioneArea").setText(this.post.postContent);
         this.formEditPost.setValue(this.post);
-        console.log('fdfds');
-        console.log(this.formEditPost.get('groupSocial').value);
-        // $("#myText").data("emojioneArea").setText(this.post.postContent);
+        console.log("Abc");
+        console.log(this.post.postContent);
+
       });
     }
 

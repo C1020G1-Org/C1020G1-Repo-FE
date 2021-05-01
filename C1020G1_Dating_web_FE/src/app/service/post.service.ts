@@ -74,6 +74,15 @@ export class PostService {
     return this.http.put<any>(this.baseUrl + '/' + postEditImage.post.postId, postEditImage, this.httpOptions);
   }
 
+  /**
+   * Author: SonPH
+   * update delete
+   */
+
+  deletePost(postId: number): Observable<any> {
+    return this.http.delete(this.baseUrl + '/' + postId , this.httpOptions);
+  }
+
   observeCreatingComment(observablePost: Post, observableParentComment: ParentComment, observableChildComment: ChildComment) {
 
       for (let parentComment of observablePost.parentComments) {
@@ -164,25 +173,27 @@ export class PostService {
   }
 
   observeEditingPost(observablePost: any) {
-    console.log(this.postsInService);
-    console.log(observablePost);
     for (let i = 0; i < this.postsInService.length; i++) {
-      console.log('truoc khi vao if');
+
       if (this.postsInService[i].postId == observablePost.post.postId) {
         let tempParentComment = this.postsInService[i].parentComments;
-
-        console.log('truoc khi thay doi');
-        console.log(this.postsInService[i]);
 
         this.postsInService[i] = observablePost.post;
 
         this.postsInService[i].parentComments = tempParentComment;
 
-        console.log('sau khi thay doi');
-        console.log(this.postsInService[i]);
+        return;
+      }
+    }
+  }
 
-        console.log('from service');
-        console.log(this.postsInService[i]);
+  deletePostFE(postId: any) {
+    for (let i = 0; i < this.postsInService.length; i++) {
+
+      if (this.postsInService[i].postId == postId) {
+
+        this.postsInService.splice(i, 1);
+
         return;
       }
     }

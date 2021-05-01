@@ -7,6 +7,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 import { PostService } from 'src/app/service/post.service';
 import { TokenStorageService } from 'src/app/service/auth/token-storage';
 import {User} from "../../models/user-model";
+import {ngxLoadingAnimationTypes} from "ngx-loading";
 
 
 declare const $: any;
@@ -17,12 +18,21 @@ declare const $: any;
   styleUrls: ['./create-post.component.css']
 })
 export class CreatePostComponent implements OnInit {
+
+  public config = {
+    animationType: ngxLoadingAnimationTypes.doubleBounce,
+    primaryColour: '#006ddd',
+    backdropBorderRadius: '3px'
+  };
+
   public formCreatePost: FormGroup;
   public user: User;
   public check: boolean = false;
   public contentTemp: any;
   public fileImage: any;
   public urlImage: Array<string>;
+  public message: string;
+  public loading = false;
 
   constructor(public formBuilder: FormBuilder,
               public postService: PostService,
@@ -47,32 +57,33 @@ export class CreatePostComponent implements OnInit {
   }
 
   async addNewPost() {
-    this.contentTemp = $("#myText").data("emojioneArea").getText();
-    this.formCreatePost.get("postContent").setValue($("#myText").data("emojioneArea").getText());
+    this.contentTemp = $("#createText").data("emojioneArea").getText();
+    this.formCreatePost.get("postContent").setValue($("#createText").data("emojioneArea").getText());
     this.formCreatePost.get("user").setValue(this.user);
     if (this.contentTemp != '') {
+      this.loading = true;
       await this.addImageToFireBase();
       this.check = false;
-      console.log(this.formCreatePost.value);
       let postImage = {
         post: this.formCreatePost.value,
         postImages: this.urlImage
       };
-      console.log(postImage);
-      console.log(JSON.stringify(postImage));
-      console.log('chuan bi vao create post');
       this.postService.createPost(postImage).subscribe((data) => {
-        console.log(data);
         if(this.postService.postsInService != undefined) {
+          this.formCreatePost = this.formBuilder.group({
+            postStatus: ['public', [Validators.required]],
+            postContent: [''],
+            user: [''],
+            groupSocial: [null]
+          });
+          $("#createText").data("emojioneArea").setText('');
           this.postService.postsInService.unshift(data);
+          this.fileImage = [];
         } else {
           this.postService.pushNewPost(data);
         }
-        console.log(this.postService.postsInService);
-        // this.ngOnInit();
+        this.loading = false;
       })
-
-      console.log('ra khoi create');
     } else {
       this.check = true;
     }
@@ -82,18 +93,27 @@ export class CreatePostComponent implements OnInit {
     return this.formCreatePost.get('postStatus');
   }
 
-  importImages(event) {
-  let files = event.target.files;
+  importImages(event) {let files = event.target.files;
     if (files) {
       for (let file of files) {
-        let reader = new FileReader();
-        reader.onload = (e: any) => {
-          this.fileImage.push({url: e.target.result, file: file})
-        };
-        reader.readAsDataURL(file);
+        const name = file.type;
+        const size = file.size;
+        if (name.match(/(png|jpeg|jpg|PNG|JPEG|JPG)$/)) {
+          if (size <= 1000000) {
+            this.message = null;
+            let reader = new FileReader();
+            reader.onload = (e: any) => {
+              this.fileImage.push({url: e.target.result, file: file})
+            };
+            reader.readAsDataURL(file);
+          } else {
+            return this.message = "Big size!!"
+          }
+        } else {
+          return this.message = 'Not Image!!';
+        }
       }
     }
-    console.log(this.fileImage);
   }
 
   addImageToFireBase() {
@@ -114,7 +134,6 @@ export class CreatePostComponent implements OnInit {
               })).subscribe();
           }
         }))).then(() => {
-        console.log(this.urlImage);
         resolve(1)
       });
     });

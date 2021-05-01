@@ -3,17 +3,21 @@ import {CommonModule} from '@angular/common';
 import {CreatePostComponent} from './create-post/create-post.component';
 import {EditPostComponent} from './edit-post/edit-post.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { DeletePostComponent } from './delete-post/delete-post.component';
+import {NgxLoadingModule} from "ngx-loading";
 
 @NgModule({
-  declarations: [CreatePostComponent, EditPostComponent],
+  declarations: [CreatePostComponent, EditPostComponent, DeletePostComponent],
   exports: [
     CreatePostComponent,
-    EditPostComponent
+    EditPostComponent,
+    DeletePostComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgxLoadingModule.forRoot({})
   ]
 })
 export class PostModule {

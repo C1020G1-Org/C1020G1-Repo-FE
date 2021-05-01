@@ -74,7 +74,14 @@
                                 </li>
 
                                 <li>
+                                  <a
+                                    href=""
+                                    data-toggle="modal"
+                                    data-target="#deletePostModal"
+                                    (click)="sendEditPostId(post.postId)"
+                                  >
                                   <i class="fa fa-trash-o"></i>Delete Post
+                                  </a>
                                 </li>
                               </ul>
                             </div>
@@ -350,10 +357,6 @@
       </div>
     </div>
   </section>
-
-  <div class="bottombar border border-primary">
-    <h4>Footer của Hữu Kiên</h4>
-  </div>
 </div>
 
 <!-- modal edit parent comment -->
@@ -652,3 +655,5 @@
 </div>
 
 <app-edit-post [postIDInUrl]="editingPostId"></app-edit-post>
+
+<app-delete-post [idDelete]="editingPostId"></app-delete-post>
