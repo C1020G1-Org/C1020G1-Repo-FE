@@ -17993,6 +17993,9 @@ body .ui-tooltip {
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
+  --nav-bar-background: #FFFFFF;
+  --nav-bar-background-gradient: linear-gradient(to top, #FFFFFF, rgba(255,255,255.9), rgba(255,255,255,.7), rgba(255,255,255,.4), rgba(255,255,255,0));
+  --nav-bar-background-gradient-wash: linear-gradient(to top, #F0F2F5, rgba(240,242,245.9), rgba(240,242,245,.7), rgba(240,242,245,.4), rgba(240,242,245,0));
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace
 }

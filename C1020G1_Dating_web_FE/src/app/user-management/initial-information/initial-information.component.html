@@ -94,12 +94,12 @@
         </div>
         <hr>
         <div class="d-flex justify-content-center">
-          <button class="main-btn3" data-ripple="" (click)="goToLogin()">Cancel</button>
-          <button class="main-btn2" data-ripple="" (click)="backToRegistration()">Back</button>
+          <button class="main-btn3" data-ripple="" (click)="goToLogin()" [disabled]="disable" >Cancel</button>
+          <button class="main-btn2" data-ripple="" (click)="backToRegistration()" [disabled]="disable" >Back</button>
           <button
             [class]="(formInitial.valid && this.avatarFile != null && this.backgroundFile != null)? 'main-btn':'main-btn3'"
             type="submit" data-ripple=""
-            [disabled]="!(formInitial.valid && this.avatarFile != null && this.backgroundFile != null)"
+            [disabled]="!(formInitial.valid && this.avatarFile != null && this.backgroundFile != null && !disable)"
             (click)="submit()">Registry
           </button>
         </div>

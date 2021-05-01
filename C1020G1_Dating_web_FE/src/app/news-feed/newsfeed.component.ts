@@ -103,8 +103,6 @@ export class NewsfeedComponent implements OnInit {
         }
 
         this.posts = this.postService.postsInService;
-        console.log(checkNewsFeed);
-        console.log(this.posts);
       })
     } else {
       this.postService.findAllPostInWall(userId, pageNumber).subscribe(listPageablePost => {
@@ -131,8 +129,6 @@ export class NewsfeedComponent implements OnInit {
         }
 
         this.posts = this.postService.postsInService;
-        console.log(checkNewsFeed);
-        console.log(this.posts);
       })
     }
 
@@ -153,6 +149,7 @@ export class NewsfeedComponent implements OnInit {
   async submitParentForm(post: Post) {
     this.parentCommentForm.get('post').setValue(post);
     this.parentCommentForm.get('user').setValue(this.user);
+    this.parentCommentForm.controls.content.setValue(this.parentCommentForm.get("content").value.trim())
 
     if (this.imageUrlFromLocal == null && this.parentCommentForm.get('content').value == '') {
       return;
@@ -162,23 +159,7 @@ export class NewsfeedComponent implements OnInit {
       await this.saveParentImagetoFirebase();
     }
 
-    console.log(this.parentCommentForm.value);
-    // if (this.parentCommentForm.get('post').value.parentComments != null) {
-    //   for (let parentComment of this.parentCommentForm.get('post').value.parentComments) {
-    //     parentComment.user.account = null;
-    //   }
-    // }
-
     this.commentService.createParentComment(this.parentCommentForm.value).subscribe((data) => {
-      console.log("tìm account");
-      console.log(data)
-
-      // if(data.post.parentComments != null){
-      //   for (let parentComment of data.post.parentComments){
-      //     parentComment.user.account = null;
-      //   }
-      // }
-
       this.postService.observeCreatingComment(post, data, null);
       this.parentCommentForm.reset();
       this.imageUrlFromLocal = null;

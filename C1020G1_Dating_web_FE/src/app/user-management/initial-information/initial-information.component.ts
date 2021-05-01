@@ -28,6 +28,7 @@ export class InitialInformationComponent implements OnInit {
   public fileMessageBackground: string = null;
   public messageRegistry: string;
   public isLoggin: boolean;
+  public disable = false;
 
   constructor(public formBuilder: FormBuilder,
               public userCreate: UserCreateService,
@@ -155,6 +156,7 @@ export class InitialInformationComponent implements OnInit {
   async submit() {
     this.messageRegistry="Registration in progress..."
     this.isLoggin= false;
+    this.disable = true;
     $('#successModal').modal('toggle');
 
     this.userStorage.user.marriaged = this.formInitial.value.marriaged;
@@ -181,6 +183,7 @@ export class InitialInformationComponent implements OnInit {
     this.userCreate.createUser(this.userStorage.backendObject).subscribe(() => {
       this.messageRegistry="Your account is registry successfully!";
       this.isLoggin = true;
+      this.disable = false
       this.userStorage.clear()
     }, (error) => {
       this.userStorage.serverError = error;

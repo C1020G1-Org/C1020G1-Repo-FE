@@ -1,10 +1,11 @@
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TokenStorageService } from './../../service/auth/token-storage';
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import {GroupRequest, GroupSocial, GroupUser} from "../../models/group_social";
 import {GroupManagementService} from "../../service/groups/group-management.service";
 import {GroupService} from "../../service/groups/group.service";
+import {TokenStorageService} from "../../service/auth/token-storage";
 
 @Component({
   selector: 'app-group-header',

@@ -50,7 +50,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.tokenStorage.getUser();
-    console.log(this.user.status)
     if (this.user.status.statusId == 1) {
       this.displayStatus = "status f-online"
     }
@@ -118,7 +117,6 @@ export class HeaderComponent implements OnInit {
 
     this.friendRequestService.deleteFriendRequestFE(this.friendRequestHeader.sendUser.userId);
     this.friendRequestService.setCheckFriendRequest2True();
-    console.log(this.friendRequestService.getCheckFriendRequest2());
   }
 
   acceptFriendRequestInHeader(friendRequest: FriendRequest,key:string){

@@ -20,13 +20,14 @@
             <i class="fa fa-user" style="color: #999999;cursor:pointer"></i><em class="bg-red" *ngIf="lengthNoti">{{lengthNoti}}</em>
           </a>
           <div class="dropdowns">
-            <span><a href="#" title=""
-                     [routerLink]="['/wall/', user.userId , 'friendrequest']">View all Requests</a></span>
+            <span><a href="http://localhost:4200/wall/{{user.userId}}/friend_request/{{user.userId}}" title="">
+              View all Requests</a></span>
             <ul class="drops-menu" *ngIf="notiListFriend">
               <li *ngFor="let notiFriend of notiListFriend">
                 <div>
                   <figure>
-                    <img src="{{notiFriend.friendRequest.sendUser.userAvatar}}" style="width: 40px; height: 40px" alt="">
+                    <img src="{{notiFriend.friendRequest.sendUser.userAvatar}}" style="width: 40px; height: 40px"
+                         alt="">
                   </figure>
                   <div class="mesg-meta">
                     <h6><a href="http://localhost:4200/wall/{{notiFriend.friendRequest.sendUser.userId}}" title="">

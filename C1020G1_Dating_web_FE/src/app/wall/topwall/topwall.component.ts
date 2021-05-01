@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {TokenStorageService} from "../../service/auth/token-storage";
 import {User} from "../../models/user-model";
 import {FriendRequestService} from "../../service/friends/friend-request.service";
@@ -40,7 +40,8 @@ export class TopwallComponent implements OnInit {
   notification: Notification;
 
   friendRequestToDelete: FriendRequest;
-  postInfos: Post[];
+
+  isDisplayPost: boolean;
 
 
   constructor(
@@ -48,7 +49,8 @@ export class TopwallComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private tokenStorage:TokenStorageService,
     private friendRequestService: FriendRequestService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private router: Router
   ) {
   }
 
@@ -67,10 +69,8 @@ export class TopwallComponent implements OnInit {
     });
 
     this.setNotiList();
-    this.userService.findPostById(this.id).subscribe(posts =>{
-      this.postInfos = posts
-    })
-
+    let splitURL = this.router.url.split("/")
+    this.isDisplayPost = splitURL.length <= 4;
   }
 
   unFriend() {
@@ -180,7 +180,4 @@ export class TopwallComponent implements OnInit {
     this.friendRequestToDelete = friendRequest;
   }
 
-  clearPost() {
-    this.postInfos = undefined;
-  }
 }

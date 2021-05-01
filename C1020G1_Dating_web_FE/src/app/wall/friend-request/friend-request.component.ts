@@ -159,7 +159,6 @@ export class FriendRequestComponent implements OnInit{
     newroomuser1.avatar = this.userLogging.userAvatar;
     newroomuser1.nickNameFriend = this.userWall.userName;
     newroomuser1.getroom = this.userWall.userName;
-    console.log(newroomuser1);
     roomuser.set(newroomuser1);
   }
 
@@ -173,7 +172,6 @@ export class FriendRequestComponent implements OnInit{
     newroomuser2.avatar = this.userWall.userAvatar;
     newroomuser2.nickNameFriend = this.userLogging.userName;
     newroomuser2.getroom = this.userLogging.userName;
-    console.log(newroomuser2);
     roomuser.set(newroomuser2);
   }
 }

@@ -84,23 +84,16 @@ export class RoomListComponent implements OnInit {
 
     // this.nickname = localStorage.getItem('nickname1');
     if (this.token.getUser() == null) {
-      console.log('aaaaaaa');
-    } else {
       this.checkLogin = true;
       this.nickname = this.token.getUser().userName;
-    }
-    if (this.token.getUser() == null) {
-      console.log('aaaaaaa');
-    } else {
       this.id = (this.token.getUser().userId).toString();
     }
-    console.log(this.id);
+
     // firebase.database().ref('roomusers/').orderByChild('nickname').equalTo()
     //Hiển thị ra danh sách room bằng id.
     firebase.database().ref('roomusers/').orderByChild('id').equalTo(this.id).on('value', resp => {
       this.rooms = [];
       this.rooms = snapshotToArray(resp);
-      console.log(this.rooms);
       this.isLoadingResults = false;
     });
 
@@ -116,12 +109,10 @@ export class RoomListComponent implements OnInit {
     if (this.token.getUser() === null) {
       this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then(
         data => {
-          console.log(data);
           this.socialUser = data;
           const tokenFacebook = new JwtResponse(this.socialUser.authToken);
           this.authenticationService.facebook(tokenFacebook).subscribe(
             res => {
-              console.log(res);
               this.nickname = res.user.userName;
               this.id = (res.user.userId).toString();
               //Hien thi tin nhan
@@ -141,7 +132,6 @@ export class RoomListComponent implements OnInit {
 
   scrollBottom() {
     var objDiv = document.getElementById('parentDiv');
-    console.log('1');
     objDiv.scrollTop = objDiv.scrollHeight;
   }
 
@@ -154,7 +144,6 @@ export class RoomListComponent implements OnInit {
     chat.date = this.datePipe.transform(new Date(), 'dd/MM/yyyy HH:mm:ss');
     chat.type = 'message';
     const newMessage = firebase.database().ref('chats/').push();
-    console.log(chat);
     newMessage.set(chat);
     this.chatForm = this.formBuilder.group({
       'message': [null, Validators.required]
@@ -189,25 +178,19 @@ export class RoomListComponent implements OnInit {
   }
 
   show(roomname,getroom) {
-    console.log("abc");
     firebase.database().ref('roomusers/').orderByChild('nickNameFriend').equalTo(this.token.getUser().userName).on('value', resp1 => {
       this.friend = snapshotToArray(resp1);
       this.idFriend = this.friend[0].id;
-      console.log(this.friend);
     });
     this.styleChatBox = 'position: fixed; bottom: 0px; right: 50px; width: 330px; height: 420px; display: block; z-index: 1000';
     this.id = (this.token.getUser().userId).toString();
     this.nickname = this.token.getUser().userName;
-    console.log(this.nickname);
-    console.log(roomname);
     const chat = {roomname: '', nickname: '', id: '', message: '', date: '', type: ''};
     //Chatroom--------------------------
     this.ref.orderByChild('roomname').equalTo(roomname).on('value', resp => {
       this.chats = [];
       this.id = (this.token.getUser().userId).toString();
-      console.log(this.id);
       this.chats = snapshotToArray(resp);
-      console.log(this.chats);
       setTimeout(() => {
         this.chatcontent.nativeElement.scrollTop = this.chatcontent.nativeElement.scrollHeight;
       }, 500);
@@ -225,39 +208,4 @@ export class RoomListComponent implements OnInit {
     this.styleChatBox = 'display: none';
     this.isAddMember = false;
   }
-
-  createGroupChat(value: any) {
-
-  }
-
-  showGroupChat() {
-
-  }
-
-  search(value: any) {
-
-  }
-
-  addNewMember(nickNameFriend: any) {
-
-  }
-
-  myFunction() {
-
-  }
-
-  myFunction1() {
-
-  }
-
-  showAddNewMember(roomname: string) {
-
-  }
-
-  handleEmoticonSelection($event: any) {
-    console.log(event);
-  }
-
-
-
 }

@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {LoginComponent} from "./login/login/login.component";
-import {ErrorPageComponent} from "./error/error-page/error-page.component";
 import {NameSearchComponent} from "./searching/name-search/name-search.component";
 import {AdvancedSearchComponent} from "./searching/advanced-search/advanced-search.component";
 import {LoginRoutingModule} from "./login/login-routing.module";
@@ -22,18 +21,12 @@ import {TimelineComponent} from "./wall/timeline/timeline.component";
 import {InformationComponent} from "./wall/information/information.component";
 import {FriendsComponent} from "./wall/friends/friends.component";
 import {NewsfeedComponent} from "./news-feed/newsfeed.component";
-import {HomeComponent} from "./home/home.component";
+import {ErrorPageComponent} from "./error/error-page/error-page.component";
 
 
 const routes: Routes = [
-  {
-    path: 'home',
-    children: [
-      {path: 'name-search', component: NameSearchComponent},
-      {path: 'advanced-search', component: AdvancedSearchComponent},
-    ],
-    component: HomeComponent, canActivate: [AuthGuardService]
-  },
+  {path: 'name-search', component: NameSearchComponent, canActivate: [AuthGuardService]},
+  {path: 'advanced-search', component: AdvancedSearchComponent, canActivate: [AuthGuardService]},
   {
     path: 'wall/:id',
     children: [
@@ -45,13 +38,12 @@ const routes: Routes = [
     ],
     component: TopwallComponent, canActivate: [AuthGuardService]
   },
-  {path: 'newsfeed', component: NewsfeedComponent,canActivate: [AuthGuardService]},
+  {path: 'newsfeed', component: NewsfeedComponent, canActivate: [AuthGuardService]},
   {path: '', pathMatch: 'full', redirectTo: 'newsfeed'},
   {path: 'login', component: LoginComponent},
   {path: 'recover', component: RecoverPasswordComponent},
   {path: 'registration', component: RegistrationComponent},
   {path: 'initial-information', component: InitialInformationComponent, canActivate: [RegisGuardService]},
-
 
   {
     path: 'edit',
@@ -63,8 +55,7 @@ const routes: Routes = [
     ],
     component: EditComponent, canActivate: [AuthGuardService]
   },
-
-
+  {path: '**', component: ErrorPageComponent},
 ];
 
 @NgModule({

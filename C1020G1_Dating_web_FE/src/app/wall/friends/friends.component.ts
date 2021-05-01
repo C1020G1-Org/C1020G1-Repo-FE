@@ -30,19 +30,15 @@ export class FriendsComponent implements OnInit {
   ngOnInit(): void {
     this.getAllFriend();
     this.id = this.activatedRoute.snapshot.params['id'];
-
-    console.log(this.id);
   }
 
   showDelete(id: number, userName: string) {
     this.friendId = id;
     this.friendName = userName;
-    console.log(this.friendId, this.friendName)
   }
 
   delete() {
     this.friendService.deleteFriend(this.friendId).subscribe(data => {
-      console.log('kkk');
       window.location.reload();
     })
   }
@@ -54,7 +50,6 @@ export class FriendsComponent implements OnInit {
 
   getAllFriend() {
     this.friendService.getAllFriend(2, this.pageNumber).subscribe(data => {
-      console.log(data);
       let listFriends = data.content;
       if (this.friends != null) {
         this.friends = this.friends.concat(listFriends);

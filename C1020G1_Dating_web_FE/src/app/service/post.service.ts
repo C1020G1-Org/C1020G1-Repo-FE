@@ -51,8 +51,8 @@ export class PostService {
     return this.http.get<any>(this.baseUrl + `/wall/` + userId + `?page=` + pageNumber, this.httpOptions);
   }
 
-  pushNewPost(post: Post) {
-    this.postsInService.push(post)
+  createNewPosts(post: Post) {
+    this.postsInService = [post]
   }
 
 
@@ -143,17 +143,8 @@ export class PostService {
       if (observableParentComment != null) {
         for (let i = 0; i < post.parentComments.length; i++) {
           if (post.parentComments[i].parentCommentId == observableParentComment.parentCommentId) {
-            console.log('nhan tu db');
-            console.log(observableParentComment);
-
-            console.log('truoc edit');
-            console.log(post.parentComments[i]);
-
             post.parentComments[i] = observableParentComment;
             post.parentComments[i].childComments = followChildComments;
-
-
-            console.log(post.parentComments[i].childComments);
             return;
           }
         }

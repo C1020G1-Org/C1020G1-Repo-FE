@@ -58,7 +58,6 @@ export class CommentComponent implements OnInit {
     }
 
     this.childCommentForm.get('parentComment').value.user.account = null;
-    console.log(this.childCommentForm.value);
     this.commentService.createChildComment(this.childCommentForm.value).subscribe(data => {
 
       this.postService.observeCreatingComment(this.post, this.parentOfchildComment, data);

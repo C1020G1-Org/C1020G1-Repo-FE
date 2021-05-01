@@ -24,9 +24,7 @@ export class FriendSuggestComponent implements OnInit {
 
   ngOnInit(): void {
     this.friendService.getAllFriendSuggest(this.tokenStorage.getUser().userId).subscribe(data => {
-      console.log(data);
       this.suggestFriend = data;
-      console.log(this.suggestFriend);
     })
   }
 

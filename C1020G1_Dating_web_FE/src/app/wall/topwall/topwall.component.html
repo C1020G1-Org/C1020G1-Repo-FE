@@ -1,9 +1,10 @@
-<section>
-  <div class="gap2 gray-bg">
+<section *ngIf="userInfo">
+  <div class="gap2 shadow-lg pt-1">
+    <img src="{{userInfo.userBackground}}" id="background">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          <div class="user-profile" *ngIf="userInfo">
+          <div class="user-profile shadow-sm m-1 " >
             <figure>
               <div class="edit-pp">
                 <label class="fileContainer">
@@ -11,7 +12,7 @@
                   <input type="file">
                 </label>
               </div>
-              <img src="{{userInfo.userBackground}}" id="background">
+              <img src="{{userInfo.userBackground}}" id="test">
               <ul class="profile-controls">
                 <li
                   *ngIf="checkFriend == true && userLogging.userId != userInfo.userId && checkFriendRequest == true && checkFriendRequest2 == true">
@@ -79,16 +80,16 @@
                 <div class="col-lg-10 col-md-9">
                   <ul class="profile-menu">
                     <li>
-                      <a [routerLink]="['timeline' , this.userInfo.userId ]">Timeline</a>
+                      <a href="http://localhost:4200/wall/{{this.userInfo.userId}}">Timeline</a>
                     </li>
                     <li>
-                      <a [routerLink]="['info' , this.userInfo.userId ]" (click)="clearPost()" >Information</a>
+                      <a [routerLink]="['info' , this.userInfo.userId ]" >Information</a>
                     </li>
                     <li>
-                      <a [routerLink]="['friends' , this.userInfo.userId ]" (click)="clearPost()" >Friends</a>
+                      <a [routerLink]="['friends' , this.userInfo.userId ]">Friends</a>
                     </li>
                     <li *ngIf="userLogging.userId == userInfo.userId">
-                      <a [routerLink]="['friend_request' , this.userLogging.userId]" (click)="clearPost()" >Friends Request</a>
+                      <a [routerLink]="['friend_request' , this.userLogging.userId]" >Friends Request</a>
                     </li>
                   </ul>
                 </div>
@@ -96,10 +97,18 @@
             </div>
 
           </div>
-          <div *ngIf="postInfos">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="gap2 gray-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div *ngIf="isDisplayPost">
             <app-newsfeed></app-newsfeed>
           </div>
-          <div *ngIf="!postInfos">
+          <div *ngIf="!isDisplayPost">
             <router-outlet></router-outlet>
           </div>
         </div>

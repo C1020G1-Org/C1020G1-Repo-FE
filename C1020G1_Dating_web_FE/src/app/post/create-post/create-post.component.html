@@ -1,3 +1,10 @@
+<div
+  *ngIf="check">
+  <div class="alert alert-danger" role="alert">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    Content is required!!
+  </div>
+</div>
 <div class="mat-app-background basic-container">
   <ng-template #customLoadingTemplate>
     <div class="custom-class">
@@ -35,12 +42,6 @@
                   *ngIf="!postStatus.valid && (postStatus.dirty ||postStatus.touched)">
                   <div class="alert alert-danger" role="alert" [hidden]="!postStatus.errors.required">
                     Status is required!!
-                  </div>
-                </div>
-                <div
-                  *ngIf="check">
-                  <div class="alert alert-danger" role="alert">
-                    Content is required!!
                   </div>
                 </div>
                 <div *ngIf="message != null" class="alert alert-danger" role="alert">

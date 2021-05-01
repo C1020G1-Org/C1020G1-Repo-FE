@@ -5,8 +5,7 @@
       <figure style="display: inline-block"><img src="{{friendSuggest.suggestFriend.userAvatar}}" alt="" style="border-radius: 50%"></figure>
       <div class="friend-meta">
         <a href="#" title="" class="underline">Add Friend</a>
-        <h4><a [routerLink]="['/wall',friendSuggest.suggestFriend.userId,'timeline']" title="">{{friendSuggest.suggestFriend.userName}}</a></h4>
-
+        <h4><a href="http://localhost:4200/wall/{{friendSuggest.suggestFriend.userId}}" title="">{{friendSuggest.suggestFriend.userName}}</a></h4>
       </div>
     </li>
   </ul>

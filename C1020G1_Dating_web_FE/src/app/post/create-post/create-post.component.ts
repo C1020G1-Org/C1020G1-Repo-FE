@@ -60,7 +60,7 @@ export class CreatePostComponent implements OnInit {
     this.contentTemp = $("#createText").data("emojioneArea").getText();
     this.formCreatePost.get("postContent").setValue($("#createText").data("emojioneArea").getText());
     this.formCreatePost.get("user").setValue(this.user);
-    if (this.contentTemp != '') {
+    if (this.contentTemp.trim() != '') {
       this.loading = true;
       await this.addImageToFireBase();
       this.check = false;
@@ -80,7 +80,7 @@ export class CreatePostComponent implements OnInit {
           this.postService.postsInService.unshift(data);
           this.fileImage = [];
         } else {
-          this.postService.pushNewPost(data);
+          this.postService.createNewPosts(data);
         }
         this.loading = false;
       })
