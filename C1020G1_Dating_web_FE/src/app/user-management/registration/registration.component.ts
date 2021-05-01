@@ -30,9 +30,10 @@ export class RegistrationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this.userStorage.user.userName = this.tokenStorage.getUser().userName;
-    this.userStorage.user.email = this.tokenStorage.getUser().email;
+    if (this.tokenStorage.getUser() != null) {
+      this.userStorage.user.userName = this.tokenStorage.getUser().userName;
+      this.userStorage.user.email = this.tokenStorage.getUser().email;
+    }
 
     this.formRegistration = this.formBuilder.group({
       accountName: [this.userStorage.account.accountName, [Validators.required, Validators.pattern("^[0-9A-Za-z_]*$"), Validators.minLength(6), Validators.maxLength(24)]],
@@ -62,10 +63,11 @@ export class RegistrationComponent implements OnInit {
     this.userCreate.getWardByDistrict(this.userStorage.district).subscribe(data => {
       this.wards = data;
     });
+
+    this.tokenStorage.logOut();
   }
 
   submit() {
-
     this.userStorage.account.accountName = this.formRegistration.value.accountName;
     this.userStorage.account.password = this.formRegistration.value.password;
     this.userStorage.user.userName = this.formRegistration.value.userName;
@@ -80,10 +82,9 @@ export class RegistrationComponent implements OnInit {
     this.userStorage.reEmail = this.formRegistration.value.reEmail;
     this.userStorage.rePassword = this.formRegistration.value.rePassword;
     this.userStorage.termOfService = this.formRegistration.value.termOfService;
-    this.userStorage.registed()
-    this.router.navigateByUrl("/initial-information");
-    this.tokenStorage.logOut();
-    console.log(this.userStorage)
+    this.userStorage.registed();
+    this.router.navigateByUrl("initial-information");
+
   }
 
   public toggleShowPassword(): void {
@@ -95,23 +96,25 @@ export class RegistrationComponent implements OnInit {
   }
 
   public changeDistrict(e) {
-    let id = Number.parseInt(e.target.value);
+    let id = e.target.value.split(": ")[1];
     this.userCreate.getDistrictByProvince(id).subscribe(data => {
       this.districts = data;
     });
-    this.wards = []
+    this.formRegistration.controls.district.setValue("");
+    this.wards = [];
+    this.formRegistration.controls.ward.value.wardId = "";
   }
 
   public changeWard(e) {
-    let id = Number.parseInt(e.target.value);
+    let id = e.target.value.split(": ")[1]
     this.userCreate.getWardByDistrict(id).subscribe(data => {
       this.wards = data;
     });
+    this.formRegistration.controls.ward.value.wardId = "";
   }
 
   goToLogin() {
-    this.userStorage.clear();
-    this.tokenStorage.logOut();
+    this.userStorage.clear()
     this.router.navigateByUrl("login");
   }
 }

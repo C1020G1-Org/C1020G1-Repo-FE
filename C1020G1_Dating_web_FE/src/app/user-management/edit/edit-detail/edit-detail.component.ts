@@ -76,7 +76,7 @@ export class EditDetailComponent implements OnInit {
     this.user.ward = this.editUserForm.value.ward;
     this.editService.updateUser( this.user).subscribe(data => {
       this.tokenStorage.saveUser(this.user);
-      this.router.navigateByUrl("/home")
+      window.location.reload();
     })
   }
 

@@ -88,6 +88,7 @@ export class UpdateStatusComponent implements OnInit {
     setTimeout(() => {
       this.messageUpdateSuccessful = 'Update Status ' + this.valueStatus + ' Successful !';
       this.dialog.closeAll();
-    }, 2000);
+      window.location.reload();
+    }, 1000);
   }
 }

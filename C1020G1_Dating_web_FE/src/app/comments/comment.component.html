@@ -8,9 +8,9 @@
       </div>
       <div class="we-comment">
         <h5>
-          <a href="time-line.html" title="">{{
+          <a href="http://localhost:4200/wall/{{parentComment.user.userId}}" title="">{{
             parentComment.user.userName
-          }}</a>
+            }}</a>
         </h5>
         <p style="display: block">
           {{ parentComment.content }}
@@ -45,7 +45,7 @@
             aria-expanded="false"
             aria-controls="childComment1"
             title="Reply"
-            >Reply <i class="fa fa-reply"></i
+          >Reply <i class="fa fa-reply"></i
           ></a>
           <a
             *ngIf="parentComment.user.userName == user.userName"
@@ -83,9 +83,9 @@
         </div>
         <div class="we-comment">
           <h5>
-            <a href="time-line.html" title="">{{
+            <a href="http://localhost:4200/wall/{{childComment.user.userId}}"  title="">{{
               childComment.user.userName
-            }}</a>
+              }}</a>
           </h5>
           <p>
             {{ childComment.content }}
@@ -171,15 +171,15 @@
                   <div class="col-lg-6 col-md-6 col-sm-6">
                     <figure style="margin-top: 10px">
                       <span
-                        ><i
-                          style="
+                      ><i
+                        style="
                             position: absolute;
                             top: 2%;
                             left: 90%;
                           "
-                          class="fa fa-trash delete-icon"
-                          (click)="deleteUpdateImage()"
-                        ></i
+                        class="fa fa-trash delete-icon"
+                        (click)="deleteUpdateImage()"
+                      ></i
                       ></span>
                       <img
                         style="width: 100%"

@@ -26,7 +26,6 @@ export class TimelineComponent implements OnInit {
     let id = this.activatedRoute.snapshot.params['id'];
     this.userService.findPostById(id).subscribe(data => {
       this.postInfos = data;
-      console.log(this.postInfos)
     });
   }
 

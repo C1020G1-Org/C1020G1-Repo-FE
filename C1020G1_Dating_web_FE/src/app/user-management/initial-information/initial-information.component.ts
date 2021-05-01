@@ -185,7 +185,7 @@ export class InitialInformationComponent implements OnInit {
     }, (error) => {
       this.userStorage.serverError = error;
       $('#successModal').modal('toggle');
-      this.router.navigateByUrl("registration");
+      this.router.navigateByUrl("login");
     });
     this.userStorage.clearRegis();
   }

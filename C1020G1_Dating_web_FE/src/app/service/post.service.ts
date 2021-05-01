@@ -47,6 +47,11 @@ export class PostService {
     return this.http.get<any>(this.baseUrl + `/` + postId, this.httpOptions);
   }
 
+  findAllPostInWall(userId: number, pageNumber: number):Observable<any> {
+    return this.http.get<any>(this.baseUrl + `/wall/` + userId + `?page=` + pageNumber, this.httpOptions);
+  }
+
+
   /**
    * Author : SonPH
    * create a new post
@@ -66,21 +71,13 @@ export class PostService {
   }
 
   observeCreatingComment(observablePost: Post, observableParentComment: ParentComment, observableChildComment: ChildComment) {
-    // for (let post of this.postsInService) {
-    //   if (post.postId == observablePost.postId) {
-    //     if (observableParentComment != null) {
-    //       post.parentComments.push(observableParentComment);
-    //       if (observableChildComment != null) {
-    //         for (let parentComment of post.parentComments) {
-    //           if (parentComment.parentCommentId == observableParentComment.parentCommentId) {
-    //             parentComment.childComments.push(observableChildComment);
-    //             return;
-    //           }
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
+
+      for (let parentComment of observablePost.parentComments) {
+        parentComment.user.account = null;
+        for (let childComment of parentComment.childComments){
+          childComment.user.account = null;
+        }
+      }
 
     if (observableChildComment == null) {
       for (let post of this.postsInService) {

@@ -11,6 +11,7 @@ import Notification from "../../models/notification";
 import {NotificationService} from "../../service/friends/notification.service";
 import {map} from "rxjs/operators";
 import {UserServiceService} from "../../service/user-service.service";
+import {Post} from "../../models/Post";
 
 @Component({
   selector: 'app-topwall',
@@ -39,7 +40,7 @@ export class TopwallComponent implements OnInit {
   notification: Notification;
 
   friendRequestToDelete: FriendRequest;
-
+  postInfos: Post[];
 
 
   constructor(
@@ -48,12 +49,10 @@ export class TopwallComponent implements OnInit {
     private tokenStorage:TokenStorageService,
     private friendRequestService: FriendRequestService,
     private notificationService: NotificationService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
-
-
-
     this.userLogging = this.tokenStorage.getUser();
 
 
@@ -64,19 +63,13 @@ export class TopwallComponent implements OnInit {
       this.userInfo = data;
       this.checkFriendUserWall();
       this.findAllFriendRequest();
-
       this.checkFriendRequestUserWall();
-
-      console.log(this.checkFriend);
-      console.log(this.checkFriendRequest);
-      console.log(this.checkFriendRequest2);
-      // console.log(this.userInfo);
     });
 
     this.setNotiList();
-
-
-
+    this.userService.findPostById(this.id).subscribe(posts =>{
+      this.postInfos = posts
+    })
 
   }
 
@@ -185,5 +178,9 @@ export class TopwallComponent implements OnInit {
   sendFriendRequestToDelete(friendRequest: FriendRequest) {
     this.notification = this.friendRequestService.findNotifyByFriendRequest(this.notiList, friendRequest);
     this.friendRequestToDelete = friendRequest;
+  }
+
+  clearPost() {
+    this.postInfos = undefined;
   }
 }

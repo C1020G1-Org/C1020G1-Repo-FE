@@ -14,9 +14,7 @@ export class ErrorPageComponent implements OnInit {
 
 
 
-  constructor(private accountService: AccountService,
-              private tokenStorage: TokenStorageService,
-              private router: Router) { }
+  constructor() { }
 
   ngOnInit(): void {
 

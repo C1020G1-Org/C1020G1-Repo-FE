@@ -47,7 +47,8 @@
 
                   <div>
                     <label for="inputOccupation">Occupation:</label>
-                    <input type="text" class="form-control" id="inputOccupation" placeholder="">
+                    <input type="text" [(ngModel)]="occupation" class="form-control"
+                           id="inputOccupation" placeholder="">
                   </div>
 
                   <div>
@@ -72,22 +73,27 @@
                   <div class="tab-content">
                     <div class="tab-pane active fade show " id="All">
                       <div class="central-meta item" *ngIf="listUser != null">
-                        <span class="create-post">People<a title="" href="#">See All</a></span>
+                        <span class="create-post">People
+<!--                          <a title="" href="#">See All</a>-->
+                        </span>
                         <div class="pit-friends" *ngFor="let userFavourite of listUser">
                           <figure><a href="#" title=""><img
                             src="{{userFavourite.user.userAvatar}}" alt="" style="height: 50px; width: 50px"></a></figure>
                           <!--                            src="{{user.userAvatar}}" alt=""></a></figure>-->
                           <div class="pit-frnz-meta">
-                            <a href="#" title="">{{userFavourite.user.userName}}</a>
-                            <i>Address: {{userFavourite.user.ward.district.province.provinceName}}</i>
+                            <a [routerLink]="['wall',userFavourite.user.userId]" title="">{{userFavourite.user.userName}}</a>
+                            <i *ngIf="userFavourite.friends">Friend</i>
+                            <i *ngIf="!userFavourite.friends && userFavourite.user.userId != user.userId">Not Friend</i>
+                            <i *ngIf="!userFavourite.friends && userFavourite.user.userId == user.userId">Me</i>
+                            <i>, Address: {{userFavourite.user.ward.district.province.provinceName}}</i>
                             <i *ngIf="userFavourite.favourites.length != 0">, Favourites: {{userFavourite.favourites}}</i>
                             <i *ngIf="userFavourite.favourites.length == 0">, Favourites: None </i>
                             <ul class="add-remove-frnd">
-                              <li class="add-tofrndlist">
+                              <li class="add-tofrndlist" *ngIf="!userFavourite.friends && userFavourite.user.userId != user.userId">
                                 <a title="Add friend" href="#"><i
                                   class="fa fa-user-plus"></i></a>
                               </li>
-                              <li class="remove-frnd">
+                              <li class="remove-frnd" *ngIf="userFavourite.friends">
                                 <a title="Send Message" href="#"><i
                                   class="fa fa-comment"></i></a>
                               </li>
@@ -98,11 +104,13 @@
                       <div *ngIf="(first == true) && (listUser == null)">
                       </div>
                       <div class="central-meta item" *ngIf="(first == false) && (listUser == null)">
-                        <h2 style="color: red">No results found</h2>
+                        <h2 style="color: red">No people found</h2>
                       </div>
                       <div class="central-meta item">
-                                                <span class="create-post">Recommend Friends<a title=""
-                                                                                              href="#">See All</a></span>
+                                                <span class="create-post">Recommend Friends
+<!--                                                  <a title=""-->
+<!--                                                                                              href="#">See All</a>-->
+                                                </span>
                         <div class="pit-friends" *ngFor="let userFavourite of listRecommendation">
                           <figure><a href="#" title=""><img
                             src="{{userFavourite.user.userAvatar}}" alt="" style="height: 50px; width: 50px"></a></figure>
@@ -117,10 +125,10 @@
                                 <a title="Add friend" href="#"><i
                                   class="fa fa-user-plus"></i></a>
                               </li>
-                              <li class="remove-frnd">
-                                <a title="Send Message" href="#"><i
-                                  class="fa fa-comment"></i></a>
-                              </li>
+<!--                              <li class="remove-frnd">-->
+<!--                                <a title="Send Message" href="#"><i-->
+<!--                                  class="fa fa-comment"></i></a>-->
+<!--                              </li>-->
                             </ul>
                           </div>
                         </div>

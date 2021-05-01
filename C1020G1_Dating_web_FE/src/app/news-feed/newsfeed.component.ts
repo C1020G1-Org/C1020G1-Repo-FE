@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CommentService} from 'src/app/service/comment.service';
 import {PostService} from 'src/app/service/post.service';
 import {finalize} from 'rxjs/operators';
@@ -10,6 +10,8 @@ import {User} from "../models/user-model";
 import {ParentComment} from "../models/ParentComment";
 import {ChildComment} from "../models/ChildComment";
 import {Post} from "../models/Post";
+import {UserService} from "../wall/service/user.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 declare const $: any;
 
@@ -39,15 +41,14 @@ export class NewsfeedComponent implements OnInit {
               private tokenStorageService: TokenStorageService,
               private commentService: CommentService,
               private observerService: ObserverService,
-              public storage: AngularFireStorage) {
-    // this.observerService.getChangeEvent().subscribe(() =>{
-    //   this.getAllPostInNewsFeed(this.user.userId, this.pageNumber);
-    // })
+              public storage: AngularFireStorage,
+              public userService: UserService,
+              public router: Router,
+              private activateRouter: ActivatedRoute) {
   }
 
   ngOnInit(): void {
     this.user = this.tokenStorageService.getUser();
-    this.user.account = null;
 
     this.parentCommentForm = new FormGroup({
       parentCommentId: new FormControl(''),
@@ -55,7 +56,7 @@ export class NewsfeedComponent implements OnInit {
       commentImage: new FormControl(''),
       post: new FormControl(''),
       user: new FormControl(''),
-      childComments : new FormControl(null)
+      childComments: new FormControl(null)
     });
 
     this.childCommentForm = new FormGroup({
@@ -65,46 +66,87 @@ export class NewsfeedComponent implements OnInit {
       user: new FormControl('')
     })
 
-    this.getAllPostInNewsFeed(this.user.userId, this.pageNumber);
+    if (this.router.url == "/newsfeed") {
+      this.getAllPostInNewsFeed(this.user.userId, this.pageNumber, true);
+    } else {
+      let id = this.activateRouter.snapshot.params['id'];
+      this.getAllPostInNewsFeed(id, this.pageNumber, false);
+    }
+
+
   }
 
   // get all post in newsfeed
-  getAllPostInNewsFeed(userId: number, pageNumber: number) {
-    this.postService.findAllPostInNewsFeed(userId, pageNumber).subscribe(listPageablePost => {
-      console.log('vao duoc newsfeed ')
-      if (listPageablePost == null) {
-        console.log("end page");
-      } else {
-        let listPostsFromDb = listPageablePost.content;
+  getAllPostInNewsFeed(userId: number, pageNumber: number, checkNewsFeed) {
+    if (checkNewsFeed) {
+      this.postService.findAllPostInNewsFeed(userId, pageNumber).subscribe(listPageablePost => {
+        if (listPageablePost == null) {
+        } else {
+          let listPostsFromDb = listPageablePost.content;
 
-        for (let post of listPostsFromDb) {
-          post.user.account = null;
-          for (let parentComment of post.parentComments) {
-            parentComment.user.account = null;
-            for (let childComment of parentComment.childComments){
-              childComment.user.account = null;
+          for (let post of listPostsFromDb) {
+            post.user.account = null;
+            for (let parentComment of post.parentComments) {
+              parentComment.user.account = null;
+              for (let childComment of parentComment.childComments) {
+                childComment.user.account = null;
+              }
             }
           }
+
+          if (this.postService.postsInService != null) {
+            this.postService.postsInService = this.postService.postsInService.concat(listPostsFromDb);
+          } else {
+            this.postService.postsInService = listPostsFromDb;
+          }
+
         }
 
-        if (this.postService.postsInService != null) {
-          this.postService.postsInService = this.postService.postsInService.concat(listPostsFromDb);
+        this.posts = this.postService.postsInService;
+        console.log(checkNewsFeed);
+        console.log(this.posts);
+      })
+    } else {
+      this.postService.findAllPostInWall(userId, pageNumber).subscribe(listPageablePost => {
+        if (listPageablePost == null) {
         } else {
-          this.postService.postsInService = listPostsFromDb;
+          let listPostsFromDb = listPageablePost.content;
+
+          for (let post of listPostsFromDb) {
+            post.user.account = null;
+            for (let parentComment of post.parentComments) {
+              parentComment.user.account = null;
+              for (let childComment of parentComment.childComments) {
+                childComment.user.account = null;
+              }
+            }
+          }
+
+          if (this.postService.postsInService != null) {
+            this.postService.postsInService = this.postService.postsInService.concat(listPostsFromDb);
+          } else {
+            this.postService.postsInService = listPostsFromDb;
+          }
+
         }
 
-      }
+        this.posts = this.postService.postsInService;
+        console.log(checkNewsFeed);
+        console.log(this.posts);
+      })
+    }
 
-      this.posts = this.postService.postsInService;
-
-      console.log(this.postService.postsInService);
-    })
   };
 
   // create function loadmore post in newsfeed
   loadMorePost() {
     this.pageNumber++;
-    this.getAllPostInNewsFeed(this.user.userId, this.pageNumber);
+    if (this.router.url == "/newsfeed") {
+      this.getAllPostInNewsFeed(this.user.userId, this.pageNumber, true);
+    } else {
+      this.getAllPostInNewsFeed(this.user.userId, this.pageNumber, false);
+    }
+
   }
 
   // submit form to create or update parent-comment
@@ -128,7 +170,8 @@ export class NewsfeedComponent implements OnInit {
     // }
 
     this.commentService.createParentComment(this.parentCommentForm.value).subscribe((data) => {
-      console.log(data);
+      console.log("tìm account");
+      console.log(data)
 
       // if(data.post.parentComments != null){
       //   for (let parentComment of data.post.parentComments){
@@ -137,7 +180,7 @@ export class NewsfeedComponent implements OnInit {
       // }
 
       this.postService.observeCreatingComment(post, data, null);
-      this.ngOnInit();
+      this.parentCommentForm.reset();
       this.imageUrlFromLocal = null;
     }, error => console.log(error))
   }
@@ -177,7 +220,7 @@ export class NewsfeedComponent implements OnInit {
       console.log('ok');
       console.log('data');
       console.log(data);
-      this.postService.observeEditingComment(data,this.editingParentComment.childComments ,null);
+      this.postService.observeEditingComment(data, this.editingParentComment.childComments, null);
       this.imageUrlFromLocal = null;
     }, error => console.log(error))
   }
@@ -294,5 +337,10 @@ export class NewsfeedComponent implements OnInit {
   // send editing post to edit-post-component
   sendEditPostId(editingPostId: number) {
     this.editingPostId = editingPostId;
+  }
+
+  logout() {
+    this.tokenStorageService.logOut();
+    window.location.reload();
   }
 }

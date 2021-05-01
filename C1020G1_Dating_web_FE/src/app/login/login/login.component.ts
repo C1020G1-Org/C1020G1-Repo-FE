@@ -1,11 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthenticationService} from "../../service/auth/authentication-service";
 import {TokenStorageService} from "../../service/auth/token-storage";
 import {Account} from "../../service/auth/account";
-import {ActivatedRoute, Router} from "@angular/router";
-import {FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser} from "angularx-social-login";
 import {JwtResponse} from "../../service/auth/JwtResponse";
+import {Component, OnInit} from "@angular/core";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser} from "angularx-social-login";
+import {ActivatedRoute, Router} from "@angular/router";
+import {User} from "../../models/user-model";
+
 
 
 @Component({
@@ -22,7 +24,7 @@ export class LoginComponent implements OnInit {
   socialUser: SocialUser;
   userLogged: SocialUser;
   isError = false;
-
+  user: User;
 
 
   constructor(private route: ActivatedRoute,
@@ -34,21 +36,21 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.loginForm = this.form.group({
       accountName: ['', [Validators.required, Validators.pattern("^[0-9A-Za-z]*$")]],
       password: ['', Validators.required],
       remember: false
     });
 
-    this.checkLogin();
+    if (this.tokenStorage.isLogged()) {
+      this.router.navigateByUrl("/newsfeed")
+    }
   }
 
   signInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(data => {
       this.socialUser = data;
       const tokenGoogle = new JwtResponse(this.socialUser.idToken)
-      console.log(data)
       this.auth.google(tokenGoogle).subscribe(req => {
           if (req.token == "") {
             this.tokenStorage.saveUser(req.user);
@@ -58,7 +60,7 @@ export class LoginComponent implements OnInit {
             req.user.account = null;
             this.tokenStorage.saveUser(req.user);
             this.tokenStorage.saveAccountName(req.accountName);
-            this.router.navigateByUrl("/home");
+            window.location.reload();
           }
         },
         error => {
@@ -73,7 +75,8 @@ export class LoginComponent implements OnInit {
   }
 
   signInWithFB(): void {
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(data => {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID)
+      .then(data => {
       this.socialUser = data;
       const tokenFacebook = new JwtResponse(this.socialUser.authToken)
       this.auth.facebook(tokenFacebook).subscribe(req => {
@@ -85,9 +88,8 @@ export class LoginComponent implements OnInit {
             req.user.account = null;
             this.tokenStorage.saveUser(req.user);
             this.tokenStorage.saveAccountName(req.accountName);
-            this.router.navigateByUrl("/home");
+            window.location.reload();
           }
-
         },
         error => {
           console.log(error);
@@ -99,24 +101,17 @@ export class LoginComponent implements OnInit {
         console.log(err)
       }
     );
+
   }
 
   logOut(): void {
     this.authService.signOut().then(
       data => {
         this.tokenStorage.logOut();
-        this.router.navigateByUrl("/login")
+        window.location.reload();
       }
     );
   }
-
-
-  checkLogin() {
-    if (this.tokenStorage.isLogged()) {
-      this.router.navigateByUrl("/home")
-    }
-  }
-
 
   viewPassword() {
     if (this.type === 'password') {
@@ -144,13 +139,15 @@ export class LoginComponent implements OnInit {
   loginWithCheckRemember(accountReg) {
     if (!this.loginForm.get("remember").value) {
       this.auth.sendLogin(accountReg).subscribe(data => {
-        data.user.account = null;
-        this.tokenStorage.saveUser(data.user);
+        this.user = data.user
+        this.user.account = null
+        this.tokenStorage.saveUser(this.user);
         this.login(data)
       })
     } else {
       this.auth.sendLogin(accountReg).subscribe(data => {
-        data.user.account = null;
+        this.user = data.user
+        this.user.account = null
         this.tokenStorage.saveUser(data.user);
         this.loginRemember(data);
 
@@ -162,7 +159,7 @@ export class LoginComponent implements OnInit {
     if (data.token != "INVALID_CREDENTIALS") {
       this.tokenStorage.saveToken(data.token);
       this.tokenStorage.saveAccountName(this.getAccountName().value);
-      this.router.navigateByUrl("/home");
+      window.location.reload();
     } else {
       this.title = "Your account is not correct, please check your username or password";
       this.isError = true;
@@ -173,7 +170,7 @@ export class LoginComponent implements OnInit {
     if (data.token != "INVALID_CREDENTIALS") {
       this.tokenStorage.saveTokenRemember(data.token);
       this.tokenStorage.saveAccountName(this.getAccountName().value);
-      this.router.navigateByUrl("/home");
+      window.location.reload();
     } else {
       this.title = "Your account is not correct, please check your username or password"
     }

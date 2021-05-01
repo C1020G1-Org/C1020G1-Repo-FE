@@ -20,36 +20,35 @@ import {TopwallComponent} from "./wall/topwall/topwall.component";
 import {EditDetailComponent} from "./user-management/edit/edit-detail/edit-detail.component";
 import {TimelineComponent} from "./wall/timeline/timeline.component";
 import {InformationComponent} from "./wall/information/information.component";
-import firebase from "firebase";
-import Auth = firebase.auth.Auth;
 import {FriendsComponent} from "./wall/friends/friends.component";
 import {NewsfeedComponent} from "./news-feed/newsfeed.component";
+import {HomeComponent} from "./home/home.component";
 
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     children: [
       {path: 'name-search', component: NameSearchComponent},
       {path: 'advanced-search', component: AdvancedSearchComponent},
-      {
-        path: 'wall/:id',
-        children: [
-          {path: 'friend_request/:id', component: FriendRequestComponent},
-          {path: 'friends/:id', component: FriendsComponent},
-          {path: 'timeline/:id', component: TimelineComponent},
-          {path: 'info/:id', component: InformationComponent},
-        ],
-        component: TopwallComponent, canActivate: [AuthGuardService]
-      }
     ],
-    component: ErrorPageComponent, canActivate: [AuthGuardService]
+    component: HomeComponent, canActivate: [AuthGuardService]
   },
-  {path: 'c10tinder', pathMatch: 'full', redirectTo: 'home'},
+  {
+    path: 'wall/:id',
+    children: [
+      {path: 'friend_request/:id', component: FriendRequestComponent},
+      {path: 'friends/:id', component: FriendsComponent},
+      {path: 'timeline/:id', component: TimelineComponent},
+      {path: 'info/:id', component: InformationComponent},
+      {path: 'edit/:id', component: InformationComponent},
+    ],
+    component: TopwallComponent, canActivate: [AuthGuardService]
+  },
+  {path: 'newsfeed', component: NewsfeedComponent,canActivate: [AuthGuardService]},
+  {path: '', pathMatch: 'full', redirectTo: 'newsfeed'},
   {path: 'login', component: LoginComponent},
-  {path: '', component: LoginComponent},
   {path: 'recover', component: RecoverPasswordComponent},
-  {path: 'home', component: NewsfeedComponent, canActivate: [AuthGuardService]},
   {path: 'registration', component: RegistrationComponent},
   {path: 'initial-information', component: InitialInformationComponent, canActivate: [RegisGuardService]},
 

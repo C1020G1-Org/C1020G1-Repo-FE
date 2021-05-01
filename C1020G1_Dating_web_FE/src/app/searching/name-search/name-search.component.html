@@ -27,22 +27,23 @@
                   <div class="tab-content">
                     <div class="tab-pane active fade show " id="All">
                       <div class="central-meta item" *ngIf="listUser != null">
-                        <span class="create-post">People<a title="" href="#">See All</a></span>
+                        <span class="create-post">People
+<!--                          <a title="" href="#">See All</a>-->
+                        </span>
                         <div class="pit-friends" *ngFor="let userFavourite of listUser">
-                          <figure><a href="#" title=""><img
+                          <figure><a [routerLink]="['/wall',userFavourite.user.userId]" title=""><img
                             src="{{userFavourite.user.userAvatar}}" alt="" style="height: 50px; width: 50px"></a></figure>
                           <!--                            src="{{user.userAvatar}}" alt=""></a></figure>-->
                           <div class="pit-frnz-meta">
-                            <a href="#" title="">{{userFavourite.user.userName}}</a>
-                            <i>Address: {{userFavourite.user.ward.district.province.provinceName}}</i>
+                            <a [routerLink]="['/wall',userFavourite.user.userId]" title="">{{userFavourite.user.userName}}</a>
+                            <i *ngIf="userFavourite.friends">Friend</i>
+                            <i *ngIf="!userFavourite.friends && userFavourite.user.userId != user.userId">Not Friend</i>
+                            <i *ngIf="!userFavourite.friends && userFavourite.user.userId == user.userId">Me</i>
+                            <i>, Address: {{userFavourite.user.ward.district.province.provinceName}}</i>
                             <i *ngIf="userFavourite.favourites.length != 0">, Favourites: {{userFavourite.favourites}}</i>
                             <i *ngIf="userFavourite.favourites.length == 0">, Favourites: None </i>
                             <ul class="add-remove-frnd">
-                              <li class="add-tofrndlist">
-                                <a title="Add friend" href="#"><i
-                                  class="fa fa-user-plus"></i></a>
-                              </li>
-                              <li class="remove-frnd">
+                              <li class="remove-frnd" *ngIf="userFavourite.friends">
                                 <a title="Send Message" href="#"><i
                                   class="fa fa-comment"></i></a>
                               </li>
@@ -53,29 +54,53 @@
                       <div *ngIf="(first == true) && (listUser == null)">
                       </div>
                       <div class="central-meta item" *ngIf="(first == false) && (listUser == null)">
-                        <h2 style="color: red">No results found</h2>
+                        <h2 style="color: red">No people found</h2>
+                      </div>
+                      <div class="central-meta item" *ngIf="listGroup != null">
+                        <span class="create-post">Group
+<!--                          <a title="" href="#">See All</a>-->
+                        </span>
+                        <div class="pit-friends" *ngFor="let groupStatus of listGroup">
+                          <figure><a href="#" title=""><img
+                            src="{{groupStatus.groupSocial.imageAvatarUrl}}" alt="" style="height: 50px; width: 50px"></a></figure>
+                          <div class="pit-frnz-meta">
+                            <a href="#" title="">{{groupStatus.groupSocial.groupName}}</a>
+<!--                            <i>Address: {{userFavourite.user.ward.district.province.provinceName}}</i>-->
+                            <i *ngIf="groupStatus.groupUser">Joined</i>
+                            <i *ngIf="!groupStatus.groupUser">Not joined</i>
+                            <ul class="add-remove-frnd">
+                              <li class="add-tofrndlist" *ngIf="!groupStatus.groupUser">
+                                <a title="Add friend" href="#"><i
+                                  class="fa fa-user-plus"></i></a>
+                              </li>
+<!--                              <li class="remove-frnd">-->
+<!--                                <a title="Send Message" href="#"><i-->
+<!--                                  class="fa fa-comment"></i></a>-->
+<!--                              </li>-->
+                            </ul>
+                          </div>
+                        </div>
+                      </div><!-- searched groups -->
+                      <div *ngIf="(first == true) && (listGroup == null)">
+                      </div>
+                      <div class="central-meta item" *ngIf="(first == false) && (listGroup == null)">
+                        <h2 style="color: red">No group found</h2>
                       </div>
                       <div class="central-meta item">
-                                                <span class="create-post">Recommend Friends<a title=""
-                                                                                              href="#">See All</a></span>
+                                                <span class="create-post">Recommend Friends
+<!--                                                  <a title=""-->
+<!--                                                                                              href="#">See All</a>-->
+                                                </span>
                         <div class="pit-friends" *ngFor="let userFavourite of listRecommendation">
                           <figure><a href="#" title=""><img
                             src="{{userFavourite.user.userAvatar}}" alt="" style="height: 50px; width: 50px"></a></figure>
                           <!--                            src="{{user.userAvatar}}" alt=""></a></figure>-->
                           <div class="pit-frnz-meta">
-                            <a href="#" title="">{{userFavourite.user.userName}}</a>
-                            <i>{{userFavourite.user.ward.district.province.provinceName}}</i>
-                            <i>, Favourites: {{userFavourite.favourites}}</i>
-                            <ul class="add-remove-frnd">
-                              <li class="add-tofrndlist">
-                                <a title="Add friend" href="#"><i
-                                  class="fa fa-user-plus"></i></a>
-                              </li>
-                              <li class="remove-frnd">
-                                <a title="Send Message" href="#"><i
-                                  class="fa fa-comment"></i></a>
-                              </li>
-                            </ul>
+                            <a [routerLink]="['/wall',userFavourite.user.userId]" title="">{{userFavourite.user.userName}}</a>
+                            <i *ngIf="!userFavourite.friends">Not Friend</i>
+                            <i>, Address: {{userFavourite.user.ward.district.province.provinceName}}</i>
+                            <i *ngIf="userFavourite.favourites.length != 0">, Favourites: {{userFavourite.favourites}}</i>
+                            <i *ngIf="userFavourite.favourites.length == 0">, Favourites: None </i>
                           </div>
                         </div>
                       </div><!-- recommend peoples -->

@@ -6,7 +6,7 @@
         <hr>
         <div class="row m-lg-0 p-lg-0">
           <div class="col-lg-6 mx-lg-0 p-lg-0 pr-lg-3" style="margin-bottom: 20px;">
-            <label style="text-transform: none">Account name <span class="color-orange">(*)</span></label>
+            <label style="text-transform: none">Account name <span class="color-orange">*</span></label>
             <input type="text" placeholder="Account name" formControlName="accountName">
             <span class="color-red" style="font-size: 12px"
                   *ngIf="formRegistration.controls.accountName.errors?.required && (formRegistration.controls.accountName?.touched ||formRegistration.controls.accountName?.dirty)"><i
@@ -29,7 +29,7 @@
             </span>
           </div>
           <div class="col-lg-6 mx-lg-0 p-lg-0 pl-lg-3" style="margin-bottom: 20px;">
-            <label style="text-transform: none">Display Name <span class="color-orange">(*)</span></label>
+            <label style="text-transform: none">User name <span class="color-orange">*</span></label>
             <input type="text" placeholder="Name for display" formControlName="userName">
             <span class="color-red" style="font-size: 12px"
                   *ngIf="formRegistration.controls.userName.errors?.required && (formRegistration.controls.userName?.touched ||formRegistration.controls.userName?.dirty)"><i
@@ -47,7 +47,7 @@
         </div>
         <div class="row m-lg-0 p-lg-0">
           <div class="col-lg-6 m-0 p-lg-0 pr-lg-3" style="margin-bottom: 20px;">
-            <label>Password <span class="color-orange">(*)</span></label>
+            <label>Password <span class="color-orange">*</span></label>
             <input [type]="(showPassword)?'text':'password'" placeholder="Password" formControlName="password">
             <i [class]="(showPassword)?'fa fa-eye relative':'fa fa-eye-slash relative'"
                (click)="toggleShowPassword()"></i>
@@ -65,7 +65,7 @@
             </span>
           </div>
           <div class="col-lg-6 m-0 p-lg-0 pl-lg-3" style="margin-bottom: 20px">
-            <label style="text-transform: none">Confirm password <span class="color-orange">(*)</span></label>
+            <label style="text-transform: none">Confirm password <span class="color-orange">*</span></label>
             <input [type]="(showRePassword)?'text':'password'" placeholder="Confirm password"
                    formControlName="rePassword"><i (click)="toggleShowRePassword()"
                                                    [class]="(showRePassword)?'fa fa-eye relative':'fa fa-eye-slash relative'"></i>
@@ -81,15 +81,22 @@
         </div>
         <div class="row m-lg-0 p-lg-0">
           <div class="col-lg-6 mx-lg-0 p-lg-0 pr-lg-3" style="margin-bottom: 20px;">
-            <label>Occupation <span class="color-orange">(*)</span></label>
-            <input type="text" placeholder="Occupation" formControlName="occupation">
+            <label>Occupation <span class="color-orange">*</span></label>
+            <select formControlName="occupation">
+              <option disabled value="">Choose occupation</option>
+              <option value="engineer">Engineer</option>
+              <option value="driver">Driver</option>
+              <option value="student">Student</option>
+              <option value="doctor">Doctor</option>
+              <option value="teacher">Teacher</option>
+            </select>
             <span class="color-red" style="font-size: 12px"
                   *ngIf="formRegistration.controls.occupation.errors?.required && (formRegistration.controls.occupation?.touched ||formRegistration.controls.occupation?.dirty)"><i
               class="fa fa-exclamation-circle"></i><i> Occupation is required</i>
             </span>
           </div>
           <div class="col-lg-6 mx-lg-0 p-lg-0 pl-lg-3" style="margin-bottom: 20px;">
-            <label>Birthday <span class="color-orange">(*)</span></label>
+            <label>Birthday <span class="color-orange">*</span></label>
             <input type="date" placeholder="Birthday" formControlName="birthday">
             <span class="color-red" style="font-size: 12px"
                   *ngIf="formRegistration.controls.birthday.errors?.required && (formRegistration.controls.birthday?.touched ||formRegistration.controls.birthday?.dirty)"><i
@@ -103,7 +110,7 @@
         </div>
         <div class="row m-lg-0 p-lg-0">
           <div class="col-lg-6 mx-lg-0 p-lg-0 pr-lg-3" style="margin-bottom: 20px;">
-            <label>Email <span class="color-orange">(*)</span></label>
+            <label>Email <span class="color-orange">*</span></label>
             <input type="email" placeholder="Email" formControlName="email">
             <span class="color-red" style="font-size: 12px"
                   *ngIf="formRegistration.controls.email.errors?.required && (formRegistration.controls.email?.touched ||formRegistration.controls.email?.dirty)"><i
@@ -118,7 +125,7 @@
             </span>
           </div>
           <div class="col-lg-6 mx-lg-0 p-lg-0 pl-lg-3" style="margin-bottom: 20px;">
-            <label style="text-transform: none">Confirm email <span class="color-orange">(*)</span></label>
+            <label style="text-transform: none">Confirm email <span class="color-orange">*</span></label>
             <input type="email" placeholder="Confirm email" formControlName="reEmail">
             <span class="color-red" style="font-size: 12px"
                   *ngIf="formRegistration.controls.reEmail.errors?.required && (formRegistration.controls.reEmail?.touched ||formRegistration.controls.reEmail?.dirty)"><i
@@ -132,7 +139,7 @@
         </div>
         <div class="row m-lg-0 p-lg-0">
           <div class="col-lg-4 mx-lg-0 p-lg-0 pr-lg-4" style="margin-bottom: 20px;">
-            <label>Province <span class="color-orange">(*)</span></label>
+            <label>Province <span class="color-orange">*</span></label>
             <select formControlName="province" (change)="this.changeDistrict($event)">
               <option disabled value="">Choose province</option>
               <option *ngFor="let province of provinces"
@@ -144,7 +151,7 @@
             </span>
           </div>
           <div class="col-lg-4 mx-lg-0 p-lg-0 pl-lg-2 pr-lg-2" style="margin-bottom: 20px;">
-            <label>District <span class="color-orange">(*)</span></label>
+            <label>District <span class="color-orange">*</span></label>
             <select formControlName="district" (change)="this.changeWard($event)">
               <option disabled value="">Choose district</option>
               <option *ngFor="let district of districts"
@@ -156,7 +163,7 @@
             </span>
           </div>
           <div class="col-lg-4 mx-lg-0 p-lg-0 pl-lg-4" style="margin-bottom: 20px;">
-            <label>Ward <span class="color-orange">(*)</span></label>
+            <label>Ward <span class="color-orange">*</span></label>
             <select formControlName="ward">
               <option disabled value="">Choose ward</option>
               <option *ngFor="let ward of wards"
@@ -170,7 +177,7 @@
         </div>
         <div class="row m-lg-0 p-lg-0">
           <div class="col-lg-12 mx-lg-0 p-lg-0" style="margin-bottom: 20px;">
-            <label>Address <span class="color-orange">(*)</span></label>
+            <label>Address <span class="color-orange">*</span></label>
             <input type="text" placeholder="Address" formControlName="address">
             <span class="color-red" style="font-size: 12px"
                   *ngIf="formRegistration.controls.address.errors?.required && (formRegistration.controls.address?.touched ||formRegistration.controls.address?.dirty)"><i
@@ -180,7 +187,7 @@
         </div>
         <div class="row m-lg-0 p-lg-0">
           <div class="col-lg-6 mx-lg-0 p-lg-0 pr-lg-3" style="margin-bottom: 20px;">
-            <label>Gender <span class="color-orange">(*)</span></label>
+            <label>Gender <span class="color-orange">*</span></label>
             <div class="form-radio pl-4">
               <div class="radio">
                 <label>
@@ -203,7 +210,7 @@
           <label style="text-transform: none">Terms of services</label>
           <span class="color-orange"
                 style="font-size: 12px"><i>You must read and agree Term of Service for registration</i></span>
-          <textarea readonly>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisl tincidunt eget nullam non. Quis hendrerit dolor magna eget est lorem ipsum dolor sit. Volutpat odio facilisis mauris sit amet massa. Commodo odio aenean sed adipiscing diam donec adipiscing tristique. Mi eget mauris pharetra et. Non tellus orci ac auctor augue. Elit at imperdiet dui accumsan sit. Ornare arcu dui vivamus arcu felis. Egestas integer eget aliquet nibh praesent. In hac habitasse platea dictumst quisque sagittis purus. Pulvinar elementum integer enim neque volutpat ac.</textarea>
+          <textarea readonly>C10Tinder  provides services in accordance with this Term of Services. Accessing or registering an account in our system by any way shall means that you agree and commit to strictly comply with this Term of Service. We reserve the right to amend the content of the Term of Service at our discretion without prior noticing to users. By continuing to use our website, users automatically agree with the new content of the amended Term of Services.</textarea>
           <div class="checkbox">
             <label class="color-orange" style="text-transform: none">
               <input type="checkbox" formControlName="termOfService"><i class="check-box"></i>I must read and understand

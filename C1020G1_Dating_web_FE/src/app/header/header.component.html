@@ -1,172 +1,183 @@
-<div class="topbar stick">
-  <div class="logo">
-    <a title="" routerLink="/newsfeed"><img src="assets/images/pngegg.png" height="50" width="50" alt="logo" /></a>
-  </div>
-  <div class="top-area">
-    <div class="top-search">
-      <form method="post" class="">
-        <!--        <input (change)="search($event.target.value)" type="text" placeholder="Search People">-->
-        <input (keydown.enter)="search($event)" type="text" placeholder="Search People">
-        <button data-ripple><i class="ti-search"></i></button>
-      </form>
+<div class="theme-layout">
+  <div class="topbar stick">
+    <div class="logo">
+      <a title="" routerLink="/newsfeed"><img src="assets/images/pngegg.png" class="logo-custome" alt="logo"/>
+        <b class="title"> C10Tinder</b></a>
     </div>
-    <ul class="setting-area pr-5">
-      <li><a routerLink="/" title="Home" data-ripple=""><i class="fa fa-home"></i></a></li>
-      <li><a routerLink="/group/list" title="Group" data-ripple=""><i class="fa fa-users"></i></a></li>
-      <li>
-        <a title="Friend Requests" data-ripple="">
-          <i class="fa fa-user" style="color: #999999;cursor:pointer"></i><em class="bg-red" *ngIf="lengthNoti">{{lengthNoti}}</em>
-        </a>
-        <div class="dropdowns">
-          <span><a href="#" title="" [routerLink]="['/wall/', user.userId , 'friendrequest']">View all Requests</a></span>
-          <ul class="drops-menu" *ngIf="notiListFriend">
-            <li *ngFor="let notiFriend of notiListFriend">
-              <div>
-                <figure>
-                  <img src="{{notiFriend.friendRequest.sendUser.userAvatar}}" style="width: 50px;height: 50px;margin: 10px">
-                </figure>
-                <br>
-                <div class="mesg-meta">
-                  <span><a [routerLink]="['/wall',notiFriend.friendRequest.sendUser.userId,'timeline']" title="">{{notiFriend.friendRequest.sendUser.userName}}</a></span>
-                </div>
-                <div class="add-del-friends" style="margin-top: 5%">
-                  <button title="Add Friend" style="border: none;background: white"
-                          (click)="acceptFriendRequestInHeader(notiFriend.friendRequest,notiFriend.key)">
-                    <i class="fa fa-check-square fa-2x" style="color: #ff6e16"></i>
-                  </button>
-                  <button title="Unrequest" style="border: none;background: white" data-toggle="modal"
-                          data-target="#headerModal" (click)="sendIdFriendRequest(notiFriend.friendRequest,notiFriend.key)">
-                    <i class="fa fa-trash fa-2x" style="color: #ff6e16">
-                    </i></button>
-                </div>
-              </div>
-            </li>
-          </ul>
-          <ul class="drops-menu" *ngIf="!checkListNotiFriend">
-            <li style="color: #ff6e16;text-align: center;margin-top: 10%;margin-bottom: 10%">Has not friend request
-              <i class="fa fa-smile fa-2x"></i>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <li>
-        <a title="Notification" data-ripple="">
-          <i class="fa fa-bell" style="color: #999999;cursor: pointer"></i><em class="bg-purple" *ngIf="lengthNotiGroup > 0">{{notiGroupList.length}}</em>
-        </a>
-        <div class="dropdowns">
-          <span *ngIf="notiGroupList">{{notiGroupList.length}} New Notifications <a class="cursor" (click)="deleteAllNotiGroup()" title="">Clear
-              All</a></span>
-          <ul class="drops-menu">
-            <li *ngFor="let noti of notiGroupList">
-              <a title="" class="show-mesg">
-                <div class="mesg-meta cursor" style="width: 95%">
+    <div class="top-area">
+      <div class="top-search">
+        <form method="post" class="">
+          <!--        <input (change)="search($event.target.value)" type="text" placeholder="Search People">-->
+          <input (keydown.enter)="search($event)" type="text" placeholder="Search People">
+          <button data-ripple><i class="ti-search"></i></button>
+        </form>
+      </div>
+      <ul class="setting-area pr-5">
+        <li><a routerLink="/" title="Home" data-ripple=""><i class="fa fa-home"></i></a></li>
+        <li><a routerLink="/group/list" title="Group" data-ripple=""><i class="fa fa-users"></i></a></li>
+        <li>
+          <a title="Friend Requests" data-ripple="">
+            <i class="fa fa-user" style="color: #999999;cursor:pointer"></i><em class="bg-red" *ngIf="lengthNoti">{{lengthNoti}}</em>
+          </a>
+          <div class="dropdowns">
+            <span><a href="#" title=""
+                     [routerLink]="['/wall/', user.userId , 'friendrequest']">View all Requests</a></span>
+            <ul class="drops-menu" *ngIf="notiListFriend">
+              <li *ngFor="let notiFriend of notiListFriend">
+                <div>
                   <figure>
-                    <img class="noti-image" [src]="noti.groupSender.imageAvatarUrl" alt="" style="border-radius: 50%">
+                    <img src="{{notiFriend.friendRequest.sendUser.userAvatar}}" style="width: 40px; height: 40px" alt="">
                   </figure>
-                  <div (click)="nav(noti.groupSender.groupId)" class="mesg-meta" style="cursor: pointer">
-                    <h6>{{noti.groupSender.groupName}}</h6>
-                    <span class="content-span">{{noti.content}}</span>
+                  <div class="mesg-meta">
+                    <h6><a href="http://localhost:4200/wall/{{notiFriend.friendRequest.sendUser.userId}}" title="">
+                      {{notiFriend.friendRequest.sendUser.userName}}</a></h6>
+                    <span><b>{{notiFriend.friendRequest.sendUser.userName}}</b> want be friend with you</span>
                   </div>
-                  <a (click)="clearNotiGroup(noti.key)" class="clear-noti"
-                     style="display: inline-block;margin-left: 1%;cursor: pointer"><i class="fa fa-times-circle"></i></a>
+                  <div class="add-del-friends" style="margin-top: 3%">
+                    <a title="Add Friend" style="border: none;background: white;cursor: pointer"
+                       (click)="acceptFriendRequestInHeader(notiFriend.friendRequest,notiFriend.key)">
+                      <i class="fa fa-check-square" style="color: #ff6e16"></i>
+                    </a>
+                    <a title="Unrequest" style="border: none;background: white;cursor: pointer" data-toggle="modal"
+                       data-target="#headerModal"
+                       (click)="sendIdFriendRequest(notiFriend.friendRequest,notiFriend.key)">
+                      <i class="fa fa-trash" style="color: #ff6e16">
+                      </i></a>
+                  </div>
                 </div>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <li>
-        <a href="#" title="Messages" data-ripple=""><i class="fa fa-commenting"></i><em class="bg-blue">9</em></a>
-        <div class="dropdowns">
-          <span>5 New Messages <a href="#" title="">Mark all as read</a></span>
-          <ul class="drops-menu">
-            <li>
-              <a class="show-mesg" href="#" title="">
-                <figure>
-                  <img src="assets/images/resources/thumb-1.jpg" alt="">
-                  <span class="status f-online"></span>
-                </figure>
-                <div class="mesg-meta">
-                  <h6>sarah Loren</h6>
-                  <span><i class="ti-check"></i> Hi, how r u dear ...?</span>
-                  <i>2 min ago</i>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a class="show-mesg" href="#" title="">
-                <figure>
-                  <img src="assets/images/resources/thumb-2.jpg" alt="">
-                  <span class="status f-offline"></span>
-                </figure>
-                <div class="mesg-meta">
-                  <h6>Jhon doe</h6>
-                  <span><i class="ti-check"></i> We’ll have to check that at the office and see if the client is on
+              </li>
+            </ul>
+            <ul class="drops-menu" *ngIf="!checkListNotiFriend">
+              <li style="color: #ff6e16;text-align: center;margin-top: 10%;margin-bottom: 10%">Has not friend request
+                <i class="fa fa-smile fa-2x"></i>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <a title="Notification" data-ripple="">
+            <i class="fa fa-bell" style="color: #999999;cursor: pointer"></i><em class="bg-purple"
+                                                                                 *ngIf="lengthNotiGroup > 0">{{notiGroupList.length}}</em>
+          </a>
+          <div class="dropdowns">
+          <span *ngIf="notiGroupList">{{notiGroupList.length}} New Notifications <a class="cursor"
+                                                                                    (click)="deleteAllNotiGroup()"
+                                                                                    title="">Clear
+              All</a></span>
+            <ul class="drops-menu">
+              <li *ngFor="let noti of notiGroupList">
+                <a title="" class="show-mesg">
+                  <div class="mesg-meta cursor" style="width: 95%">
+                    <figure>
+                      <img class="noti-image" [src]="noti.groupSender.imageAvatarUrl" alt="" style="border-radius: 50%">
+                    </figure>
+                    <div (click)="nav(noti.groupSender.groupId)" class="mesg-meta" style="cursor: pointer">
+                      <h6>{{noti.groupSender.groupName}}</h6>
+                      <span class="content-span">{{noti.content}}</span>
+                    </div>
+                    <a (click)="clearNotiGroup(noti.key)" class="clear-noti"
+                       style="display: inline-block;margin-left: 1%;cursor: pointer"><i class="fa fa-times-circle"></i></a>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <a href="#" title="Messages" data-ripple=""><i class="fa fa-commenting"></i><em class="bg-blue">9</em></a>
+          <div class="dropdowns">
+            <span>5 New Messages <a href="#" title="">Mark all as read</a></span>
+            <ul class="drops-menu">
+              <li>
+                <a class="show-mesg" href="#" title="">
+                  <figure>
+                    <img src="assets/images/resources/thumb-1.jpg" alt="">
+                    <span class="status f-online"></span>
+                  </figure>
+                  <div class="mesg-meta">
+                    <h6>sarah Loren</h6>
+                    <span><i class="ti-check"></i> Hi, how r u dear ...?</span>
+                    <i>2 min ago</i>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a class="show-mesg" href="#" title="">
+                  <figure>
+                    <img src="assets/images/resources/thumb-2.jpg" alt="">
+                    <span class="status f-offline"></span>
+                  </figure>
+                  <div class="mesg-meta">
+                    <h6>Jhon doe</h6>
+                    <span><i class="ti-check"></i> We’ll have to check that at the office and see if the client is on
                     board with</span>
-                  <i>2 min ago</i>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a class="show-mesg" href="#" title="">
-                <figure>
-                  <img src="assets/images/resources/thumb-3.jpg" alt="">
-                  <span class="status f-online"></span>
-                </figure>
-                <div class="mesg-meta">
-                  <h6>Andrew</h6>
-                  <span> <i class="fa fa-paperclip"></i>Hi Jack's! It’s Diana, I just wanted to let you know that we
+                    <i>2 min ago</i>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a class="show-mesg" href="#" title="">
+                  <figure>
+                    <img src="assets/images/resources/thumb-3.jpg" alt="">
+                    <span class="status f-online"></span>
+                  </figure>
+                  <div class="mesg-meta">
+                    <h6>Andrew</h6>
+                    <span> <i class="fa fa-paperclip"></i>Hi Jack's! It’s Diana, I just wanted to let you know that we
                     have to reschedule..</span>
-                  <i>2 min ago</i>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a class="show-mesg" href="#" title="">
-                <figure>
-                  <img src="assets/images/resources/thumb-4.jpg" alt="">
-                  <span class="status f-offline"></span>
-                </figure>
-                <div class="mesg-meta">
-                  <h6>Tom cruse</h6>
-                  <span><i class="ti-check"></i> Great, I’ll see you tomorrow!.</span>
-                  <i>2 min ago</i>
-                </div>
-              </a>
-              <span class="tag">New</span>
-            </li>
-            <li>
-              <a class="show-mesg" href="#" title="">
-                <figure>
-                  <img src="assets/images/resources/thumb-5.jpg" alt="">
-                  <span class="status f-away"></span>
-                </figure>
-                <div class="mesg-meta">
-                  <h6>Amy</h6>
-                  <span><i class="fa fa-paperclip"></i> Sed ut perspiciatis unde omnis iste natus error sit </span>
-                  <i>2 min ago</i>
-                </div>
-              </a>
-              <span class="tag">New</span>
-            </li>
+                    <i>2 min ago</i>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a class="show-mesg" href="#" title="">
+                  <figure>
+                    <img src="assets/images/resources/thumb-4.jpg" alt="">
+                    <span class="status f-offline"></span>
+                  </figure>
+                  <div class="mesg-meta">
+                    <h6>Tom cruse</h6>
+                    <span><i class="ti-check"></i> Great, I’ll see you tomorrow!.</span>
+                    <i>2 min ago</i>
+                  </div>
+                </a>
+                <span class="tag">New</span>
+              </li>
+              <li>
+                <a class="show-mesg" href="#" title="">
+                  <figure>
+                    <img src="assets/images/resources/thumb-5.jpg" alt="">
+                    <span class="status f-away"></span>
+                  </figure>
+                  <div class="mesg-meta">
+                    <h6>Amy</h6>
+                    <span><i class="fa fa-paperclip"></i> Sed ut perspiciatis unde omnis iste natus error sit </span>
+                    <i>2 min ago</i>
+                  </div>
+                </a>
+                <span class="tag">New</span>
+              </li>
+            </ul>
+            <a href="chat-messenger.html" title="" class="more-mesg">View All</a>
+          </div>
+        </li>
+      </ul>
+      <div class="user-img">
+        <h5 class="m-0">{{user.userName}}</h5>
+        <img src="{{user.userAvatar}}" alt="" style="height: 45px; width: 45px;">
+        <span class="{{displayStatus}}"></span>
+        <div class="user-setting">
+          <span class="seting-title">User setting <a href="#" title="">see all</a></span>
+          <ul class="log-out">
+            <li><a [routerLink]="['/wall', user.userId]" title=""><i class="ti-user"></i>
+              view profile</a></li>
+            <li><a [routerLink]="['/edit/detail']" title=""><i class="ti-pencil-alt"></i>edit
+              profile</a></li>
+            <!--            <li><a href="#" title=""><i class="ti-target"></i>activity log</a></li>-->
+            <!--            <li><a href="setting.html" title=""><i class="ti-settings"></i>account setting</a></li>-->
+            <li><a title="" (click)="logout()"><i class="ti-power-off"></i>log out</a></li>
           </ul>
-          <a href="chat-messenger.html" title="" class="more-mesg">View All</a>
         </div>
-      </li>
-    </ul>
-    <div class="user-img" (click)="myFunction()">
-      <h5>{{user.userName}}</h5>
-      <img src="{{user.userAvatar}}" alt="" style="height: 45px; width: 45px;">
-      <span class="{{displayStatus}}"></span>
-      <div class="{{myClass}}">
-        <span class="seting-title">User setting <a href="#" title="">see all</a></span>
-        <ul class="log-out">
-          <li><a [routerLink]="['/wall', user.userId , 'timeline' , user.userId]" title=""><i class="ti-user"></i> view profile</a></li>
-          <li><a [routerLink]="['/wall', user.userId, 'edit' , user.userId]" title=""><i class="ti-pencil-alt"></i>edit profile</a></li>
-          <li><a href="#" title=""><i class="ti-target"></i>activity log</a></li>
-          <li><a href="setting.html" title=""><i class="ti-settings"></i>account setting</a></li>
-          <li><a title="" (click)="logout()"><i class="ti-power-off"></i>log out</a></li>
-        </ul>
       </div>
     </div>
   </div>

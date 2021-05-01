@@ -34,6 +34,7 @@ import {AdminGroupModule} from "./admin-group/admin-group.module";
 import {PostModule} from "./post/post.module";
 import {NewsFeedModule} from "./news-feed/news-feed.module";
 import {CommentsModule} from "./comments/comment.module";
+import {FriendSuggestComponent} from "./friend-suggest/friend-suggest.component";
 
 
 @NgModule({
@@ -42,7 +43,7 @@ import {CommentsModule} from "./comments/comment.module";
     ErrorPageComponent,
     FooterComponent,
     AdvancedSearchComponent,
-    TopwallComponent
+    TopwallComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,8 +68,8 @@ import {CommentsModule} from "./comments/comment.module";
     GroupModule,
     AdminGroupModule,
     PostModule,
+    CommentsModule,
     NewsFeedModule,
-    CommentsModule
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',
@@ -78,16 +79,19 @@ import {CommentsModule} from "./comments/comment.module";
         {
           id: GoogleLoginProvider.PROVIDER_ID,
           provider: new GoogleLoginProvider(
-            '995950085039-m1rgd3afdhashcnebmg6q5g0112httdv.apps.googleusercontent.com'
+            "995950085039-m1rgd3afdhashcnebmg6q5g0112httdv.apps.googleusercontent.com"
           )
         },
         {
           id: FacebookLoginProvider.PROVIDER_ID,
-          provider: new FacebookLoginProvider('1763676513806884')
+          provider: new FacebookLoginProvider('471251267423480')
         }
       ]
     } as SocialAuthServiceConfig,
   }],
+  exports: [
+    FriendSuggestComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

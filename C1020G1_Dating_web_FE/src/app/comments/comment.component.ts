@@ -60,9 +60,9 @@ export class CommentComponent implements OnInit {
     this.childCommentForm.get('parentComment').value.user.account = null;
     console.log(this.childCommentForm.value);
     this.commentService.createChildComment(this.childCommentForm.value).subscribe(data => {
-      console.log(data);
+
       this.postService.observeCreatingComment(this.post, this.parentOfchildComment, data);
-      this.ngOnInit();
+      this.childCommentForm.reset()
       this.imageUrlFromLocal = null;
     }, error => console.log(error))
   }

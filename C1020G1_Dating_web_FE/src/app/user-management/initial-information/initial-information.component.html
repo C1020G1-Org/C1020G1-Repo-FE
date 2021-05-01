@@ -30,11 +30,11 @@
             class="color-orange">(*)</span></label>
           <span class="color-red d-block" style="font-size: 12px"
                 *ngIf="this.fileMessageAvatar != null"><i
-            class="fa fa-warning"></i><i> {{this.fileMessageAvatar}}</i>
+            class="fa fa-exclamation-circle"></i><i> {{this.fileMessageAvatar}}</i>
           </span>
           <span class="color-red d-block" style="font-size: 12px"
                 *ngIf="this.fileMessageBackground != null"><i
-            class="fa fa-warning"></i><i> {{this.fileMessageBackground}}</i>
+            class="fa fa-exclamation-circle"></i><i> {{this.fileMessageBackground}}</i>
           </span>
         </div>
         <div>
@@ -72,7 +72,7 @@
             </div>
             <span class="color-red pl-lg-4" style="font-size: 12px"
                   *ngIf="this.formInitial.controls.reason.hasError('requireCheckboxToBeChecked') && (formInitial.controls.reason?.touched ||formInitial.controls.reason?.dirty)"><i
-              class="fa fa-warning"></i><i> At least a participation reason is checked</i>
+              class="fa fa-exclamation-circle"></i><i> At least a participation reason is checked</i>
             </span>
           </div>
           <div class="col-lg-6 mx-lg-0 p-lg-0 pl-lg-3" style="margin-bottom: 20px;">
@@ -85,11 +85,11 @@
                 class="check-box"></i>
                 {{favourite.favouriteName}}
               </label>
-              <span class="color-red ml-4" style="font-size: 12px"
-                    *ngIf="this.formInitial.controls.favourites.hasError('requireCheckboxToBeChecked') && (formInitial.controls.favourites?.touched ||formInitial.controls.favourites?.dirty)"><i
-                class="fas fa-warning"></i><i>At least a favourite is checked</i>
-            </span>
             </div>
+            <span class="color-red ml-4" style="font-size: 12px"
+                  *ngIf="this.formInitial.controls.favourites.hasError('requireCheckboxToBeChecked') && (formInitial.controls.favourites?.touched ||formInitial.controls.favourites?.dirty)"><i
+              class="fa fa-exclamation-circle"></i><i> At least a favourite is checked</i>
+            </span>
           </div>
         </div>
         <hr>
@@ -109,12 +109,12 @@
 </div>
 <div id="successModal" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
-    <div class="modal-content c-form color-box darker-box">
+    <div class="modal-content c-form">
       <div class="modal-body">
-        <h5 style="text-align: center" class="color-green">{{this.messageRegistry}}</h5>
+        <h5 style="text-align: center" class="color-orange">{{this.messageRegistry}}</h5>
       </div>
       <div class="modal-footer" [hidden]="!this.isLoggin">
-        <button type="button" class="btn main-btn3 purple-box" data-dismiss="modal" (click)="goToLogin()">Login Page
+        <button type="button" class="btn main-btn" data-dismiss="modal" (click)="goToLogin()">Login Page
         </button>
       </div>
     </div>

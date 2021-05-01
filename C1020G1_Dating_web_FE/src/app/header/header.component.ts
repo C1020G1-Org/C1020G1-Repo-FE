@@ -39,9 +39,6 @@ export class HeaderComponent implements OnInit {
 
   key: string;
 
-  myClass = "user-setting";
-  checkShow = false;
-
   constructor(private searchingService: SearchingService,
               private router: Router,
               private tokenStorage: TokenStorageService,
@@ -70,12 +67,15 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.tokenStorage.logOut();
-    this.router.navigateByUrl("/login")
+    window.location.reload();
   }
 
   search(event: any) {
-    this.searchingService.searchTerm.next(event.target.value);
-    this.router.navigateByUrl('/name-search')
+    this.searchingService.passKeySearch(event.target.value);
+    if (this.router.url == '/name-search') {
+    } else {
+      this.router.navigateByUrl('/name-search');
+    }
   }
 
 
@@ -129,17 +129,6 @@ export class HeaderComponent implements OnInit {
     })
   }
 
-  myFunction(){
-    if (this.checkShow) {
-      this.myClass = "user-setting";
-      this.checkShow = false;
-      console.log(0)
-    } else {
-      this.myClass = "user-setting active";
-      this.checkShow = true;
-      console.log(1)
-    }
-  }
 
   /**
    * @author PhinNL

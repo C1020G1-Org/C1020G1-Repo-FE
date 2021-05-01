@@ -44,7 +44,7 @@
                           (click)="acceptFriendRequest(friendRequestWallUserAndLoginUser)">
                     <i class="fa fa-check-square" style="color: white"></i></button>
                 </li>
-                <li><a class="edit-seting"  title="Send Message" data-toggle="tooltip">
+                <li><a class="edit-seting" title="Send Message" data-toggle="tooltip">
                   <i class="fa fa-comment"></i></a>
                 </li>
                 <li>
@@ -82,13 +82,13 @@
                       <a [routerLink]="['timeline' , this.userInfo.userId ]">Timeline</a>
                     </li>
                     <li>
-                      <a [routerLink]="['info' , this.userInfo.userId ]">Information</a>
+                      <a [routerLink]="['info' , this.userInfo.userId ]" (click)="clearPost()" >Information</a>
                     </li>
                     <li>
-                      <a [routerLink]="['friends' , this.userInfo.userId ]">Friends</a>
+                      <a [routerLink]="['friends' , this.userInfo.userId ]" (click)="clearPost()" >Friends</a>
                     </li>
                     <li *ngIf="userLogging.userId == userInfo.userId">
-                      <a [routerLink]="['friend_request' , this.userLogging.userId]">Friends Request</a>
+                      <a [routerLink]="['friend_request' , this.userLogging.userId]" (click)="clearPost()" >Friends Request</a>
                     </li>
                   </ul>
                 </div>
@@ -96,7 +96,12 @@
             </div>
 
           </div>
-          <router-outlet></router-outlet>
+          <div *ngIf="postInfos">
+            <app-newsfeed></app-newsfeed>
+          </div>
+          <div *ngIf="!postInfos">
+            <router-outlet></router-outlet>
+          </div>
         </div>
       </div>
     </div>
@@ -150,3 +155,4 @@
     </div>
   </div>
 </div>
+

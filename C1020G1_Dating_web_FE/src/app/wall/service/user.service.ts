@@ -1,27 +1,21 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {Post} from "../../models/Post";
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class
+export class UserService {
+  postInfos: Post[];
 
+  constructor() { }
 
-serService {
-  public API_USER = 'http://localhost:8080/user';
-  public API_POST = 'http://localhost:8080/post';
-  public API_COMMENT = 'http://localhost:8080/comment';
-  constructor( private http: HttpClient) { }
-  findUserById(id: number): Observable<any> {
-      return this.http.get(this.API_USER + '/' + id);
+  public savePostInfo(posts: Post[]){
+    this.postInfos =posts;
   }
 
-  findPostById(id: number): Observable<any> {
-      return this.http.get(this.API_POST + '/' + id);
+  public getPostInfo(){
+    return this.postInfos;
   }
 
-  findCommentById(id: number): Observable<any> {
-    return this.http.get(this.API_COMMENT + '/' + id);
-  }
 }

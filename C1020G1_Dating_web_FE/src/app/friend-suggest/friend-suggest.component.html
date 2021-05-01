@@ -1,0 +1,13 @@
+<div class="widget stick-widget">
+  <h4 class="widget-title">Who's follownig</h4>
+  <ul class="followers">
+    <li *ngFor="let friendSuggest of suggestFriend">
+      <figure style="display: inline-block"><img src="{{friendSuggest.suggestFriend.userAvatar}}" alt="" style="border-radius: 50%"></figure>
+      <div class="friend-meta">
+        <a href="#" title="" class="underline">Add Friend</a>
+        <h4><a [routerLink]="['/wall',friendSuggest.suggestFriend.userId,'timeline']" title="">{{friendSuggest.suggestFriend.userName}}</a></h4>
+
+      </div>
+    </li>
+  </ul>
+</div>

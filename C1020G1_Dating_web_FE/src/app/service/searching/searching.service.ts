@@ -14,7 +14,7 @@ export class SearchingService {
 
   constructor(
     public http: HttpClient,
-    private tokenStorage: TokenStorageService
+    private tokenStorage: TokenStorageService,
   ) {
     this.httpOptions = {
       headers: new HttpHeaders({
@@ -27,16 +27,19 @@ export class SearchingService {
     };
   }
 
-  doNameSearch(name): Observable<any> {
-    return this.http.get(this.API + '/name-search/' + name, this.httpOptions);
+  doNameSearch(name, userId): Observable<any> {
+    return this.http.get(this.API + '/name-search/?name=' + name +
+      '&userId=' + userId, this.httpOptions);
   }
 
-  doAdvancedSearch(name, birthday, favourites, province, gender): Observable<any> {
+  doAdvancedSearch(name, birthday, favourites, province, occupation, gender, userId): Observable<any> {
     return this.http.get(this.API + '/advanced-search?name=' + name +
       '&birthday=' + birthday +
       '&favourites=' + favourites +
       '&province=' + province +
-      '&gender=' + gender, this.httpOptions);
+      '&occupation=' + occupation +
+      '&gender=' + gender +
+      '&userId=' + userId, this.httpOptions);
   }
 
   getAllProvince(): Observable<any> {
@@ -51,8 +54,16 @@ export class SearchingService {
     return this.http.get('http://localhost:8080/misc/favourites', this.httpOptions);
   }
 
-  passKeySearch() {
-    this.keySearch = this.searchTerm.value;
+  getListGroup(name, userId): Observable<any> {
+    return this.http.get(this.API + '/group/?name=' + name +
+      '&userId=' + userId, this.httpOptions);
+  }
+
+  passKeySearch(name) {
+    this.keySearch = name;
+  }
+
+  getKeySearch() {
     return this.keySearch;
   }
 }

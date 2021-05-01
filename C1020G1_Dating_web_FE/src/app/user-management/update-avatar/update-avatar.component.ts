@@ -69,7 +69,8 @@ export class UpdateAvatarComponent implements OnInit {
               this.editService.updateAvatar(this.user.userId, url, stringImage).subscribe((data) => {
                 this.tokenStorage.saveUser(data);
                 this.messageUpdateSuccessful = 'Successful avatar update !';
-                this.selectedImage = '';
+                this.selectedImage = ''
+                window.location.reload();
               });
             }
           );
@@ -110,7 +111,6 @@ export class UpdateAvatarComponent implements OnInit {
         reader.onload = (e: any) => this.background = e.target.result;
         reader.readAsDataURL(background.target.files[0]);
         this.selectedBackground = background.target.files[0];
-        console.log(file);
       } else {
         this.messageBackground = 'Error image invalid (file.PNG or file.JPG) !';
       }
@@ -133,12 +133,13 @@ export class UpdateAvatarComponent implements OnInit {
       this.storage.upload(name, this.selectedBackground).snapshotChanges().pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe((url) => {
+            console.log(url)
               setTimeout(() => {
                 this.editService.updateBackground(this.user.userId, url, stringImage).subscribe((data) => {
                   this.tokenStorage.saveUser(data);
                   this.messageUpdateSuccessful = 'Successful background update !';
                   this.selectedBackground = '';
-                  this.ngOnInit();
+                  window.location.reload();
                 });
               });
             }
@@ -191,7 +192,7 @@ export class UpdateAvatarComponent implements OnInit {
     });
     setTimeout(() => {
       this.dialog.closeAll();
-    }, 2000);
+    }, 1000);
   }
 
   showInfoBackground(content4) {
