@@ -1,0 +1,149 @@
+
+<div class="set-title">
+  <h1><i class="fa fa-file-image"> Edit Avatar</i></h1>
+  <span>Update your avatar regularly so that everyone can see you every day</span>
+</div>
+<div class="setting-meta container-fluid">
+  <form>
+    <div class="change-photo">
+      <div class="form-row">
+        <div class="user-profile">
+          <figure class="img-fluid"  >
+            <div class="edit-pp img-fluid ">
+              <label class="fileContainer">
+                <i class="fa fa-image"></i>
+                <input type="file" accept="*.png.jpg" (change)="showBackGround($event);openWindowBackground(content2)" >
+              </label>
+            </div>
+            <img (click)="showInfoBackground(content4)" id="image-1" class="borde border-custom" [src]="background" alt="">
+          </figure>
+          <div class="profile-section">
+            <div class="row">
+              <div class="col-lg-2 col-md-3 mr-5 mt-5">
+                <div class="profile-author">
+                  <div class="profile-author-thumb">
+                    <div class="zoomin">
+                      <img id="image" (click)="showInfoAvatar(content5)" [src]="avatar" alt="">
+                      <div class="edit-dp">
+                        <label class="fileContainer">
+                          <i class="fa fa-upload"></i>
+                          <input type="file" accept="*.png.jpg" (change)="showImage($event)" >
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <input value="0" class="form-range ml-4"
+                       (input)="changeSizeImage($event)"
+                       type="range">
+              </div>
+              <div class="col-lg-6 ml-5">
+                <div class="edit-img">
+                  <form class="edit-phto mt-2 ">
+                    <label class="fileContainer">
+                      <i (click)="openWindowRemoveImage(content3)" class="fa fa-window-close">
+                        Remove Avatar</i>
+                    </label>
+                  </form>
+                  <form class="edit-phto mt-5 ">
+                    <label class="fileContainer">
+                      <i (click)="openWebcam()" class="fa fa-camera ">
+                        Photograph</i>
+                    </label>
+                  </form>
+                </div>
+                <div>
+                  <p class="text-danger font-italic font-weight-bolder">{{messageAvatarError}}</p>
+                  <p class="text-danger font-italic font-weight-bolder">{{messageBackground}}</p>
+                  <p class="text-success font-italic font-weight-bolder">{{messageUpdateSuccessful}}</p>
+                </div>
+                <div class="submit-btns mt-5">
+                  <button type="button" (click)="return()"
+                          class="btn-secondary"
+                          data-ripple="">
+                    <span>Cancel</span></button>
+                  <button type="button" (click)="openWindowAvatar(content)" data-ripple="">
+                    <span>Save</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!-- user profile banner  -->
+      </div>
+    </div>
+  </form>
+</div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h1 class="modal-title text-dark font-italic font-weight-bolder"><i class="fa fa-file-image"></i> Update Avatar</h1>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h2 class="text-dark font-italic font-weight-bolder">Are you sure you will choose this image as your avatar ?</h2>
+    <img class="img-fluid" [src]="avatar">
+  </div>
+  <div class="modal-footer">
+    <button type="button"  class="btn btn-secondary color-orange" (click)="saveImage();modal.close('Close click')">OK</button>
+    <button type="button" class="btn btn-secondary color-black" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
+<ng-template #content2 let-modal>
+  <div class="modal-header">
+    <h1 class="modal-title text-dark font-italic font-weight-bolder"><i class="fa fa-file-image"></i> Update Avatar</h1>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h2 class="text-dark font-italic font-weight-bolder">Are you sure you will choose this image as your background ?</h2>
+    <img class="img-fluid" [src]="background">
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary color-orange" (click)="saveBackground();modal.close('Close click')">OK</button>
+    <button type="button" class="btn btn-secondary color-black" (click)="return();modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
+<ng-template #content3 let-modal>
+  <div class="modal-header">
+    <h1 class="modal-title text-dark font-italic font-weight-bolder"><i class="fa fa-window-close"></i> Remove Image</h1>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h2 class="text-dark font-italic font-weight-bolder">Are you sure you will remove this avatar?</h2>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary color-orange" (click)="removeImage();modal.close('Close click')">OK</button>
+    <button type="button" class="btn btn-secondary color-black" (click)="return();modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
+<ng-template #content4 let-modal>
+  <div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body d-flex flex-row justify-content-center">
+    <img [src]="background">
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary color-black" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
+<ng-template #content5 let-modal>
+  <div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body d-flex flex-row justify-content-center">
+    <img [src]="avatar">
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary color-black" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
+

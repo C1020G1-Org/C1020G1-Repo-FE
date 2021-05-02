@@ -1,0 +1,103 @@
+
+
+  <section>
+    <div class="gap2 gray-bg">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div *ngIf="groups" class="row merged20" id="page-contents">
+              <div class="col-lg-12">
+                <div class="central-meta">
+                  <div class="title-block">
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="align-left">
+                          <h5>Groups <span *ngIf="groups">{{groups.length}}</span></h5>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="row merged20">
+                          <div class="col-lg-12 col-md-12 col-sm-12">
+                            <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+                            <input type="text" placeholder="Search Group" formControlName="search">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- title block -->
+                <div class="central-meta padding30">
+                  <div class="row">
+                    <div class="col-lg-2 col-md-4 col-sm-4">
+                      <div class="addgroup">
+                        <div class="item-upload">
+                          <i class="fa fa-plus-circle"></i>
+                          <div class="upload-meta">
+                            <h5>Create Group</h5>
+                            <span>its only take a few minutes!</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div><!-- Create Group -->
+
+                    <div class="col-lg-2 col-md-4 col-sm-4" *ngFor="let group of groups">
+                      <div class="group-box">
+                        <figure><img src="{{group.imageAvatarUrl}}" alt="" style="height: 150px; width: 150px; text-align: center"></figure>
+                        <a  [routerLink]="['/group/details/' + group.groupId]">{{group.groupName}}</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="lodmore" *ngIf="groups">
+                    <span>Viewing {{groups.length}} of {{data.totalElements}} Groups</span>
+                    <button *ngIf="groups.length !== data.totalElements" class="btn-view btn-load-more" title="Load More" data-toggle="tooltip"
+                              (click)="loadMoreGroup()"></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section><!-- content -->
+
+<div class="popup-wraper4">
+  <div class="popup creat-group">
+    <span class="popup-closed"><i class="ti-close"></i></span>
+    <div class="popup-meta">
+      <div class="popup-head">
+        <h5>Create Friend Group</h5>
+      </div>
+      <div class="group-adding">
+        <div class="friend-group">
+
+          <div class="change-photo">
+            <div class="edit-img">
+              <form class="edit-phto">
+                <label class="fileContainer">
+                  <i class="fa fa-camera-retro"></i>
+                  Upload Group Avatar
+                  <input type="file">
+                </label>
+              </form>
+            </div>
+          </div>
+          <form method="post">
+            <input type="text" placeholder="Group Name">
+            <input type="text" placeholder="Category">
+            <select>
+              <option value="Select">Select</option>
+              <option value="">Family front</option>
+              <option value="">Gold Mines Group</option>
+              <option value="">Friends Family</option>
+              <option value="">Creative world</option>
+            </select>
+            <button class="main-btn">Create Group</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- Create friends Group -->
