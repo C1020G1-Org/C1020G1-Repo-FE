@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Friends} from "../../models/friends";
 import {FriendService} from "../../service/friends/friend.service";
 import {ActivatedRoute} from "@angular/router";
+import {TokenStorageService} from "../../service/auth/token-storage";
+import {User} from "../../models/user-model";
+import {UserServiceService} from "../../service/user-service.service";
 
 
 @Component({
@@ -10,26 +13,36 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./friends.component.css']
 })
 export class FriendsComponent implements OnInit {
-  public friends: Friends[];
+  friends: Friends[];
   friendId: number;
   friendName: string;
-  public pageNumber = 0;
-  public checkLoadMore: boolean;
-  public check: boolean;
+  pageNumber = 0;
+  checkLoadMore: boolean;
+  check: boolean;
+
+  userLogging: User;
+
+  userWall: User;
 
 
   constructor(
     private friendService: FriendService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private tokenStorage: TokenStorageService,
+    private userService: UserServiceService
   ) {
   }
 
 
-  id: number;
-
   ngOnInit(): void {
-    this.getAllFriend();
-    this.id = this.activatedRoute.snapshot.params['id'];
+
+    this.userLogging = this.tokenStorage.getUser();
+
+    let id = this.activatedRoute.snapshot.params['id'];
+    this.userService.findUserById(id).subscribe( data => {
+      this.userWall = data;
+      this.getAllFriend();
+    });
   }
 
   showDelete(id: number, userName: string) {
@@ -49,7 +62,7 @@ export class FriendsComponent implements OnInit {
   }
 
   getAllFriend() {
-    this.friendService.getAllFriend(2, this.pageNumber).subscribe(data => {
+    this.friendService.getAllFriend(this.userWall.userId, this.pageNumber).subscribe(data => {
       let listFriends = data.content;
       if (this.friends != null) {
         this.friends = this.friends.concat(listFriends);

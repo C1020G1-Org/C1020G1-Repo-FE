@@ -12,6 +12,7 @@ import {NotificationService} from "../../service/friends/notification.service";
 import {map} from "rxjs/operators";
 import {UserServiceService} from "../../service/user-service.service";
 import {Post} from "../../models/Post";
+import firebase from "firebase";
 
 @Component({
   selector: 'app-topwall',
@@ -19,7 +20,7 @@ import {Post} from "../../models/Post";
   styleUrls: ['./topwall.component.css']
 })
 export class TopwallComponent implements OnInit {
-  public userInfo: User;
+  userWall: User;
 
   id: number;
 
@@ -62,14 +63,14 @@ export class TopwallComponent implements OnInit {
 
 
     this.userService.findUserById(this.id).subscribe(data => {
-      this.userInfo = data;
+      this.userWall = data;
       this.checkFriendUserWall();
       this.findAllFriendRequest();
       this.checkFriendRequestUserWall();
     });
 
     this.setNotiList();
-    let splitURL = this.router.url.split("/")
+    let splitURL = this.router.url.split("/");
     this.isDisplayPost = splitURL.length <= 4;
   }
 
@@ -81,7 +82,7 @@ export class TopwallComponent implements OnInit {
   //Check friend between user login and user wall
   checkFriendUserWall() {
 
-    this.friendRequestService.getAllFriendOfUser(this.userInfo.userId).subscribe(data => {
+    this.friendRequestService.getAllFriendOfUser(this.userWall.userId).subscribe(data => {
       if (data != null) {
         let friends: Friends[] = data;
         for (let i = 0; i < friends.length; i++) {
@@ -97,7 +98,7 @@ export class TopwallComponent implements OnInit {
 
   //Check list friend request between user login and user wall.
   checkFriendRequestUserWall() {
-    this.friendRequestService.findAllFriendRequest(this.userInfo.userId).subscribe(data => {
+    this.friendRequestService.findAllFriendRequest(this.userWall.userId).subscribe(data => {
       if (data != null) {
         let listFriendRequest: FriendRequest[] = data;
         for (let i = 0; i < listFriendRequest.length; i++) {
@@ -115,7 +116,7 @@ export class TopwallComponent implements OnInit {
   createFriendRequest() {
     let friendRequest: FriendRequest = {
       sendUser: this.userLogging,
-      receiveUser: this.userInfo
+      receiveUser: this.userWall
     };
     this.friendRequestService.createFriendRequest(friendRequest).subscribe(data => {
       this.ngOnInit();
@@ -126,7 +127,7 @@ export class TopwallComponent implements OnInit {
   noti(friendRequest: FriendRequest) {
     let notification = new Notification();
     notification.friendRequest = friendRequest;
-    this.notificationService.create(notification, this.userInfo.userId);
+    this.notificationService.create(notification, this.userWall.userId);
   }
 
   setNotiList() {
@@ -146,7 +147,14 @@ export class TopwallComponent implements OnInit {
     this.notification = this.friendRequestService.findNotifyByFriendRequest(this.notiList, friendRequest);
     this.friendRequestService.acceptFriendRequest(friendRequest).subscribe(data => {
       this.ngOnInit();
-      this.notificationService.delete(this.userLogging.userId, this.notification.key)
+      this.notificationService.delete(this.userLogging.userId, this.notification.key);
+      const newRoom = firebase.database().ref('rooms/').push();
+      const room = {roomname: ''};
+      room.roomname =  this.userWall.userName;
+      newRoom.set(room);
+
+      this.createRoomFromLoginToWall();
+      this.createRoomFromWallToLogin();
     });
   }
 
@@ -155,7 +163,7 @@ export class TopwallComponent implements OnInit {
     this.friendRequestService.findAllFriendRequest(this.userLogging.userId).subscribe(data => {
         let listFriendRequest: FriendRequest[] = data;
         for (let i = 0; i < listFriendRequest.length; i++) {
-          if (listFriendRequest[i].sendUser.userId == this.userInfo.userId) {
+          if (listFriendRequest[i].sendUser.userId == this.userWall.userId) {
             this.checkFriendRequest = false;
             this.friendRequestWallUserAndLoginUser = listFriendRequest[i];
             break;
@@ -180,4 +188,33 @@ export class TopwallComponent implements OnInit {
     this.friendRequestToDelete = friendRequest;
   }
 
+  setIsDisplay() {
+    this.isDisplayPost = false;
+  }
+
+  createRoomFromLoginToWall(){
+    const roomuser = firebase.database().ref('roomusers/').push();
+    const newroomuser1 = {roomname: '', nickname: '', id: '', status: '', avatar: '', nickNameFriend: '',getroom: ''};
+    newroomuser1.roomname = this.userWall.userName  + this.userLogging.userName;
+    newroomuser1.nickname = this.userLogging.userName;
+    newroomuser1.id = this.userLogging.userId.toString();
+    newroomuser1.status = this.userLogging.status.statusName;
+    newroomuser1.avatar = this.userLogging.userAvatar;
+    newroomuser1.nickNameFriend = this.userWall.userName;
+    newroomuser1.getroom = this.userWall.userName;
+    roomuser.set(newroomuser1);
+  }
+
+  createRoomFromWallToLogin(){
+    const roomuser = firebase.database().ref('roomusers/').push();
+    const newroomuser2 = {roomname: '', nickname: '', id: '', status: '', avatar: '', nickNameFriend: '',getroom: ''};
+    newroomuser2.roomname =  this.userWall.userName + this.userLogging.userName;
+    newroomuser2.nickname = this.userWall.userName;
+    newroomuser2.id = this.userWall.userId.toString();
+    newroomuser2.status = this.userWall.status.statusName;
+    newroomuser2.avatar = this.userWall.userAvatar;
+    newroomuser2.nickNameFriend = this.userLogging.userName;
+    newroomuser2.getroom = this.userLogging.userName;
+    roomuser.set(newroomuser2);
+  }
 }

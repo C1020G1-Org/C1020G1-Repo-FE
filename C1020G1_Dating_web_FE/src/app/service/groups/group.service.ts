@@ -8,7 +8,7 @@ import {GroupSocial} from "../../models/group_social";
   providedIn: 'root'
 })
 export class GroupService {
-  public API: string = 'http://localhost:8080/group';
+  private API: string = 'http://localhost:8080/group';
   httpOptions;
   constructor(public http: HttpClient, private groupManager: GroupManagementService, private accountService: AccountService) {
     this.httpOptions = accountService.httpOptions;

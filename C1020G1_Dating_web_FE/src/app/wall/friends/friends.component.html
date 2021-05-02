@@ -27,7 +27,7 @@
             <div class="frnd-meta">
               <img src="{{friend.friend.userAvatar}}" style="width: 40%;height: 80px" alt="">
               <div class="frnd-name">
-                <a [routerLink]="['/wall',friend.friend.userId,'timeline']" title="">{{friend.friend.userName}}</a>
+                <a href="http://localhost:4200/wall/{{friend.friend.userId}}" title="">{{friend.friend.userName}}</a>
                 <span>{{friend.friend.address}}</span>
               </div>
               <ul class="frnd-info">

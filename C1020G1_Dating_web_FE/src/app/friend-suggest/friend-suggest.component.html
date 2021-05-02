@@ -1,12 +1,18 @@
 <div class="widget stick-widget">
-  <h4 class="widget-title">Who's follownig</h4>
+  <h4 class="widget-title">Friends Suggest</h4>
   <ul class="followers">
     <li *ngFor="let friendSuggest of suggestFriend">
       <figure style="display: inline-block"><img src="{{friendSuggest.suggestFriend.userAvatar}}" alt="" style="border-radius: 50%"></figure>
       <div class="friend-meta">
-        <a href="#" title="" class="underline">Add Friend</a>
-        <h4><a href="http://localhost:4200/wall/{{friendSuggest.suggestFriend.userId}}" title="">{{friendSuggest.suggestFriend.userName}}</a></h4>
+        <a (click)="createFriendRequest(friendSuggest)" title="" class="underline" style="cursor: pointer">Add Friend</a>
+        <h4><a href="http://localhost:4200/wall/{{friendSuggest.suggestFriend.userId}}"
+              title="">{{friendSuggest.suggestFriend.userName}}</a></h4>
+
+        <span *ngIf="friendSuggest.mutualFriends" (mouseover)="getMutualFriend(friendSuggest.mutualFriends)"
+              tooltip="{{mutualFriend}}" style="font-size: 13px">
+          {{friendSuggest.mutualFriends.length}} mutual Friends</span>
       </div>
+      <hr>
     </li>
   </ul>
 </div>

@@ -20,7 +20,6 @@ export class GroupListComponent implements OnInit {
     public groupService: GroupService,
     private formBuilder: FormBuilder,
     private title: Title,
-    private tokenStorage: TokenStorageService
   ) { }
 
   getAllGroup() {
@@ -40,15 +39,13 @@ export class GroupListComponent implements OnInit {
       search: ""
     });
     this.getAllGroup();
+
   }
 
   onSubmit() {
     this.pageNumber = 0;
     this.groups = null;
     this.getAllGroup();
-  }
-  get user() {
-    return this.tokenStorage.getUser();
   }
 
   loadMoreGroup() {

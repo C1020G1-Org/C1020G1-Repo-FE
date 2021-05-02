@@ -87,8 +87,8 @@ export class FriendRequestComponent implements OnInit{
     this.userWall = friendRequest.sendUser;
     this.notification = this.friendRequestService.findNotifyByFriendRequest(this.notiList, friendRequest);
     this.friendRequestService.acceptFriendRequest(friendRequest).subscribe(data => {
-      this.ngOnInit();
-      this.notificationService.delete(this.userLogging.userId, this.notification.key)
+
+      this.notificationService.delete(this.userLogging.userId, this.notification.key);
       const newRoom = firebase.database().ref('rooms/').push();
       const room = {roomname: ''};
       room.roomname =  this.userWall.userName;
@@ -96,8 +96,7 @@ export class FriendRequestComponent implements OnInit{
 
       this.createRoomFromLoginToWall();
       this.createRoomFromWallToLogin();
-
-
+      this.ngOnInit();
     });
   }
 

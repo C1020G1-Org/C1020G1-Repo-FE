@@ -48,7 +48,6 @@ import {DatePipe} from "@angular/common";
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     LoginModule,
     SocialLoginModule,
     HeaderModule,
@@ -71,7 +70,8 @@ import {DatePipe} from "@angular/common";
     PostModule,
     CommentsModule,
     NewsFeedModule,
-    ChatModule
+    ChatModule,
+    AppRoutingModule
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',

@@ -20,11 +20,12 @@ export class GroupDetailComponent implements OnInit {
               private tokenStorage: TokenStorageService) {
   }
   ngOnInit() {
+    console.log("abc");
     this.title.setTitle("Group-detail");
     this.activatedRoute.paramMap.subscribe(data => {
       this.groupService.getGroupById(data.get("id")).subscribe(group => {
         this.group = group;
-      })
+      });
 
       this.groupService.getGroupUserByGroupIdAndUserId(data.get("id"), this.user.userId).subscribe(data => {
         this.isJoin = true;

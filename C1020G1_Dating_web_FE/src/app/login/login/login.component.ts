@@ -116,10 +116,10 @@ export class LoginComponent implements OnInit {
 
   viewPassword() {
     if (this.type === 'password') {
-      this.type = 'text'
+      this.type = 'text';
       this.classPassword = 'fa fa-eye relative color-orange'
     } else {
-      this.type = 'password'
+      this.type = 'password';
       this.classPassword = 'fa fa-eye-slash relative color-orange'
     }
   }
@@ -140,15 +140,15 @@ export class LoginComponent implements OnInit {
   loginWithCheckRemember(accountReg) {
     if (!this.loginForm.get("remember").value) {
       this.auth.sendLogin(accountReg).subscribe(data => {
-        this.user = data.user
-        this.user.account = null
+        this.user = data.user;
+        this.user.account = null;
         this.tokenStorage.saveUser(this.user);
         this.login(data)
       })
     } else {
       this.auth.sendLogin(accountReg).subscribe(data => {
-        this.user = data.user
-        this.user.account = null
+        this.user = data.user;
+        this.user.account = null;
         this.tokenStorage.saveUser(data.user);
         this.loginRemember(data);
 
@@ -161,7 +161,7 @@ export class LoginComponent implements OnInit {
       this.tokenStorage.saveToken(data.token);
       this.tokenStorage.saveAccountName(this.getAccountName().value);
 
-      // this.chatOfThinh()
+      this.chatOfThinh();
       window.location.reload();
     } else {
       this.title = "Your account is not correct, please check your username or password";
@@ -173,27 +173,26 @@ export class LoginComponent implements OnInit {
     if (data.token != "INVALID_CREDENTIALS") {
       this.tokenStorage.saveTokenRemember(data.token);
       this.tokenStorage.saveAccountName(this.getAccountName().value);
-      // this.chatOfThinh();
+      this.chatOfThinh();
       window.location.reload();
     } else {
       this.title = "Your account is not correct, please check your username or password"
     }
   }
 
-  // Thinh
-  // chatOfThinh() {
-  //   const createNewUser = firebase.database().ref('users/').push();
-  //   createNewUser.set(this.user);
-  //   const id = this.tokenStorage.getUser().userId;
-  //   this.ref.orderByChild('id').equalTo(id).once('value', snapshot => {
-  //     if (snapshot.exists()) {
-  //       localStorage.setItem('nickname1', String(id));
-  //       // firebase.database().ref('users/' + id + '/fullName'  ).update(this.tokenService.getUser());
-  //     } else {
-  //       const newUser = firebase.database().ref('users/').push();
-  //       newUser.set(this.tokenStorage.getUser());
-  //       localStorage.setItem('nickname1', String(id));
-  //     }
-  //   });
-  // }
+  chatOfThinh() {
+    const createNewUser = firebase.database().ref('users/').push();
+    createNewUser.set(this.user);
+    const id = this.tokenStorage.getUser().userId;
+    this.ref.orderByChild('id').equalTo(id).once('value', snapshot => {
+      if (snapshot.exists()) {
+        localStorage.setItem('nickname1', String(id));
+        // firebase.database().ref('users/' + id + '/fullName'  ).update(this.tokenService.getUser());
+      } else {
+        const newUser = firebase.database().ref('users/').push();
+        newUser.set(this.tokenStorage.getUser());
+        localStorage.setItem('nickname1', String(id));
+      }
+    });
+  }
 }

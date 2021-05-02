@@ -40,7 +40,6 @@ export class FriendRequestService {
   }
 
   acceptFriendRequest(friendRequest: FriendRequest): Observable<any> {
-    console.log(friendRequest);
     return this.http.post('http://localhost:8080/addfriend', friendRequest , this.httpOptions);
   }
 
@@ -54,11 +53,13 @@ export class FriendRequestService {
 
   findNotifyByFriendRequest(notiList: Notification[], friendRequest: FriendRequest): Notification {
     let notification = new Notification();
+    if(notiList){
     for (let i = 0; i < notiList.length; i++) {
       if (notiList[i].friendRequest.sendUser.userId == friendRequest.sendUser.userId &&
         notiList[i].friendRequest.receiveUser.userId == friendRequest.receiveUser.userId) {
         notification = notiList[i]
       }
+    }
     }
     return notification;
   }

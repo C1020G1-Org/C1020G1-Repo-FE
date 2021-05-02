@@ -53,7 +53,7 @@ export class GroupHeaderComponent implements OnInit {
     this.groupService.saveRequest({
       groupSocial: this.group, user: this.tokenStorage.getUser(),
       sender: "user"
-    }).subscribe(() => this.reload());
+    }).subscribe(() => window.location.reload());
   }
   showDelete(groupId: number, groupName: string) {
     this.groupId = groupId;
@@ -77,11 +77,11 @@ export class GroupHeaderComponent implements OnInit {
   }
 
   acceptRequest() {
-    this.groupManagementService.acceptRequest(this.request.groupRequestId).subscribe(() => this.reload());
+    this.groupManagementService.acceptRequest(this.request.groupRequestId).subscribe(() => window.location.reload());
   }
 
   deniedRequest() {
-    this.groupManagementService.deniedRequest(this.request.groupRequestId).subscribe(() => this.reload());
+    this.groupManagementService.deniedRequest(this.request.groupRequestId).subscribe(() => window.location.reload());
   }
 
   open(content){
@@ -92,8 +92,8 @@ export class GroupHeaderComponent implements OnInit {
   editGroup() {
     this.group.scope = this.scope;
     this.groupService.editGroup(this.group).subscribe(() => {
-      this.reload();
       this.modalService.dismissAll();
+      window.location.reload();
     });
   }
 }

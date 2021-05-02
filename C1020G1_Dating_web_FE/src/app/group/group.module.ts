@@ -10,6 +10,8 @@ import { GroupMemberComponent } from "./group-member/group-member.component";
 import { NgModule } from '@angular/core';
 import {HeaderModule} from "../header/header.module";
 import {FooterModule} from "../footer/footer.module";
+import {ChatModule} from "../chat/chat.module";
+import {RoomListComponent} from "../chat/room-list/room-list.component";
 
 const routes: Routes = [
   { path: 'group/details/:id', component: GroupDetailComponent },

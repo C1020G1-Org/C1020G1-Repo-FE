@@ -31,11 +31,11 @@
 <!--                          <a title="" href="#">See All</a>-->
                         </span>
                         <div class="pit-friends" *ngFor="let userFavourite of listUser">
-                          <figure><a [routerLink]="['/wall',userFavourite.user.userId]" title=""><img
+                          <figure><a href="http://localhost:4200/wall/{{userFavourite.user.userId}}" title=""><img
                             src="{{userFavourite.user.userAvatar}}" alt="" style="height: 50px; width: 50px"></a></figure>
                           <!--                            src="{{user.userAvatar}}" alt=""></a></figure>-->
                           <div class="pit-frnz-meta">
-                            <a [routerLink]="['/wall',userFavourite.user.userId]" title="">{{userFavourite.user.userName}}</a>
+                            <a href="http://localhost:4200/wall/{{userFavourite.user.userId}}" title="">{{userFavourite.user.userName}}</a>
                             <i *ngIf="userFavourite.friends">Friend</i>
                             <i *ngIf="!userFavourite.friends && userFavourite.user.userId != user.userId">Not Friend</i>
                             <i *ngIf="!userFavourite.friends && userFavourite.user.userId == user.userId">Me</i>
@@ -96,7 +96,7 @@
                             src="{{userFavourite.user.userAvatar}}" alt="" style="height: 50px; width: 50px"></a></figure>
                           <!--                            src="{{user.userAvatar}}" alt=""></a></figure>-->
                           <div class="pit-frnz-meta">
-                            <a [routerLink]="['/wall',userFavourite.user.userId]" title="">{{userFavourite.user.userName}}</a>
+                            <a href="http://localhost:4200/wall/{{userFavourite.user.userId}}" title="">{{userFavourite.user.userName}}</a>
                             <i *ngIf="!userFavourite.friends">Not Friend</i>
                             <i>, Address: {{userFavourite.user.ward.district.province.provinceName}}</i>
                             <i *ngIf="userFavourite.favourites.length != 0">, Favourites: {{userFavourite.favourites}}</i>

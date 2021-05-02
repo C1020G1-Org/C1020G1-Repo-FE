@@ -17,7 +17,6 @@ import {EditComponent} from "./user-management/edit/edit.component";
 import {FriendRequestComponent} from "./wall/friend-request/friend-request.component";
 import {TopwallComponent} from "./wall/topwall/topwall.component";
 import {EditDetailComponent} from "./user-management/edit/edit-detail/edit-detail.component";
-import {TimelineComponent} from "./wall/timeline/timeline.component";
 import {InformationComponent} from "./wall/information/information.component";
 import {FriendsComponent} from "./wall/friends/friends.component";
 import {NewsfeedComponent} from "./news-feed/newsfeed.component";
@@ -32,7 +31,6 @@ const routes: Routes = [
     children: [
       {path: 'friend_request/:id', component: FriendRequestComponent},
       {path: 'friends/:id', component: FriendsComponent},
-      {path: 'timeline/:id', component: TimelineComponent},
       {path: 'info/:id', component: InformationComponent},
       {path: 'edit/:id', component: InformationComponent},
     ],
@@ -44,7 +42,6 @@ const routes: Routes = [
   {path: 'recover', component: RecoverPasswordComponent},
   {path: 'registration', component: RegistrationComponent},
   {path: 'initial-information', component: InitialInformationComponent, canActivate: [RegisGuardService]},
-
   {
     path: 'edit',
     children: [

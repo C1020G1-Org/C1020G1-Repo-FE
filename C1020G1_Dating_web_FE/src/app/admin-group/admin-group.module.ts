@@ -20,22 +20,25 @@ import { HeaderModule } from '../header/header.module';
 import { FooterModule } from '../footer/footer.module';
 import {GroupMemberComponent} from "./view/group-member/group-member.component";
 import {GroupModule} from "../group/group.module";
+
+
 const routes: Routes = [
   { path: 'group/member/list/:id', component: GroupMemberListComponent },
   { path: 'group/warning/:id/:guid', component: GroupMemberWarningComponent },
   { path: 'group/request/list/:id', component: GroupListRequestComponent }
 ];
+
 @NgModule({
   declarations: [GroupListRequestComponent, GroupMemberWarningComponent, GroupMemberComponent, GroupRequestComponent, GroupMemberListComponent,
     AcceptModalComponent, CancelRequestModalComponent, InviteModalComponent, RemoveMemberModalComponent, WarningMemberModalComponent, AsideComponent
   ],
   imports: [
     CommonModule,
-    [RouterModule.forChild(routes)],
     FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     HeaderModule,
+    RouterModule.forChild(routes),
     FooterModule,
     GroupModule
   ],
