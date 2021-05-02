@@ -5,7 +5,7 @@
     Content is required!!
   </div>
 </div>
-<div class="mat-app-background basic-container">
+<div *ngIf="user.userId == idUserWall || idUserWall == 0" class="mat-app-background basic-container">
   <ng-template #customLoadingTemplate>
     <div class="custom-class">
     </div>
@@ -26,7 +26,8 @@
                 </label>
               </li>
               <li>
-                <select class="fa form-control d-inline-block" formControlName="postStatus" id="postStatus" name="postStatus"
+                <select class="fa form-control d-inline-block" formControlName="postStatus" id="postStatus"
+                        name="postStatus"
                         style="height: 30px;width: 125px;font-size: 15px">
                   <option value="public">
                     &#xf0ac; &nbsp; Public
@@ -50,9 +51,11 @@
               </li>
             </ul>
             <div class="d-block w-100">
-          <textarea rows="2" formControlName="postContent" name="postContent" id="createText" class="select-status myText"
+          <textarea  rows="2" formControlName="postContent" name="postContent" id="createText"
+                    class="select-status myText"
                     style="height: 100px" placeholder="Share some what you are thinking?">
           </textarea>
+
             </div>
           </div>
           <div style="overflow-y: scroll; max-height:120px">

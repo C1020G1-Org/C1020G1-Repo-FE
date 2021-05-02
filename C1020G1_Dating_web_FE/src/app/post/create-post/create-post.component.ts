@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {AngularFireStorage} from "@angular/fire/storage";
@@ -34,6 +34,10 @@ export class CreatePostComponent implements OnInit {
   public message: string;
   public loading = false;
 
+
+  @Input() idUserWall : number;
+
+
   constructor(public formBuilder: FormBuilder,
               public postService: PostService,
               public router: Router,
@@ -57,10 +61,11 @@ export class CreatePostComponent implements OnInit {
   }
 
   async addNewPost() {
-    this.contentTemp = $("#createText").data("emojioneArea").getText();
-    this.formCreatePost.get("postContent").setValue($("#createText").data("emojioneArea").getText());
+
+    // this.contentTemp = $(this.finalLocation).data("emojioneArea").getText();
+    // this.formCreatePost.get("postContent").setValue(this.contentTemp);
     this.formCreatePost.get("user").setValue(this.user);
-    if (this.contentTemp.trim() != '') {
+    if (this.formCreatePost.get("postContent").value.trim() != '') {
       this.loading = true;
       await this.addImageToFireBase();
       this.check = false;
@@ -76,7 +81,7 @@ export class CreatePostComponent implements OnInit {
             user: [''],
             groupSocial: [null]
           });
-          $("#createText").data("emojioneArea").setText('');
+          this.formCreatePost.get("postContent").setValue('');
           this.postService.postsInService.unshift(data);
           this.fileImage = [];
         } else {

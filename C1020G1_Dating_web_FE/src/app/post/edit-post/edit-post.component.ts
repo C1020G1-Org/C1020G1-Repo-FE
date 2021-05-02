@@ -65,9 +65,7 @@ export class EditPostComponent implements OnInit, OnChanges {
     return this.formEditPost.get('postStatus');
   }
   async editPost() {
-    this.contentTemp = $("#editText").data("emojioneArea").getText();
-
-    if (this.contentTemp != '') {
+    if (this.formEditPost.get('postContent').value.trim() != '') {
       this.check = false;
       this.loading = true;
       await this.addImageToFireBase();
@@ -121,7 +119,7 @@ export class EditPostComponent implements OnInit, OnChanges {
         }
       }
     }
-  }
+  }p
 
   deleteImage(event) {
     let index = event.target.attributes['data-index'].value;

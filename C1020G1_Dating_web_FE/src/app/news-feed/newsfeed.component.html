@@ -39,7 +39,7 @@
 
               <div class="col-lg-6">
                 <!-- Khung create post of SonHP -->
-                <app-create-post></app-create-post>
+                <app-create-post [idUserWall] = "idUserWall"></app-create-post>
 
                 <!-- add post new box -->
 
@@ -228,32 +228,6 @@
                                       line-height: 16px;
                                     "
                                   />
-                                  <!-- <div
-                                    *ngIf="
-                                      !parentCommentForm.valid ||
-                                      content.touched
-                                    "
-                                  >
-                                    <div
-                                      class="alert alert-danger"
-                                      role="alert"
-                                      [hidden]="!content.errors.required"
-                                    >
-                                      Content is required!!
-                                    </div>
-                                  </div> -->
-                                  <!-- <div
-                                    style="margin-top: 10px"
-                                    class="alert alert-danger"
-                                    role="alert"
-                                    *ngIf="
-                                      parentCommentForm.get('content')
-                                        .invalid &&
-                                      parentCommentForm.get('content').touched
-                                    "
-                                  >
-                                    Content must be not blank !
-                                  </div> -->
                                   <input
                                     type="hidden"
                                     formControlName="commentImage"
@@ -309,24 +283,6 @@
                                         />
                                       </label>
                                     </div>
-                                    <span
-                                      class="em em-expressionless"
-                                      title="add icon"
-                                    ></span>
-                                    <div class="smiles-bunch">
-                                      <i class="em em---1"></i>
-                                      <i class="em em-smiley"></i>
-                                      <i class="em em-anguished"></i>
-                                      <i class="em em-laughing"></i>
-                                      <i class="em em-angry"></i>
-                                      <i class="em em-astonished"></i>
-                                      <i class="em em-blush"></i>
-                                      <i class="em em-disappointed"></i>
-                                      <i class="em em-worried"></i>
-                                      <i class="em em-kissing_heart"></i>
-                                      <i class="em em-rage"></i>
-                                      <i class="em em-stuck_out_tongue"></i>
-                                    </div>
                                   </div>
                                 </form>
                               </div>
@@ -347,7 +303,7 @@
               </div>
               <!-- centerl meta -->
 
-              <div class="col-lg-3 border border-primary">
+              <div class="col-lg-3">
                 <app-room-list></app-room-list>
               </div>
               <!-- sidebar -->

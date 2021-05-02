@@ -83,7 +83,7 @@ export class RoomListComponent implements OnInit {
   ) {
 
     // this.nickname = localStorage.getItem('nickname1');
-    if (this.token.getUser() == null) {
+    if (this.token.getUser() != null) {
       this.checkLogin = true;
       this.nickname = this.token.getUser().userName;
       this.id = (this.token.getUser().userId).toString();

@@ -21,6 +21,7 @@ declare const $: any;
   styleUrls: ['./newsfeed.component.css']
 })
 export class NewsfeedComponent implements OnInit {
+  location : string
   posts: Post[];
   pageNumber = 0;
   user: User;
@@ -36,6 +37,8 @@ export class NewsfeedComponent implements OnInit {
   childCommentForm: FormGroup;
   editingChildComment: ChildComment;
   deletingChildCommentId: number;
+
+  idUserWall : number;
 
   constructor(private postService: PostService,
               private tokenStorageService: TokenStorageService,
@@ -68,9 +71,13 @@ export class NewsfeedComponent implements OnInit {
 
     if (this.router.url == "/newsfeed") {
       this.getAllPostInNewsFeed(this.user.userId, this.pageNumber, true);
+      this.location = "Newsfeed";
+      this.idUserWall = 0;
     } else {
-      let id = this.activateRouter.snapshot.params['id'];
-      this.getAllPostInNewsFeed(id, this.pageNumber, false);
+      this.idUserWall = this.activateRouter.snapshot.params['id'];
+      console.log(this.idUserWall);
+      this.getAllPostInNewsFeed(this.idUserWall, this.pageNumber, false);
+      this.location = "Wall";
     }
 
 
@@ -102,7 +109,7 @@ export class NewsfeedComponent implements OnInit {
 
         }
 
-        this.posts = this.postService.postsInService;
+        this.posts = this.postService.postsInService.reverse();
       })
     } else {
       this.postService.findAllPostInWall(userId, pageNumber).subscribe(listPageablePost => {
@@ -128,7 +135,7 @@ export class NewsfeedComponent implements OnInit {
 
         }
 
-        this.posts = this.postService.postsInService;
+        this.posts = this.postService.postsInService.reverse();
       })
     }
 
