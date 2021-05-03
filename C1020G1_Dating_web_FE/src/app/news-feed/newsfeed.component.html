@@ -1,162 +1,123 @@
 <script src="newsfeed.component.ts"></script>
-<div class="theme-layout">
-  <!-- topbar -->
-  <section>
-    <div class="gap2 gray-bg">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="row merged20" id="page-contents">
-              <div class="col-lg-3">
-                <aside class="sidebar static left">
-                  <div class="advertisment-box">
-                    <h4 class="">advertisment</h4>
-                    <figure>
-                      <a href="#" title="Advertisment"><img src="assets/images/resources/ad-widget.gif" alt=""></a>
-                    </figure>
-                  </div><!-- advertisment box -->
-                  <div class="widget">
-                    <h4 class="widget-title">Shortcuts</h4>
-                    <ul class="naves">
-                      <li>
-                        <i class="ti-clipboard"></i>
-                        <a routerLink="/newsfeed" title="">News feed</a>
-                      </li>
-                      <li>
-                        <i class="ti-files"></i>
-                        <a [routerLink]="['/wall', user.userId]" title="">My pages</a>
-                      </li>
-                      <li>
-                        <i class="ti-power-off"></i>
-                        <a (click)="logout()" title="">Logout</a>
-                      </li>
-                    </ul>
-                  </div><!-- Shortcuts -->
-                  <app-friend-suggest></app-friend-suggest>
-                </aside>
+  <!-- Khung create post of SonHP -->
+  <app-create-post [idUserWall]="idUserWall" [checkGroup]="route"></app-create-post>
+
+  <!-- add post new box -->
+
+  <div class="loadMore">
+    <div class="central-meta item">
+      <div class="user-post" *ngFor="let post of posts">
+        <div class="friend-info">
+          <!-- avatar area -->
+          <figure>
+            <img src="{{ post.user.userAvatar }}" class="img-custome"/>
+          </figure>
+
+          <!-- header of post : post's owner, time, edit, delete post -->
+          <div class="friend-name">
+            <div class="more">
+              <div
+                class="more-post-optns"
+                *ngIf="post.user.userId == user.userId"
+              >
+                <i class="ti-more-alt"></i>
+                <ul>
+                  <li>
+                    <a
+                      href=""
+                      data-toggle="modal"
+                      data-target="#editPostModal"
+                      (click)="sendEditPostId(post.postId)"
+                    >
+                      <i class="fa fa-pencil-square-o"></i>Edit
+                      Post
+                    </a>
+                  </li>
+
+                  <li>
+                    <a
+                      href=""
+                      data-toggle="modal"
+                      data-target="#deletePostModal"
+                      (click)="sendEditPostId(post.postId)"
+                    >
+                      <i class="fa fa-trash-o"></i>Delete Post
+                    </a>
+                  </li>
+                </ul>
               </div>
-              <!-- sidebar -->
-
-              <div class="col-lg-6">
-                <!-- Khung create post of SonHP -->
-                <app-create-post [idUserWall] = "idUserWall"></app-create-post>
-
-                <!-- add post new box -->
-
-                <div class="loadMore">
-                  <div class="central-meta item">
-                    <div class="user-post" *ngFor="let post of posts">
-                      <div class="friend-info">
-                        <!-- avatar area -->
-                        <figure>
-                          <img src="{{ post.user.userAvatar }}"/>
-                        </figure>
-
-                        <!-- header of post : post's owner, time, edit, delete post -->
-                        <div class="friend-name">
-                          <div class="more">
-                            <div
-                              class="more-post-optns"
-                              *ngIf="post.user.userId == user.userId"
-                            >
-                              <i class="ti-more-alt"></i>
-                              <ul>
-                                <li>
-                                  <a
-                                    href=""
-                                    data-toggle="modal"
-                                    data-target="#editPostModal"
-                                    (click)="sendEditPostId(post.postId)"
-                                  >
-                                    <i class="fa fa-pencil-square-o"></i>Edit
-                                    Post
-                                  </a>
-                                </li>
-
-                                <li>
-                                  <a
-                                    href=""
-                                    data-toggle="modal"
-                                    data-target="#deletePostModal"
-                                    (click)="sendEditPostId(post.postId)"
-                                  >
-                                  <i class="fa fa-trash-o"></i>Delete Post
-                                  </a>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                          <ins
-                          ><a href="http://localhost:4200/wall/{{post.user.userId}}" title=""
-                          >{{ post.user.userName }}
-                          </a>
-                            &nbsp;&nbsp;
-                            <a *ngIf="post.groupSocial" href="">
-                              <i class="fa fa-caret-right"></i>
-                              &nbsp;&nbsp;
-                              {{ post.groupSocial.groupName }} (group)</a
-                            >
-                          </ins>
-                          <span
-                          ><i class="fa fa-globe"></i>
-                            {{ post.postStatus }}
-                            {{ post.postPublished | date: "medium" }}
+            </div>
+            <ins
+            ><a href="http://localhost:4200/wall/{{post.user.userId}}" title=""
+            >{{ post.user.userName }}
+            </a>
+              &nbsp;&nbsp;
+              <a *ngIf="post.groupSocial" href="">
+                <i class="fa fa-caret-right"></i>
+                &nbsp;&nbsp;
+                {{ post.groupSocial.groupName }} (group)</a
+              >
+            </ins>
+            <span
+            ><i class="fa fa-globe"></i>
+              {{ post.postStatus }}
+              {{ post.postPublished | date: "medium" }}
                           </span>
-                        </div>
+          </div>
 
-                        <!-- primary content of post -->
-                        <div class="post-meta">
-                          <!-- content -->
-                          <p>
-                            {{ post.postContent }}
-                          </p>
+          <!-- primary content of post -->
+          <div class="post-meta">
+            <!-- content -->
+            <p>
+              {{ post.postContent }}
+            </p>
 
-                          <!-- bunch of images -->
-                          <figure>
-                            <div class="img-bunch" *ngIf="post.postImages">
-                              <div class="row">
-                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                  <figure
-                                    *ngFor="
+            <!-- bunch of images -->
+            <figure>
+              <div class="img-bunch" *ngIf="post.postImages">
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <figure
+                      *ngFor="
                                       let postImage of post.postImages;
                                       let i = index
                                     "
-                                  >
-                                    <a
-                                      [style.display]="
+                    >
+                      <a
+                        [style.display]="
                                         i >= 1 ? 'none' : 'block'
                                       "
-                                      [attr.data-index]="i"
-                                      class="strip"
-                                      href="{{ postImage.image }}"
-                                      title=""
-                                      data-strip-group="mygroup"
-                                      data-strip-group-options="loop: false"
-                                    >
-                                      <img
-                                        style="width: 100%"
-                                        src="{{ postImage.image }}"
-                                        alt=""
-                                      />
-                                      <span
-                                      >Click on image to see more photos</span
-                                      >
-                                    </a>
-                                    <!-- <div class="more-photos">
-                                      <span
-                                        >+{{ post.postImages.length - 1 }}</span
-                                      >
-                                    </div> -->
-                                  </figure>
-                                </div>
-                              </div>
-                            </div>
-                          </figure>
+                        [attr.data-index]="i"
+                        class="strip"
+                        href="{{ postImage.image }}"
+                        title=""
+                        data-strip-group="mygroup"
+                        data-strip-group-options="loop: false"
+                      >
+                        <img
+                          style="width: 100%"
+                          src="{{ postImage.image }}"
+                          alt=""
+                        />
+                        <span
+                        >Click on image to see more photos</span
+                        >
+                      </a>
+                      <!-- <div class="more-photos">
+                        <span
+                          >+{{ post.postImages.length - 1 }}</span
+                        >
+                      </div> -->
+                    </figure>
+                  </div>
+                </div>
+              </div>
+            </figure>
 
-                          <!-- comment button -->
-                          <div class="we-video-info">
-                            <ul style="width: 50%">
-                              <li>
+            <!-- comment button -->
+            <div class="we-video-info">
+              <ul style="width: 50%">
+                <li>
                                 <span class="comment" title="Comments">
                                   <a
                                     data-toggle="collapse"
@@ -168,57 +129,57 @@
                                   ><i class="fa fa-commenting"> Comment</i></a
                                   >
                                 </span>
-                              </li>
-                            </ul>
-                            <ul style="width: 50%">
-                              <li class="mr-0 float-right">
+                </li>
+              </ul>
+              <ul style="width: 50%">
+                <li class="mr-0 float-right">
                               <span class="mt-5" *ngIf="post.parentComments.length > 0">+ {{post.parentComments.length}}
                                 Comments</span>
-                                <span class="mt-5" *ngIf="post.parentComments.length == 0">0 Comment</span>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
+                  <span class="mt-5" *ngIf="post.parentComments.length == 0">0 Comment</span>
+                </li>
+              </ul>
+            </div>
+          </div>
 
-                        <div
-                          class="coment-area"
-                          style="display: block"
-                          id="commentBlock"
-                        >
-                          <app-comment
-                            id="{{ 'blockComment' + post.postId }}"
-                            class="we-comet collapse"
-                            [parentComments]="post.parentComments"
-                            [postFromNewsfeed]="post"
-                            (onEditingParentCommentPicked)="
+          <div
+            class="coment-area"
+            style="display: block"
+            id="commentBlock"
+          >
+            <app-comment
+              id="{{ 'blockComment' + post.postId }}"
+              class="we-comet collapse"
+              [parentComments]="post.parentComments"
+              [postFromNewsfeed]="post"
+              (onEditingParentCommentPicked)="
                               getEditingParentComment($event, post)
                             "
-                            (onDeletingParentCommentPicked)="
+              (onDeletingParentCommentPicked)="
                               getDeletingParentComment($event)
                             "
-                            (onEditingChildCommentPicked)="
+              (onEditingChildCommentPicked)="
                               getEditingChildComment($event)
                             "
-                            (onDeletingChildCommentPicked)="
+              (onDeletingChildCommentPicked)="
                               getDeletingChildComment($event)
                             "
-                          ></app-comment>
-                          <ul class="we-comet" style="margin-top: 10px">
-                            <!-- user comment -->
-                            <li class="post-comment">
-                              <div class="comet-avatar">
-                                <img src="{{ user.userAvatar }}" alt=""/>
-                              </div>
-                              <div class="post-comt-box">
-                                <form
-                                  [formGroup]="parentCommentForm"
-                                  (ngSubmit)="submitParentForm(post)"
-                                >
-                                  <input
-                                    class="form-control"
-                                    placeholder="Post your comment"
-                                    formControlName="content"
-                                    style="
+            ></app-comment>
+            <ul class="we-comet" style="margin-top: 10px">
+              <!-- user comment -->
+              <li class="post-comment">
+                <div class="comet-avatar">
+                  <img src="{{ user.userAvatar }}" class="img-custome" alt=""/>
+                </div>
+                <div class="post-comt-box">
+                  <form
+                    [formGroup]="parentCommentForm"
+                    (ngSubmit)="submitParentForm(post)"
+                  >
+                    <input
+                      class="form-control"
+                      placeholder="Post your comment"
+                      formControlName="content"
+                      style="
                                       background: #edf2f6 none repeat scroll 0 0;
                                       border-color: transparent;
                                       border-radius: 5px;
@@ -227,28 +188,28 @@
                                       height: 60px;
                                       line-height: 16px;
                                     "
-                                  />
-                                  <input
-                                    type="hidden"
-                                    formControlName="commentImage"
-                                  />
-                                  <input type="hidden" formControlName="post"/>
-                                  <input type="hidden" formControlName="user"/>
-                                  <input
-                                    type="hidden"
-                                    formControlName="parentCommentId"
-                                  />
-                                  <figure *ngIf="imageUrlFromLocal">
-                                    <div class="row">
-                                      <div class="img-bunch">
-                                        <div
-                                          class="col-lg-3 col-md-3 col-sm-3"
-                                        ></div>
-                                        <div
-                                          class="col-lg-6 col-md-6 col-sm-6"
-                                          style="position: relative"
-                                        >
-                                          <figure style="margin-top: 10px">
+                    />
+                    <input
+                      type="hidden"
+                      formControlName="commentImage"
+                    />
+                    <input type="hidden" formControlName="post"/>
+                    <input type="hidden" formControlName="user"/>
+                    <input
+                      type="hidden"
+                      formControlName="parentCommentId"
+                    />
+                    <figure *ngIf="imageUrlFromLocal">
+                      <div class="row">
+                        <div class="img-bunch">
+                          <div
+                            class="col-lg-3 col-md-3 col-sm-3"
+                          ></div>
+                          <div
+                            class="col-lg-6 col-md-6 col-sm-6"
+                            style="position: relative"
+                          >
+                            <figure style="margin-top: 10px">
                                             <span
                                             ><i
                                               style="
@@ -260,60 +221,49 @@
                                               (click)="deleteUpdateImage()"
                                             ></i
                                             ></span>
-                                            <img
-                                              style="width: 100%"
-                                              src="{{ imageUrlFromLocal }}"
-                                              alt=""
-                                            />
-                                          </figure>
-                                        </div>
-                                        <div
-                                          class="col-lg-3 col-md-3 col-sm-3"
-                                        ></div>
-                                      </div>
-                                    </div>
-                                  </figure>
-                                  <div class="add-smiles">
-                                    <div class="uploadimage">
-                                      <i class="fa fa-image"></i>
-                                      <label class="fileContainer">
-                                        <input
-                                          type="file"
-                                          (change)="getImageFromLocal($event)"
-                                        />
-                                      </label>
-                                    </div>
-                                  </div>
-                                </form>
-                              </div>
-                            </li>
-                          </ul>
+                              <img
+                                style="width: 100%"
+                                src="{{ imageUrlFromLocal }}"
+                                alt=""
+                              />
+                            </figure>
+                          </div>
+                          <div
+                            class="col-lg-3 col-md-3 col-sm-3"
+                          ></div>
                         </div>
                       </div>
+                    </figure>
+                    <div class="add-smiles">
+                      <div class="uploadimage">
+                        <i class="fa fa-image"></i>
+                        <label class="fileContainer">
+                          <input
+                            type="file"
+                            (change)="getImageFromLocal($event)"
+                          />
+                        </label>
+                      </div>
                     </div>
-                  </div>
-
-                  <button
-                    class="btn-view btn-load-more"
-                    (click)="loadMorePost()"
-                  >
-                    Load More
-                  </button>
+                  </form>
                 </div>
-              </div>
-              <!-- centerl meta -->
-
-              <div class="col-lg-3">
-                <app-room-list></app-room-list>
-              </div>
-              <!-- sidebar -->
-            </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
-  </section>
-</div>
+
+    <button
+      class="btn-view btn-load-more"
+      (click)="loadMorePost()"
+    >
+      Load More
+    </button>
+  </div>
+
+<!-- centerl meta -->
+
 
 <!-- modal edit parent comment -->
 <div
@@ -394,21 +344,7 @@
                   <input type="file" (change)="getImageFromLocal($event)"/>
                 </label>
               </div>
-              <span class="em em-expressionless" title="add icon"></span>
-              <div class="smiles-bunch">
-                <i class="em em---1"></i>
-                <i class="em em-smiley"></i>
-                <i class="em em-anguished"></i>
-                <i class="em em-laughing"></i>
-                <i class="em em-angry"></i>
-                <i class="em em-astonished"></i>
-                <i class="em em-blush"></i>
-                <i class="em em-disappointed"></i>
-                <i class="em em-worried"></i>
-                <i class="em em-kissing_heart"></i>
-                <i class="em em-rage"></i>
-                <i class="em em-stuck_out_tongue"></i>
-              </div>
+
             </div>
             <button
               type="button"
@@ -540,21 +476,7 @@
                   <input type="file" (change)="getImageFromLocal($event)"/>
                 </label>
               </div>
-              <span class="em em-expressionless" title="add icon"></span>
-              <div class="smiles-bunch">
-                <i class="em em---1"></i>
-                <i class="em em-smiley"></i>
-                <i class="em em-anguished"></i>
-                <i class="em em-laughing"></i>
-                <i class="em em-angry"></i>
-                <i class="em em-astonished"></i>
-                <i class="em em-blush"></i>
-                <i class="em em-disappointed"></i>
-                <i class="em em-worried"></i>
-                <i class="em em-kissing_heart"></i>
-                <i class="em em-rage"></i>
-                <i class="em em-stuck_out_tongue"></i>
-              </div>
+
             </div>
             <button
               type="button"

@@ -102,7 +102,7 @@ export class RegistrationComponent implements OnInit {
     });
     this.formRegistration.controls.district.setValue("");
     this.wards = [];
-    this.formRegistration.controls.ward.value.wardId = "";
+    this.formRegistration.controls.ward.setValue("");
   }
 
   public changeWard(e) {
@@ -110,7 +110,7 @@ export class RegistrationComponent implements OnInit {
     this.userCreate.getWardByDistrict(id).subscribe(data => {
       this.wards = data;
     });
-    this.formRegistration.controls.ward.value.wardId = "";
+    this.formRegistration.controls.ward.setValue("");
   }
 
   goToLogin() {

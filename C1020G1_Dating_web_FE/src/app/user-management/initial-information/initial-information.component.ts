@@ -184,11 +184,11 @@ export class InitialInformationComponent implements OnInit {
       this.messageRegistry="Your account is registry successfully!";
       this.isLoggin = true;
       this.disable = false
-      this.userStorage.clear()
+      this.userStorage.clear();
     }, (error) => {
       this.userStorage.serverError = error;
       $('#successModal').modal('toggle');
-      this.router.navigateByUrl("login");
+      this.router.navigateByUrl("registration");
     });
     this.userStorage.clearRegis();
   }

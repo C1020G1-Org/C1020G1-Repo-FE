@@ -14,3 +14,7 @@
 .delete-icon:focus {
   outline-color: #dc3545;
 }
+.img-custom {
+  height: 40px;
+  width: 40px;
+}

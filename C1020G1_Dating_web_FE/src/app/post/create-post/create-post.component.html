@@ -5,7 +5,7 @@
     Content is required!!
   </div>
 </div>
-<div *ngIf="user.userId == idUserWall || idUserWall == 0" class="mat-app-background basic-container">
+<div *ngIf="user.userId == idUserWall || idUserWall == 0 || isGroup" class="mat-app-background basic-container">
   <ng-template #customLoadingTemplate>
     <div class="custom-class">
     </div>
@@ -58,6 +58,7 @@
 
             </div>
           </div>
+          <div class="clearfix"></div>
           <div style="overflow-y: scroll; max-height:120px">
             <div *ngFor="let file of this.fileImage; let i = index" class="d-inline-block" style="margin: 0">
             <span><i class="fa fa-trash delete-icon d-inline" (click)="deleteUpdateImage($event)"

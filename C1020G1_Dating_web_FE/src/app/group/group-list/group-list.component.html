@@ -45,7 +45,7 @@
                     <div class="col-lg-2 col-md-4 col-sm-4" *ngFor="let group of groups">
                       <div class="group-box">
                         <figure><img src="{{group.imageAvatarUrl}}" alt="" style="height: 150px; width: 150px; text-align: center"></figure>
-                        <a  [routerLink]="['/group/details/' + group.groupId]">{{group.groupName}}</a>
+                        <a  href="http://localhost:4200/group/details/{{group.groupId}}">{{group.groupName}}</a>
                       </div>
                     </div>
                   </div>

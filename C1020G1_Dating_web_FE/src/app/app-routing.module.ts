@@ -21,11 +21,12 @@ import {InformationComponent} from "./wall/information/information.component";
 import {FriendsComponent} from "./wall/friends/friends.component";
 import {NewsfeedComponent} from "./news-feed/newsfeed.component";
 import {ErrorPageComponent} from "./error/error-page/error-page.component";
+import {HomeComponent} from "./home/home.component";
 
 
 const routes: Routes = [
-  {path: 'name-search', component: NameSearchComponent, canActivate: [AuthGuardService]},
-  {path: 'advanced-search', component: AdvancedSearchComponent, canActivate: [AuthGuardService]},
+  {path: 'name-search', component: NameSearchComponent, canActivate:[AuthGuardService]},
+  {path: 'advanced-search', component: AdvancedSearchComponent, canActivate:[AuthGuardService]},
   {
     path: 'wall/:id',
     children: [
@@ -36,7 +37,7 @@ const routes: Routes = [
     ],
     component: TopwallComponent, canActivate: [AuthGuardService]
   },
-  {path: 'newsfeed', component: NewsfeedComponent, canActivate: [AuthGuardService]},
+  {path: 'newsfeed', component: HomeComponent, canActivate: [AuthGuardService]},
   {path: '', pathMatch: 'full', redirectTo: 'newsfeed'},
   {path: 'login', component: LoginComponent},
   {path: 'recover', component: RecoverPasswordComponent},

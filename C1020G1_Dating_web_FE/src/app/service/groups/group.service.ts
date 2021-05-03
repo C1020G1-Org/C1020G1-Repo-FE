@@ -40,4 +40,8 @@ export class GroupService {
   getAllGroupRequest(userId) {
     return this.http.get("http://localhost:8080/request/list/user/" + userId, this.httpOptions);
   }
+
+  getAllPostGroup(groupId,pageNumber): Observable<any> {
+    return this.http.get("http://localhost:8080/group-list-post/" + groupId + `?page=` + pageNumber, this.httpOptions);
+  }
 }

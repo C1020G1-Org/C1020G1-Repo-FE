@@ -144,6 +144,8 @@ export class TopwallComponent implements OnInit {
   acceptFriendRequest(friendRequest: FriendRequest) {
     this.checkFriendRequest = true;
     this.checkFriendRequest2 = true;
+    friendRequest.sendUser.account = null;
+    friendRequest.receiveUser.account = null;
     this.notification = this.friendRequestService.findNotifyByFriendRequest(this.notiList, friendRequest);
     this.friendRequestService.acceptFriendRequest(friendRequest).subscribe(data => {
       this.ngOnInit();
@@ -199,7 +201,7 @@ export class TopwallComponent implements OnInit {
     newroomuser1.nickname = this.userLogging.userName;
     newroomuser1.id = this.userLogging.userId.toString();
     newroomuser1.status = this.userLogging.status.statusName;
-    newroomuser1.avatar = this.userLogging.userAvatar;
+    newroomuser1.avatar = this.userWall.userAvatar;
     newroomuser1.nickNameFriend = this.userWall.userName;
     newroomuser1.getroom = this.userWall.userName;
     roomuser.set(newroomuser1);
@@ -212,9 +214,14 @@ export class TopwallComponent implements OnInit {
     newroomuser2.nickname = this.userWall.userName;
     newroomuser2.id = this.userWall.userId.toString();
     newroomuser2.status = this.userWall.status.statusName;
-    newroomuser2.avatar = this.userWall.userAvatar;
+    newroomuser2.avatar = this.userLogging.userAvatar;
     newroomuser2.nickNameFriend = this.userLogging.userName;
     newroomuser2.getroom = this.userLogging.userName;
     roomuser.set(newroomuser2);
+  }
+
+  logout() {
+    this.tokenStorage.logOut();
+    window.location.reload();
   }
 }

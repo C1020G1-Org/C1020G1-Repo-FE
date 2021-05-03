@@ -26,6 +26,9 @@ export class NameSearchComponent implements OnInit,DoCheck {
   ngOnInit(): void {
     this.listUser = [];
     this.user = this.tokenStorageService.getUser();
+    if(this.user == null){
+      this.activeRouter.navigateByUrl("/login")
+    }
     this.doSearchNameHeader();
     this.searchingService.getAllRecommendation(this.user.userId).subscribe((data) => {
       this.listRecommendation = data;
@@ -38,7 +41,7 @@ export class NameSearchComponent implements OnInit,DoCheck {
     this.searchingService.doNameSearch(this.searchingService.getKeySearch(), this.user.userId).subscribe((data) => {
       this.listUser = data;
     });
-    this.searchingService.getListGroup(this.name, this.user.userId).subscribe((data) => {
+    this.searchingService.getListGroup(this.searchingService.getKeySearch(), this.user.userId).subscribe((data) => {
       this.listGroup = data;
     })
   }

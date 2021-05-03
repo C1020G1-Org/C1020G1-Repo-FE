@@ -140,16 +140,10 @@ export class LoginComponent implements OnInit {
   loginWithCheckRemember(accountReg) {
     if (!this.loginForm.get("remember").value) {
       this.auth.sendLogin(accountReg).subscribe(data => {
-        this.user = data.user;
-        this.user.account = null;
-        this.tokenStorage.saveUser(this.user);
         this.login(data)
       })
     } else {
       this.auth.sendLogin(accountReg).subscribe(data => {
-        this.user = data.user;
-        this.user.account = null;
-        this.tokenStorage.saveUser(data.user);
         this.loginRemember(data);
 
       })
@@ -158,6 +152,9 @@ export class LoginComponent implements OnInit {
 
   login(data) {
     if (data.token != "INVALID_CREDENTIALS") {
+      this.user = data.user;
+      this.user.account = null;
+      this.tokenStorage.saveUser(this.user);
       this.tokenStorage.saveToken(data.token);
       this.tokenStorage.saveAccountName(this.getAccountName().value);
 
@@ -171,6 +168,9 @@ export class LoginComponent implements OnInit {
 
   loginRemember(data) {
     if (data.token != "INVALID_CREDENTIALS") {
+      this.user = data.user;
+      this.user.account = null;
+      this.tokenStorage.saveUser(data.user);
       this.tokenStorage.saveTokenRemember(data.token);
       this.tokenStorage.saveAccountName(this.getAccountName().value);
       this.chatOfThinh();

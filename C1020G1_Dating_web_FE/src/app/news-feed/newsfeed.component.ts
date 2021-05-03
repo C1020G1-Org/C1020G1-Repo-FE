@@ -12,6 +12,7 @@ import {ChildComment} from "../models/ChildComment";
 import {Post} from "../models/Post";
 import {UserService} from "../wall/service/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {GroupService} from "../service/groups/group.service";
 
 declare const $: any;
 
@@ -21,7 +22,6 @@ declare const $: any;
   styleUrls: ['./newsfeed.component.css']
 })
 export class NewsfeedComponent implements OnInit {
-  location : string
   posts: Post[];
   pageNumber = 0;
   user: User;
@@ -40,6 +40,10 @@ export class NewsfeedComponent implements OnInit {
 
   idUserWall : number;
 
+  idGroup: number;
+
+  route: string
+
   constructor(private postService: PostService,
               private tokenStorageService: TokenStorageService,
               private commentService: CommentService,
@@ -47,7 +51,8 @@ export class NewsfeedComponent implements OnInit {
               public storage: AngularFireStorage,
               public userService: UserService,
               public router: Router,
-              private activateRouter: ActivatedRoute) {
+              private activateRouter: ActivatedRoute,
+              private groupService: GroupService) {
   }
 
   ngOnInit(): void {
@@ -69,86 +74,88 @@ export class NewsfeedComponent implements OnInit {
       user: new FormControl('')
     })
 
-    if (this.router.url == "/newsfeed") {
-      this.getAllPostInNewsFeed(this.user.userId, this.pageNumber, true);
-      this.location = "Newsfeed";
+     this.route = this.router.url
+
+    if (this.route.includes("newsfeed")) {
+      this.getAllPostInNewsFeed(this.user.userId, this.pageNumber, "newsfeed");
       this.idUserWall = 0;
-    } else {
+    }
+
+    if (this.route.includes("wall")){
       this.idUserWall = this.activateRouter.snapshot.params['id'];
-      console.log(this.idUserWall);
-      this.getAllPostInNewsFeed(this.idUserWall, this.pageNumber, false);
-      this.location = "Wall";
+      this.getAllPostInNewsFeed(this.idUserWall, this.pageNumber, "wall");
+
+    }
+
+    if (this.route.includes("group")){
+      this.idGroup = this.activateRouter.snapshot.params['id'];
+      console.log(this.idGroup)
+      this.getAllPostInNewsFeed(this.idGroup, this.pageNumber, "group");
+
     }
 
 
   }
 
   // get all post in newsfeed
-  getAllPostInNewsFeed(userId: number, pageNumber: number, checkNewsFeed) {
-    if (checkNewsFeed) {
-      this.postService.findAllPostInNewsFeed(userId, pageNumber).subscribe(listPageablePost => {
-        if (listPageablePost == null) {
-        } else {
-          let listPostsFromDb = listPageablePost.content;
-
-          for (let post of listPostsFromDb) {
-            post.user.account = null;
-            for (let parentComment of post.parentComments) {
-              parentComment.user.account = null;
-              for (let childComment of parentComment.childComments) {
-                childComment.user.account = null;
-              }
-            }
-          }
-
-          if (this.postService.postsInService != null) {
-            this.postService.postsInService = this.postService.postsInService.concat(listPostsFromDb);
-          } else {
-            this.postService.postsInService = listPostsFromDb;
-          }
-
-        }
-
-        this.posts = this.postService.postsInService.reverse();
+  getAllPostInNewsFeed(id: number, pageNumber: number, checkUrl) {
+    if (checkUrl == "newsfeed") {
+      this.postService.findAllPostInNewsFeed(id, pageNumber).subscribe(listPageablePostNewsFeed => {
+        this.extracted(listPageablePostNewsFeed);
       })
-    } else {
-      this.postService.findAllPostInWall(userId, pageNumber).subscribe(listPageablePost => {
-        if (listPageablePost == null) {
-        } else {
-          let listPostsFromDb = listPageablePost.content;
-
-          for (let post of listPostsFromDb) {
-            post.user.account = null;
-            for (let parentComment of post.parentComments) {
-              parentComment.user.account = null;
-              for (let childComment of parentComment.childComments) {
-                childComment.user.account = null;
-              }
-            }
-          }
-
-          if (this.postService.postsInService != null) {
-            this.postService.postsInService = this.postService.postsInService.concat(listPostsFromDb);
-          } else {
-            this.postService.postsInService = listPostsFromDb;
-          }
-
-        }
-
-        this.posts = this.postService.postsInService.reverse();
+    }
+    if (checkUrl == "wall"){
+      this.postService.findAllPostInWall(id, pageNumber).subscribe(listPageablePostWall => {
+        this.extracted(listPageablePostWall);
+      })
+    }
+    if (checkUrl == "group") {
+      this.groupService.getAllPostGroup(id, pageNumber).subscribe(listPageablePostGroup => {
+        this.extracted(listPageablePostGroup)
       })
     }
 
   };
 
-  // create function loadmore post in newsfeed
+  private extracted(listPageablePost) {
+    if (listPageablePost != null) {
+      let listPostsFromDb = listPageablePost.content;
+
+      for (let post of listPostsFromDb) {
+        post.user.account = null;
+        for (let parentComment of post.parentComments) {
+          parentComment.user.account = null;
+          for (let childComment of parentComment.childComments) {
+            childComment.user.account = null;
+          }
+        }
+      }
+
+      if (this.postService.postsInService != null) {
+        this.postService.postsInService = this.postService.postsInService.concat(listPostsFromDb);
+      } else {
+        this.postService.postsInService = listPostsFromDb;
+      }
+
+    }
+    this.posts = this.postService.postsInService;
+  }
+
+// create function loadmore post in newsfeed
   loadMorePost() {
     this.pageNumber++;
-    if (this.router.url == "/newsfeed") {
-      this.getAllPostInNewsFeed(this.user.userId, this.pageNumber, true);
-    } else {
-      this.getAllPostInNewsFeed(this.user.userId, this.pageNumber, false);
+    if (this.route.includes("newsfeed")) {
+      this.getAllPostInNewsFeed(this.user.userId, this.pageNumber, "newsfeed");
     }
+
+    if (this.route.includes("wall")){
+      this.getAllPostInNewsFeed(this.idUserWall, this.pageNumber, "wall");
+    }
+
+    if (this.route.includes("group")){
+      this.getAllPostInNewsFeed(this.idGroup, this.pageNumber, "group");
+    }
+
 
   }
 
@@ -209,6 +216,7 @@ export class NewsfeedComponent implements OnInit {
       console.log('data');
       console.log(data);
       this.postService.observeEditingComment(data, this.editingParentComment.childComments, null);
+      this.parentCommentForm.reset();
       this.imageUrlFromLocal = null;
     }, error => console.log(error))
   }

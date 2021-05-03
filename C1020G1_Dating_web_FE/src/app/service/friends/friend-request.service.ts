@@ -65,6 +65,10 @@ export class FriendRequestService {
   }
 
   saveListFriendRequest(listFriendsRequest) {
+
+      for (let i of listFriendsRequest) {
+        i.sendUser.account = null;
+      }
     this.friendsRequest = listFriendsRequest;
   }
 
@@ -86,9 +90,11 @@ export class FriendRequestService {
   }
 
   deleteFriendRequestFE(idSendUser : number){
-    for(let i = 0 ; i < this.friendsRequest.length ; i++){
-      if(this.friendsRequest[i].sendUser.userId == idSendUser){
-        this.friendsRequest.splice(i,1);
+    if (this.friendsRequest) {
+      for (let i = 0; i < this.friendsRequest.length; i++) {
+        if (this.friendsRequest[i].sendUser.userId == idSendUser) {
+          this.friendsRequest.splice(i, 1);
+        }
       }
     }
   }

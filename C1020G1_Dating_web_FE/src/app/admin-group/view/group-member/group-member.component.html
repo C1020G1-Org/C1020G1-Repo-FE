@@ -1,6 +1,6 @@
 <div class="group-box">
     <figure><img [src]="member.user.userAvatar" alt=""></figure>
-    <a href="/profile/{{member.user.userId}}">{{member.user.userName}}</a>
+    <a href="http://localhost:4200/wall/{{member.user.userId}}">{{member.user.userName}}</a>
     <span>{{member.user.ward.district.province.provinceName}}</span><br>
     <div *ngIf="member.groupSocial.admin.userId !== member.user.userId" class="invites-btns">
         <a class="main-btn cursor accept" routerLink="/group/warning/{{member.groupSocial.groupId}}/{{member.groupUserId}}" title="Go to Action" data-ripple="">Action</a>

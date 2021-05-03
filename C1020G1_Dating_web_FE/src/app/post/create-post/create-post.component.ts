@@ -37,6 +37,9 @@ export class CreatePostComponent implements OnInit {
 
   @Input() idUserWall : number;
 
+  @Input() checkGroup : string;
+  isGroup: boolean
+
 
   constructor(public formBuilder: FormBuilder,
               public postService: PostService,
@@ -58,6 +61,7 @@ export class CreatePostComponent implements OnInit {
     });
     this.fileImage = [];
     this.urlImage = [];
+    this.isGroup = this.checkGroup.includes("group")
   }
 
   async addNewPost() {

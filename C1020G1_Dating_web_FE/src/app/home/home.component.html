@@ -1,0 +1,50 @@
+<div class="theme-layout">
+  <!-- topbar -->
+  <section>
+    <div class="gap2 gray-bg">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row merged20" id="page-contents">
+              <div class="col-lg-3">
+                <aside class="sidebar static left">
+                  <div class="advertisment-box">
+                    <h4 class="">advertisment</h4>
+                    <figure>
+                      <a href="#" title="Advertisment"><img src="assets/images/resources/ad-widget.gif" alt=""></a>
+                    </figure>
+                  </div><!-- advertisment box -->
+                  <div class="widget">
+                    <h4 class="widget-title">Shortcuts</h4>
+                    <ul class="naves">
+                      <li>
+                        <i class="ti-files"></i>
+                        <a [routerLink]="['/wall', user.userId]" title="">My pages</a>
+                      </li>
+                      <li>
+                        <i class="ti-power-off"></i>
+                        <a (click)="logout()" title="">Logout</a>
+                      </li>
+                    </ul>
+                  </div><!-- Shortcuts -->
+                  <app-friend-suggest></app-friend-suggest>
+                </aside>
+              </div>
+              <!-- sidebar -->
+
+              <div class="col-lg-6">
+                <app-newsfeed></app-newsfeed>
+              </div>
+              <!-- centerl meta -->
+
+              <div class="col-lg-3">
+                <app-room-list></app-room-list>
+              </div>
+              <!-- sidebar -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

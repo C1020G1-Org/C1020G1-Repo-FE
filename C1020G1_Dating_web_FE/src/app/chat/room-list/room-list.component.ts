@@ -182,7 +182,7 @@ export class RoomListComponent implements OnInit {
       this.friend = snapshotToArray(resp1);
       this.idFriend = this.friend[0].id;
     });
-    this.styleChatBox = 'position: fixed; bottom: 0px; right: 50px; width: 330px; height: 420px; display: block; z-index: 1000';
+    this.styleChatBox = 'position: fixed; bottom: 0px; right: 50px; width: 310px; height: 420px; display: block; z-index: 1000';
     this.id = (this.token.getUser().userId).toString();
     this.nickname = this.token.getUser().userName;
     const chat = {roomname: '', nickname: '', id: '', message: '', date: '', type: ''};

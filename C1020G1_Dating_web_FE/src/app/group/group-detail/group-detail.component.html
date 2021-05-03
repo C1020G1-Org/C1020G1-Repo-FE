@@ -1,130 +1,60 @@
-
-<div class="postoverlay"></div>
-  <section>
-    <div class="gap2 gray-bg">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <div *ngIf="group" class="row merged20" id="page-contents">
-              <app-group-header></app-group-header>
-              <div class="col-lg-3">
-                <aside class="sidebar static right">
-                  <div class="widget">
-                    <h4 class="widget-title">Profile intro</h4>
-                    <ul class="short-profile">
-                      <li>
-                        <span>about</span>
-                        <p>This group gather all Meow Meow Meow <br>...... </p>
-                      </li>
-                      <li>
-                        <span>{{group.scope}}</span>
-                        <div *ngIf="group.scope === 'private' ; else elseBlock">
-                          <p>Only members see everyone in the group and what they post.!</p>
-                        </div>
-
-                        <ng-template #elseBlock>
-                          <p>Everyone can see all activities in this group.!</p>
-                        </ng-template>
-                        <p></p>
-                      </li>
-                      <li>
-                        <span>Display</span>
-                        <p>Anyone can find this group.</p>
-                      </li>
-                      <li>
-                        <span>Location</span>
-                        <p>VietNam</p>
-                      </li>
-                    </ul>
-                  </div>
-                </aside>
-              </div>
-              <div class="col-lg-6" *ngIf="group.scope == 'public' || isJoin ; else elseBlock1">
-                <div class="central-meta postbox">
-                  <span class="create-post">Create post</span>
-                  <div class="new-postbox">
-                    <figure>
-                      <!-- <img src="images/resources/admin.jpg" alt=""> -->
-                    </figure>
-                    <div class="newpst-input">
-                      <form method="post">
-                                                <textarea rows="2"
-                                                          placeholder="Share some what you are thinking?"></textarea>
-                      </form>
-                    </div>
-                    <div class="attachments">
-                      <ul>
-                        <li>
-													<span class="add-loc">
-														<i class="fa fa-map-marker"></i>
-													</span>
-                        </li>
-                        <li>
-                          <i class="fa fa-music"></i>
-                          <label class="fileContainer">
-                            <input type="file">
-                          </label>
-                        </li>
-                        <li>
-                          <i class="fa fa-image"></i>
-                          <label class="fileContainer">
-                            <input type="file">
-                          </label>
-                        </li>
-                        <li>
-                          <i class="fa fa-video-camera"></i>
-                          <label class="fileContainer">
-                            <input type="file">
-                          </label>
-                        </li>
-                        <li>
-                          <i class="fa fa-camera"></i>
-                          <label class="fileContainer">
-                            <input type="file">
-                          </label>
-                        </li>
-                        <li class="preview-btn">
-                          <button class="post-btn-preview" type="submit" data-ripple="">
-                            Preview
-                          </button>
-                        </li>
-                      </ul>
-                      <button class="post-btn" type="submit" data-ripple="">Post</button>
-                    </div>
-                    <div class="add-location-post">
-                      <span>Drag map point to selected area</span>
-                      <div class="row">
-
-                        <div class="col-lg-6">
-                          <label class="control-label">Lat :</label>
-                          <input type="text" class="" id="us3-lat"/>
-                        </div>
-                        <div class="col-lg-6">
-                          <label>Long :</label>
-                          <input type="text" class="" id="us3-lon"/>
-                        </div>
+<section>
+  <div class="gap2 gray-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div *ngIf="group" class="row merged20" id="page-contents">
+            <app-group-header class="w-100"></app-group-header>
+            <div class="col-lg-3">
+              <aside class="sidebar static right">
+                <div class="widget">
+                  <h4 class="widget-title">Profile intro</h4>
+                  <ul class="short-profile">
+                    <li>
+                      <span>about</span>
+                      <p>This group gather all Meow Meow Meow <br>...... </p>
+                    </li>
+                    <li>
+                      <span>{{group.scope}}</span>
+                      <div *ngIf="group.scope === 'private' ; else elseBlock">
+                        <p>Only members see everyone in the group and what they post.!</p>
                       </div>
-                      <!-- map -->
-                      <div id="us3"></div>
-                    </div>
-                  </div>
 
-                </div><!-- add post new box -->
+                      <ng-template #elseBlock>
+                        <p>Everyone can see all activities in this group.!</p>
+                      </ng-template>
+                      <p></p>
+                    </li>
+                    <li>
+                      <span>Display</span>
+                      <p>Anyone can find this group.</p>
+                    </li>
+                    <li>
+                      <span>Location</span>
+                      <p>VietNam</p>
+                    </li>
+                  </ul>
+                </div>
+                <app-friend-suggest></app-friend-suggest>
+              </aside>
+            </div>
+            <div class="col-lg-6" *ngIf="group.scope == 'public' || isJoin ; else elseBlock1">
+              <app-newsfeed></app-newsfeed>
+            </div><!-- central meta -->
 
-              </div><!-- central meta -->
+            <ng-template #elseBlock1>
+              <h5 style="color: orange">You have join in group to see all post and information this group !!</h5>
+            </ng-template>
 
-              <ng-template #elseBlock1>
-                <h5 style="color: orange">You have join in group to see all post and information this group !!</h5>
-              </ng-template>
-
-              <div class="col-lg-3 border border-primary">
-              </div>
+            <div class="col-lg-3">
+              <app-room-list></app-room-list>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section><!-- content -->
+  </div>
+</section><!-- content -->
 
 <div class="popup-wraper3">
   <div class="popup">

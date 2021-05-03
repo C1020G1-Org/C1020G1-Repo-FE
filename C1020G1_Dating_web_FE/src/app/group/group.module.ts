@@ -12,11 +12,13 @@ import {HeaderModule} from "../header/header.module";
 import {FooterModule} from "../footer/footer.module";
 import {ChatModule} from "../chat/chat.module";
 import {RoomListComponent} from "../chat/room-list/room-list.component";
+import {AuthGuardService} from "../service/auth/auth-guard.service";
+import {NewsFeedModule} from "../news-feed/news-feed.module";
 
 const routes: Routes = [
-  { path: 'group/details/:id', component: GroupDetailComponent },
-  { path: 'group/list', component: GroupListComponent },
-  { path: 'group/member/:id', component: GroupMemberComponent }
+  { path: 'group/details/:id', component: GroupDetailComponent, canActivate:[AuthGuardService]},
+  { path: 'group/list', component: GroupListComponent, canActivate:[AuthGuardService]},
+  { path: 'group/member/:id', component: GroupMemberComponent ,canActivate:[AuthGuardService]}
 ]
 
 @NgModule({
@@ -35,7 +37,9 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(routes),
     HeaderModule,
-    FooterModule
+    FooterModule,
+    NewsFeedModule,
+    ChatModule
   ]
 })
 export class GroupModule { }

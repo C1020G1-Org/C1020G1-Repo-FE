@@ -1,48 +1,49 @@
-<div class="example-container mat-elevation-z8">
-  <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="rooms" class="example-table chat-users"
-           matSort matSortActive="roomname" matSortDisableClear matSortDirection="asc">
+<!--<div class="example-container mat-elevation-z8">-->
+<div class="mat-elevation-z8 stick" style="box-shadow: none !important;">
+  <table mat-table [dataSource]="rooms" class="example-table chat-users"
+         matSort matSortActive="roomname" matSortDisableClear matSortDirection="asc">
 
-      <!-- Room Name Column -->
-      <ng-container matColumnDef="roomname">
-        <th mat-header-cell style="padding-right: 209px !important" *matHeaderCellDef></th>
-        <figure style="text-align: left;">
-          <td mat-cell *matCellDef="let row" style="text-align: left; float: left; width: 100%">
+    <!-- Room Name Column -->
+    <ng-container matColumnDef="roomname">
+      <th mat-header-cell
+          style="padding-right: 194px !important;font-size: 20px !important;font-weight: bold !important; color: black !important;border: none"
+          *matHeaderCellDef>Chat
+      </th>
+      <figure style="text-align: left;">
+        <td mat-cell *matCellDef="let row" style="text-align: left; float: left; width: 100%; border: none !important;">
 
-            <div class="d-flex align-items-center justify-content-between float-left"
-                 style="line-height: 40px; margin-left: 10px">
-              <a (click)="show(row.roomname,row.getroom)" style="cursor: pointer">
-                <img src="{{row.avatar}}" alt="" width="40px" height="40px"
-                     style="border-radius: 50%; border: 1px solid #aaaaaa">
-                <span class="status f-online" style="position: relative; bottom: -15px; right: 11px"></span>
-                {{row.nickNameFriend}}
-              </a>
-            </div>
-          </td>
-        </figure>
+          <div class="d-flex align-items-center justify-content-between float-left"
+               style="line-height: 40px; margin-left: 10px">
+            <a (click)="show(row.roomname,row.getroom)" style="cursor: pointer">
+              <img src="{{row.avatar}}" alt="" width="40px" height="40px"
+                   style="border-radius: 50%; border: 1px solid #aaaaaa">
+              <span class="status f-online" style="position: relative; bottom: -15px; right: 11px"></span>
+              {{row.nickNameFriend}}
+            </a>
+          </div>
+        </td>
+      </figure>
 
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
 
-  </div>
 </div>
+<!--</div>-->
 
 <mat-drawer-container style="{{styleChatBox}}">
-
   <!--    Hiển thị tin nhắn///////////////-->
   <mat-drawer-content class="chat-pane"
                       style="width: 340px; height: 60px; position: relative; top: 0px; z-index: 1000; background: #95999c">
     <div class="chat-head ">
       <span class="status f-online"></span>
       <div class="dropdown">
-
         <span style="height: 30px; padding: 0 10px">{{getroom}}</span>
 
       </div>
       <div class="more">
-        <span (click)="close() "><i class="ti-close"></i></span>
+        <span (click)="close()"><i class="ti-close" style="margin-right: 20px"></i></span>
       </div>
     </div>
   </mat-drawer-content>
@@ -63,8 +64,8 @@
               <span class="msg-name" *ngIf="chat.nickname === nickname">Me</span>
               <span class="msg-name" *ngIf="chat.nickname !== nickname">{{chat.nickname}}</span>
               <span class="msg-date"> at {{chat.date}}</span>
-              <div >
-                <p id="text" style="color: #0e0e0e"  >{{chat.message}}</p>
+              <div>
+                <p id="text" style="color: #0e0e0e">{{chat.message}}</p>
 
               </div>
             </div>
@@ -83,15 +84,15 @@
 
       <form class="" [formGroup]="chatForm" (ngSubmit)="onFormSubmit(chatForm.value)">
         <mat-form-field style="width: 90%; margin-left: 5%">
-          <button style="margin-top: 12px; border-radius: 50%" class="btn btn-block btn-outline-light" type="submit"
+          <button style="margin-top: 12px;border-radius: 50%!important;padding: 1px 1px " class="btn " type="submit"
                   [disabled]="!chatForm.valid" mat-button matSuffix
                   aria-label="Send">
-            Send
+            <i style="color: blue; font-size: 29px; " class="ti-arrow-circle-right"></i>
           </button>
-
-          <input  style="padding-bottom: 7px;margin-bottom: 6px; background: white; border-radius: 15px" matInput
-                  formControlName="message"
-                  [errorStateMatcher]="matcher"/>
+          <input style="padding-bottom: 7px;padding-top: 5px;margin-bottom: 6px; background: white; border-radius: 15px"
+                 matInput
+                 formControlName="message"
+                 [errorStateMatcher]="matcher"/>
         </mat-form-field>
       </form>
     </div>
@@ -103,3 +104,5 @@
 <!--  module = document.querySelector(".text p");-->
 <!--  $clamp(module , {clamp: 3})-->
 <!--</script>-->
+
+

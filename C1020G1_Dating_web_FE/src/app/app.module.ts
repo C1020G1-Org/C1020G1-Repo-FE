@@ -37,6 +37,7 @@ import {CommentsModule} from "./comments/comment.module";
 import {FriendSuggestComponent} from "./friend-suggest/friend-suggest.component";
 import {ChatModule} from "./chat/chat.module";
 import {DatePipe} from "@angular/common";
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import {DatePipe} from "@angular/common";
     FooterComponent,
     AdvancedSearchComponent,
     TopwallComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

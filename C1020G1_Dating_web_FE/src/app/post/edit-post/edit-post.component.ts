@@ -70,7 +70,7 @@ export class EditPostComponent implements OnInit, OnChanges {
       this.loading = true;
       await this.addImageToFireBase();
 
-      this.formEditPost.get("postContent").setValue(this.contentTemp);
+      // this.formEditPost.get("postContent").setValue(this.contentTemp);
 
       this.updateImages = this.updateUrlImage.map(x => {
         return {
@@ -162,10 +162,9 @@ export class EditPostComponent implements OnInit, OnChanges {
         this.post = data.post;
         console.log(this.post);
         this.postImages = data.postImages;
-        $("#editText").data("emojioneArea").setText(this.post.postContent);
+        this.formEditPost.controls.postContent.setValue(this.post.postContent)
         this.formEditPost.setValue(this.post);
-        console.log("Abc");
-        console.log(this.post.postContent);
+
 
       });
     }

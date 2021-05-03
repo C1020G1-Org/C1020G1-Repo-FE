@@ -64,7 +64,7 @@
                           <figure><a href="#" title=""><img
                             src="{{groupStatus.groupSocial.imageAvatarUrl}}" alt="" style="height: 50px; width: 50px"></a></figure>
                           <div class="pit-frnz-meta">
-                            <a href="#" title="">{{groupStatus.groupSocial.groupName}}</a>
+                            <a href="http://localhost:4200/group/details/{{groupStatus.groupSocial.groupId}}" title="">{{groupStatus.groupSocial.groupName}}</a>
 <!--                            <i>Address: {{userFavourite.user.ward.district.province.provinceName}}</i>-->
                             <i *ngIf="groupStatus.groupUser">Joined</i>
                             <i *ngIf="!groupStatus.groupUser">Not joined</i>

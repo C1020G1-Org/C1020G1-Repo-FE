@@ -20,12 +20,13 @@ import { HeaderModule } from '../header/header.module';
 import { FooterModule } from '../footer/footer.module';
 import {GroupMemberComponent} from "./view/group-member/group-member.component";
 import {GroupModule} from "../group/group.module";
+import {AuthGuardService} from "../service/auth/auth-guard.service";
 
 
 const routes: Routes = [
-  { path: 'group/member/list/:id', component: GroupMemberListComponent },
-  { path: 'group/warning/:id/:guid', component: GroupMemberWarningComponent },
-  { path: 'group/request/list/:id', component: GroupListRequestComponent }
+  { path: 'group/member/list/:id', component: GroupMemberListComponent, canActivate:[AuthGuardService]} ,
+  { path: 'group/warning/:id/:guid', component: GroupMemberWarningComponent, canActivate:[AuthGuardService]} ,
+  { path: 'group/request/list/:id', component: GroupListRequestComponent, canActivate:[AuthGuardService]}
 ];
 
 @NgModule({

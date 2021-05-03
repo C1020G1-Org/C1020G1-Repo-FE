@@ -1,8 +1,9 @@
-import { TokenStorageService } from './../../service/auth/token-storage';
+
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
 import {GroupService} from "../../service/groups/group.service";
+import {TokenStorageService} from "../../service/auth/token-storage";
 
 @Component({
   selector: 'app-group-detail',
