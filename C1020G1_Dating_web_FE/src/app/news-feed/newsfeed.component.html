@@ -255,6 +255,7 @@
     </div>
 
     <button
+      *ngIf="!noData"
       class="btn-view btn-load-more"
       (click)="loadMorePost()"
     >

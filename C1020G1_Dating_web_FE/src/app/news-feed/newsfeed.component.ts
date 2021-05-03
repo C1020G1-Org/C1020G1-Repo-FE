@@ -43,6 +43,7 @@ export class NewsfeedComponent implements OnInit {
   idGroup: number;
 
   route: string
+  noData: boolean;
 
   constructor(private postService: PostService,
               private tokenStorageService: TokenStorageService,
@@ -118,7 +119,10 @@ export class NewsfeedComponent implements OnInit {
   };
 
   private extracted(listPageablePost) {
-    if (listPageablePost != null) {
+    if(listPageablePost == null){
+      this.noData = true;
+      return;
+    }else {
       let listPostsFromDb = listPageablePost.content;
 
       for (let post of listPostsFromDb) {
