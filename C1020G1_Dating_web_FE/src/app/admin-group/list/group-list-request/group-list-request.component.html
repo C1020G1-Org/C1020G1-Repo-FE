@@ -70,8 +70,8 @@
     <app-invite-modal (event)="set()" [modal]="modal"></app-invite-modal>
 </ng-template>
 <ng-template #acceptModal let-modal>
-    <app-accept-modal [modal]="modal" [member]="request" (event)="page = 0;set();"></app-accept-modal>
+    <app-accept-modal [modal]="modal" [member]="request" (event)="page = 0;deleteNoti();set();"></app-accept-modal>
 </ng-template>
 <ng-template #cancelRequestModal let-modal>
-    <app-cancel-request-modal [modal]="modal" [member]="request" (event)="page = 0;set();"></app-cancel-request-modal>
+    <app-cancel-request-modal [modal]="modal" [member]="request" (event)="page = 0;deleteNoti();set();"></app-cancel-request-modal>
 </ng-template>

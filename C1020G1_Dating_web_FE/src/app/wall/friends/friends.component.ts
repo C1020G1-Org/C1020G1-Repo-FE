@@ -39,10 +39,11 @@ export class FriendsComponent implements OnInit {
     this.userLogging = this.tokenStorage.getUser();
 
     let id = this.activatedRoute.snapshot.params['id'];
-    this.userService.findUserById(id).subscribe( data => {
+    this.userService.findUserById(id).subscribe(data => {
       this.userWall = data;
-      this.getAllFriend();
+      this.getAllFriend(false);
     });
+
   }
 
   showDelete(id: number, userName: string) {
@@ -58,18 +59,30 @@ export class FriendsComponent implements OnInit {
 
   loadMoreFriend() {
     this.pageNumber++;
-    this.getAllFriend();
+    this.getAllFriend(true);
+
   }
 
-  getAllFriend() {
+  getAllFriend(checkLoadMore) {
     this.friendService.getAllFriend(this.userWall.userId, this.pageNumber).subscribe(data => {
-      let listFriends = data.content;
-      if (this.friends != null) {
-        this.friends = this.friends.concat(listFriends);
+      if (data.content == null) {
         this.checkLoadMore = false;
+        return;
+      }
+      if (!checkLoadMore) {
+        if (this.friends == null) {
+          this.friends = data.content
+          this.checkLoadMore = data.content.length >= 4;
+          return;
+        }
       } else {
-        this.friends = listFriends;
-        this.checkLoadMore = true;
+        if (data.content.length < 4) {
+          this.friends = this.friends.concat(data.content)
+          this.checkLoadMore = false
+        } else {
+          this.friends = this.friends.concat(data.content)
+          this.checkLoadMore = true
+        }
       }
     })
   }

@@ -14,6 +14,7 @@ import {EditComponent} from "./edit/edit.component";
 import {HeaderModule} from "../header/header.module";
 import {EditDetailComponent} from './edit/edit-detail/edit-detail.component';
 import {EditModule} from "./edit/edit.module";
+import {NgxLoadingModule} from "ngx-loading";
 
 
 @NgModule({
@@ -26,15 +27,16 @@ import {EditModule} from "./edit/edit.module";
     ChangePasswordComponent,
     LoadingComponent,
   ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    FormsModule,
-    WebcamModule,
-    HeaderModule,
-    EditModule
-  ]
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        FormsModule,
+        WebcamModule,
+        HeaderModule,
+        EditModule,
+        NgxLoadingModule
+    ]
 })
 export class UserManagementModule {
 }

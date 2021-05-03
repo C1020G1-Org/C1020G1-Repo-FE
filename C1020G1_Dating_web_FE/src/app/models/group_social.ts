@@ -3,7 +3,7 @@ import {User} from "./user-model";
 export interface GroupSocial {
   groupId: number;
   groupName: string;
-  groupPulished: string;
+  groupPublished: string;
   imageBackground: string;
   imageAvatarUrl: string;
   admin: User;

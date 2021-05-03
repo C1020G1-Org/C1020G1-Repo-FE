@@ -13,6 +13,8 @@ import {SearchingService} from "../service/searching/searching.service";
 import NotificationGroup from "../models/groupNotification";
 import {NotificationGroupService} from "../service/groups/group-notification.service";
 import firebase from "firebase";
+import {GroupRequest} from "../models/group_social";
+import {NotificationRequestGroupService} from "../service/groups/group-request-notification";
 
 
 @Component({
@@ -39,6 +41,8 @@ export class HeaderComponent implements OnInit {
   checkListNotiFriend: boolean;
   checkListNotiGroup: number;
 
+  requestNotiLength: number = 0;
+  groupRequest: GroupRequest;
 
   key: string;
 
@@ -47,7 +51,8 @@ export class HeaderComponent implements OnInit {
               private tokenStorage: TokenStorageService,
               private notificationService: NotificationService,
               private friendRequestService: FriendRequestService,
-              private notificationGroupService: NotificationGroupService
+              private notificationGroupService: NotificationGroupService,
+              private notificationRequestGroupService: NotificationRequestGroupService
   ) {
   }
 
@@ -64,6 +69,7 @@ export class HeaderComponent implements OnInit {
     }
     this.setNotiListFriend();
     this.setNotiGroupList();
+    this.setNotiListRequestGroup();
   }
 
 
@@ -141,6 +147,26 @@ export class HeaderComponent implements OnInit {
     })
   }
 
+  setNotiListRequestGroup() {
+    this.notificationRequestGroupService.getAll(this.user.userId).snapshotChanges().pipe(
+      map(changes =>
+        changes.map(data => ({key: data.payload.key, ...data.payload.val()})
+        )
+      )
+    ).subscribe(data => {
+      if (data.length > 0){
+        this.groupRequest = data[0].groupRequest;
+      }
+      this.requestNotiLength = data.length;
+    });
+  }
+  navRequest(id: number){
+    this.router.navigateByUrl('/group/request/list/'+id);
+  }
+  clearNotiRequest() {
+    this.notificationRequestGroupService.deleteAll(this.user.userId);
+  }
+
 
   /**
    * @author PhinNL
@@ -163,7 +189,8 @@ export class HeaderComponent implements OnInit {
    * clear all group notification by user logged
    */
   deleteAllNotiGroup() {
-    this.notificationGroupService.deleteAll(this.user.userId).then(() => console.log('delete all success!'));
+    this.notificationGroupService.deleteAll(this.user.userId).then(() => {});
+    this.notificationRequestGroupService.deleteAll(this.user.userId).then(() => {});
   }
   /**
    * @author PhinNL
@@ -206,5 +233,9 @@ export class HeaderComponent implements OnInit {
     newroomuser2.nickNameFriend = this.user.userName;
     newroomuser2.getroom = this.user.userName;
     roomuser.set(newroomuser2);
+  }
+
+  get groupNotiLengthAll() {
+    return this.requestNotiLength > 0 ? this.lengthNotiGroup + 1 : this.lengthNotiGroup;
   }
 }

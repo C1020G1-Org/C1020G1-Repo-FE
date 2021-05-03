@@ -7,6 +7,7 @@ import {atLeastOneCheckboxValidator} from "../validator/atleast.validator";
 import {finalize} from "rxjs/operators";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {Favourite, Reason} from "../../models/user-model";
+import {ngxLoadingAnimationTypes} from "ngx-loading";
 
 declare const $: any;
 
@@ -26,9 +27,12 @@ export class InitialInformationComponent implements OnInit {
   public reasons: Array<Reason>;
   public fileMessageAvatar: string = null;
   public fileMessageBackground: string = null;
-  public messageRegistry: string;
-  public isLoggin: boolean;
-  public disable = false;
+  public config = {
+    animationType: ngxLoadingAnimationTypes.doubleBounce,
+    primaryColour: '#006ddd',
+    backdropBorderRadius: '3px'
+  };
+  public loading = false;
 
   constructor(public formBuilder: FormBuilder,
               public userCreate: UserCreateService,
@@ -42,7 +46,7 @@ export class InitialInformationComponent implements OnInit {
     this.formInitial = this.formBuilder.group({
       avatarUrl: [this.userStorage.user.userAvatar],
       backgroundUrl: [this.userStorage.user.userBackground],
-      marriaged: [this.userStorage.user.marriaged, [Validators.required]],
+      marriaged: ["single", [Validators.required]],
       reason: this.formBuilder.array(this.userStorage.reason
         .filter(r => r != null)
         .map(r => r?.reasonId), atLeastOneCheckboxValidator),
@@ -154,10 +158,7 @@ export class InitialInformationComponent implements OnInit {
   }
 
   async submit() {
-    this.messageRegistry="Registration in progress..."
-    this.isLoggin= false;
-    this.disable = true;
-    $('#successModal').modal('toggle');
+    this.loading = true;
 
     this.userStorage.user.marriaged = this.formInitial.value.marriaged;
 
@@ -179,15 +180,14 @@ export class InitialInformationComponent implements OnInit {
 
     await this.saveAvatar();
     await this.saveBackground();
-
+    console.log(this.userStorage.backendObject);
     this.userCreate.createUser(this.userStorage.backendObject).subscribe(() => {
-      this.messageRegistry="Your account is registry successfully!";
-      this.isLoggin = true;
-      this.disable = false
+      this.loading = false;
       this.userStorage.clear();
-    }, (error) => {
-      this.userStorage.serverError = error;
       $('#successModal').modal('toggle');
+    }, (error) => {
+      this.loading = false;
+      this.userStorage.serverError = error;
       this.router.navigateByUrl("registration");
     });
     this.userStorage.clearRegis();
@@ -199,7 +199,6 @@ export class InitialInformationComponent implements OnInit {
     this.userStorage.avatarFile = this.avatarFile;
     this.userStorage.background = this.background;
     this.userStorage.avatar = this.avatar;
-
     this.userStorage.user.marriaged = this.formInitial.value.marriaged;
 
     this.userStorage.favourites = [];

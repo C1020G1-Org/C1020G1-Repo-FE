@@ -4,15 +4,24 @@
     <li *ngFor="let friendSuggest of suggestFriend">
       <figure style="display: inline-block"><img src="{{friendSuggest.suggestFriend.userAvatar}}" alt="" style="border-radius: 50%"></figure>
       <div class="friend-meta">
-        <a (click)="createFriendRequest(friendSuggest)" title="" class="underline" style="cursor: pointer">Add Friend</a>
+        <a (click)="createFriendRequest(friendSuggest)" tooltip="Add Friend" class="underline" style="cursor: pointer">
+          <i class="fa fa-user-plus" style="font-size: 20px"></i></a>
         <h4><a href="http://localhost:4200/wall/{{friendSuggest.suggestFriend.userId}}"
               title="">{{friendSuggest.suggestFriend.userName}}</a></h4>
 
         <span *ngIf="friendSuggest.mutualFriends" (mouseover)="getMutualFriend(friendSuggest.mutualFriends)"
-              tooltip="{{mutualFriend}}" style="font-size: 13px">
+              tooltip="{{mutualFriend}}" style="font-size: 13px" class="d-flex">
           {{friendSuggest.mutualFriends.length}} mutual Friends</span>
       </div>
       <hr>
+    </li>
+    <li>
+      <div *ngIf="suggestFriend.length == 0" style="margin:auto">
+        <h3 style="color: orangered" class="d-flex justify-content-center align-items-center">
+          No friend suggestions yet !!
+        </h3>
+        <i class="fa fa-frown-o" style="font-size: 40px;color: orangered;margin: 0 40%"></i>
+      </div>
     </li>
   </ul>
 </div>

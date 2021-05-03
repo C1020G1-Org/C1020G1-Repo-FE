@@ -36,7 +36,7 @@ export class EditDetailComponent implements OnInit {
       userName: new FormControl('', [Validators.required]),
       gender: new FormControl('', [Validators.required]),
       birthday: new FormControl('', [Validators.required]),
-      marriaged: new FormControl('', [Validators.required]),
+      marriaged: new FormControl('single', [Validators.required]),
       occupation: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
       address: new FormControl('', [Validators.required]),

@@ -42,10 +42,10 @@
             </div>
           </div>
         </div>
-        <div *ngIf="check" style="margin-left: 30%">
-          <h5 style="color: orangered" class="d-flex justify-content-center align-items-lg-center">
+        <div *ngIf="friends.length == 0" style="margin: auto">
+          <h1 style="color: orangered" class="d-flex justify-content-center align-items-lg-center">
             Currently there are no friends !!<i class="fa fa-frown-o fa-3x" style="margin-left: 20px"></i>
-          </h5>
+          </h1>
         </div>
       </div>
       <div class="lodmore" *ngIf="checkLoadMore">

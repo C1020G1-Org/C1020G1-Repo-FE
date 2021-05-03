@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {finalize} from 'rxjs/operators';
 import {DomSanitizer} from "@angular/platform-browser";
@@ -8,6 +8,8 @@ import { PostService } from 'src/app/service/post.service';
 import { TokenStorageService } from 'src/app/service/auth/token-storage';
 import {User} from "../../models/user-model";
 import {ngxLoadingAnimationTypes} from "ngx-loading";
+import {GroupSocial} from "../../models/group_social";
+import {GroupService} from "../../service/groups/group.service";
 
 
 declare const $: any;
@@ -28,16 +30,15 @@ export class CreatePostComponent implements OnInit {
   public formCreatePost: FormGroup;
   public user: User;
   public check: boolean = false;
-  public contentTemp: any;
   public fileImage: any;
   public urlImage: Array<string>;
   public message: string;
   public loading = false;
+  public groupSocial: GroupSocial;
 
 
   @Input() idUserWall : number;
 
-  @Input() checkGroup : string;
   isGroup: boolean
 
 
@@ -46,7 +47,10 @@ export class CreatePostComponent implements OnInit {
               public router: Router,
               public storage: AngularFireStorage,
               public dom: DomSanitizer,
-              private tokenStorageService : TokenStorageService) {
+              private tokenStorageService : TokenStorageService,
+              private groupService: GroupService,
+              private activateRouter: ActivatedRoute
+              ) {
   }
 
   ngOnInit(): void {
@@ -61,14 +65,17 @@ export class CreatePostComponent implements OnInit {
     });
     this.fileImage = [];
     this.urlImage = [];
-    this.isGroup = this.checkGroup.includes("group")
+    this.isGroup = this.router.url.includes("group")
+    this.groupService.getGroupById(this.activateRouter.snapshot.params['id']).subscribe(data => {
+      this.groupSocial = data;
+    });
   }
 
   async addNewPost() {
 
-    // this.contentTemp = $(this.finalLocation).data("emojioneArea").getText();
-    // this.formCreatePost.get("postContent").setValue(this.contentTemp);
+    this.formCreatePost.get("groupSocial").setValue(this.groupSocial);
     this.formCreatePost.get("user").setValue(this.user);
+    // this.formCreatePost.get("postContent").setValue($("#createText").data("emojioneArea").getText());
     if (this.formCreatePost.get("postContent").value.trim() != '') {
       this.loading = true;
       await this.addImageToFireBase();
@@ -77,6 +84,7 @@ export class CreatePostComponent implements OnInit {
         post: this.formCreatePost.value,
         postImages: this.urlImage
       };
+      console.log(postImage);
       this.postService.createPost(postImage).subscribe((data) => {
         if(this.postService.postsInService != undefined) {
           this.formCreatePost = this.formBuilder.group({
