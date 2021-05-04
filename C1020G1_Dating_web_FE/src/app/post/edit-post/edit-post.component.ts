@@ -7,6 +7,7 @@ import { PostService } from 'src/app/service/post.service';
 import {Post} from "../../models/Post";
 import {PostEditImage, PostImage2} from "../../models/PostImage";
 import {ngxLoadingAnimationTypes} from "ngx-loading";
+import {EmojiEvent} from "@ctrl/ngx-emoji-mart/ngx-emoji";
 declare const $: any;
 @Component({
   selector: 'app-edit-post',
@@ -26,6 +27,8 @@ export class EditPostComponent implements OnInit, OnChanges {
     backdropBorderRadius: '3px'
   };
   public loading = false;
+  emojiVisible = "";
+  isEmojiVisible = true
 
   @Input() public postIDInUrl: number;
 
@@ -41,8 +44,6 @@ export class EditPostComponent implements OnInit, OnChanges {
               public storage: AngularFireStorage) {
   }
   ngOnChanges(): void {
-  //   this.updateFileImage = [];
-  // this.deleteImages = [];
       this.setValue(this.postIDInUrl);
   }
   ngOnInit(): void {
@@ -70,7 +71,6 @@ export class EditPostComponent implements OnInit, OnChanges {
       this.loading = true;
       await this.addImageToFireBase();
 
-      // this.formEditPost.get("postContent").setValue(this.contentTemp);
 
       this.updateImages = this.updateUrlImage.map(x => {
         return {
@@ -87,10 +87,11 @@ export class EditPostComponent implements OnInit, OnChanges {
       };
 
       this.postService.updatePost(this.postEditImage).subscribe(data =>{
-        console.log(data);
         $('#editPostModal').click();
-        this.loading = false;
+        data.post.postContent = decodeURI(data.post.postContent);
         this.postService.observeEditingPost(data);
+        this.formEditPost.get("postContent").setValue('');
+        this.loading = false;
       })
     } else {
       this.check = true;
@@ -169,5 +170,20 @@ export class EditPostComponent implements OnInit, OnChanges {
       });
     }
 
+  }
+
+  addEmoji($event: EmojiEvent) {
+    const value = this.formEditPost.get("postContent");
+    value.setValue(value.value + $event.emoji.native);
+  }
+
+  show() {
+    if (this.isEmojiVisible) {
+      this.emojiVisible = "show"
+      this.isEmojiVisible =false
+    } else {
+      this.emojiVisible = ""
+      this.isEmojiVisible = true
+    }
   }
 }

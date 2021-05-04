@@ -19,7 +19,6 @@ import {TopwallComponent} from "./wall/topwall/topwall.component";
 import {EditDetailComponent} from "./user-management/edit/edit-detail/edit-detail.component";
 import {InformationComponent} from "./wall/information/information.component";
 import {FriendsComponent} from "./wall/friends/friends.component";
-import {NewsfeedComponent} from "./news-feed/newsfeed.component";
 import {ErrorPageComponent} from "./error/error-page/error-page.component";
 import {HomeComponent} from "./home/home.component";
 

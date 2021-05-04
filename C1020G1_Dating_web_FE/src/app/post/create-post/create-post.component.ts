@@ -10,6 +10,8 @@ import {User} from "../../models/user-model";
 import {ngxLoadingAnimationTypes} from "ngx-loading";
 import {GroupSocial} from "../../models/group_social";
 import {GroupService} from "../../service/groups/group.service";
+import {EmojiEvent} from "@ctrl/ngx-emoji-mart/ngx-emoji";
+import {Post} from "../../models/Post";
 
 
 declare const $: any;
@@ -35,11 +37,14 @@ export class CreatePostComponent implements OnInit {
   public message: string;
   public loading = false;
   public groupSocial: GroupSocial;
+  public isJoin: boolean = false;
 
 
   @Input() idUserWall : number;
 
   isGroup: boolean
+  emojiPickerVisible = "";
+  isEmojiPickerVisible = true
 
 
   constructor(public formBuilder: FormBuilder,
@@ -66,16 +71,20 @@ export class CreatePostComponent implements OnInit {
     this.fileImage = [];
     this.urlImage = [];
     this.isGroup = this.router.url.includes("group")
-    this.groupService.getGroupById(this.activateRouter.snapshot.params['id']).subscribe(data => {
-      this.groupSocial = data;
-    });
+    if (this.isGroup) {
+      this.groupService.getGroupById(this.activateRouter.snapshot.params['id']).subscribe(data => {
+        this.groupSocial = data;
+        this.groupService.getGroupUserByGroupIdAndUserId(this.groupSocial.groupId, this.user.userId).subscribe(data => {
+          this.isJoin = true;
+        }, err => {
+        });
+      });
+    }
   }
 
   async addNewPost() {
-
     this.formCreatePost.get("groupSocial").setValue(this.groupSocial);
     this.formCreatePost.get("user").setValue(this.user);
-    // this.formCreatePost.get("postContent").setValue($("#createText").data("emojioneArea").getText());
     if (this.formCreatePost.get("postContent").value.trim() != '') {
       this.loading = true;
       await this.addImageToFireBase();
@@ -84,7 +93,6 @@ export class CreatePostComponent implements OnInit {
         post: this.formCreatePost.value,
         postImages: this.urlImage
       };
-      console.log(postImage);
       this.postService.createPost(postImage).subscribe((data) => {
         if(this.postService.postsInService != undefined) {
           this.formCreatePost = this.formBuilder.group({
@@ -93,6 +101,8 @@ export class CreatePostComponent implements OnInit {
             user: [''],
             groupSocial: [null]
           });
+          let post: Post = data;
+          post.postContent = decodeURI(post.postContent);
           this.formCreatePost.get("postContent").setValue('');
           this.postService.postsInService.unshift(data);
           this.fileImage = [];
@@ -159,5 +169,20 @@ export class CreatePostComponent implements OnInit {
   deleteUpdateImage(event) {
     let index = event.target.attributes['data-index'].value;
     this.fileImage.splice(index, 1);
+  }
+
+  addEmoji($event: EmojiEvent) {
+    const value = this.formCreatePost.get("postContent");
+    value.setValue(value.value + $event.emoji.native);
+  }
+
+  show() {
+    if (this.isEmojiPickerVisible) {
+      this.emojiPickerVisible = "show"
+      this.isEmojiPickerVisible =false
+    } else {
+      this.emojiPickerVisible = ""
+      this.isEmojiPickerVisible = true
+    }
   }
 }

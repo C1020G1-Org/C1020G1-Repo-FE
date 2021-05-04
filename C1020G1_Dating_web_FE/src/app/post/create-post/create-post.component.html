@@ -5,7 +5,8 @@
     Content is required!!
   </div>
 </div>
-<div *ngIf="user.userId == idUserWall || idUserWall == 0 || isGroup" class="mat-app-background basic-container">
+<div *ngIf="user.userId == idUserWall || idUserWall == 0 ||( isGroup && isJoin)"
+     class="mat-app-background basic-container">
   <ng-template #customLoadingTemplate>
     <div class="custom-class">
     </div>
@@ -49,13 +50,19 @@
                   {{this.message}}
                 </div>
               </li>
+              <li>
+                <div class="custom-dropdown">
+                  <span class="custom-hover " (click)="show()">😀</span>
+                  <emoji-mart class="dropdown-content {{emojiPickerVisible}}" [darkMode]="false"
+                              (emojiSelect)="addEmoji($event)"></emoji-mart>
+                </div>
+              </li>
             </ul>
             <div class="d-block w-100">
-          <textarea  rows="2" formControlName="postContent" name="postContent" id="createText"
+          <textarea rows="2" formControlName="postContent" name="postContent" id="createText"
                     class="select-status myText"
                     style="height: 100px" placeholder="Share some what you are thinking?">
           </textarea>
-
             </div>
           </div>
           <div class="clearfix"></div>

@@ -17,8 +17,7 @@
         <li><a routerLink="/group/list" title="Group" data-ripple=""><i class="fa fa-users"></i></a></li>
         <li>
           <a title="Friend Requests" data-ripple="">
-            <i class="fa fa-user" style="color: #999999;cursor:pointer"></i><em class="bg-red"
-                                                                                *ngIf="lengthNoti">{{lengthNoti}}</em>
+            <i class="fa fa-user" style="color: #999999;cursor:pointer"></i><em class="bg-red" *ngIf="lengthNoti">{{lengthNoti}}</em>
           </a>
           <div class="dropdowns">
             <span><a href="http://localhost:4200/wall/{{user.userId}}/friend_request/{{user.userId}}" title="">

@@ -9,6 +9,21 @@
                    [template]="customLoadingTemplate" style="z-index: 999999"></ngx-loading>
       <div class="modal-content">
         <div class="modal-body">
+          <div
+            *ngIf="!postStatus.valid && (postStatus.dirty ||postStatus.touched)">
+            <div class="alert alert-danger" role="alert" [hidden]="!postStatus.errors.required">
+              Status is required!!
+            </div>
+          </div>
+          <div
+            *ngIf="check">
+            <div class="alert alert-danger" role="alert">
+              Content is required!!
+            </div>
+          </div>
+          <div *ngIf="message != null" class="alert alert-danger" role="alert">
+            {{this.message}}
+          </div>
           <div class="central-meta postbox">
             <span class="create-post">Edit post</span>
             <div class="new-postbox">
@@ -36,20 +51,12 @@
                             &#xf023; &nbsp; Only Me
                           </option>
                         </select>
-                        <div
-                          *ngIf="!postStatus.valid && (postStatus.dirty ||postStatus.touched)">
-                          <div class="alert alert-danger" role="alert" [hidden]="!postStatus.errors.required">
-                            Status is required!!
-                          </div>
-                        </div>
-                        <div
-                          *ngIf="check">
-                          <div class="alert alert-danger" role="alert">
-                            Content is required!!
-                          </div>
-                        </div>
-                        <div *ngIf="message != null" class="alert alert-danger" role="alert">
-                          {{this.message}}
+                      </li>
+                      <li>
+                        <div class="custom-dropdown">
+                          <span class="custom-hover " (click)="show()">😀</span>
+                          <emoji-mart class="dropdown-content {{emojiVisible}}" [darkMode]="false"
+                                      (emojiSelect)="addEmoji($event)"></emoji-mart>
                         </div>
                       </li>
                     </ul>

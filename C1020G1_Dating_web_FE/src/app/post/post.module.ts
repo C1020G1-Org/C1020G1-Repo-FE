@@ -3,8 +3,10 @@ import {CommonModule} from '@angular/common';
 import {CreatePostComponent} from './create-post/create-post.component';
 import {EditPostComponent} from './edit-post/edit-post.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { DeletePostComponent } from './delete-post/delete-post.component';
+import {DeletePostComponent} from './delete-post/delete-post.component';
 import {NgxLoadingModule} from "ngx-loading";
+import {PickerModule} from "@ctrl/ngx-emoji-mart";
+import {EmojiModule} from "@ctrl/ngx-emoji-mart/ngx-emoji";
 
 @NgModule({
   declarations: [CreatePostComponent, EditPostComponent, DeletePostComponent],
@@ -17,7 +19,10 @@ import {NgxLoadingModule} from "ngx-loading";
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    NgxLoadingModule.forRoot({})
+    EmojiModule,
+    PickerModule,
+    NgxLoadingModule.forRoot({}),
+
   ]
 })
 export class PostModule {
