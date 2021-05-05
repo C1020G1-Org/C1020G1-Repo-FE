@@ -11,7 +11,6 @@ import Notification from "../../models/notification";
 import {NotificationService} from "../../service/friends/notification.service";
 import {map} from "rxjs/operators";
 import {UserServiceService} from "../../service/user-service.service";
-import {Post} from "../../models/Post";
 import firebase from "firebase";
 
 @Component({

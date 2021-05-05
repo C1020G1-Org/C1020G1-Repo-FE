@@ -94,6 +94,7 @@ export class CreatePostComponent implements OnInit {
         postImages: this.urlImage
       };
       this.postService.createPost(postImage).subscribe((data) => {
+        data.postContent = this.formCreatePost.get("postContent").value
         if(this.postService.postsInService != undefined) {
           this.formCreatePost = this.formBuilder.group({
             postStatus: ['public', [Validators.required]],
@@ -101,8 +102,7 @@ export class CreatePostComponent implements OnInit {
             user: [''],
             groupSocial: [null]
           });
-          let post: Post = data;
-          post.postContent = decodeURI(post.postContent);
+
           this.formCreatePost.get("postContent").setValue('');
           this.postService.postsInService.unshift(data);
           this.fileImage = [];

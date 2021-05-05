@@ -88,7 +88,7 @@ export class EditPostComponent implements OnInit, OnChanges {
 
       this.postService.updatePost(this.postEditImage).subscribe(data =>{
         $('#editPostModal').click();
-        data.post.postContent = decodeURI(data.post.postContent);
+        data.post.postContent = this.formEditPost.get("postContent").value
         this.postService.observeEditingPost(data);
         this.formEditPost.get("postContent").setValue('');
         this.loading = false;

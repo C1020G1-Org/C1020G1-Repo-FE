@@ -44,6 +44,7 @@ export class NewsfeedComponent implements OnInit {
 
   route: string
   noData: boolean;
+  timeEdit: string;
 
   constructor(private postService: PostService,
               private tokenStorageService: TokenStorageService,
@@ -213,12 +214,9 @@ export class NewsfeedComponent implements OnInit {
       this.parentCommentForm.get('commentImage').setValue(null);
     }
 
-    console.log(this.parentCommentForm.value);
 
     this.commentService.editParentComment(this.editingParentComment.parentCommentId, this.parentCommentForm.value).subscribe((data) => {
-      console.log('ok');
-      console.log('data');
-      console.log(data);
+      console.log(data)
       this.postService.observeEditingComment(data, this.editingParentComment.childComments, null);
       this.parentCommentForm.reset();
       this.imageUrlFromLocal = null;

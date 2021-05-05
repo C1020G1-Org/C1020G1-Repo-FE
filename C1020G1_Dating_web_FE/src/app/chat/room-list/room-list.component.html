@@ -1,5 +1,6 @@
 <!--<div class="example-container mat-elevation-z8">-->
-<div class="mat-elevation-z8 stick" style="box-shadow: none !important;">
+<aside class="sidebar static right">
+<div class="mat-elevation-z8 widget stick-widget" style="box-shadow: none !important;">
   <table mat-table [dataSource]="rooms" class="example-table chat-users"
          matSort matSortActive="roomname" matSortDisableClear matSortDirection="asc">
 
@@ -30,10 +31,10 @@
   </table>
 
 </div>
+</aside>
 <!--</div>-->
 
 <mat-drawer-container style="{{styleChatBox}}">
-  <!--    Hiển thị tin nhắn///////////////-->
   <mat-drawer-content class="chat-pane"
                       style="width: 340px; height: 60px; position: relative; top: 0px; z-index: 1000; background: #95999c">
     <div class="chat-head ">

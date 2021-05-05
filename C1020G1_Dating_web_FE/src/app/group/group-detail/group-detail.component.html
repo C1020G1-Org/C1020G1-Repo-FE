@@ -8,7 +8,7 @@
             <div class="col-lg-3">
               <aside class="sidebar static right">
                 <div class="widget">
-                  <h4 class="widget-title">Profile intro</h4>
+                  <h4 class="widget-title">Profile Group</h4>
                   <ul class="short-profile">
                     <li>
                       <span>about</span>
@@ -38,17 +38,13 @@
                 <app-friend-suggest></app-friend-suggest>
               </aside>
             </div>
-            <div class="col-lg-6" *ngIf="group.scope == 'public' || isJoin ; else elseBlock1">
+            <div class="col-lg-9" *ngIf="group.scope == 'public' || isJoin ; else elseBlock1">
               <app-newsfeed></app-newsfeed>
             </div><!-- central meta -->
 
             <ng-template #elseBlock1>
               <h5 style="color: orange">You have join in group to see all post and information this group !!</h5>
             </ng-template>
-
-            <div class="col-lg-3">
-              <app-room-list></app-room-list>
-            </div>
           </div>
         </div>
       </div>

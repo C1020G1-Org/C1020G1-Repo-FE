@@ -38,6 +38,23 @@
               <!-- centerl meta -->
 
               <div class="col-lg-3">
+                <div class="central-meta item">
+                                                <span class="create-post">Recommend Friends
+
+                                                </span>
+                  <div class="pit-friends" *ngFor="let userFavourite of listRecommendation">
+                    <figure><a href="#" title=""><img
+                      src="{{userFavourite.user.userAvatar}}" alt="" style="height: 40px; width: 40px"></a></figure>
+                    <a href="http://localhost:4200/wall/{{userFavourite.user.userId}}"
+                       title="">{{userFavourite.user.userName}}</a>
+                    <div class="pit-frnz-meta float-left">
+                      <i *ngIf="!userFavourite.friends">Not Friend</i>
+                      <i> Address: {{userFavourite.user.ward.district.province.provinceName}}</i>
+                      <i *ngIf="userFavourite.favourites.length != 0"> Favourites: {{userFavourite.favourites}}</i>
+                      <i *ngIf="userFavourite.favourites.length == 0"> Favourites: None </i>
+                    </div>
+                  </div>
+                </div><!-- recommend peoples -->
                 <app-room-list></app-room-list>
               </div>
               <!-- sidebar -->
