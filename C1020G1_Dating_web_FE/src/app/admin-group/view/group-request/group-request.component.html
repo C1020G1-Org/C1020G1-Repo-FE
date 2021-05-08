@@ -1,0 +1,9 @@
+<div class="group-box">
+    <figure><img [src]="member.user.userAvatar" alt=""></figure>
+    <a routerLink="/wall/{{member.user.userId}}">{{member.user.userName}}</a>
+    <span>{{member.user.ward.district.province.provinceName}}</span><br>
+    <div class="invites-btns">
+        <a class="main-btn cursor accept" title="" data-ripple="" (click)="accept()">Accept</a>
+        <a class="main-btn3 cursor" title="" data-ripple="" (click)="cancel()">Cancel</a>
+    </div>
+</div>

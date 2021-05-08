@@ -1,0 +1,147 @@
+<div class="theme-layout">
+  <div class="topbar stick">
+    <div class="logo">
+      <a title="" routerLink="/newsfeed"><img src="assets/images/pngegg.png" class="logo-custome" alt="logo"/>
+        <b class="title"> C10Tinder</b></a>
+    </div>
+    <div class="top-area">
+      <div class="top-search">
+        <form method="post" class="">
+          <!--        <input (change)="search($event.target.value)" type="text" placeholder="Search People">-->
+          <input (keydown.enter)="search($event)" type="text" placeholder="Search People">
+          <button data-ripple><i class="ti-search"></i></button>
+        </form>
+      </div>
+      <ul class="setting-area pr-5">
+        <li><a href="http://localhost:4200/newsfeed" title="Home" data-ripple=""><i class="fa fa-home"></i></a></li>
+        <li><a routerLink="/group/list" title="Group" data-ripple=""><i class="fa fa-users"></i></a></li>
+        <li>
+          <a title="Friend Requests" data-ripple="">
+            <i class="fa fa-user" style="color: #999999;cursor:pointer"></i><em class="bg-red" *ngIf="lengthNoti">{{lengthNoti}}</em>
+          </a>
+          <div class="dropdowns">
+            <span><a href="http://localhost:4200/wall/{{user.userId}}/friend_request/{{user.userId}}" title="">
+              View all Requests</a></span>
+            <ul class="drops-menu" *ngIf="notiListFriend">
+              <li *ngFor="let notiFriend of notiListFriend">
+                <div>
+                  <figure>
+                    <img src="{{notiFriend.friendRequest.sendUser.userAvatar}}" style="width: 40px; height: 40px"
+                         alt="">
+                  </figure>
+                  <div class="mesg-meta">
+                    <h6><a href="http://localhost:4200/wall/{{notiFriend.friendRequest.sendUser.userId}}" title="">
+                      {{notiFriend.friendRequest.sendUser.userName}}</a></h6>
+                    <span><b>{{notiFriend.friendRequest.sendUser.userName}}</b> want be friend with you</span>
+                  </div>
+                  <div class="add-del-friends" style="margin-top: 3%">
+                    <a title="Add Friend" style="border: none;background: white;cursor: pointer"
+                       (click)="acceptFriendRequestInHeader(notiFriend.friendRequest,notiFriend.key)">
+                      <i class="fa fa-check-square" style="color: #ff6e16"></i>
+                    </a>
+                    <a title="Unrequest" style="border: none;background: white;cursor: pointer" data-toggle="modal"
+                       data-target="#headerModal"
+                       (click)="sendIdFriendRequest(notiFriend.friendRequest,notiFriend.key)">
+                      <i class="fa fa-trash" style="color: #ff6e16">
+                      </i></a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <ul class="drops-menu" *ngIf="!checkListNotiFriend">
+              <li style="color: #ff6e16;text-align: center;margin-top: 10%;margin-bottom: 10%">Has not friend request
+                <i class="fa fa-smile fa-2x"></i>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <a title="Notification" data-ripple="">
+            <i class="fa fa-bell" style="color: #999999;cursor: pointer"></i><em class="bg-purple"
+                                                                                 *ngIf="groupNotiLengthAll > 0">{{groupNotiLengthAll}}</em>
+          </a>
+          <div class="dropdowns">
+          <span *ngIf="groupNotiLengthAll">{{groupNotiLengthAll}} New Notifications <a style="cursor: pointer;"
+                                                                                       (click)="deleteAllNotiGroup()"
+                                                                                       title="">Clear
+              All</a></span>
+            <ul class="drops-menu">
+              <li *ngIf="requestNotiLength > 0">
+                <a title="" class="show-mesg">
+                  <div class="mesg-meta cursor" style="width: 95%">
+                    <figure>
+                      <img class="noti-image" [src]="groupRequest.groupSocial.imageAvatarUrl" alt=""
+                           style="border-radius: 50%">
+                    </figure>
+                    <div (click)="navRequest(groupRequest.groupSocial.groupId)" class="mesg-meta"
+                         style="cursor: pointer">
+                      <h6>{{groupRequest.groupSocial.groupName}}</h6>
+                      <span class="content-span">Your group has {{requestNotiLength}} new request</span>
+                    </div>
+                    <a (click)="clearNotiRequest()" class="clear-noti"
+                       style="display: inline-block;margin-left: 1%;cursor: pointer"><i class="fa fa-times-circle"></i></a>
+                  </div>
+                </a>
+              </li>
+              <li *ngFor="let noti of notiGroupList">
+                <a title="" class="show-mesg">
+                  <div class="mesg-meta cursor" style="width: 95%">
+                    <figure>
+                      <img class="noti-image" [src]="noti.groupSender.imageAvatarUrl" alt="" style="border-radius: 50%">
+                    </figure>
+                    <div (click)="nav(noti.groupSender.groupId)" class="mesg-meta" style="cursor: pointer">
+                      <h6>{{noti.groupSender.groupName}}</h6>
+                      <span class="content-span">{{noti.content}}</span>
+                    </div>
+                    <a (click)="clearNotiGroup(noti.key)" class="clear-noti"
+                       style="display: inline-block;margin-left: 1%;cursor: pointer"><i class="fa fa-times-circle"></i></a>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+      <div class="user-img">
+        <h5 class="m-0">{{user.userName}}</h5>
+        <img src="{{user.userAvatar}}" alt="" style="height: 45px; width: 45px;">
+        <span class="{{displayStatus}}"></span>
+        <div class="user-setting">
+          <span class="seting-title">User setting <a href="#" title="">see all</a></span>
+          <ul class="log-out">
+            <li><a href="http://localhost:4200/wall/{{user.userId}}" title=""><i class="ti-user"></i>
+              view profile</a></li>
+            <li><a [routerLink]="['/edit/detail']" title=""><i class="ti-pencil-alt"></i>edit
+              profile</a></li>
+            <!--            <li><a href="#" title=""><i class="ti-target"></i>activity log</a></li>-->
+            <!--            <li><a href="setting.html" title=""><i class="ti-settings"></i>account setting</a></li>-->
+            <li><a title="" (click)="logout()"><i class="ti-power-off"></i>log out</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="headerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">DELETE FRIENDS REQUEST</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure want to delete this request?</p>
+        <p><span style="color: red">Warning: </span>Can not undo</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteFriendRequestInHeader()"
+        >Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

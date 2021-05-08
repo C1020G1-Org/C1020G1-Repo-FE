@@ -1,0 +1,21 @@
+.delete-icon {
+  position: relative;
+  bottom: -2px;
+  left: -25px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #17a2b8;
+}
+
+.delete-icon:hover {
+  color: #fa6342;
+}
+
+.delete-icon:focus {
+  outline-color: #dc3545;
+}
+
+.img-custom {
+  height: 40px !important;
+  width: 40px !important;
+}
