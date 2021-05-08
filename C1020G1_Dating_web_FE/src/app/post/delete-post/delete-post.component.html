@@ -1,0 +1,20 @@
+<div class="modal fade" id="deletePostModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Delete Your Post</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        Are you sure you can delete this post?
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer d-flex justify-content-end">
+        <button type="button" class="btn btn-outline-primary mr-3 pr-4 pl-4" (click)="deletePost()" data-dismiss="modal">Yes</button>
+        <button type="button" class="btn btn-outline-secondary pr-3 pl-3" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

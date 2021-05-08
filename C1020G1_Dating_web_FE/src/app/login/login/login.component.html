@@ -1,0 +1,53 @@
+<div class="www-layout">
+  <section>
+    <div class="gap no-gap signin whitish medium-opacity">
+      <div class="bg-image" style="background-image:url(assets/images/resources/theme-bg.jpg)"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <div>
+              <figure><img src="assets/images/pngegg.png" style="width: 50%" alt=""></figure>
+              <h1>Welcome to the C10Tinder</h1>
+              <p>
+                C10Tinder is a social network template that can be used to connect people.
+                Use this template for multipurpose social activities like dating, posting, chatting and much more.
+                Now join & Make Cool Friends around the world !!!
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="we-login-register">
+              <div class="form-title">
+                <i class="fa fa-key"></i>login
+                <span><i class="fa fa-exclamation-circle" *ngIf="isError"></i> {{title}}</span>
+              </div>
+              <form class="we-form" method="post" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <input type="text" placeholder="Account Name" formControlName="accountName">
+                <span class="text-black-50" style="font-size: 12px" *ngIf="loginForm.controls.accountName.errors?.required && loginForm.get('accountName').touched">
+                  <i class="fa fa-exclamation-circle"></i><i> Account Name Not Null!</i>
+                </span>
+                <span class="text-black-50" style="font-size: 12px"
+                      *ngIf="loginForm.controls.accountName.errors?.pattern"><i class="fa fa-exclamation-circle"></i><i> Account name contain alphabet characters and digits</i>
+                </span> <br>
+                <i (click)="viewPassword()" class="{{classPassword}}"></i>
+                <input [type]="type" placeholder="Password" formControlName="password">
+                <p class="text-black-50" style="font-size: 12px" *ngIf="loginForm.controls.password.errors?.required && loginForm.get('password').touched">
+                  <i class="fa fa-exclamation-circle"></i><i> Password Not Null!</i>
+                </p>
+                <input type="checkbox" formControlName="remember" ><label>remember me</label>
+                <button type="submit" data-ripple="" [disabled]="loginForm.invalid">Log In</button>
+                <a class="forgot underline" routerLink="/recover" title="">forgot password?</a>
+              </form>
+              <i class="fa fa-2x fa-facebook-square mr-1 " (click)="signInWithFB()"></i>
+
+              <i class="fa fa-2x fa-google-plus-square  ml-1 " (click)="signInWithGoogle()"></i>
+
+              <span>don't have an account? <a class="we-account underline" routerLink="/registration" title="">register now</a></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+

@@ -1,0 +1,166 @@
+<section>
+  <div class="gap2 gray-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div *ngIf="group" class="row merged20" id="page-contents">
+            <app-group-header class="w-100"></app-group-header>
+            <div class="col-lg-3">
+              <aside class="sidebar static right">
+                <div class="widget">
+                  <h4 class="widget-title">Profile Group</h4>
+                  <ul class="short-profile">
+                    <li>
+                      <span>about</span>
+                      <p>This group gather all Meow Meow Meow <br>...... </p>
+                    </li>
+                    <li>
+                      <span>{{group.scope}}</span>
+                      <div *ngIf="group.scope === 'private' ; else elseBlock">
+                        <p>Only members see everyone in the group and what they post.!</p>
+                      </div>
+
+                      <ng-template #elseBlock>
+                        <p>Everyone can see all activities in this group.!</p>
+                      </ng-template>
+                      <p></p>
+                    </li>
+                    <li>
+                      <span>Display</span>
+                      <p>Anyone can find this group.</p>
+                    </li>
+                    <li>
+                      <span>Location</span>
+                      <p>VietNam</p>
+                    </li>
+                  </ul>
+                </div>
+                <app-friend-suggest></app-friend-suggest>
+              </aside>
+            </div>
+            <div class="col-lg-9" *ngIf="group.scope == 'public' || isJoin ; else elseBlock1">
+              <app-newsfeed></app-newsfeed>
+            </div><!-- central meta -->
+
+            <ng-template #elseBlock1>
+              <h5 style="color: orange">You have join in group to see all post and information this group !!</h5>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><!-- content -->
+
+<div class="popup-wraper3">
+  <div class="popup">
+    <span class="popup-closed"><i class="ti-close"></i></span>
+    <div class="popup-meta">
+      <div class="popup-head">
+        <h5>Report Post</h5>
+      </div>
+      <div class="Rpt-meta">
+        <span>We're sorry something's wrong. How can we help?</span>
+        <form method="post" class="c-form">
+          <div class="form-radio">
+            <div class="radio">
+              <label>
+                <input type="radio" name="radio" checked="checked"><i class="check-box"></i>It's spam or
+                abuse
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="radio"><i class="check-box"></i>It breaks r/technology's rules
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="radio"><i class="check-box"></i>Not Related
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="radio"><i class="check-box"></i>Other issues
+              </label>
+            </div>
+          </div>
+          <div>
+            <label>Write about Report</label>
+            <textarea placeholder="write someting about Post" rows="2"></textarea>
+          </div>
+          <div>
+            <button data-ripple="" type="submit" class="main-btn">Submit</button>
+            <a href="#" data-ripple="" class="main-btn3 cancel">Close</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div><!-- report popup -->
+
+<div class="popup-wraper1">
+  <div class="popup direct-mesg">
+    <span class="popup-closed"><i class="ti-close"></i></span>
+    <div class="popup-meta">
+      <div class="popup-head">
+        <h5>Send Message</h5>
+      </div>
+      <div class="send-message">
+        <form method="post" class="c-form">
+          <input type="text" placeholder="Sophia">
+          <textarea placeholder="Write Message"></textarea>
+          <button type="submit" class="main-btn">Send</button>
+        </form>
+        <div class="add-smiles">
+          <div class="uploadimage">
+            <i class="fa fa-image"></i>
+            <label class="fileContainer">
+              <input type="file">
+            </label>
+          </div>
+          <span title="add icon" class="em em-expressionless"></span>
+          <div class="smiles-bunch">
+            <i class="em em---1"></i>
+            <i class="em em-smiley"></i>
+            <i class="em em-anguished"></i>
+            <i class="em em-laughing"></i>
+            <i class="em em-angry"></i>
+            <i class="em em-astonished"></i>
+            <i class="em em-blush"></i>
+            <i class="em em-disappointed"></i>
+            <i class="em em-worried"></i>
+            <i class="em em-kissing_heart"></i>
+            <i class="em em-rage"></i>
+            <i class="em em-stuck_out_tongue"></i>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div><!-- send message popup -->
+<script>
+  jQuery(document).ready(function ($) {
+
+    $('#us3').locationpicker({
+      location: {
+        latitude: -8.681013,
+        longitude: 115.23506410000005
+      },
+      radius: 0,
+      inputBinding: {
+        latitudeInput: $('#us3-lat'),
+        longitudeInput: $('#us3-lon'),
+        radiusInput: $('#us3-radius'),
+        locationNameInput: $('#us3-address')
+      },
+      enableAutocomplete: true,
+      onchanged: function (currentLocation, radius, isMarkerDropped) {
+        // Uncomment line below to show alert on each Location Changed event
+        //alert("Location changed. New location (" + currentLocation.latitude + ", " + currentLocation.longitude + ")");
+      }
+    });
+
+  });
+</script>

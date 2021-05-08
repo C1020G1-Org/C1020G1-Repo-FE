@@ -1,0 +1,40 @@
+.delete-icon{
+  position: relative;
+  bottom: -2px;
+  left: -25px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #17a2b8;
+}
+
+.delete-icon:hover {
+  color: #fa6342;
+}
+
+.delete-icon:focus {
+  outline-color: #dc3545;
+}
+
+.custom-hover:hover {
+  cursor: pointer !important;
+}
+
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+  top: 10%;
+}
+
+.show {
+  display: inline-block !important;
+}
