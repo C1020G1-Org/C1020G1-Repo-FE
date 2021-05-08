@@ -59,7 +59,6 @@ export class RoomListComponent implements OnInit {
   scrolltop: number = null;
   ref = firebase.database().ref('chats/');
   chatForm: FormGroup;
-  addRoomName = '';
   roomname = '';
   getroom;
   message = '';
